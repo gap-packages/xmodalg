@@ -1,0 +1,589 @@
+<!-- ------------------------------------------------------------------- -->
+<!--                                                                     -->
+<!--  cat1.xml            XModAlg documentation               Z. Arvasi  -->
+<!--                                                        & A. Odabas  -->
+<!--  version 1.11, 04/11/2015                                           --> 
+<!--                                                                     --> 
+<!--  Copyright (C) 2014-2015, Z. Arvasi & A. Odabas,                    --> 
+<!--  Osmangazi University, Eskisehir, Turkey                            --> 
+<!--                                                                     -->
+<!-- ------------------------------------------------------------------- -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Chapter Label="chap-cat1">
+
+<Heading>Cat1-algebras</Heading>
+
+<Section>
+
+<Heading>Definitions and examples</Heading>
+
+<Index>cat1-group</Index>
+
+Algebraic structures which are equivalent to crossed modules of algebras include :
+
+<List>
+<Item> 
+cat<M>^{1}</M>-algebras. (Ellis, <Cite Key="ellis1"/>);
+</Item>
+<Item> 
+simplicial algebras with Moore complex of length 1 
+(Z. Arvasi and T.Porter, <Cite Key="arvasi2"/>);
+</Item>
+<Item> 
+algebra-algebroids (Gaffar Musa's Ph.D. thesis, <Cite Key="mosa"/>). 
+</Item>
+</List>
+
+In this section we describe an implementation of cat<M>^{1}</M>-algebras 
+and their morphisms. 
+<P/>
+The notion of cat<M>^{1}</M>-groups was defined as an algebraic model 
+of <M>2</M>-types by Loday in <Cite Key="loday"/>. 
+Then Ellis defined the cat<M>^{1}</M>-algebras in <Cite Key="ellis1"/>.
+<P/>
+Let <M>A</M> and <M>R</M> be <M>k</M>-algebras, 
+let <M>t,h:A\rightarrow R</M> be surjections, 
+and let <M>e:R\rightarrow A</M> be an inclusion. 
+
+<Display>
+\xymatrix@R=50pt@C=50pt{ A \ar@{->}@&lt;-1.5pt>[d]_{t} 
+\ar@{->}@&lt;1.5pt>[d]^{h} \\ R \ar@/^1.5pc/[u]^{e} 
+}
+</Display>
+
+If the conditions,
+<Display>
+\mathbf{Cat1Alg1:} \quad te = id_{R} = he, 
+\qquad  
+\mathbf{Cat1Alg2:} \quad (\ker t)(\ker h) = \{0_{A}\} 
+</Display> 
+are satisfied, then the algebraic system 
+<M>\mathcal{C} := (e;t,h : A \rightarrow R)</M>
+is called a cat<M>^{1}</M>-algebra. 
+The system which satisfy the condition
+<M>\mathbf{Cat1Alg1}</M> is called a <E>precat<M>^{1}</M>-algebra</E>. 
+The homomorphisms <M>t,h</M> and <M>e</M> are called the 
+<E>tail</E>, <E>head</E> and <E>embedding</E> homomorphisms, respectively.
+
+<ManSection>
+   <Func Name="Cat1"
+         Arg="args" />
+   <Oper Name="PreCat1ByTailHeadEmbedding"
+         Arg="t h e" />
+   <Oper Name="PreCat1ByEndomorphisms"
+         Arg="t h" />
+   <Oper Name="PreCat1AlgebraObj"
+         Arg="C" />
+   <Oper Name="PreCat1Algebra"
+         Arg="C" />
+   <Prop Name="IsIdentityCat1Algebra"
+         Arg="C" />
+   <Prop Name="IsCat1Algebra"
+         Arg="C" />
+   <Prop Name="IsPreCat1Algebra"
+         Arg="C" />
+<Description>
+The operations listed above are used for construction of precat<M>^{1}</M> 
+and cat<M>^{1}</M>-algebra structures. 
+The function <C>Cat1Algebra</C> selects the operation from the
+above implementations up to user's input. 
+The operation <C>PreCat1AlgebraObj</C> is used for preserving the implementations,
+
+</Description> 
+</ManSection> 
+
+
+<ManSection>
+   <Attr Name="Source"
+         Arg="C" />
+   <Attr Name="Range"
+         Arg="C" />
+   <Attr Name="Tail"
+         Arg="C" />
+   <Attr Name="Head"
+         Arg="C" />
+   <Attr Name="Embedding"
+         Arg="C" />
+   <Attr Name="Kernel"
+         Arg="C" />
+   <Attr Name="Boundary"
+         Arg="C" />
+<Description> 
+These are the seven main attributes of a pre-cat<M>^{1}</M>-algebra. 
+</Description> 
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> A := GroupRing(GF(2),Group((1,2,3)(4,5)));
+<algebra-with-one over GF(2), with 1 generators>
+gap> R := GroupRing(GF(2),Group((1,2,3)));
+<algebra-with-one over GF(2), with 1 generators>
+gap> f := AllHomsOfAlgebras(A,R);
+[ [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ <zero> of ... ], 
+  [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*() ],
+  [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3) ],
+  [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ],
+  [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,3,2) ], 
+  [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*(1,2,3) ],
+  [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ], 
+  [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*(1,3,2)
+     ] ]
+gap> g := AllHomsOfAlgebras(R,A);
+[ [ (Z(2)^0)*(1,2,3) ] -> [ <zero> of ... ], 
+  [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*() ],
+  [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3) ],
+  [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ],
+  [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,3,2) ], 
+  [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*(1,2,3) ],
+  [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ], 
+  [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*(1,3,2) ] ]
+gap> C4 := PreCat1ByTailHeadEmbedding(f[6],f[6],g[8]);
+[AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -> AlgebraWithOne( GF(2), 
+  [ (Z(2)^0)*(1,2,3) ] )]
+gap> IsCat1Algebra(C4);
+true
+gap> Size(C4);
+[ 64, 8 ]
+gap> Display(C4);
+
+Cat1-algebra [..=>..] :-
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3) ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
+: kernel has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+: boundary homomorphism maps generators of kernel to:
+  [ <zero> of ..., <zero> of ..., <zero> of ... ]
+: kernel embedding maps generators of kernel to:
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+]]>
+</Example>
+
+<ManSection>
+   <Oper Name="Cat1AlgebraSelect"
+         Arg="gf gpsize gpnum num" />
+<Description> 
+
+The Cat1Algebra function may also be used to select a cat<M>^{1}</M>-algebra from a data file. All cat<M>^{1}</M>-structures on
+commutative algebras are stored in a list in file cat1algdata.g. The data is read into the list CAT1ALG_LIST only when this function is called.
+
+The function Cat1AlgebraSelect may be used in four ways:
+
+<List>
+<Item> 
+Cat1AlgebraSelect( gf ) returns the list of possible size of Galois field or the list of possible size of 
+groups with given Galois field. 
+</Item>
+<Item> 
+Cat1AlgebraSelect( gf, gpsize ) returns the list of possible size of group with given Galois fields or the list of possible 
+number of groups with given Galois field and size of group.
+</Item>
+<Item> 
+Cat1AlgebraSelect( gf, gpsize, gpnum ) returns the list of possible number of group with given Galois field and size of group or the list of possible 
+cat<M>^{1}</M>-structures with given Galois field and group.
+</Item>
+<Item> 
+Cat1AlgebraSelect( gf, gpsize, gpnum, num ) (or just Cat1Algebra( gf, gpsize, gpnum, num )) returns the chosen cat<M>^{1}</M>-algebra.
+</Item>
+</List>
+
+Now, we will give an example for the usage of this function.
+
+</Description> 
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> C := Cat1AlgebraSelect(11);
+|--------------------------------------------------------|
+| 11 is invalid number for Galois Field (gf)             |
+| Possible numbers for the gf in the Data :              |
+|--------------------------------------------------------|
+ [ 2, 3, 4, 5, 7 ]
+Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+fail
+gap> C := Cat1AlgebraSelect(4,12);
+|--------------------------------------------------------|
+| 12 is invalid number for size of group (gpsize)        |
+| Possible numbers for the gpsize for GF(4) in the Data: |
+|--------------------------------------------------------|
+ [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+fail
+gap> C := Cat1AlgebraSelect(2,6,3);
+|--------------------------------------------------------|
+| 3 is invalid number for group of order 6               |
+| Possible numbers for the gpnum in the Data :           |
+|--------------------------------------------------------|
+ [ 1, 2 ]
+Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+fail
+gap> C := Cat1AlgebraSelect(2,6,2);
+There are 4 cat1-structures for the algebra GF(2)_c6.
+ Range Alg      Tail                    Head
+|--------------------------------------------------------|
+| GF(2)_c6      identity map            identity map     |
+| -----         [ 2, 10 ]               [ 2, 10 ]        |
+| -----         [ 2, 14 ]               [ 2, 14 ]        |
+| -----         [ 2, 50 ]               [ 2, 50 ]        |
+|--------------------------------------------------------|
+Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
+4
+gap> C2 := Cat1AlgebraSelect( 4, 6, 2, 2 );
+[GF(2^2)_c6 -> Algebra( GF(2^2),
+[ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+(
+    Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ] )]
+gap> Size( C2 ); 
+[ 4096, 1024 ]
+gap> Display( C2 ); 
+
+Cat1-algebra [GF(2^2)_c6=>..] :-
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)
+    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)
+    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)
+    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)
+    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: kernel has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)
+    (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: boundary homomorphism maps generators of kernel to:
+  [ <zero> of ... ]
+: kernel embedding maps generators of kernel to:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)
+    (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+]]>
+</Example>
+
+<ManSection> 
+   <Oper Name="SubCat1Algebra"
+         Arg="arg" />
+   <Oper Name="SubPreCat1Algebra"
+         Arg="arg" />
+   <Prop Name="IsSubCat1Algebra"
+         Arg="arg" />
+   <Prop Name="IsSubPreCat1Algebra"
+         Arg="arg" />
+<Description> 
+Let <M>\mathcal{C} = (e;t,h:A\rightarrow R)</M> 
+be a cat<M>^{1}</M>-algebra, and let <M>A^{\prime}</M>, 
+<M>R^{\prime}</M> be subalgebras of <M>A</M> and <M>R</M> respectively. 
+If the restriction morphisms
+<Display>
+t^{\prime} = t|_{A^{\prime}} : A^{\prime}\rightarrow R^{\prime}, 
+\qquad  
+h^{\prime} = h|_{A^{\prime}} : A^{\prime}\rightarrow R^{\prime}, 
+\qquad 
+e^{\prime} = e|_{R^{\prime}} : R^{\prime}\rightarrow A^{\prime}
+</Display> 
+satisfy the <M>\mathbf{Cat1Alg1}</M> and <M>\mathbf{Cat1Alg2}</M> 
+conditions, then the system 
+<M>\mathcal{C}^{\prime } = (e^{\prime};t^{\prime},h^{\prime}
+  : A^{\prime} \rightarrow R^{\prime})</M> 
+is called a <E>subcat<M>^{1}</M>-algebra</E> of 
+<M>\mathcal{C} = (e;t,h:A\rightarrow R)</M>. 
+<P/> 
+If the morphisms satisfy only the <M>\mathbf{Cat1Alg1}</M> condition 
+then <M>\mathcal{C}^{\prime }</M> is called a 
+<E>sub-precat<M>^{1}</M>-algebra</E> of <M>\mathcal{C}</M>. 
+<P/> 
+The operations in this subsection are used for constructing 
+subcat<M>^{1}</M>-algebras of a given cat<M>^{1}</M>-algebra.
+
+</Description> 
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> C3 := Cat1AlgebraSelect( 2, 6, 2, 4 );; 
+gap> A3 := Source( C3 );
+GF(2)_c6
+gap> B3 := Range( C3 ); 
+GF(2)_c3
+gap> eA3 := Elements( A3 );;
+gap> eB3 := Elements( B3 );;
+gap> AA3 := Subalgebra( A3, [ eA3[1], eA3[2], eA3[3] ] );
+<algebra over GF(2), with 3 generators>
+gap> [ Size(A3), Size(AA3) ]; 
+[ 64, 4 ]
+gap> BB3 := Subalgebra( B3, [ eB3[1], eB3[2] ] ); 
+<algebra over GF(2), with 2 generators>
+gap> [ Size(B3), Size(BB3) ]; 
+[ 8, 2 ]
+gap> CC3 := SubCat1Algebra( C3, AA3, BB3 );
+[Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) 
+ ] ) -> Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*() ] )]
+gap> Display( CC3 );
+
+Cat1-algebra [..=>..] :-
+: source algebra has generators:
+  [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
+:  range algebra has generators:
+  [ <zero> of ..., (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ <zero> of ..., (Z(2)^0)*(), <zero> of ... ]
+: head homomorphism maps source generators to:
+  [ <zero> of ..., (Z(2)^0)*(), <zero> of ... ]
+: range embedding maps range generators to:
+  [ <zero> of ..., (Z(2)^0)*() ]
+: kernel has generators:
+  [ <zero> of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
+: boundary homomorphism maps generators of kernel to:
+  [ <zero> of ..., <zero> of ... ]
+: kernel embedding maps generators of kernel to:
+  [ <zero> of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
+]]>
+</Example>
+
+</Section>
+
+
+<Section> 
+
+<Heading>Cat<M>^{1}-</M>algebra morphisms</Heading> 
+
+Let <M>\mathcal{C} = (e;t,h:A\rightarrow R)</M>, 
+<M>\mathcal{C}^{\prime } = (e^{\prime}; t^{\prime }, h^{\prime } 
+                           : A^{\prime} \rightarrow R^{\prime})</M> 
+be cat<M>^{1}</M>-algebras, 
+and let <M>\phi : A\rightarrow A^{\prime}</M> 
+and <M>\varphi : R \rightarrow R^{\prime}</M> be algebra homomorphisms. 
+If the diagram
+<Display>
+\xymatrix@R=50pt@C=50pt{ A \ar@{->}@&lt;-1.5pt>[d]_{t} 
+\ar@{->}@&lt;1.5pt>[d]^{h} \ar@{->}[r]^{\phi} &amp; A' \ar@{->}@&lt;-1.5pt>[d]_{t'} 
+\ar@{->}@&lt;1.5pt>[d]^{h'} \\ R \ar@/^1.5pc/[u]^{e} \ar@{->}[r]_{\varphi} &amp; R' \ar@/_1.5pc/[u]_{e'}
+}
+</Display>
+commutes, (i.e <M>t^{\prime} \circ \phi = \varphi \circ t</M>, 
+<M>h^{\prime} \circ \phi = \varphi \circ h</M> and 
+<M>e^{\prime } \circ \varphi = \phi \circ e</M>), 
+then the pair <M>(\phi ,\varphi )</M>is called
+a cat<M>^{1}</M>-algebra morphism. 
+
+
+<ManSection>
+   <Oper Name="Cat1AlgebraMorphism"
+         Arg="arg" />
+   <Oper Name="IdentityMapping"
+         Arg="C" />
+   <Oper Name="PreCat1AlgebraMorphismByHoms"
+         Arg="f g" />
+   <Oper Name="Cat1AlgebraMorphismByHoms"
+         Arg="f g" />
+   <Prop Name="IsPreCat1AlgebraMorphism"
+         Arg="C" />
+   <Prop Name="IsCat1AlgebraMorphism"
+         Arg="arg" />
+<Description> 
+These operations are used for constructing cat<M>^{1}</M>-algebra morphisms. 
+Details of the implementations can be found in <Cite Key="aodabas1"/>.
+</Description>
+</ManSection>
+
+<ManSection>
+   <Attr Name="Source"
+         Arg="m" />
+   <Attr Name="Range"
+         Arg="m" />
+   <Attr Name="IsTotal"
+         Arg="m" />
+   <Prop Name="IsSingleValued"
+         Arg="m" />
+   <Attr Name="Name"
+         Arg="m" />
+   <Attr Name="Boundary"
+         Arg="m" />
+<Description> 
+These are the six main attributes of a cat<M>^{1}</M>-algebra morphism. 
+</Description>
+</ManSection>
+
+<Example>
+<![CDATA[
+gap> C1:=Cat1Algebra(2,1,1,1);
+[GF(2)_triv -> GF(2)_triv]
+gap> Display(C1);
+
+Cat1-algebra [GF(2)_triv=>GF(2)_triv] :-
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: the kernel is trivial.
+
+gap> C2:=Cat1Algebra(2,2,1,2);
+[GF(2)_c2 -> GF(2)_triv]
+gap> Display(C2);
+
+Cat1-algebra [GF(2)_c2=>GF(2)_triv] :-
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: kernel has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
+: boundary homomorphism maps generators of kernel to:
+  [ <zero> of ... ]
+: kernel embedding maps generators of kernel to:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
+
+gap> C1=C2;
+false
+gap> R1:=Source(C1);;
+gap> R2:=Source(C2);;
+gap> S1:=Range(C1);;
+gap> S2:=Range(C2);;
+gap> gR1:=GeneratorsOfAlgebra(R1);
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> gR2:=GeneratorsOfAlgebra(R2);
+[ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
+gap> gS1:=GeneratorsOfAlgebra(S1);
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> gS2:=GeneratorsOfAlgebra(S2);
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> im1:=[gR2[1],gR2[1]];
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> f1:=AlgebraHomomorphismByImages(R1,R2,gR1,im1);
+[ (Z(2)^0)*(), (Z(2)^0)*() ] -> [ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> im2:=[gS2[1],gS2[1]];
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> f2:=AlgebraHomomorphismByImages(S1,S2,gS1,im2);
+[ (Z(2)^0)*(), (Z(2)^0)*() ] -> [ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> m:=Cat1AlgebraMorphism(C1,C2,f1,f2);
+[[GF(2)_triv=>GF(2)_triv] => [GF(2)_c2=>GF(2)_triv]]
+gap> Display(m);
+Morphism of cat1-algebras :-
+: Source = [GF(2)_triv=>GF(2)_triv] with generating sets:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+:  Range = [GF(2)_c2=>GF(2)_triv] with generating sets:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: Source Homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: Range Homomorphism maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> Image2dAlgMapping(m);
+[GF(3)_c2^3=>GF(3)_c2^3]
+gap> IsSurjective(m);
+false
+gap> IsInjective(m);
+true
+gap> IsBijective(m);
+false
+
+]]>
+</Example>
+
+</Section> 
+
+
+<Section> 
+
+<Heading>Equivalent Categories</Heading> 
+
+The categories <M>\mathbf{Cat1Alg}</M> (cat<M>^{1}</M>-algebras) 
+and <M>\mathbf{XModAlg}</M> (crossed modules) 
+are naturally equivalent <Cite Key="ellis1"/>.  
+This equivalence is outlined in what follows. 
+For a given crossed module <M>(\partial : A \rightarrow R)</M> 
+we can construct the semidirect product <M>R\ltimes A</M>
+thanks to the action of <M>R</M> on <M>A</M>. 
+If we define <M>t,h : R\ltimes A \rightarrow R</M> 
+and <M>e : R \rightarrow R \ltimes A</M> by 
+<Display>
+t(r,a) = r, \qquad 
+h(r,a) = r+\partial(a), \qquad 
+e(r) = (r,0), 
+</Display>
+respectively, then 
+<M>\mathcal{C} = (e;t,h : R \ltimes A \rightarrow R)</M> 
+is a cat<M>^{1}-</M>algebra.
+<P/> 
+Conversely, for a given cat<M>^{1}</M>-algebra 
+<M>\mathcal{C}=(e;t,h : A \rightarrow R)</M>, 
+the map <M>\partial : \ker t \rightarrow R</M> is a crossed module, 
+where the action is multiplication action and 
+<M>\partial</M> is the restriction of <M>h</M> to <M>\ker t</M>. 
+
+
+<ManSection>
+   <Oper Name="PreCat1ByPreXMod"
+         Arg="X0" />
+   <Oper Name="PreXModAlgebraByPreCat1Algebra"
+         Arg="C" />
+   <Oper Name="Cat1AlgebraByXModAlgebra"
+         Arg="X0" />
+   <Oper Name="XModAlgebraByCat1Algebra"
+         Arg="C" />
+<Description> 
+These operations are used for constructing a cat<M>^{1}</M>-algebra 
+from a given crossed module, and conversely.
+</Description>
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> CXM := Cat1AlgebraByXModAlgebra( XM );
+[GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]]
+gap> X3 := XModAlgebraByCat1Algebra( C3 ); 
+[Algebra( GF(2), [ <zero> of ..., <zero> of ..., <zero> of ... 
+ ] )->Algebra( GF(2), 
+[ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ] )]
+gap> Display( X3 ); 
+
+Crossed module [..->..] :- 
+: Source algebra has generators:
+  [ <zero> of ..., <zero> of ..., <zero> of ... ]
+: Range algebra has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+: Boundary homomorphism maps source generators to:
+  [ <zero> of ..., <zero> of ..., <zero> of ... ]
+]]>
+</Example>
+
+Since all these operations are linked to the functions <C>Cat1Algebra</C> and
+<C>XModAlgebra</C>, all of them can be done by using these two functions. 
+We may also use the function <C>Cat1Algebra</C> instead of the operation
+<C>Cat1AlgebraSelect</C>.
+
+
+</Section>
+
+</Chapter>

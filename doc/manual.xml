@@ -1,0 +1,96 @@
+<!-- ------------------------------------------------------------------- -->
+<!--                                                                     -->
+<!--  manual.xml          XModAlg documentation               Z. Arvasi  -->
+<!--                                                        & A. Odabas  -->
+<!--  version 1.12, 13/11/2015                                           --> 
+<!--                                                                     --> 
+<!--  Copyright (C) 2014-2015, Z. Arvasi & A. Odabas,                    --> 
+<!--  Osmangazi University, Eskisehir, Turkey                            --> 
+<!--                                                                     -->
+<!-- ------------------------------------------------------------------- -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Reading data chunk from the PackageInfo.g file --> 
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+  [<!ENTITY XModAlg "<Package>XModAlg</Package>">,
+  <!ENTITY Im "\mathop{\textrm{Im}\rm}">
+   <#Include Label="PKGVERSIONDATA"> 
+  ]> 
+
+<!-- The documentation to the XModAlg package. -->
+
+<Book Name="XModAlg"> 
+
+<TitlePage>
+  <Title>&XModAlg;</Title>
+  <Subtitle>Crossed modules and cat1-algebras 
+            of commutative algebras</Subtitle>
+  <Version>Version &VERSION;</Version>
+  <Date>&RELEASEDATE;</Date> 
+  <Author> Zekeriya Arvasi
+    <Email>zarvasi@ogu.edu.tr</Email>
+    <Homepage>http://fef.ogu.edu.tr/zarvasi</Homepage>
+    <Address>
+      Department of Mathematics and Computer Science,<Br/>
+      Osmangazi University, Eski&#x15f;ehir, Turkey
+    </Address>
+  </Author>   
+  <Author> Alper Odaba&#x15f; 
+    <Email>aodabas@ogu.edu.tr</Email>
+    <Homepage>http://fef.ogu.edu.tr/matbil/aodabas/</Homepage>
+    <Address>
+      Department of Mathematics and Computer Science,<Br/>
+      Osmangazi University, Eski&#x15f;ehir, Turkey
+    </Address>
+  </Author>
+
+<Abstract>
+The &XModAlg; package provides functions for computation with crossed modules of commutative algebras and cat<M>^{1}</M>-algebras). 
+The current version is &VERSION;, released &LONGRELEASEDATE; for &GAP; 4.7. 
+<P/>
+Bug reports, suggestions and comments are, of course, welcome. 
+Please contact the second author at     
+<Email>aodabas@ogu.edu.tr</Email>.
+</Abstract>
+
+<Copyright> 
+<Index>License</Index>
+&copyright; &COPYRIGHTYEARS; Zekeriya Arvasi and Alper Odabas.  
+
+&XModAlg; is free software; you can redistribute it 
+and/or modify it under the terms of the 
+<URL Text="GNU General Public License">http://www.fsf.org/licenses/gpl.html</URL> 
+as published by the Free Software Foundation; 
+either version 2 of the License, or any later version.
+</Copyright>
+
+<Acknowledgements>
+This documentation was prepared with the <Package>GAPDoc</Package> 
+package of Frank L&#xfc;beck and Max Neunh&#xf6;ffer. 
+<P/>
+Both authors are very grateful to <URL Text="Chris Wensley">http://pages.bangor.ac.uk/~mas023/</URL>  for helpful suggestions.
+<P/>
+This work was partially supported by T&#220;B&#304;TAK 
+(The Scientific and Technical Research Council of Turkey), 
+project number 107T542. 
+</Acknowledgements>
+
+</TitlePage>
+
+<TableOfContents/>
+
+<Body>
+
+<#Include SYSTEM "intro.xml">
+<#Include SYSTEM "xmod.xml">
+<#Include SYSTEM "cat1.xml">
+
+</Body>
+
+<Bibliography Databases="manual"/>
+
+<TheIndex/>
+
+</Book>

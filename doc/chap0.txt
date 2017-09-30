@@ -1,0 +1,97 @@
+  
+  
+                                    [1X[5XXModAlg[105X[101X
+  
+  
+           [1XCrossed modules and cat1-algebras of commutative algebras[101X
+  
+  
+                                  Version 1.12
+  
+  
+                                   14/11/2015
+  
+  
+                                Zekeriya Arvasi
+  
+                                  Alper Odabaş
+  
+  
+  
+  Zekeriya Arvasi
+      Email:    [7Xmailto:zarvasi@ogu.edu.tr[107X
+      Homepage: [7Xhttp://fef.ogu.edu.tr/zarvasi[107X
+      Address:  [33X[0;14YDepartment of Mathematics and Computer Science,[133X
+                [33X[0;14YOsmangazi University, Eskişehir, Turkey[133X
+  
+  
+  Alper Odabaş
+      Email:    [7Xmailto:aodabas@ogu.edu.tr[107X
+      Homepage: [7Xhttp://fef.ogu.edu.tr/matbil/aodabas/[107X
+      Address:  [33X[0;14YDepartment of Mathematics and Computer Science,[133X
+                [33X[0;14YOsmangazi University, Eskişehir, Turkey[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XAbstract[101X
+  [33X[0;0YThe  [5XXModAlg[105X package provides functions for computation with crossed modules
+  of  commutative  algebras  and cat[22X^1[122X-algebras). The current version is 1.12,
+  released 14th November 2015 for [5XGAP[105X 4.7.[133X
+  
+  [33X[0;0YBug  reports,  suggestions  and  comments  are,  of  course, welcome. Please
+  contact the second author at [7Xmailto:aodabas@ogu.edu.tr[107X.[133X
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y©  2014-2015 Zekeriya Arvasi and Alper Odabas. [5XXModAlg[105X is free software; you
+  can  redistribute  it  and/or  modify  it under the terms of the GNU General
+  Public  License  ([7Xhttp://www.fsf.org/licenses/gpl.html[107X)  as published by the
+  Free  Software  Foundation;  either  version  2 of the License, or any later
+  version.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YThis  documentation was prepared with the [5XGAPDoc[105X package of Frank Lübeck and
+  Max Neunhöffer.[133X
+  
+  [33X[0;0YBoth      authors     are     very     grateful     to     Chris     Wensley
+  ([7Xhttp://pages.bangor.ac.uk/~mas023/[107X) for helpful suggestions.[133X
+  
+  [33X[0;0YThis  work  was partially supported by TÜBİTAK (The Scientific and Technical
+  Research Council of Turkey), project number 107T542.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (XModAlg)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+  2 [33X[0;0YCrossed modules[133X
+    2.1 [33X[0;0YDefinition and Examples[133X
+      2.1-1 XModAlgebra
+      2.1-2 Source
+      2.1-3 SubXModAlgebra
+      2.1-4 PreXModAlgebraByBoundaryAndAction
+    2.2 [33X[0;0Y(Pre-)Crossed Module Morphisms[133X
+      2.2-1 XModAlgebraMorphism
+      2.2-2 Kernel
+      2.2-3 Image
+      2.2-4 SourceHom
+  3 [33X[0;0YCat1-algebras[133X
+    3.1 [33X[0;0YDefinitions and examples[133X
+      3.1-1 Cat1
+      3.1-2 Source
+      3.1-3 Cat1AlgebraSelect
+      3.1-4 SubCat1Algebra
+    3.2 [33X[0;0YCat[22X^1-[122Xalgebra morphisms[133X
+      3.2-1 Cat1AlgebraMorphism
+      3.2-2 Source
+    3.3 [33X[0;0YEquivalent Categories[133X
+      3.3-1 PreCat1ByPreXMod
+  
+  
+  [32X

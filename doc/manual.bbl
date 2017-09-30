@@ -1,0 +1,75 @@
+\begin{thebibliography}{AOUW15}
+
+\bibitem[AE03]{arvasi4}
+Z.~Arvasi and U.~Ege.
+\newblock Annihilators, multipliers and crossed modules.
+\newblock {\em Applied Categorical Structures}, 11:487--506, 2003.
+
+\bibitem[AO15]{arvasi_odabas}
+Z.~Arvasi and A.~Odabas.
+\newblock Computing 2-dimensional algebras: Crossed modules and cat1-algebras.
+\newblock {\em J. Algebra and Its Applications}, DOI:10.1142/S0219498816501851,
+  2015.
+
+\bibitem[AOUW15]{alp3}
+M.~Alp, A.~Odabas, E.~O. Uslu, and C.~D. Wensley.
+\newblock {\em XMod: Crossed Modules and Cat1-groups in GAP}, 2015.
+
+\bibitem[AP96]{arvasi2}
+Z.~Arvasi and T.~Porter.
+\newblock Simplicial and crossed resolutions of commutative algebras.
+\newblock {\em J. Algebra}, 181:426--448, 1996.
+
+\bibitem[AP98]{arvasi3}
+Z.~Arvasi and T.~Porter.
+\newblock Freeness conditions for 2-crossed modules of commutative algebras.
+\newblock {\em Applied Categorical Structures}, 6:455--471, 1998.
+
+\bibitem[AW00]{alp2}
+M.~Alp and C.~D. Wensley.
+\newblock Enumeration of cat1-groups of low order.
+\newblock {\em Int. J. Algebra and Computation}, 10:407--424, 2000.
+
+\bibitem[Bro82]{brown1}
+R.~Brown.
+\newblock Higher dimensional group theory,.
+\newblock In {\em Low Dimensional Topology}, volume~48 of {\em London Math.
+  Soc. Lecture Note Series}. London Mathematical Society, 1982.
+
+\bibitem[Bro87]{brown2}
+R.~Brown.
+\newblock From groups to groupoids: a brief survey.
+\newblock {\em Bull. London Math. Soc.}, 19:113--134, 1987.
+
+\bibitem[Ell88]{ellis1}
+G.~J. Ellis.
+\newblock Higher dimensional crossed modules of algebras.
+\newblock {\em J. Pure and Appl. Algebra}, 52:277--282, 1988.
+
+\bibitem[Lod82]{loday}
+J.~L. Loday.
+\newblock Spaces with finitely many non-trivial homotopy groups.
+\newblock {\em J. App. Algebra}, 24:179--202, 1982.
+
+\bibitem[Mos86]{mosa}
+G.~H. Mosa.
+\newblock {\em Higher dimensional algebroids and crossed complexes}.
+\newblock Ph.{D}.~thesis, University of Wales, Bangor (U.K.), 1986.
+
+\bibitem[Oda09]{aodabas1}
+A.~Odabas.
+\newblock {\em Crossed Modules of Algebras with GAP}.
+\newblock Ph.{D}.~thesis, Osmangazi University, Eskisehir, 2009.
+
+\bibitem[Por87]{porter1}
+T.~Porter.
+\newblock Some categorical results in the theory of crossed modules in
+  commutative algebras.
+\newblock {\em J. Algebra}, 109:415--429, 1987.
+
+\bibitem[Whi49]{whitehead}
+J.~H.~C. Whitehead.
+\newblock Combinatorial homotopy {I}{I}.
+\newblock {\em Bull. Amer. Math. Soc.}, 55:453--496, 1949.
+
+\end{thebibliography}

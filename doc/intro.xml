@@ -1,0 +1,53 @@
+<!-- ------------------------------------------------------------------- -->
+<!--                                                                     -->
+<!--  intro.xml           XModAlg documentation               Z. Arvasi  -->
+<!--                                                        & A. Odabas  -->
+<!--  version 1.11, 02/11/2015                                           --> 
+<!--                                                                     --> 
+<!--  Copyright (C) 2014-2015, Z. Arvasi & A. Odabas,              		 --> 
+<!--  Osmangazi University, Eskisehir, Turkey                            --> 
+<!--                                                                     -->
+<!-- ------------------------------------------------------------------- -->
+
+<!-- lines to edit for each new version: 73, 121. --> 
+
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<Chapter Label="Intro">
+
+<Heading>Introduction</Heading>
+
+In 1950 S. MacLane and J.H.C. Whitehead, <Cite Key="whitehead"/>
+suggested that crossed modules modeled homotopy <M>2</M>-types. 
+Later crossed modules have been considered as <M>2</M><E>-dimensional groups</E>, 
+<Cite Key="brown1"/>, <Cite Key="brown2"/>. 
+The commutative algebra version of this construction has been adapted by 
+T. Porter, <Cite Key="arvasi2"/>, <Cite Key="porter1"/>. 
+This algebraic version is called <E>combinatorial algebra theory</E>, 
+which contains potentially important new ideas 
+(see <Cite Key="arvasi2"/>, <Cite Key="arvasi3"/>, <Cite Key="arvasi4"/>).
+<P/>
+A share package <Package>XMod</Package>, <Cite Key="alp3"/>, 
+<Cite Key="alp2"/>, was prepared by 
+M. Alp and C.D. Wensley for the &GAP; computational group theory language, 
+initially for &GAP;3 then revised for &GAP;4.  
+The <M>2</M>-dimensional part of this programme contains functions for computing
+crossed modules and cat<M>^{1}</M>-groups and their morphisms  
+<Cite Key="alp3"/>.
+<P/>
+This package includes functions for computing crossed modules of algebras, cat<M>^{1}</M>-algebras and their
+morphisms by analogy with <E>computational group theory</E>. We will concentrate on group rings over of abelian 
+groups over finite fields because these algebras are conveniently implemented in &GAP;.
+The tools needed are the group algebras in which the group algebra functor 
+<M>\mathcal{K}(.):Gr\rightarrow Alg</M> 
+is left adjoint to the unit group functor 
+<M>\mathcal{U}(.):Alg\rightarrow Gr</M>.
+<P/>
+The categories <C>XModAlg</C> (crossed modules of algebras) 
+and <C>Cat1Alg</C> (cat<M>^{1}</M>-algebras) are equivalent, and we include functions to convert objects and morphisms
+between them. The algorithms implemented in this package are analyzed in
+A. Odabas's Ph.D. thesis, <Cite Key="aodabas1"/> and described in detail in the paper <Cite Key="arvasi_odabas" />.
+<P/>
+There are aspects of commutative algebras for which no &GAP; functions yet exist, for example semidirect products. 
+We have included here functions for all homomorphisms of algebras. 
+</Chapter>

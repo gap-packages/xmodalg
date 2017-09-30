@@ -1,0 +1,90 @@
+\GAPDocLabFile{xmodalg}
+\makelabel{xmodalg:Title page}{}{X7D2C85EC87DD46E5}
+\makelabel{xmodalg:Abstract}{}{X7AA6C5737B711C89}
+\makelabel{xmodalg:Copyright}{}{X81488B807F2A1CF1}
+\makelabel{xmodalg:Acknowledgements}{}{X82A988D47DFAFCFA}
+\makelabel{xmodalg:Table of Contents}{}{X8537FEB07AF2BEC8}
+\makelabel{xmodalg:Introduction}{1}{X7DFB63A97E67C0A1}
+\makelabel{xmodalg:Crossed modules}{2}{X808C6B357F8BADC1}
+\makelabel{xmodalg:Definition and Examples}{2.1}{X7BB9D67179296AA0}
+\makelabel{xmodalg:(Pre-)Crossed Module Morphisms}{2.2}{X866610BC7C41E1EC}
+\makelabel{xmodalg:Cat1-algebras}{3}{X85527BA8786CB7FC}
+\makelabel{xmodalg:Definitions and examples}{3.1}{X811B6B0F8203F972}
+\makelabel{xmodalg:Cat1-algebra morphisms}{3.2}{X8159613D81C201EA}
+\makelabel{xmodalg:Equivalent Categories}{3.3}{X8617844F86989A78}
+\makelabel{xmodalg:Bibliography}{Bib}{X7A6F98FD85F02BFE}
+\makelabel{xmodalg:References}{Bib}{X7A6F98FD85F02BFE}
+\makelabel{xmodalg:Index}{Ind}{X83A0356F839C696F}
+\makelabel{xmodalg:License}{}{X81488B807F2A1CF1}
+\makelabel{xmodalg:crossed module}{2.1}{X7BB9D67179296AA0}
+\makelabel{xmodalg:2d-algebra}{2.1}{X7BB9D67179296AA0}
+\makelabel{xmodalg:XModAlgebra}{2.1.1}{X813D94F97D8E71A8}
+\makelabel{xmodalg:XModAlgebraByBoundaryAndAction}{2.1.1}{X813D94F97D8E71A8}
+\makelabel{xmodalg:XModAlgebraByIdeal}{2.1.1}{X813D94F97D8E71A8}
+\makelabel{xmodalg:XModAlgebraByModule}{2.1.1}{X813D94F97D8E71A8}
+\makelabel{xmodalg:XModAlgebraByCentralExtension}{2.1.1}{X813D94F97D8E71A8}
+\makelabel{xmodalg:XModAlgebraByMultipleAlgebra}{2.1.1}{X813D94F97D8E71A8}
+\makelabel{xmodalg:Source}{2.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Range}{2.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Boundary}{2.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:XModAlgebraAction}{2.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:SubXModAlgebra}{2.1.3}{X7CA213397B334CBC}
+\makelabel{xmodalg:IsSubXModAlgebra}{2.1.3}{X7CA213397B334CBC}
+\makelabel{xmodalg:precrossed module}{2.1.3}{X7CA213397B334CBC}
+\makelabel{xmodalg:PreXModAlgebraByBoundaryAndAction}{2.1.4}{X813B894B7C2E8BAB}
+\makelabel{xmodalg:IsPreXModAlgebra}{2.1.4}{X813B894B7C2E8BAB}
+\makelabel{xmodalg:XModAlgebraMorphism}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:IdentityMapping}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:PreXModAlgebraMorphismByHoms}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:XModAlgebraMorphismByHoms}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:IsPreXModAlgebraMorphism}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:IsXModAlgebraMorphism}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:Source}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:Range}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:IsTotal}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:IsSingleValued}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:Name}{2.2.1}{X7D575D07810640EB}
+\makelabel{xmodalg:Kernel}{2.2.2}{X7DCD99628504B810}
+\makelabel{xmodalg:Image}{2.2.3}{X87F4D35A826599C6}
+\makelabel{xmodalg:SourceHom}{2.2.4}{X7B7975DA7E870690}
+\makelabel{xmodalg:RangeHom}{2.2.4}{X7B7975DA7E870690}
+\makelabel{xmodalg:IsInjective}{2.2.4}{X7B7975DA7E870690}
+\makelabel{xmodalg:IsSurjective}{2.2.4}{X7B7975DA7E870690}
+\makelabel{xmodalg:IsBijjective}{2.2.4}{X7B7975DA7E870690}
+\makelabel{xmodalg:cat1-group}{3.1}{X811B6B0F8203F972}
+\makelabel{xmodalg:Cat1}{3.1.1}{X7F4221DF83D1B6D8}
+\makelabel{xmodalg:PreCat1ByTailHeadEmbedding}{3.1.1}{X7F4221DF83D1B6D8}
+\makelabel{xmodalg:PreCat1ByEndomorphisms}{3.1.1}{X7F4221DF83D1B6D8}
+\makelabel{xmodalg:PreCat1AlgebraObj}{3.1.1}{X7F4221DF83D1B6D8}
+\makelabel{xmodalg:PreCat1Algebra}{3.1.1}{X7F4221DF83D1B6D8}
+\makelabel{xmodalg:IsIdentityCat1Algebra}{3.1.1}{X7F4221DF83D1B6D8}
+\makelabel{xmodalg:IsCat1Algebra}{3.1.1}{X7F4221DF83D1B6D8}
+\makelabel{xmodalg:IsPreCat1Algebra}{3.1.1}{X7F4221DF83D1B6D8}
+\makelabel{xmodalg:Source}{3.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Range}{3.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Tail}{3.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Head}{3.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Embedding}{3.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Kernel}{3.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Boundary}{3.1.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Cat1AlgebraSelect}{3.1.3}{X82EC94BA7E7F8DEA}
+\makelabel{xmodalg:SubCat1Algebra}{3.1.4}{X86E99B197E920C21}
+\makelabel{xmodalg:SubPreCat1Algebra}{3.1.4}{X86E99B197E920C21}
+\makelabel{xmodalg:IsSubCat1Algebra}{3.1.4}{X86E99B197E920C21}
+\makelabel{xmodalg:IsSubPreCat1Algebra}{3.1.4}{X86E99B197E920C21}
+\makelabel{xmodalg:Cat1AlgebraMorphism}{3.2.1}{X860E29147DA143B5}
+\makelabel{xmodalg:IdentityMapping}{3.2.1}{X860E29147DA143B5}
+\makelabel{xmodalg:PreCat1AlgebraMorphismByHoms}{3.2.1}{X860E29147DA143B5}
+\makelabel{xmodalg:Cat1AlgebraMorphismByHoms}{3.2.1}{X860E29147DA143B5}
+\makelabel{xmodalg:IsPreCat1AlgebraMorphism}{3.2.1}{X860E29147DA143B5}
+\makelabel{xmodalg:IsCat1AlgebraMorphism}{3.2.1}{X860E29147DA143B5}
+\makelabel{xmodalg:Source}{3.2.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Range}{3.2.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:IsTotal}{3.2.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:IsSingleValued}{3.2.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Name}{3.2.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:Boundary}{3.2.2}{X7DE8173F80E07AB1}
+\makelabel{xmodalg:PreCat1ByPreXMod}{3.3.1}{X7AA150628786FF01}
+\makelabel{xmodalg:PreXModAlgebraByPreCat1Algebra}{3.3.1}{X7AA150628786FF01}
+\makelabel{xmodalg:Cat1AlgebraByXModAlgebra}{3.3.1}{X7AA150628786FF01}
+\makelabel{xmodalg:XModAlgebraByCat1Algebra}{3.3.1}{X7AA150628786FF01}
