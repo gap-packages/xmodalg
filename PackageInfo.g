@@ -8,17 +8,17 @@ SetPackageInfo( rec(
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 
-Version := "1.12",
-Date := "14/11/2015",
+Version := "1.13",
+Date := "4/10/2017",
 
 ##  duplicate these values for inclusion in the manual: 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "1.12">
-##  <!ENTITY ZIPFILENAME "xmodalg-1.12.zip">
-##  <!ENTITY HTMLFILENAME "xmodalg112.html">
-##  <!ENTITY RELEASEDATE "14/11/2015">
-##  <!ENTITY LONGRELEASEDATE "14th November 2015">
-##  <!ENTITY COPYRIGHTYEARS "2014-2015">
+##  <!ENTITY VERSION "1.13">
+##  <!ENTITY ZIPFILENAME "xmodalg-1.13.zip">
+##  <!ENTITY HTMLFILENAME "xmodalg113.html">
+##  <!ENTITY RELEASEDATE "4/10/2017">
+##  <!ENTITY LONGRELEASEDATE "4th October 2017">
+##  <!ENTITY COPYRIGHTYEARS "2014-2017">
 ##  <#/GAPDoc>
 
 PackageWWWHome := 
@@ -93,7 +93,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.7",
-  NeededOtherPackages := [ ["XMod", ">=2.43"] ],
+  NeededOtherPackages := [ ["XMod", ">=2.62"] ],
   SuggestedOtherPackages := [ ["GAPDoc", ">= 1.5.1" ] ],
   ExternalConditions := [ ]
 ),
@@ -102,7 +102,7 @@ AvailabilityTest := ReturnTrue,
 
 BannerString := Concatenation( 
   "---------------------------------------------------------------------------------\n",
-  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.7 \n", 
+  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.8 \n", 
   "Methods for crossed modules of commutative algebras and cat1-algebras\n",
   "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n"
 ),
