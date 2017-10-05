@@ -1,37 +1,58 @@
 #############################################################################
 ##
-#W  cat1.tst, 04/11/15          XModAlg test files      Z. Arvasi - A. Odabas      
-#############################################################################
-
-
+#W  cat1.tst                XModAlg test files          Z. Arvasi - A. Odabas 
+## 
+gap> START_TEST( "XModAlg package: cat1.tst" );
 gap> saved_infolevel_xmodalg := InfoLevel( InfoXModAlg );; 
 gap> SetInfoLevel( InfoXModAlg, 0 );
 
+## make cat1.tst independent of xmod.tst 
+gap> A := GroupRing( GF(5), DihedralGroup(4) );;
+gap> SetName( A, "GF5[D4]" );
+gap> I := AugmentationIdeal( A );;
+gap> SetName( I, "Aug" );
+gap> CM := XModAlgebraByIdeal( A, I );;
+gap> G := SmallGroup( 4, 2 );;
+gap> F := GaloisField( 4 );;
+gap> R := GroupRing( F, G );;
+gap> SetName( R, "GF(2^2)[k4]" ); 
+gap> e5 := Elements(R)[5];; 
+gap> S := Subalgebra( R, [e5] );; 
+gap> SetName( S, "<e5>" );
+gap> RS := Cartesian( R, S );; 
+gap> SetName( RS, "GF(2^2)[k4] x <e5>" ); 
+gap> act := AlgebraAction( R, RS, S );;
+gap> bdy := AlgebraHomomorphismByFunction( S, R, r->r );;
+gap> IsAlgebraAction( act );; 
+gap> IsAlgebraHomomorphism( bdy );; 
+gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
+gap> IsXModAlgebra( XM );;
+
 ## Chapter 3,  Section 3.1.2
-gap> A := GroupRing(GF(2),Group((1,2,3)(4,5)));
+gap> A := GroupRing( GF(2), Group( (1,2,3)(4,5) ) );
 <algebra-with-one over GF(2), with 1 generators>
-gap> R := GroupRing(GF(2),Group((1,2,3)));
+gap> R := GroupRing( GF(2), Group( (1,2,3) ) );
 <algebra-with-one over GF(2), with 1 generators>
-gap> f := AllHomsOfAlgebras(A,R);
+gap> f := AllHomsOfAlgebras( A, R );
 [ [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ <zero> of ... ], [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*() ],
   [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3) ],
   [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ],
   [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,3,2) ], [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*(1,2,3) ],
   [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ], [ (Z(2)^0)*(1,3,2)(4,5) ] -> [ (Z(2)^0)*(1,3,2)
      ] ]
-gap> g := AllHomsOfAlgebras(R,A);
+gap> g := AllHomsOfAlgebras( R, A );
 [ [ (Z(2)^0)*(1,2,3) ] -> [ <zero> of ... ], [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*() ],
   [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3) ],
   [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ],
   [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*()+(Z(2)^0)*(1,3,2) ], [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*(1,2,3) ],
   [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ], [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*(1,3,2) ] ]
-gap> C4 := PreCat1ByTailHeadEmbedding(f[6],f[6],g[8]);
+gap> C4 := PreCat1ByTailHeadEmbedding( f[6], f[6], g[8] );
 [AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -> AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3) ] )]
-gap> IsCat1Algebra(C4);
+gap> IsCat1Algebra( C4 );
 true
-gap> Size(C4);
+gap> Size( C4 );
 [ 64, 8 ]
-gap> Display(C4);
+gap> Display( C4 );
 
 Cat1-algebra [..=>..] :-
 : source algebra has generators:
@@ -52,7 +73,6 @@ Cat1-algebra [..=>..] :-
   [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
 
 ## Chapter 3,  Section 3.1.3
-
 gap> C2 := Cat1AlgebraSelect( 4, 6, 2, 2 );
 [GF(2^2)_c6 -> Algebra( GF(2^2),
 [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+(
@@ -85,7 +105,7 @@ Cat1-algebra [GF(2^2)_c6=>..] :-
   [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)
     (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
 	
-gap> C := Cat1AlgebraSelect(11);
+gap> C := Cat1AlgebraSelect( 11 );
 |--------------------------------------------------------|
 | 11 is invalid number for Galois Field (gf)             |
 | Possible numbers for the gf in the Data :              |
@@ -94,7 +114,7 @@ gap> C := Cat1AlgebraSelect(11);
 Usage: Cat1Algebra( gf, gpsize, gpnum, num );
 fail
 
-gap> C := Cat1AlgebraSelect(4,12);
+gap> C := Cat1AlgebraSelect( 4, 12 );
 |--------------------------------------------------------|
 | 12 is invalid number for size of group (gpsize)        |
 | Possible numbers for the gpsize for GF(4) in the Data: |
@@ -103,7 +123,7 @@ gap> C := Cat1AlgebraSelect(4,12);
 Usage: Cat1Algebra( gf, gpsize, gpnum, num );
 fail
 
-gap> C := Cat1AlgebraSelect(2,6,3);
+gap> C := Cat1AlgebraSelect( 2, 6, 3 );
 |--------------------------------------------------------|
 | 3 is invalid number for group of order 6               |
 | Possible numbers for the gpnum in the Data :           |
@@ -112,7 +132,7 @@ gap> C := Cat1AlgebraSelect(2,6,3);
 Usage: Cat1Algebra( gf, gpsize, gpnum, num );
 fail
 
-gap> C := Cat1AlgebraSelect(2,6,2);
+gap> C := Cat1AlgebraSelect( 2, 6, 2 );
 There are 4 cat1-structures for the algebra GF(2)_c6.
  Range Alg      Tail                    Head
 |--------------------------------------------------------|
@@ -124,8 +144,6 @@ There are 4 cat1-structures for the algebra GF(2)_c6.
 Usage: Cat1Algebra( gf, gpsize, gpnum, num );
 Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
 4
-
-
 
 
 ## Chapter 3,  Section 3.1.4
@@ -169,15 +187,99 @@ Cat1-algebra [..=>..] :-
   [ <zero> of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
 
 ## Chapter 3,  Section 3.2.2
-
-gap> C4 := Cat1AlgebraSelect( 2, 1, 1, 1 );
+gap> C1 := Cat1AlgebraSelect( 2, 1, 1, 1 );
 [GF(2)_triv -> GF(2)_triv]
+gap> Display( C1 );
+
+Cat1-algebra [GF(2)_triv=>GF(2)_triv] :- 
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: the kernel is trivial.
+
+gap> C2 := Cat1AlgebraSelect( 2, 2, 1, 2 );
+[GF(2)_c2 -> GF(2)_triv]
+gap> Display( C2 );                        
+
+Cat1-algebra [GF(2)_c2=>GF(2)_triv] :- 
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: kernel has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
+: boundary homomorphism maps generators of kernel to:
+  [ <zero> of ... ]
+: kernel embedding maps generators of kernel to:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
+
+gap> C1 = C2;
+false
+gap> R1 := Source( C1 );;
+gap> R2 := Source( C2 );
+GF(2)_c2
+gap> S1 := Range( C1 );;
+gap> S2 := Range( C2 );;
+gap> gR1 := GeneratorsOfAlgebra( R1 );
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> gR2 := GeneratorsOfAlgebra( R2 );
+[ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
+gap> gS1 := GeneratorsOfAlgebra( S1 );
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> gS2 := GeneratorsOfAlgebra( S2 );
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> im1 := [ gR2[1], gR2[1] ];
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> f1 := AlgebraHomomorphismByImages( R1, R2, gR1, im1 );
+[ (Z(2)^0)*(), (Z(2)^0)*() ] -> [ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> im2 := [ gS2[1], gS2[1] ];
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> f2 := AlgebraHomomorphismByImages( S1, S2, gS1, im2 );
+[ (Z(2)^0)*(), (Z(2)^0)*() ] -> [ (Z(2)^0)*(), (Z(2)^0)*() ]
+gap> m := Cat1AlgebraMorphism( C1, C2, f1, f2 );
+[[GF(2)_triv=>GF(2)_triv] => [GF(2)_c2=>GF(2)_triv]]
+gap> Display( m );          
+
+Morphism of cat1-algebras :- 
+: Source = [GF(2)_triv=>GF(2)_triv] with generating sets:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+:  Range = [GF(2)_c2=>GF(2)_triv] with generating sets:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: Source Homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: Range Homomorphism maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+
+## gap> Image2dAlgMapping( m );
+## [GF(3)_c2^3=>GF(3)_c2^3]
+gap> IsSurjective( m );
+false
+gap> IsInjective( m );
+true
+gap> IsBijective( m );
+false
+
 
 ## Chapter 3,  Section 3.3.1
 
 gap> CXM := Cat1AlgebraByXModAlgebra( XM );
 [GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]]
-gap> Display(CXM);
+gap> Display( CXM );
 
 Cat1-algebra [..=>GF(2^2)[k4]] :-
 :  range algebra has generators:
@@ -208,7 +310,8 @@ Crossed module [..->..] :-
 : Boundary homomorphism maps source generators to:
   [ <zero> of ..., <zero> of ..., <zero> of ... ]
 
-
+gap> SetInfoLevel( InfoXModAlg, saved_infolevel_xmodalg );; 
+gap> STOP_TEST( "cat1.tst", 10000 );
 
 ############################################################################
 ##
