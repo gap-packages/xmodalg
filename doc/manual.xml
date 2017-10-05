@@ -2,9 +2,9 @@
 <!--                                                                     -->
 <!--  manual.xml          XModAlg documentation               Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  version 1.12, 13/11/2015                                           --> 
+<!--  version 1.14, 05/10/2017                                           --> 
 <!--                                                                     --> 
-<!--  Copyright (C) 2014-2015, Z. Arvasi & A. Odabas,                    --> 
+<!--  Copyright (C) 2014-2017, Z. Arvasi & A. Odabas,                    --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -26,7 +26,8 @@
 <TitlePage>
   <Title>&XModAlg;</Title>
   <Subtitle>Crossed modules and cat1-algebras 
-            of commutative algebras</Subtitle>
+            of commutative algebras
+  </Subtitle>
   <Version>Version &VERSION;</Version>
   <Date>&RELEASEDATE;</Date> 
   <Author> Zekeriya Arvasi
@@ -48,10 +49,12 @@
 
 <Abstract>
 The &XModAlg; package provides functions for computation with crossed modules of commutative algebras and cat<M>^{1}</M>-algebras). 
-The current version is &VERSION;, released &LONGRELEASEDATE; for &GAP; 4.7. 
+The current version is &VERSION;, released &LONGRELEASEDATE; for &GAP; 4.8. 
 <P/>
-Bug reports, suggestions and comments are, of course, welcome. 
-Please contact the second author at     
+Bug reports, suggestions and comments are, of course, very welcome. 
+Please submit an issue on GitHub at 
+<URL>http://github.com/gap-packages/xmodalg/issues/</URL> 
+or contact the second author at     
 <Email>aodabas@ogu.edu.tr</Email>.
 </Abstract>
 
@@ -68,9 +71,14 @@ either version 2 of the License, or any later version.
 
 <Acknowledgements>
 This documentation was prepared with the <Package>GAPDoc</Package> 
-package of Frank L&#xfc;beck and Max Neunh&#xf6;ffer. 
+package <Cite Key="GAPDoc" /> of Frank L&#xfc;beck and Max Neunh&#xf6;ffer. 
 <P/>
-Both authors are very grateful to <URL Text="Chris Wensley">http://pages.bangor.ac.uk/~mas023/</URL>  for helpful suggestions.
+Both authors are very grateful to <URL Text="Chris Wensley">http://pages.bangor.ac.uk/~mas023/</URL> for helpful suggestions.
+<P/>
+The procedure used to mount new releases on GitHub uses the packages 
+<Package>GitHubPagesForGAP</Package> 
+<Cite Key="GitHubPagesForGAP" /> 
+and <Package>ReleaseTools</Package> of Max Horn. 
 <P/>
 This work was partially supported by T&#220;B&#304;TAK 
 (The Scientific and Technical Research Council of Turkey), 
@@ -89,7 +97,7 @@ project number 107T542.
 
 </Body>
 
-<Bibliography Databases="manual"/>
+<Bibliography Databases="bib.xml"/>
 
 <TheIndex/>
 
