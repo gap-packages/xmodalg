@@ -1,6 +1,7 @@
 # CHANGES to the 'XModAlg' package
 
 ## 1.13 -> 1.14 
+ * (05/10/17) moved testall.g to testing.g and added new testall.g 
  * (05/10/17) converted manual.bib to bib.xml 
  * (05/10/17) converted README and CHANGES to MarkDown files 
 
