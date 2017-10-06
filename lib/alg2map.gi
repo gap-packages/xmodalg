@@ -1,10 +1,8 @@
 #############################################################################
 ##
-#W  alg2map.gi                 The XMODALG package           Zekeriya Arvasi
+#W  alg2map.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-##  version 1.12, 14/11/2015 
-##
-#Y  Copyright (C) 2014-2015, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2017, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ##############################################################################
@@ -635,13 +633,13 @@ InstallOtherMethod( Kernel, "generic method for 2d-mappings",
 function( map )
 
     local  kerS, kerR, K;
-    if HasKernel2dMapping( map ) then
-        return Kernel2dMapping( map );
+    if HasKernel2DimensionalMapping( map ) then
+        return Kernel2DimensionalMapping( map );
     fi;
     kerS := Kernel( SourceHom( map ) ); 
     kerR := Kernel( RangeHom( map ) ); 
     K := Sub2dAlgebra( Source( map ), kerS, kerR );
-    SetKernel2dMapping( map, K );
+    SetKernel2DimensionalMapping( map, K );
     return K;
 end );
 

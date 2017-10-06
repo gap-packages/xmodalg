@@ -29,13 +29,13 @@ DeclareOperation( "ModuleHomomorphism",
 
 ##################################################################### 
 
-DeclareCategory( "Is2dAlgebra", Is2dDomain and IsAlgebra ); 
+DeclareCategory( "Is2dAlgebra", Is2DimensionalDomain and IsAlgebra ); 
 DeclareCategoryCollections( "Is2dAlgebra" ); 
 BindGlobal( "Family2dAlgebra", 
     NewFamily( "Family2dAlgebra", Is2dAlgebra, CanEasilySortElements, 
                CanEasilySortElements ) ); 
 
-DeclareProperty( "Is2dAlgebraObject", Is2dDomain );
+DeclareProperty( "Is2dAlgebraObject", Is2DimensionalDomain );
 
 DeclareRepresentation( "IsPreXModAlgebraObj", 
     Is2dAlgebra and IsAttributeStoringRep, [ "boundary", "action" ] );
