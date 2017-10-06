@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE file SYSTEM "bibxmlext.dtd">
+<file>
+
+<entry id="GAPDoc"><manual>
+  <author>
+    <name><first>Frank</first><last>Lübeck</last></name>
+    <name><first>Max</first><last>Neunhöffer</last></name>
+  </author>
+  <title><C>GAPDoc (version 1.6)</C></title>
+  <organization>RWTH Aachen</organization>
+  <year>2017</year>
+  <other type="note">
+    GAP package, 
+    <URL>http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc/index.html</URL>
+  </other>
+</manual></entry>
+
+<entry id="GitHubPagesForGAP"><manual>
+  <author>
+    <name><first>Max</first><last>Horn</last></name>
+  </author>
+  <title>
+    <C>GitHubPagesForGAP - a GitHub Pages generator for GAP packages</C> 
+  </title>
+  <year>2017</year>
+  <volume>0.2</volume> 
+  <other type="note">
+    GAP package, <URL>https://gap-system.github.io/GitHubPagesForGAP/</URL>
+  </other>
+</manual></entry>
+
+<entry id="alp3"><manual> 
+  <author> 
+    <name><first>M.</first><last>Alp</last></name>             
+    <name><first>A.</first><last>Odabas</last></name> 
+    <name><first>E. O.</first><last>Uslu</last></name> 
+    <name><first>C. D.</first><last>Wensley</last></name> 
+  </author>
+  <title><C>XMod: Crossed Modules and Cat1-groups in GAP</C></title> 
+  <volume>2.63</volume> 
+  <year>2017</year> 
+  <other type="note">
+    GAP package,
+    <URL>https://gap-packages.github.io/xmod/</URL> 
+  </other>
+</manual></entry> 
+
+<entry id="alp2"><article>
+  <author>
+    <name><first>M.</first><last>Alp</last></name>
+    <name><first>C. D.</first><last>Wensley</last></name>
+  </author>  
+  <title>Enumeration of cat1-groups of low order</title>
+  <journal>Int. J. Algebra and Computation</journal>
+  <year>2000</year>
+  <volume>10</volume>
+  <pages>407--424</pages>
+</article></entry>
+
+<entry id="arvasi2"><article>
+  <author> 
+    <name><first>Z.</first><last>Arvasi</last></name> 
+    <name><first>T.</first><last>Porter</last></name> 
+  </author>
+  <title>
+    Simplicial and Crossed Resolutions of Commutative Algebras 
+  </title>
+  <journal>J. Algebra</journal> 
+  <volume>181</volume> 
+  <pages>426--448</pages> 
+  <year>1996</year> 
+</article></entry>
+
+<entry id="arvasi3"><article>
+  <author> 
+    <name><first>Z.</first><last>Arvasi</last></name> 
+    <name><first>T.</first><last>Porter</last></name> 
+  </author>
+  <title>
+    Freeness Conditions for <M>2</M>-Crossed Modules of Commutative Algebras 
+  </title> 
+  <journal>Applied Categorical Structures</journal> 
+  <volume>6</volume> 
+  <pages>455--471</pages> 
+  <year>1998</year> 
+</article></entry>
+
+<entry id="arvasi4"><article>
+  <author> 
+    <name><first>Z.</first><last>Arvasi</last></name> 
+    <name><first>U.</first><last>Ege</last></name> 
+  </author>
+  <title>Annihilators, multipliers and crossed modules</title> 
+  <journal>Applied Categorical Structures</journal> 
+  <volume>11</volume> 
+  <pages>487--506</pages> 
+  <year>2003</year> 
+</article></entry>
+
+<entry id="arvasi_odabas"><article>
+  <author> 
+    <name><first>Z.</first><last>Arvasi</last></name> 
+    <name><first>A.</first><last>Odabas</last></name> 
+  </author>
+  <title>title not known</title> 
+  <journal>some journal</journal> 
+  <volume>0</volume> 
+  <pages>100--200</pages> 
+  <year>2099</year> 
+</article></entry>
+
+<entry id="brown1"><inproceedings>
+  <author> 
+    <name><first>R.</first><last>Brown</last></name> 
+  </author>
+  <booktitle>Low Dimensional Topology</booktitle> 
+  <title>Higher Dimensional Group Theory</title> 
+  <series>London Math. Soc. Lecture Note Series</series> 
+  <volume>48</volume> 
+  <publisher>London Mathematical Society</publisher> 
+  <year>1982</year> 
+</inproceedings></entry>
+
+<entry id="brown2"><article>
+  <author> 
+    <name><first>R.</first><last>Brown</last></name> 
+  </author>
+  <title>From groups to groupoids: a brief survey</title> 
+  <journal>Bull. London Math. Soc.</journal> 
+  <volume>19</volume> 
+  <pages>113--134</pages> 
+  <year>1987</year> 
+</article></entry>
+
+<entry id="ellis1"><article>
+  <author> 
+    <name><first>G. J.</first><last>Ellis</last></name> 
+  </author>
+  <title>Higher Dimensional Crossed Modules of Algebras</title> 
+  <journal>J. Pure and Appl. Algebra</journal> 
+  <volume>52</volume> 
+  <pages>277--282</pages> 
+  <year>1988</year> 
+</article></entry>
+
+<entry id="loday"><article>
+  <author> 
+    <name><first>J.-L.</first><last>Loday</last></name> 
+  </author>
+  <title>Spaces with finitely many non-trivial homotopy groups</title> 
+  <journal>J. App. Algebra</journal> 
+  <volume>24</volume> 
+  <pages>179--202</pages> 
+  <year>1982</year> 
+</article></entry>
+
+<entry id="mosa"><phdthesis>
+  <author> 
+    <name><first>G. H.</first><last>Mosa</last></name> 
+  </author>
+  <title>Higher dimensional algebroids and crossed complexes</title> 
+  <school>University of Wales, Bangor (U.K.)</school>  
+  <year>1986</year> 
+  <type>Ph.D. thesis</type>
+</phdthesis></entry>
+
+<entry id="aodabas1"><phdthesis> 
+  <author> 
+    <name><first>A.</first><last>Odabas</last></name> 
+  </author>
+  <title>Crossed Modules of Algebras with GAP</title> 
+  <year>2009</year> 
+  <school>Osmangazi University, Eskisehir</school> 
+  <type>Ph.D. thesis</type>
+</phdthesis></entry>
+
+<entry id="porter1"><article>
+  <author> 
+    <name><first>T.</first><last>Porter</last></name> 
+  </author>
+  <title>Some categorical results in the theory of crossed modules in commutative algebras</title> 
+  <journal>J. Algebra</journal> 
+  <volume>109</volume> 
+  <pages>415--429</pages> 
+  <year>1987</year> 
+</article></entry>
+
+<entry id="whitehead"><article>
+  <author>
+    <name><first>J. H. C.</first><last>Whitehead</last></name>
+  </author>  
+  <title>Combinatorial homotopy <C>I</C><C>I</C></title>
+  <journal>Bull. Amer. Math. Soc.</journal>
+  <year>1949</year>
+  <volume>55</volume>
+  <pages>453--496</pages>
+</article></entry> 
+
+</file>
+
