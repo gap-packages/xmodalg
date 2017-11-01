@@ -8,16 +8,16 @@ SetPackageInfo( rec(
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 
-Version := "1.13",
-Date := "05/10/2017",
+Version := "1.14",
+Date := "30/14/2017",
 
 ##  duplicate these values for inclusion in the manual: 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
 ##  <!ENTITY VERSION "1.14">
-##  <!ENTITY ZIPFILENAME "xmodalg-1.13.zip">
-##  <!ENTITY HTMLFILENAME "xmodalg113.html">
-##  <!ENTITY RELEASEDATE "05/10/2017">
-##  <!ENTITY LONGRELEASEDATE "5th October 2017">
+##  <!ENTITY ZIPFILENAME "xmodalg-1.14.zip">
+##  <!ENTITY HTMLFILENAME "xmodalg114.html">
+##  <!ENTITY RELEASEDATE "30/10/2017">
+##  <!ENTITY LONGRELEASEDATE "30th October 2017">
 ##  <!ENTITY COPYRIGHTYEARS "2014-2017">
 ##  <#/GAPDoc>
 
@@ -93,8 +93,8 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.7",
-  NeededOtherPackages := [ ["XMod", ">=2.62"] ],
-  SuggestedOtherPackages := [ ["GAPDoc", ">= 1.5.1" ] ],
+  NeededOtherPackages := [ ["XMod", ">=2.62"], ["LAGUNA", ">=3.7.0"] ],
+  SuggestedOtherPackages := [ ["GAPDoc", ">= 1.5.1" ] ],   
   ExternalConditions := [ ]
 ),
 
