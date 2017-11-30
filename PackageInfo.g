@@ -16,15 +16,15 @@ Date := "30/14/2017",
 ##  <!ENTITY VERSION "1.14">
 ##  <!ENTITY ZIPFILENAME "xmodalg-1.14.zip">
 ##  <!ENTITY HTMLFILENAME "xmodalg114.html">
-##  <!ENTITY RELEASEDATE "30/10/2017">
-##  <!ENTITY LONGRELEASEDATE "30th October 2017">
+##  <!ENTITY RELEASEDATE "30/11/2017">
+##  <!ENTITY LONGRELEASEDATE "30th November 2017">
 ##  <!ENTITY COPYRIGHTYEARS "2014-2017">
 ##  <#/GAPDoc>
 
 PackageWWWHome := 
   "http://fef.ogu.edu.tr/matbil/aodabas/xmodalg/",
 
-ArchiveURL := "http://fef.ogu.edu.tr/matbil/aodabas/xmodalg/xmodalg-1.12", 
+ArchiveURL := "http://fef.ogu.edu.tr/matbil/aodabas/xmodalg/xmodalg-1.14", 
 ArchiveFormats := "-win.zip",
 
 Persons := [
@@ -77,8 +77,8 @@ their derivations and sections, morphisms of these structures, \
 and higher-dimensional generalisations.",
 
 AbstractHTML :=
- "The <span class=\"pkgname\">XMod</span> package provides a collection of functions for computing with \
-crossed modules and cat1-algebras \
+ "The <span class=\"pkgname\">XMod</span> package provides a collection of \
+functions for computing with crossed modules and cat1-algebras \
 and morphisms of these structures.",
 
 PackageDoc := rec(
@@ -93,7 +93,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.7",
-  NeededOtherPackages := [ ["XMod", ">=2.62"], ["LAGUNA", ">=3.7.0"] ],
+  NeededOtherPackages := [ ["XMod", ">=2.64"], ["LAGUNA", ">=3.7.0"] ],
   SuggestedOtherPackages := [ ["GAPDoc", ">= 1.5.1" ] ],   
   ExternalConditions := [ ]
 ),
@@ -101,7 +101,7 @@ Dependencies := rec(
 AvailabilityTest := ReturnTrue,
 
 BannerString := Concatenation( 
-  "---------------------------------------------------------------------------------\n",
+  "-----------------------------------------------------------------------------\n",
   "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.8 \n", 
   "Methods for crossed modules of commutative algebras and cat1-algebras\n",
   "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n"
