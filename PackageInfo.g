@@ -93,7 +93,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.7",
-  NeededOtherPackages := [ ["XMod", ">=2.62"] ],
+  NeededOtherPackages := [ ["XMod", ">=2.63"] ],
   SuggestedOtherPackages := [ ["GAPDoc", ">= 1.5.1" ] ],
   ExternalConditions := [ ]
 ),
@@ -101,7 +101,7 @@ Dependencies := rec(
 AvailabilityTest := ReturnTrue,
 
 BannerString := Concatenation( 
-  "---------------------------------------------------------------------------------\n",
+  "-----------------------------------------------------------------------------\n",
   "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.8 \n", 
   "Methods for crossed modules of commutative algebras and cat1-algebras\n",
   "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n"

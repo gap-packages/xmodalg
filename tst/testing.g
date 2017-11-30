@@ -1,8 +1,10 @@
 #############################################################################
 ##
-#W  testing.g, 05/10/17          XModAlg test files     Z. Arvasi - A. Odabas 
+#W  testing.g, 30/10/17          XModAlg test files     Z. Arvasi - A. Odabas 
 ##
 #############################################################################
+
+LoadPackage( "xmodalg" );
 
 TestXModAlg := function( pkgname )
     local  pkgdir, testfiles, testresult, ff, fn;
