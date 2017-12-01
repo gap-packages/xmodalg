@@ -9,7 +9,7 @@ PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 
 Version := "1.14",
-Date := "30/14/2017",
+Date := "30/11/2017",
 
 ##  duplicate these values for inclusion in the manual: 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
@@ -71,13 +71,7 @@ PackageInfoURL :=
   Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
 AbstractHTML :=
- "The <span class=\"pkgname\">XMod</span> package provides a collection \
-  of functions for computing with crossed modules and cat1-groups, \
-their derivations and sections, morphisms of these structures, \
-and higher-dimensional generalisations.",
-
-AbstractHTML :=
- "The <span class=\"pkgname\">XMod</span> package provides a collection of \
+ "The <span class=\"pkgname\">XModAlg</span> package provides a collection of \
 functions for computing with crossed modules and cat1-algebras \
 and morphisms of these structures.",
 

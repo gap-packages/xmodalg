@@ -497,8 +497,6 @@ Morphism of cat1-algebras :-
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
 : Range Homomorphism maps range generators to:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
-gap> Image2dAlgMapping(m);
-[GF(3)_c2^3=>GF(3)_c2^3]
 gap> IsSurjective(m);
 false
 gap> IsInjective(m);
