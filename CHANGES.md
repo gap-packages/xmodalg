@@ -1,6 +1,7 @@
 # CHANGES to the 'XModAlg' package
 
 ## 1.13 -> 1.14 
+ * (02/12/17) adjust test files to work correctly after LoadAllPackages(); 
  * (30/11/17) now requires XMod 2.64 
  * (01/11/17) now requires Laguna 3.7.0 
  * (05/10/17) moved testall.g to testing.g and added new testall.g 
