@@ -9,15 +9,15 @@ PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 
 Version := "1.14",
-Date := "30/11/2017",
+Date := "02/12/2017",
 
 ##  duplicate these values for inclusion in the manual: 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
 ##  <!ENTITY VERSION "1.14">
 ##  <!ENTITY ZIPFILENAME "xmodalg-1.14.zip">
 ##  <!ENTITY HTMLFILENAME "xmodalg114.html">
-##  <!ENTITY RELEASEDATE "30/11/2017">
-##  <!ENTITY LONGRELEASEDATE "30th November 2017">
+##  <!ENTITY RELEASEDATE "02/12/2017">
+##  <!ENTITY LONGRELEASEDATE "2nd December 2017">
 ##  <!ENTITY COPYRIGHTYEARS "2014-2017">
 ##  <#/GAPDoc>
 

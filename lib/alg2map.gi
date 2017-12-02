@@ -146,7 +146,7 @@ InstallMethod( Display, "display a morphism of pre-crossed modules", true,
     [ IsPreXModAlgebraMorphism ], 0,
     function( mor )
 
-    local  morsrc, morrng, gensrc, genrng, P, Q, name, ok;	
+    local morsrc, morrng, gensrc, genrng, imsrc, imrng, P, Q, name, ok;	
     name := Name( mor );
     P := Source( mor );
     Q := Range( mor );
@@ -168,11 +168,13 @@ InstallMethod( Display, "display a morphism of pre-crossed modules", true,
         Print( GeneratorsOfAlgebra( Source( Q ) ), "\n" );
         Print( "  ", GeneratorsOfAlgebra( Range( Q ) ), "\n" );
     fi;
+    imsrc := List( gensrc, s -> Image( morsrc, s ) ); 
     Print( ": Source Homomorphism maps source generators to:\n" );
-    Print( "  ", List( gensrc, s -> Image( morsrc, s ) ), "\n" );
+    Print( "  ", imsrc, "\n" );
+    imrng := List( genrng, r -> Image( morrng, r ) ); 
     Print( ": Range Homomorphism maps range generators to:\n" );
-    Print( "  ", List( genrng, r -> Image( morrng, r ) ), "\n" );
-	Print( "\n" );
+    Print( "  ", imrng, "\n" );
+    Print( "\n" );
 end ); 
 
 #############################################################################

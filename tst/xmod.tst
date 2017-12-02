@@ -163,11 +163,13 @@ gap> Size( X3 );
 gap> IsSubXModAlgebra( X1, X3 );
 true
 
-## Chapter 2,  Section 2.2.3
+## Chapter 2,  Section 2.2.4
 
-gap> theta := SourceHom( mor );
-[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f2, (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] ->
-[ <zero> of ..., <zero> of ..., <zero> of ... ]
+gap> theta := SourceHom( mor );;
+gap> Print( MappingGeneratorsImages( theta ), "\n" ); 
+[ [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f2, (Z(2)^0)*f1+(Z(2)^0)*f2, 
+      (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ], 
+  [ <zero> of ..., <zero> of ..., <zero> of ... ] ]
 gap> phi := RangeHom( mor );
 [ (Z(2)^0)*f1 ] -> [ (Z(2)^0)*<identity> of ... ]
 gap> IsInjective( mor );
