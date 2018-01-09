@@ -1,5 +1,8 @@
 # CHANGES to the 'XModAlg' package
 
+## 1.14 -> 1.15
+ * (09/01/18) correction the release archive
+
 ## 1.13 -> 1.14 
  * (02/12/17) adjust test files to work correctly after LoadAllPackages(); 
  * (30/11/17) now requires XMod 2.64 

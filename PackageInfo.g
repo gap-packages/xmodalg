@@ -8,24 +8,24 @@ SetPackageInfo( rec(
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 
-Version := "1.14",
-Date := "02/12/2017",
+Version := "1.15",
+Date := "09/01/2018",
 
 ##  duplicate these values for inclusion in the manual: 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "1.14">
-##  <!ENTITY ZIPFILENAME "xmodalg-1.14.zip">
-##  <!ENTITY HTMLFILENAME "xmodalg114.html">
-##  <!ENTITY RELEASEDATE "02/12/2017">
-##  <!ENTITY LONGRELEASEDATE "2nd December 2017">
-##  <!ENTITY COPYRIGHTYEARS "2014-2017">
+##  <!ENTITY VERSION "1.15">
+##  <!ENTITY ZIPFILENAME "xmodalg-1.15.zip">
+##  <!ENTITY HTMLFILENAME "xmodalg115.html">
+##  <!ENTITY RELEASEDATE "09/01/2018">
+##  <!ENTITY LONGRELEASEDATE "9nd January 2018">
+##  <!ENTITY COPYRIGHTYEARS "2014-2018">
 ##  <#/GAPDoc>
 
 PackageWWWHome := 
   "http://fef.ogu.edu.tr/matbil/aodabas/xmodalg/",
 
-ArchiveURL := "http://fef.ogu.edu.tr/matbil/aodabas/xmodalg/xmodalg-1.14", 
-ArchiveFormats := "-win.zip",
+ArchiveURL := "http://fef.ogu.edu.tr/matbil/aodabas/xmodalg/xmodalg-1.15", 
+ArchiveFormats := ".zip",
 
 Persons := [
     rec(

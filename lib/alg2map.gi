@@ -2,7 +2,7 @@
 ##
 #W  alg2map.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2017, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ##############################################################################

@@ -2,7 +2,7 @@
 ##
 #W  alg2obj.gi                 The XMODALG package           Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2017, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
 ##
     
 CAT1ALG_LIST_MAX_SIZE := 7;

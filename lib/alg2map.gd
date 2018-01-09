@@ -2,7 +2,7 @@
 ##
 #W  alg2map.gd                 The XMODALG package           Zekeriya Arvasi
 #W                                                             & Alper Odabas
-##  version 1.12, 14/11/2015 
+##  version 1.15, 09/01/2018 
 ##
 #Y  Copyright (C) 2014-2015, Zekeriya Arvasi & Alper Odabas,  
 ##
