@@ -1,5 +1,8 @@
 # CHANGES to the 'XModAlg' package
 
+## 1.15 -> 1.16
+ * (29/01/18) changed package releases to https://gap-packages.github.io/xmodalg
+
 ## 1.14 -> 1.15
  * (09/01/18) correction the release archive
 

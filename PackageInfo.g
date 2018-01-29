@@ -6,32 +6,28 @@
 
 SetPackageInfo( rec(
 PackageName := "XModAlg",
+Packagename := "xmodalg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 
-Version := "1.15",
-Date := "09/01/2018",
+Version := "1.16",
+Date := "29/01/2018",
 
 ##  duplicate these values for inclusion in the manual: 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "1.15">
-##  <!ENTITY ZIPFILENAME "xmodalg-1.15.zip">
-##  <!ENTITY HTMLFILENAME "xmodalg115.html">
-##  <!ENTITY RELEASEDATE "09/01/2018">
-##  <!ENTITY LONGRELEASEDATE "9nd January 2018">
+##  <!ENTITY VERSION "1.16">
+##  <!ENTITY TARFILENAME "xmodalg-1.16.tar.gz">
+##  <!ENTITY HTMLFILENAME "xmodalg.html">
+##  <!ENTITY RELEASEDATE "29/01/2018">
+##  <!ENTITY LONGRELEASEDATE "29nd January 2018">
 ##  <!ENTITY COPYRIGHTYEARS "2014-2018">
 ##  <#/GAPDoc>
-
-PackageWWWHome := 
-  "http://fef.ogu.edu.tr/matbil/aodabas/xmodalg/",
-
-ArchiveURL := "http://fef.ogu.edu.tr/matbil/aodabas/xmodalg/xmodalg-1.15", 
-ArchiveFormats := ".zip",
 
 Persons := [
     rec(
     LastName      := "Arvasi",
     FirstNames    := "Zekeriya",
     IsAuthor      := true,
+    IsMaintainer  := false,
     Email         := "zarvasi@ogu.edu.tr",
     PostalAddress := Concatenation( [ 
                        "Prof. Dr. Z. Arvasi \n",
@@ -46,8 +42,8 @@ Persons := [
     rec(
     LastName      := "Odabas",
     FirstNames    := "Alper",
-	IsMaintainer  := true,
     IsAuthor      := true,
+    IsMaintainer  := true,
     Email         := "aodabas@ogu.edu.tr",
     PostalAddress := Concatenation( [ 
                        "Dr. A. Odabas \n",
@@ -65,10 +61,19 @@ Status := "deposited",
 CommunicatedBy := "",
 AcceptDate := "",
 
-README_URL := 
-  Concatenation( ~.PackageWWWHome, "README.md" ),
-PackageInfoURL := 
-  Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/gap-packages/xmodalg"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+PackageWWWHome  := "https://gap-packages.github.io/xmodalg/",
+README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL, 
+                                  "/releases/download/v", ~.Version, 
+                                  "/", ~.PackageName, "-", ~.Version ), 
+SupportEmail := "aodabas@ogu.edu.tr",
+ArchiveFormats  := ".tar.gz",
 
 AbstractHTML :=
  "The <span class=\"pkgname\">XModAlg</span> package provides a collection of \
@@ -77,16 +82,16 @@ and morphisms of these structures.",
 
 PackageDoc := rec(
   BookName  := "XModAlg",
-  ArchiveURLSubset := ["doc", "doc/manual.pdf"],
+  ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Crossed Modules and Cat1-Algebras in GAP",
-  Autoload  := false
+  Autoload  := true
 ),
 
 Dependencies := rec(
-  GAP := ">=4.7",
+  GAP := ">=4.8.8",
   NeededOtherPackages := [ ["XMod", ">=2.64"], ["LAGUNA", ">=3.7.0"] ],
   SuggestedOtherPackages := [ ["GAPDoc", ">= 1.5.1" ] ],   
   ExternalConditions := [ ]
@@ -98,10 +103,9 @@ BannerString := Concatenation(
   "-----------------------------------------------------------------------------\n",
   "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.8 \n", 
   "Methods for crossed modules of commutative algebras and cat1-algebras\n",
-  "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n"
+  "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n",
+  "-----------------------------------------------------------------------------\n"
 ),
-
-Autoload := false,
 
 TestFile := "tst/testall.g",
 
