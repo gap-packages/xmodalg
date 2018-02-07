@@ -1,20 +1,35 @@
-coverage:
-  precision: 2
-  round: down
-  range: "70...100"
+language: c
+env:
+  global:
+    - GAPROOT=gaproot
+    - COVDIR=coverage
 
-  status:
-    project: no
-    patch: yes
-    changes: no
+addons:
+  apt_packages:
+    - libgmp-dev
+    - libreadline-dev
+    - libgmp-dev:i386
+    - libreadline-dev:i386
+    - gcc-multilib
+    - g++-multilib
 
-comment:
-  layout: "header, diff, changes, tree"
-  behavior: default
+matrix:
+  include:
+    - env: CFLAGS="-O2" CC=clang CXX=clang++
+      compiler: clang
+    - env: CFLAGS="-O2"
+      compiler: gcc
+    - env: ABI=32
 
-ignore:
-  - "PackageInfo.g"
-  - "init.g"
-  - "read.g"
-  - "tst/*"     # ignore test harness code
-  - "tst/**/*"  # ignore test harness code
+branches:
+  only:
+    - master
+
+before_script:
+  - export GAPROOT="$HOME/gap"
+  - scripts/build_gap.sh
+script:
+  - scripts/build_pkg.sh && scripts/run_tests.sh
+after_script:
+  - bash scripts/gather-coverage.sh
+  - bash <(curl -s https://codecov.io/bash)
