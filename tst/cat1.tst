@@ -114,7 +114,7 @@ Cat1-algebra [GF(2^2)_c6=>..] :-
 : kernel embedding maps generators of kernel to:
   [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)
     (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
-	
+
 gap> C := Cat1AlgebraSelect( 11 );
 |--------------------------------------------------------|
 | 11 is invalid number for Galois Field (gf)             |
