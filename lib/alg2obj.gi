@@ -1,6 +1,6 @@
 #############################################################################
 ##
-#W  alg2obj.gi                 The XMODALG package           Zekeriya Arvasi
+#W  alg2obj.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
 #Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
 ##
@@ -1524,7 +1524,7 @@ InstallGlobalFunction( PreCat1Algebra, function( arg )
     # two endomorphisms
     if ( ( nargs=2 ) and IsEndoMapping( arg[1] )
                      and IsEndoMapping( arg[2] ) ) then
-        return PreCat1GroupByEndomorphisms( arg[1], arg[2] );
+        return PreCat1AlgebraByEndomorphisms( arg[1], arg[2] );
 
     # two homomorphisms and an embedding
     elif ( ( nargs=3 ) and
@@ -1789,7 +1789,7 @@ function( gf, size, gpnum, num )
         od;
          t :=  AlgebraHomomorphismByImages( A, A, gA, imt );
          h := AlgebraHomomorphismByImages( A, A, gA, imh );
-             return PreCat1GroupByEndomorphisms( t, h );
+             return PreCat1AlgebraByEndomorphisms( t, h );
         fi;
         genR := L[1];
         R := Subgroup( G, genR );
@@ -1817,7 +1817,7 @@ function( gf, size, gpnum, num )
     kert := Kernel( t );
     SetName( kert, L[2] );
     SetEquivalence( t, false );
-    return PreCat1GroupByEndomorphisms( t, h );
+    return PreCat1AlgebraByEndomorphisms( t, h );
 end );
 
 #############################################################################
@@ -1868,9 +1868,9 @@ end );
 
 #############################################################################
 ##
-#M  PreCat1GroupByEndomorphisms( <et>, <eh> )
+#M  PreCat1AlgebraByEndomorphisms( <et>, <eh> )
 ##
-InstallOtherMethod( PreCat1GroupByEndomorphisms,
+InstallMethod( PreCat1AlgebraByEndomorphisms,
     "cat1-algebra from tail and head endomorphisms", true, 
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
 function( et, eh )
@@ -2451,9 +2451,9 @@ function( F, G )
     PreCat1_ler := [];
     for i in [1..Length(Iler)] do
         for j in [1..Length(Iler)] do
-            if PreCat1GroupByEndomorphisms(Iler[i],Iler[j]) <> fail then 
-                Add(PreCat1_ler,PreCat1GroupByEndomorphisms(Iler[i],Iler[j]));
-                Print(PreCat1GroupByEndomorphisms(Iler[i],Iler[j]));
+            if PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]) <> fail then 
+                Add(PreCat1_ler,PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]));
+                Print(PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]));
             else 
                 continue; 
             fi;                

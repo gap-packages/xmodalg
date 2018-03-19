@@ -9,8 +9,8 @@ PackageName := "XModAlg",
 Packagename := "xmodalg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 
-Version := "1.16",
-Date := "29/01/2018",
+Version := "1.16dev",
+Date := "19/03/2018",
 
 ##  duplicate these values for inclusion in the manual: 
 ##  <#GAPDoc Label="PKGVERSIONDATA">
@@ -91,9 +91,9 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">=4.8.8",
+  GAP := ">=4.9.0",
   NeededOtherPackages := [ ["XMod", ">=2.64"], ["LAGUNA", ">=3.7.0"] ],
-  SuggestedOtherPackages := [ ["GAPDoc", ">= 1.5.1" ] ],   
+  SuggestedOtherPackages := [ ["GAPDoc", ">= 1.6.1" ] ],   
   ExternalConditions := [ ]
 ),
 

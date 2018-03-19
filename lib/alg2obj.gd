@@ -1,9 +1,7 @@
 #############################################################################
 ##
-#W  alg2obj.gd                 The XMODALG package           Zekeriya Arvasi
+#W  alg2obj.gd                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-##  version 1.15, 09/01/2018 
-##
 #Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
 ##
 
@@ -66,7 +64,6 @@ DeclareOperation( "AlgebraAction3",[ IsAlgebraHomomorphism ] );
 DeclareOperation( "AlgebraAction4",[ IsAlgebra, IsRing ] );
 DeclareOperation( "AlgebraAction5",[ IsAlgebra, IsAlgebra ] );
 
-
 DeclareAttribute( "AllAutosOfAlgebras", IsAlgebra);
 
 DeclareProperty( "IsXModAlgebra", Is2dAlgebra );
@@ -101,7 +98,6 @@ DeclareAttribute( "KernelEmbedding", IsPreCat1Algebra );
 
 DeclareGlobalFunction( "PreCat1Algebra" );
 
-
 DeclareProperty( "IsCat1Algebra", Is2dAlgebra );
 
 DeclareOperation( "PreXModAlgebraByPreCat1Algebra", [ IsPreCat1Algebra ] );
@@ -121,14 +117,18 @@ DeclareOperation( "EquivalenceHead", [ IsEquivalenceHead ] );
 DeclareOperation( "SDproduct", [ Is2dAlgebraObject ] );
 
 DeclareGlobalFunction( "Cat1Algebra" );
+DeclareOperation( "PreCat1AlgebraByEndomorphisms", 
+    [ IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
 DeclareOperation( "Cat1AlgebraSelect", [ IsInt, IsInt, IsInt, IsInt ] );
 
 DeclareProperty( "IsIdentityCat1Algebra", IsCat1Algebra );
 
 DeclareOperation( "Sub2dAlgebra", [ Is2dAlgebra, IsAlgebra, IsAlgebra ] );
-DeclareOperation( "SubPreXModAlgebra", [ IsPreXModAlgebra, IsAlgebra, IsAlgebra ] );
+DeclareOperation( "SubPreXModAlgebra", 
+    [ IsPreXModAlgebra, IsAlgebra, IsAlgebra ] );
 DeclareOperation( "SubXModAlgebra", [ IsXModAlgebra, IsAlgebra, IsAlgebra] );
-DeclareOperation( "SubPreCat1Algebra", [ IsPreCat1Algebra, IsAlgebra, IsAlgebra ] );
+DeclareOperation( "SubPreCat1Algebra", 
+    [ IsPreCat1Algebra, IsAlgebra, IsAlgebra ] );
 DeclareOperation( "SubCat1Algebra", [ IsCat1Algebra, IsAlgebra, IsAlgebra ] );
 
 DeclareOperation( "AllHomsOfAlgebras", [ IsAlgebra, IsAlgebra ] );
@@ -138,6 +138,3 @@ DeclareOperation( "AllCat1Algebras", [ IsField, IsGroup ] );
 DeclareOperation( "IsIsomorphicCat1Algebra", [ IsCat1Algebra, IsCat1Algebra ] );
 DeclareOperation( "IsomorphicCat1AlgebraFamily", [ IsCat1Algebra, IsList ] );
 DeclareOperation( "AllCat1AlgebrasUpToIsomorphism", [ IsList ] );
-
-
-
