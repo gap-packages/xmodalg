@@ -464,11 +464,11 @@ Let <M>(\theta,\varphi) : \mathcal{X} = (\partial : S \rightarrow R)
 be a crossed module homomorphism. 
 Then the crossed module 
 <Display> 
-&Im;(\theta,\varphi) = (\partial^{\prime}| : 
-&Im;\theta \rightarrow &Im;\varphi)
+\Im(\theta,\varphi) = (\partial^{\prime}| : 
+\Im\theta \rightarrow \Im\varphi)
 </Display>
 is called the image of <M>(\theta,\varphi)</M>. 
-Further, <M>&Im;(\theta,\varphi)</M> is a subcrossed module of 
+Further, <M>\Im(\theta,\varphi)</M> is a subcrossed module of 
 <M>(S^{\prime},R^{\prime},\partial^{\prime})</M>. 
 <P/> 
 In our package, the image of a crossed module homomorphism 
