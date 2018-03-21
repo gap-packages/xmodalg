@@ -115,17 +115,15 @@ gap> A := GroupRing( GF(2), CyclicGroup(4) );
 gap> B := AugmentationIdeal( A );
 <two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, (dimension 3)>
 gap> X1 := XModAlgebra( A, B );
-[Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
- ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 ] )]
+[ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>, 
+  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
 gap> C := GroupRing( GF(2), SmallGroup( 4, 2 ) );
 <algebra-with-one over GF(2), with 2 generators>
 gap> D := AugmentationIdeal( C );
 <two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, (dimension 3)>
 gap> X2 := XModAlgebra( C, D );
-[Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
- ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 ] )]
+[ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>, 
+  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
 gap> B = D;
 false
 gap> all_f := AllHomsOfAlgebras( A, C );;
@@ -162,10 +160,7 @@ true
 
 ## Chapter 2,  Section 2.2.2
 gap> X3 := Kernel(mor);
-[Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] )->Algebra( GF(2), 
-[ (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f1+(Z(2)^0)*f1*f2, 
-  (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1 ] )]
+[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> IsXModAlgebra( X3 );
 true
 gap> Size( X3 );

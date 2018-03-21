@@ -305,10 +305,7 @@ Cat1-algebra [..=>GF(2^2)[k4]] :-
 
 
 gap> X3 := XModAlgebraByCat1Algebra( C3 ); 
-[Algebra( GF(2),
-[ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5),
-  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ] )->Algebra( GF(2),
-[ (Z(2)^0)*(), (Z(2)^0)*(1,2,3), (Z(2)^0)*(1,3,2) ] )]
+[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> Display( X3 ); 
 
 Crossed module [..->..] :-
