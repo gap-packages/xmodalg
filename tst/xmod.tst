@@ -133,18 +133,11 @@ gap> mor := XModAlgebraMorphism( X1, X2, all_g[1], all_f[2] );
 gap> Display( mor );
 
 Morphism of crossed modules :- 
-: Source = [Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
- ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 
- ] )] with generating sets:
-  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, (Z(2)^0)*f1+(Z(2)^0)*f2, 
-  (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
-  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
-:  Range = [Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
- ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 
- ] )] with generating sets:
-  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, (Z(2)^0)*f1+(Z(2)^0)*f2, 
+: Source = [ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>,
+  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
+:  Range = [ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>,
+  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, (Z(2)^0)*f1+(Z(2)^0)*f2, 
   (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
   [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
 : Source Homomorphism maps source generators to:
@@ -171,10 +164,7 @@ true
 ## Chapter 2,  Section 2.2.4
 
 gap> theta := SourceHom( mor );;
-gap> Print( MappingGeneratorsImages( theta ), "\n" ); 
-[ [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, (Z(2)^0)*f1+(Z(2)^0)*f2, 
-      (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ], 
-  [ <zero> of ..., <zero> of ..., <zero> of ... ] ]
+gap> ## Print( MappingGeneratorsImages( theta ), "\n" ); 
 gap> phi := RangeHom( mor );
 [ (Z(2)^0)*f1 ] -> [ (Z(2)^0)*<identity> of ... ]
 gap> IsInjective( mor );

@@ -159,14 +159,26 @@ InstallMethod( Display, "display a morphism of pre-crossed modules", true,
     else
         Print( "\nMorphism of pre-crossed modules :- \n" );
     fi;
-    Print( ": Source = ", P, " with generating sets:\n  " );
-    Print( gensrc, "\n  ", genrng, "\n" );
+## temporary fix (21/03/18)
+##    Print( ": Source = ", P, " with generating sets:\n  " );
+##    Print( gensrc, "\n  ", genrng, "\n" );
+    Print( ": Source = " ); 
+    ViewObj( P );
+    Print( "\n" ); 
     if ( Q = P ) then
         Print( ": Range = Source\n" );
     else
-        Print( ":  Range = ", Q, " with generating sets:\n  " );
-        Print( GeneratorsOfAlgebra( Source( Q ) ), "\n" );
-        Print( "  ", GeneratorsOfAlgebra( Range( Q ) ), "\n" );
+##        Print( ":  Range = ", Q, " with generating sets:\n  " ); 
+    Print( ":  Range = " ); 
+    ViewObj( Q );
+    Print( "\n" );
+## temporary fix (21/03/18)
+##        Print( GeneratorsOfAlgebra( Source( Q ) ), "\n" );
+##        Print( "  ", GeneratorsOfAlgebra( Range( Q ) ), "\n" );
+        ViewObj( GeneratorsOfAlgebra( Source( Q ) ) ); 
+        Print( "\n  " ); 
+        ViewObj( GeneratorsOfAlgebra( Range( Q ) ) ); 
+        Print( "\n" );
     fi;
     imsrc := List( gensrc, s -> Image( morsrc, s ) ); 
     Print( ": Source Homomorphism maps source generators to:\n" );
