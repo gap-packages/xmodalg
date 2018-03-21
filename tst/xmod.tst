@@ -137,9 +137,6 @@ Morphism of crossed modules :-
   (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
 :  Range = [ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>,
   (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
-[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, (Z(2)^0)*f1+(Z(2)^0)*f2, 
-  (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
-  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
 : Source Homomorphism maps source generators to:
   [ <zero> of ..., <zero> of ..., <zero> of ... ]
 : Range Homomorphism maps range generators to:

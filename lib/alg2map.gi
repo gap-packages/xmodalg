@@ -172,13 +172,9 @@ InstallMethod( Display, "display a morphism of pre-crossed modules", true,
     Print( ":  Range = " ); 
     ViewObj( Q );
     Print( "\n" );
-## temporary fix (21/03/18)
+## temporary removal (21/03/18)
 ##        Print( GeneratorsOfAlgebra( Source( Q ) ), "\n" );
 ##        Print( "  ", GeneratorsOfAlgebra( Range( Q ) ), "\n" );
-        ViewObj( GeneratorsOfAlgebra( Source( Q ) ) ); 
-        Print( "\n  " ); 
-        ViewObj( GeneratorsOfAlgebra( Range( Q ) ) ); 
-        Print( "\n" );
     fi;
     imsrc := List( gensrc, s -> Image( morsrc, s ) ); 
     Print( ": Source Homomorphism maps source generators to:\n" );
