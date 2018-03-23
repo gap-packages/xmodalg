@@ -2,9 +2,7 @@
 <!--                                                                     -->
 <!--  cat1.xml            XModAlg documentation               Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  version 1.11, 04/11/2015                                           --> 
-<!--                                                                     --> 
-<!--  Copyright (C) 2014-2015, Z. Arvasi & A. Odabas,                    --> 
+<!--  Copyright (C) 2014-2018, Z. Arvasi & A. Odabas,                    --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -25,14 +23,14 @@ Algebraic structures which are equivalent to crossed modules of algebras include
 
 <List>
 <Item> 
-cat<M>^{1}</M>-algebras. (Ellis, <Cite Key="ellis1"/>);
+cat<M>^{1}</M>-algebras, (Ellis, <Cite Key="ellis1"/>);
 </Item>
 <Item> 
-simplicial algebras with Moore complex of length 1 
+simplicial algebras with Moore complex of length 1, 
 (Z. Arvasi and T.Porter, <Cite Key="arvasi2"/>);
 </Item>
 <Item> 
-algebra-algebroids (Gaffar Musa's Ph.D. thesis, <Cite Key="mosa"/>). 
+algebra-algebroids, (Gaffar Musa's Ph.D. thesis, <Cite Key="mosa"/>). 
 </Item>
 </List>
 
@@ -61,18 +59,18 @@ If the conditions,
 </Display> 
 are satisfied, then the algebraic system 
 <M>\mathcal{C} := (e;t,h : A \rightarrow R)</M>
-is called a cat<M>^{1}</M>-algebra. 
-The system which satisfy the condition
+is called a <E>cat<M>^{1}</M>-algebra</E>. 
+A system which satisfies the condition
 <M>\mathbf{Cat1Alg1}</M> is called a <E>precat<M>^{1}</M>-algebra</E>. 
 The homomorphisms <M>t,h</M> and <M>e</M> are called the 
 <E>tail</E>, <E>head</E> and <E>embedding</E> homomorphisms, respectively.
 
 <ManSection>
-   <Func Name="Cat1"
+   <Func Name="Cat1Algebra"
          Arg="args" />
-   <Oper Name="PreCat1ByTailHeadEmbedding"
+   <Oper Name="PreCat1Obj"
          Arg="t h e" />
-   <Oper Name="PreCat1ByEndomorphisms"
+   <Oper Name="PreCat1AlgebraByEndomorphisms"
          Arg="t h" />
    <Oper Name="PreCat1AlgebraObj"
          Arg="C" />
@@ -140,7 +138,7 @@ gap> g := AllHomsOfAlgebras(R,A);
   [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*(1,2,3) ],
   [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ], 
   [ (Z(2)^0)*(1,2,3) ] -> [ (Z(2)^0)*(1,3,2) ] ]
-gap> C4 := PreCat1ByTailHeadEmbedding(f[6],f[6],g[8]);
+gap> C4 := PreCat1Obj(f[6],f[6],g[8]);
 [AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -> AlgebraWithOne( GF(2), 
   [ (Z(2)^0)*(1,2,3) ] )]
 gap> IsCat1Algebra(C4);

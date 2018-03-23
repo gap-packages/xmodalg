@@ -1,6 +1,6 @@
 #############################################################################
 ##
-#W  alg2obj.gi                 The XMODALG package           Zekeriya Arvasi
+#W  alg2obj.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
 #Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
 ##
@@ -20,108 +20,104 @@ CAT1ALG_LIST := [ ];
 ##
 #F  ElementsLeftActing( <fun> )
 ##
-InstallGlobalFunction( ElementsLeftActing, function (ac)
+InstallGlobalFunction( ElementsLeftActing, 
+function (ac)
     local AB,B,list,uzAB,uzA,uzB,k,i,elB;       
-AB:=Source(ac);
-B:=Range(ac);
-elB:=Elements(B);
-list:=[];
-uzAB:=Length(AB);
-uzB:=Length(elB);
-uzA:=uzAB/uzB;
-k:=1;
-for i in [1..uzA] do
-Add(list,AB[k][1]);
-k:=k+uzB;
-od;
-return Set(list);
+    AB := Source(ac);
+    B := Range(ac);
+    elB := Elements(B);
+    list := [];
+    uzAB := Length(AB);
+    uzB := Length(elB);
+    uzA := uzAB/uzB;
+    k := 1;
+    for i in [1..uzA] do
+        Add(list,AB[k][1]);
+        k := k+uzB;
+    od;
+    return Set(list);
 end );
 
 #############################################################################
 ##
 #F  IsAlgebraAction( <fun> )
 ##
-InstallMethod( IsAlgebraAction,"for,for,for",true,
-[ IsMapping ],0,
+InstallMethod( IsAlgebraAction, "for,for,for", true,[ IsMapping ], 0,
 function ( ac )
-    local AB,A,B,uzB,uzA,j,i,k;        # mapping <map>, result
-AB:=Source(ac);
-B:=Elements(Range(ac));
-A:=Elements(LeftElementOfCartesianProduct(ac));
-uzB:=Length(B);
-uzA:=Length(A);
-for j in [1..uzB] do
-if One(LeftElementOfCartesianProduct(ac))*B[j]<>B[j] then
-return false;
-fi;
-     for k in [1..uzA] do
-for i in [1..uzA] do 
-if (((A[k]*A[i])*B[j])<>(A[k]*(A[i]*B[j]))) then
-return false;
-fi;
-od;
-od;
-od;
-return true;
+    local AB,A,B,uzB,uzA,j,i,k; 
+    # mapping <map>, result
+    AB := Source(ac);
+    B := Elements(Range(ac));
+    A := Elements(LeftElementOfCartesianProduct(ac));
+    uzB := Length(B);
+    uzA := Length(A);
+    for j in [1..uzB] do
+        if One(LeftElementOfCartesianProduct(ac))*B[j]<>B[j] then
+            return false;
+        fi;
+        for k in [1..uzA] do
+            for i in [1..uzA] do 
+                if (((A[k]*A[i])*B[j])<>(A[k]*(A[i]*B[j]))) then
+                    return false;
+                fi;
+            od;
+       od;
+    od;
+    return true;
 end );
 
 #############################################################################
 ##
 #F  AlgebraAction1( <D>, <E>, <fun> )
 ##
-InstallMethod( AlgebraAction1,"for,for,for",true,
-[ IsAlgebra, IsList, IsAlgebra ],0,
+InstallMethod( AlgebraAction1, "for,for,for", true,
+    [ IsAlgebra, IsList, IsAlgebra ], 0,
 function ( A,B,C )
-    local   act,arg,narg,usage,error;        # mapping <map>, result
-    narg:=3;
-    usage:= "\n Usage: input two propositions; \n";
-    error:= "\n Error: input positive value; \n";
-if ((narg < 3) or (narg >= 4)) then
-Print(usage);
-return false;
-fi;
-
-    act    := rec( fun:= x->x[1]*x[2]);
-    ObjectifyWithAttributes( act, NewType(GeneralMappingsFamily(ElementsFamily(FamilyObj(B)),
-        ElementsFamily(FamilyObj(C))),
-                               IsSPMappingByFunctionRep
-                           and IsSingleValued
-                           and IsTotal and IsGroupHomomorphism ),
-    LeftElementOfCartesianProduct, A,
-    AlgebraActionType, "Type1",
-    Source, B,
-    Range, C,
-    HasZeroModuleProduct, false,
-    IsAlgebraAction, true);
+    local act,arg,narg,usage,error;        # mapping <map>, result
+    narg := 3;
+    usage := "\n Usage: input two propositions; \n";
+    error := "\n Error: input positive value; \n";
+    if ((narg < 3) or (narg >= 4)) then
+        Print(usage);
+        return false;
+    fi;
+    act := rec( fun:= x->x[1]*x[2]);
+    ObjectifyWithAttributes( act, 
+        NewType(GeneralMappingsFamily( ElementsFamily(FamilyObj(B) ),
+        ElementsFamily( FamilyObj(C)) ),
+        IsSPMappingByFunctionRep and IsSingleValued
+            and IsTotal and IsGroupHomomorphism ),
+        LeftElementOfCartesianProduct, A,
+        AlgebraActionType, "Type1",
+        Source, B,
+        Range, C,
+        HasZeroModuleProduct, false,
+        IsAlgebraAction, true);
     # return the mapping
     return act;
 end );
 
 #############################################################################
-
-#############################################################################
 ##
 #F  AlgebraAction2( <D>, <E>, <fun> )
 ##
-InstallMethod( AlgebraAction2,"for,for,for",true,
-[ IsAlgebra ],0,
+InstallMethod( AlgebraAction2, "for,for,for", true, [ IsAlgebra ], 0,
 function ( A )
     local act,MA,MAA;        # mapping <map>, result
-    MA:=MultipleAlgebra(A);
-    MAA:=Cartesian(MA,A);
-    
-    act    := rec( fun:= x->Image(x[1],x[2]));
-    ObjectifyWithAttributes( act, NewType(GeneralMappingsFamily(ElementsFamily(FamilyObj(MAA)),
-        ElementsFamily(FamilyObj(A))),
-                               IsSPMappingByFunctionRep
-                           and IsSingleValued
-                           and IsTotal and IsGroupHomomorphism ),
-    LeftElementOfCartesianProduct, MA,
-    AlgebraActionType, "Type2",
-    Source, MAA,
-    Range, A,
-    HasZeroModuleProduct, false,
-    IsAlgebraAction, true );
+    MA := MultipleAlgebra(A);
+    MAA := Cartesian(MA,A);
+    act := rec( fun:= x->Image(x[1],x[2]) );
+    ObjectifyWithAttributes( act, 
+        NewType( GeneralMappingsFamily( ElementsFamily(FamilyObj(MAA) ), 
+            ElementsFamily( FamilyObj(A) ) ),
+        IsSPMappingByFunctionRep and IsSingleValued
+            and IsTotal and IsGroupHomomorphism ),
+        LeftElementOfCartesianProduct, MA,
+        AlgebraActionType, "Type2",
+        Source, MAA,
+        Range, A,
+        HasZeroModuleProduct, false,
+        IsAlgebraAction, true );
     # return the mapping
     return act;
 end );
@@ -130,27 +126,26 @@ end );
 ##
 #F  AlgebraAction3( <f> )
 ##
-InstallMethod( AlgebraAction3,"for,for,for",true,
-[ IsAlgebraHomomorphism ],0,
+InstallMethod( AlgebraAction3, "for,for,for", true, [IsAlgebraHomomorphism], 0,
 function ( f )
     local act,g,BA,A,B;        # mapping <map>, result
-    A:=Source(f);
-    B:=Range(f);
-    BA:=Cartesian(B,A);
-    g:=InverseGeneralMapping(f);
+    A := Source(f);
+    B := Range(f);
+    BA := Cartesian(B,A);
+    g := InverseGeneralMapping(f);
     ### act := rec( fun:= x->PreImage(g,x[1])*x[2]); 
-    act    := rec( fun:= x->ImagesRepresentative(g,x[1])*x[2]);
+    act := rec( fun:= x->ImagesRepresentative(g,x[1])*x[2]);
     ObjectifyWithAttributes( act, 
-        NewType(GeneralMappingsFamily(ElementsFamily(FamilyObj(BA)),
-        ElementsFamily(FamilyObj(A))),
+        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(BA) ),
+            ElementsFamily( FamilyObj(A) ) ),
         IsSPMappingByFunctionRep and IsSingleValued
             and IsTotal and IsGroupHomomorphism ),
-    LeftElementOfCartesianProduct, B,
-    AlgebraActionType, "Type3",
-    Source, BA,
-    Range, A,
-    HasZeroModuleProduct, false,
-    IsAlgebraAction, true );
+        LeftElementOfCartesianProduct, B,
+        AlgebraActionType, "Type3",
+        Source, BA,
+        Range, A,
+        HasZeroModuleProduct, false,
+        IsAlgebraAction, true );
     # return the mapping
     return act;
 end );
@@ -159,38 +154,33 @@ end );
 ##
 #F  AlgebraAction4( <D>, <E>, <fun> )
 ##
-InstallMethod( AlgebraAction4,"for,for,for",true,
-[ IsAlgebra, IsRing ],0,
+InstallMethod( AlgebraAction4, "for,for,for", true, [ IsAlgebra, IsRing ], 0,
 function ( M,R )
     local   act,RM;        # mapping <map>, result
-    RM:=Cartesian(R,M);
-    
-    act    := rec( fun:= x->x[1]*x[2]);
+    RM := Cartesian(R,M);
+    act := rec( fun:= x->x[1]*x[2]);
     ObjectifyWithAttributes( act, 
-        NewType(GeneralMappingsFamily(ElementsFamily(FamilyObj(RM)),
-        ElementsFamily(FamilyObj(M))),
+        NewType( GeneralMappingsFamily( ElementsFamily(FamilyObj(RM) ),
+            ElementsFamily( FamilyObj(M) ) ),
         IsSPMappingByFunctionRep and IsSingleValued
             and IsTotal and IsGroupHomomorphism ),
-    LeftElementOfCartesianProduct, R,
-    AlgebraActionType, "Type4",
-    Source, RM,
-    Range, M,
-    HasZeroModuleProduct, true,
-    IsAlgebraAction, true );
+        LeftElementOfCartesianProduct, R,
+        AlgebraActionType, "Type4",
+        Source, RM,
+        Range, M,
+        HasZeroModuleProduct, true,
+        IsAlgebraAction, true );
     # return the mapping
     return act;
 end );
 
 #############################################################################
-
-#############################################################################
 ##
 #F  AlgebraAction5( <A>, <I> )
 ##
-InstallMethod( AlgebraAction5,"for,for",true,
-[ IsAlgebra, IsAlgebra ],0,
+InstallMethod( AlgebraAction5, "for,for", true, [ IsAlgebra, IsAlgebra ], 0,
 function ( A,I )
-    local   basA,basI,vecA,genA,dimA,maps,j,im,M,act,eA;
+    local basA,basI,vecA,genA,dimA,maps,j,im,M,act,eA;
     genA := GeneratorsOfAlgebra(A);
     basA := Basis(A);
     vecA := BasisVectors(basA);
@@ -198,50 +188,47 @@ function ( A,I )
     basI := Basis(I);
     maps := ListWithIdenticalEntries(dimA,0);
     if ( dimA > 0  ) then
-    for j in [1..dimA] do
-        im := List(basI, b -> vecA[j]*b);
-        maps[j] := LeftModuleHomomorphismByImages(I,I,basI,im);
-    od;
-    M := Algebra( LeftActingDomain(A),maps);
-    act := LeftModuleGeneralMappingByImages(A,M,vecA,maps);
+        for j in [1..dimA] do
+            im := List(basI, b -> vecA[j]*b);
+            maps[j] := LeftModuleHomomorphismByImages(I,I,basI,im);
+        od;
+        M := Algebra( LeftActingDomain(A),maps);
+        act := LeftModuleGeneralMappingByImages(A,M,vecA,maps);
     else
-    maps := [ IdentityMapping(I) ];
-    M := Algebra( LeftActingDomain(A),maps);
-    eA := Elements(A);
-    act := LeftModuleGeneralMappingByImages(A,M,[eA[1]],GeneratorsOfAlgebra(M));
+        maps := [ IdentityMapping(I) ];
+        M := Algebra( LeftActingDomain(A),maps);
+        eA := Elements(A);
+        act := LeftModuleGeneralMappingByImages( A, M, [eA[1]], 
+                   GeneratorsOfAlgebra( M ) );
     fi;    
     SetIsAlgebraAction( act, true );
-    SetAlgebraActionType(act, "Type5");
-    SetHasZeroModuleProduct(act, false);
+    SetAlgebraActionType( act, "Type5" );
+    SetHasZeroModuleProduct( act, false );
     return act;
 end );
-
-#############################################################################
-
 
 #############################################################################
 ##
 #F  AlgebraHomomorphismByFunction( <D>, <E>, <fun> )
 ##
-InstallMethod( AlgebraHomomorphismByFunction,"for,for,for",true,
-[ IsObject, IsObject, IsFunction ],0,
+InstallMethod( AlgebraHomomorphismByFunction, "for,for,for", true, 
+    [ IsObject, IsObject, IsFunction ], 0,
 function ( A,B,C )
-
-    local   act,arg,narg,usage,error,fun;        # mapping <map>, result
-    error:= "\n Error: Bir Cebir Girilmeli; \n";
-if ((IsAlgebra(A) or IsMultipleAlgebra(A))=false) or ((IsAlgebra(B) or IsMultipleAlgebra(B))=false) then
-Print(error);
-return false;
-fi;
-    
+    local act,arg,narg,usage,error,fun;        # mapping <map>, result
+    error := "\n Error: Bir Cebir Girilmeli; \n";
+    if ((IsAlgebra(A) or IsMultipleAlgebra(A))=false) 
+        or ((IsAlgebra(B) or IsMultipleAlgebra(B))=false) then
+        Print(error);
+        return false;
+    fi;
     act := rec( fun := C );
     ObjectifyWithAttributes( act, 
-        NewType(GeneralMappingsFamily(ElementsFamily(FamilyObj(A)),
-        ElementsFamily(FamilyObj(B))),
+        NewType(GeneralMappingsFamily( ElementsFamily(FamilyObj(A)),
+            ElementsFamily(FamilyObj(B)) ),
         IsSPMappingByFunctionRep and IsSingleValued
             and IsTotal and IsAlgebraHomomorphism ),
-    Source, A,
-    Range, B );
+        Source, A,
+        Range, B );
     # return the mapping
     return act;
 end );
@@ -250,8 +237,7 @@ end );
 ##
 #F  MultipleHomomorphism( <D>, <E>, <fun> )
 ##
-InstallMethod( MultipleHomomorphism,"for,for,for",true,
-[ IsAlgebra ],0,
+InstallMethod( MultipleHomomorphism, "for,for,for", true, [ IsAlgebra ], 0,
 function ( A )
 
     local mu, B; # mapping <map>, result
@@ -268,8 +254,7 @@ end );
 ##
 #F  ModuleHomomorphism( <D>, <E>, <fun> )
 ##
-InstallMethod( ModuleHomomorphism,"for,for,for",true,
-[ IsAlgebra, IsRing ],0,
+InstallMethod( ModuleHomomorphism, "for,for,for", true, [IsAlgebra,IsRing], 0,
 function ( M,R )
 
     local   mu,B;        # mapping <map>, result
@@ -296,31 +281,32 @@ end );
 ##
 #M  IsMultipleAlgebra
 ##
-InstallMethod( IsMultipleAlgebra, "generic method for 2-dimensional group objects",
+InstallMethod( IsMultipleAlgebra, "generic method for 2-dim algebra objects",
     true, [ IsList ], 0,
 function( obj )
-    return ( ForAll(obj,IsMapping) );
+    return ( ForAll( obj, IsMapping ) );
 end );
 
 #############################################################################
 ##
 #F  MultipleAlgebra( <R> )
 ##
-InstallGlobalFunction( MultipleAlgebra,function ( R )
+InstallGlobalFunction( MultipleAlgebra, 
+function ( R )
     local   uzR, elR,MR,r,f,i;
-if not (IsAlgebra(R)=true) then
-return false;
-fi; 
-    uzR:=Size(R);
-    elR:=Elements(R);
-    MR:=[];
-for i in [1..uzR] do 
-r:=elR[i];
-f:=GroupHomomorphismByFunction(R,R,x->r*x);
-#if ( (f in MR) = false ) then
-       Add(MR,f);
-#    fi;
-od;
+    if not (IsAlgebra(R)=true) then
+        return false;
+    fi; 
+    uzR := Size(R);
+    elR := Elements(R);
+    MR := [];
+    for i in [1..uzR] do 
+        r := elR[i];
+        f := GroupHomomorphismByFunction( R, R, x->r*x );
+        #if ( (f in MR) = false ) then
+           Add(MR,f);
+        #fi;
+    od;
     SetIsMultipleAlgebra(MR,true);
     # return the mapping
     return MR;
@@ -328,32 +314,29 @@ end );
 
 #############################################################################
 ##
-#F  AlgebraAction( <bdy>, <act> )          crossed module from given boundary & action
+#F  AlgebraAction( <bdy>, <act> ) crossed module from given boundary & action
 ##
-InstallGlobalFunction( AlgebraAction, function( arg )
+InstallGlobalFunction( AlgebraAction, 
+function( arg )
 
     local  nargs;
-    nargs := Length( arg );
 
+    nargs := Length( arg );
     # Algebra and Ideal
     if ( ( nargs = 3 ) and IsAlgebra( arg[1] )
                        and IsAlgebra( arg[3] ) ) then
         return AlgebraAction1( arg[1], arg[2], arg[3] );
-
     # Multiple Action
     elif ( ( nargs = 1 ) and IsAlgebra( arg[1] ) ) then
         return AlgebraAction2( arg[1] );
-        
     # surjective homomorphism
     elif ( ( nargs = 1 ) and IsAlgebraHomomorphism( arg[1] )
                          and IsSurjective( arg[1] ) ) then
-      return AlgebraAction3( arg[1] );
-
-    # modul and zero map
+        return AlgebraAction3( arg[1] );
+    # module and zero map
     elif ( ( nargs = 2 ) and IsAlgebra( arg[1] ) 
                          and IsRing( arg[2] ) ) then
-      return AlgebraAction4( arg[1],arg[2] );   
-
+        return AlgebraAction4( arg[1],arg[2] );   
     fi;
     # alternatives not allowed
     Error( "usage: XModAlgebra( bdy, act );  or  XModAlgebra( G, N );" );
@@ -379,11 +362,11 @@ function( P )
     act:=XModAlgebraAction(P);
     # Check  P.boundary: P.source -> P.range
     if not ( ( Source( bdy ) = B ) and ( Range( bdy ) = A ) ) then
-       return false;
+        return false;
     fi;
     # checking
     if not IsAlgebraHomomorphism( bdy ) then
-           return false;
+        return false;
     fi;
     
     if ( IsLeftModuleGeneralMapping(act) = true ) then
@@ -414,8 +397,8 @@ function( P )
             od;
         od;
     else
-        AB:=Source(act);
-        UzAB:=Length(AB);
+        AB := Source(act);
+        UzAB := Length(AB);
         # Check  P.action: P.range 
         if not ( ( Range( act ) = B ) ) then
             return false;
@@ -443,14 +426,13 @@ function( bdy, act )
     local  A,B,filter,fam,PM,AB,BB;
     fam := Family2dAlgebra;
     filter := IsPreXModAlgebraObj;
-    B:= Source(bdy);
-    A:= Range(bdy);
-    AB:=Source(act);
-    BB:=Range(act);
-    
+    B := Source(bdy);
+    A := Range(bdy);
+    AB := Source(act);
+    BB := Range(act);
     if ( IsLeftModuleGeneralMapping(act) = true ) then
         if not ( A = AB ) then
-        Error( "require Range( bdy ) = Source( act )" );
+            Error( "require Range( bdy ) = Source( act )" );
         fi;
     else
         if not ( B = BB ) then
@@ -460,13 +442,12 @@ function( bdy, act )
     
     PM := rec();
     ObjectifyWithAttributes( PM, NewType( fam, filter ),
-    Source, B,
-    Range, A,
-    Boundary, bdy,
-    XModAlgebraAction, act,
-    IsPreXModDomain, true,
-    Is2dAlgebraObject, true);
-
+        Source, B,
+        Range, A,
+        Boundary, bdy,
+        XModAlgebraAction, act,
+        IsPreXModDomain, true,
+        Is2dAlgebraObject, true );
     if not IsPreXModAlgebra( PM ) then
         return false;
     fi;
@@ -478,38 +459,37 @@ end );
 ##
 #M  \=( <P>, <Q> )  . . . . . . . .  test if two pre-crossed modules are equal
 ##
-InstallMethod( \=,
-    "generic method for two pre-crossed modules",
+InstallMethod( \=, "generic method for two pre-crossed modules",
     IsIdenticalObj, [ IsPreXModAlgebra, IsPreXModAlgebra ], 0,
-    function ( P, Q )
+function ( P, Q )
     
-local  S, R, aP, aQ, gR, gS, s, r, im1, im2;
+    local  S, R, aP, aQ, gR, gS, s, r, im1, im2;
 
     if not ( Boundary( P ) = Boundary( Q ) ) then
         return false;
     fi;
-    S:=Source(Boundary(P));
-    R:=Range(Boundary(P));
-    aP:=XModAlgebraAction(P);
-    aQ:=XModAlgebraAction(Q);
-##    if not ( Range( aP ) = Range( aQ ) ) then
-##        return false;
-##    fi;
-##    if not ( Source( aP ) = Source( aQ ) ) then
-##        return false;
-##    fi;    
-######    
+    S := Source(Boundary(P));
+    R := Range(Boundary(P));
+    aP := XModAlgebraAction(P);
+    aQ := XModAlgebraAction(Q);
+    ##    if not ( Range( aP ) = Range( aQ ) ) then
+    ##        return false;
+    ##    fi;
+    ##    if not ( Source( aP ) = Source( aQ ) ) then
+    ##        return false;
+    ##    fi;    
+    ######    
     if HasGeneratorsOfAlgebra( R ) then
-       gR := GeneratorsOfAlgebra( R );
+        gR := GeneratorsOfAlgebra( R );
     else
-       gR := R;        
+        gR := R;        
     fi;
     if HasGeneratorsOfAlgebra( S ) then
-       gS := GeneratorsOfAlgebra( S );
+        gS := GeneratorsOfAlgebra( S );
     else
-       gS := S;        
+        gS := S;        
     fi; 
-#####    
+    #####£ 
     for r in gR do
         for s in gS do
         im1 := Image( aP, [r,s] );
@@ -541,15 +521,21 @@ InstallMethod( ViewObj, "method for a pre-crossed module", true,
     function( PM )
     
     local  type, Pact, name, bdy, act;
-    
+
     if HasName( PM ) then
         Print( Name( PM ), "\n" );
     else       
         Pact := XModAlgebraAction( PM );
-        if ( IsLeftModuleGeneralMapping(Pact) = true ) then
-            Print( "[", Source( PM ), "->", Range( PM ), "]" );
+        if IsLeftModuleGeneralMapping( Pact ) then
+## temporary fix (20/03/18) 
+##          Print( "[", Source( PM ), "->", Range( PM ), "]" ); 
+            Print( "[ " ); 
+            ViewObj( Source( PM ) ); 
+            Print( " -> " ); 
+            ViewObj( Range( PM ) ); 
+            Print( " ]" ); 
         else
-            type:=AlgebraActionType( Pact );
+            type := AlgebraActionType( Pact ); 
             #  Type 1
             if (type="Type1") then
                 Print( "[", Source( PM ), "->", Range( PM ), "]" );
@@ -578,11 +564,10 @@ end );
 InstallMethod( PrintObj, "method for a pre-crossed algebra module", true,
     [ IsPreXModAlgebra ], 0,
     function( PM )
-    IsPreXModAlgebra(PM);
     if HasName( PM ) then
         Print( Name( PM ), "\n" );
     else
-        Print( "[", Source( PM ), "->", Range( PM ), "]" );
+        Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
     fi;
 end );
 
@@ -601,8 +586,8 @@ function( PM )
     Xsrc := Source( PM );
     Xrng := Range( PM );
     Pact := XModAlgebraAction( PM );
-    type:=AlgebraActionType( Pact );
-    if (type="Type2") then   
+    type := AlgebraActionType( Pact );
+    if ( type ="Type2" ) then   
         if IsXModAlgebra( PM ) then
             Print( "\nCrossed module ", name, " :- \n" );
         else
@@ -641,7 +626,7 @@ function( PM )
         bdy := Boundary( PM );
         Print( "  ",  List( gensrc, s -> Image( bdy, s ) ), "\n" );         
         Print( "\n" );  
-   fi;
+    fi;
 end ); 
 
 #############################################################################
@@ -685,8 +670,8 @@ InstallMethod( IsXModAlgebra, "generic method for pre-crossed modules",
     fi;
     bdy := Boundary( CM );
     act := XModAlgebraAction( CM );
-    B:=Source(bdy);
-    A:=Range(bdy);
+    B := Source(bdy);
+    A := Range(bdy);
     if ( IsLeftModuleGeneralMapping(act) = true ) then
         basA := Basis(A);
         vecA := BasisVectors(basA);
@@ -714,12 +699,12 @@ InstallMethod( IsXModAlgebra, "generic method for pre-crossed modules",
         if ( HasZeroModuleProduct(act) ) then                
             return true;
         fi;
-        elB:=Elements(B);
-        uzB:=Length(elB);
+        elB := Elements(B);
+        uzB := Length(elB);
         for i in [1..uzB] do
-            b1:=elB[i];
+            b1 := elB[i];
             for j in [1..uzB] do
-                b2:=elB[j];
+                b2 := elB[j];
                 z1 := [ b1 ^ bdy, b2 ] ^ act;
                 z2 := b1 * b2;
                 if ( z1 <> z2 ) then                
@@ -756,7 +741,7 @@ function( bdy, act )
             return fail;
         fi;
     fi;
-    obj :=  XModAlgebraObj( bdy, act );
+    obj := XModAlgebraObj( bdy, act );
     return obj;
 end );
 
@@ -787,9 +772,9 @@ InstallMethod( XModAlgebraByMultipleAlgebra,
     [ IsAlgebra ], 0,
 function( A )
     local  PM,act,bdy;
-    act:=AlgebraAction(A);
-    bdy:=MultipleHomomorphism(A);
-    SetIsAlgebraAction(act,true);
+    act := AlgebraAction(A);
+    bdy := MultipleHomomorphism(A);
+    SetIsAlgebraAction( act, true );
     IsAlgebraAction(act);
     IsAlgebraHomomorphism(bdy);
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
@@ -804,17 +789,16 @@ end );
 #M  XModAlgebraByCentralExtension
 ##
 InstallMethod( XModAlgebraByCentralExtension,
-    "crossed module from Central Extension", true,
-    [ IsAlgebraHomomorphism ], 0,
+    "crossed module from Central Extension", true, [IsAlgebraHomomorphism], 0,
 function( f )
     local  PM,act,bdy;
     if IsSubset(Source(f),Range(f)) then
-    if (IsIdeal(Source(f),Range(f)) and Size(Range(f))=1) then
-    return XModAlgebraByIdeal(Source(f),Range(f));
+        if ( IsIdeal(Source(f),Range(f)) and Size(Range(f))=1 ) then
+            return XModAlgebraByIdeal( Source(f), Range(f) );
+        fi;
     fi;
-    fi;
-    act:=AlgebraAction(f);
-    bdy:=f;
+    act := AlgebraAction(f);
+    bdy := f;
     IsAlgebraAction(act);
     IsAlgebraHomomorphism(bdy);
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
@@ -828,19 +812,18 @@ end );
 ##
 #M  XModAlgebraByModule
 ##
-InstallMethod( XModAlgebraByModule,
-    "crossed module from module", true,
+InstallMethod( XModAlgebraByModule, "crossed module from module", true,
     [ IsAlgebra, IsRing ], 0,
 function( M,R )
     local  PM,act,bdy;
-    #M:=GroupRing(R,G);
-    act:=AlgebraAction(M,R);
-    bdy:=ModuleHomomorphism(M,R);
-    SetIsAlgebraAction(act,true);
+    #M := GroupRing(R,G);
+    act := AlgebraAction(M,R);
+    bdy := ModuleHomomorphism(M,R);
+    SetIsAlgebraAction( act, true );
     IsAlgebraHomomorphism(bdy);
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     if not IsXModAlgebra( PM ) then
-       Error( "this boundary and action only defines a pre-crossed module" );
+        Error( "this boundary and action only defines a pre-crossed module" );
     fi;
     return PM;
 end );
@@ -855,18 +838,18 @@ InstallMethod( XModAlgebraByIdeal,
 function( A,I )
     local  PM,act,bdy,AI;
     if not IsIdeal( A,I ) then
-       Error( "I not a ideal" );
+        Error( "I not a ideal" );
     fi;
-    # AI:=Cartesian(A,I);
-    # act:=AlgebraAction(A,AI,I);
-    act:=AlgebraAction5(A,I);
-    bdy:=AlgebraHomomorphismByFunction(I,A,i->i);
+    # AI := Cartesian(A,I);
+    # act := AlgebraAction(A,AI,I);
+    act := AlgebraAction5(A,I);
+    bdy := AlgebraHomomorphismByFunction(I,A,i->i);
     IsAlgebraAction(act);
     IsAlgebraHomomorphism(bdy);
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
- #   if not IsXModAlgebra( PM ) then
- #      Error( "this boundary and action only defines a pre-crossed module" );
-  #  fi;
+    # if not IsXModAlgebra( PM ) then
+    #   Error( "this boundary and action only defines a pre-crossed module" );
+    # fi;
     return PM;
 end );
 
@@ -878,40 +861,32 @@ InstallGlobalFunction( XModAlgebra, function( arg )
 
     local  nargs;
     nargs := Length( arg );
-
     # two homomorphisms
     if ( ( nargs = 2 ) and IsAlgebraHomomorphism( arg[1] )
                        and IsAlgebraAction( arg[2] ) ) then
         return XModAlgebraByBoundaryAndAction( arg[1], arg[2] );
-        
-   # module
+    # module
     elif ( ( nargs = 2 ) and IsRing( arg[1] )
                        and IsGroup( arg[2] ) ) then 
-     return XModAlgebraByModule( GroupRing( arg[1],arg[2] ),arg[1] );
-     
-   # ideal
+        return XModAlgebraByModule( GroupRing( arg[1],arg[2] ),arg[1] );
+    # ideal
     elif ( ( nargs = 2 ) and IsAlgebra( arg[1] )
-                       and IsAlgebra( arg[2] ) and IsIdeal(arg[1],arg[2]) ) then 
-     return XModAlgebraByIdeal( arg[1],arg[2] );
-    
+            and IsAlgebra( arg[2] ) and IsIdeal(arg[1],arg[2]) ) then 
+        return XModAlgebraByIdeal( arg[1],arg[2] );
     # surjective homomorphism
     elif ( ( nargs = 1 ) and IsAlgebraHomomorphism( arg[1] )
                          and IsSurjective( arg[1] ) ) then
         return XModAlgebraByCentralExtension( arg[1] );
-        
     # convert a cat1-algebra
     elif ( ( nargs = 1 ) and Is2dAlgebra( arg[1] ) ) then
         return XModAlgebraOfCat1Algebra( arg[1] );
-        
     # multiple algebra
     elif ( ( nargs = 1 ) and IsAlgebra( arg[1] )) then
         return XModAlgebraByMultipleAlgebra( arg[1] );
-    
     fi;
     # alternatives not allowed
     Error( "usage: XModAlgebra( bdy, act ); " );
 end );
-
 
 ##############################################################################
 ##
@@ -940,12 +915,12 @@ function( PM, SM )
     fi;
     if ( AlgebraActionType(XModAlgebraAction(PM))="Type2" ) 
          and (AlgebraActionType(XModAlgebraAction(SM))="Type2" ) then
-    return true;
+        return true;
     fi;
     ok := true;
     ######    
     if HasGeneratorsOfAlgebra( Ssrc ) then
-       gensrc := GeneratorsOfAlgebra( Ssrc );
+        gensrc := GeneratorsOfAlgebra( Ssrc );
     else
         gensrc := Ssrc;        
     fi;
@@ -1161,7 +1136,6 @@ function( obj, src, rng )
     fi;
 end );
 
-
 ##############################################################################
 ##
 #M  SubPreXModAlgebra            creates SubPreXMod Of Algebra from Ssrc<=Psrc 
@@ -1189,31 +1163,31 @@ function( PM, Ssrc, Srng )
     #  Type 1
     if (type="Type1") then
         Print( "1. tip icin alt xmod olustur\n" );
-        SM:=XModAlgebraByIdeal(Srng,Ssrc);
+        SM := XModAlgebraByIdeal( Srng, Ssrc );
     #  Type 2
     elif (type="Type2") then
         Print( "2. tip icin alt xmod olustur\n" );
-        SM:=XModAlgebraByMultipleAlgebra(Ssrc);
+        SM := XModAlgebraByMultipleAlgebra( Ssrc );
     #  Type 3
     elif (type="Type3") then
         Print( "3. tip icin alt xmod olustur\n" );
-        genSsrc:=GeneratorsOfAlgebra(Ssrc);
-        B:=Range(Pbdy);
-        list:=[];    
+        genSsrc := GeneratorsOfAlgebra( Ssrc );
+        B := Range(Pbdy);
+        list := [];    
         for i in genSsrc do
-            Add(list,Image( Pbdy,i ));            
+            Add( list, Image( Pbdy, i ) ); 
         od;
-        f:=AlgebraHomomorphismByImages( Ssrc,B,genSsrc,list );
-        K:=Image(f);
-        surf:=AlgebraHomomorphismByImages( Ssrc,K,genSsrc,list );
-        SM:=XModAlgebraByCentralExtension( surf );
+        f := AlgebraHomomorphismByImages( Ssrc, B, genSsrc, list );
+        K := Image(f);
+        surf := AlgebraHomomorphismByImages( Ssrc,K,genSsrc,list );
+        SM := XModAlgebraByCentralExtension( surf );
     #  Type 4
     elif (type="Type4") then
         Print( "4. tip icin alt xmod olustur\n" );
-        SM:=XModAlgebraByModule(Ssrc,Srng);
+        SM := XModAlgebraByModule( Ssrc, Srng );
     #  Type 5
     elif (type="Type5") then
-        SM:=XModAlgebraByIdeal(Srng,Ssrc);
+        SM := XModAlgebraByIdeal( Srng, Ssrc );
     else
         Print( "Uyumsuz xmod\n" );
         return false;
@@ -1315,15 +1289,14 @@ InstallMethod( PreCat1AlgebraObj, "for tail, head, embedding", true,
     
     fam := Family2dAlgebra;
     filter := IsPreCat1AlgebraObj;
-    C1A    := rec();
+    C1A := rec();
     ObjectifyWithAttributes( C1A, NewType( fam, filter ),
-    Source, Source( t ),
-    Range, Range( t ),
-    Tail, t, 
-    Head, h, 
-    RangeEmbedding, e,
-    IsPreCat1Domain, true );
-    
+        Source, Source( t ),
+        Range, Range( t ),
+        Tail, t, 
+        Head, h, 
+        RangeEmbedding, e,
+        IsPreCat1Domain, true );
     if not ( ( Source(h) = Source(t) ) and ( Range(h) = Range(t) ) ) then
         Error( "tail & head must have same source and range" );
     fi;
@@ -1356,31 +1329,31 @@ function( C1A )
         Print( Name( C1A ), "\n" );
     else          
         if IsXModAlgebraConst( Tail(C1A) ) then
-            PM:=XModAlgebraConst( Tail(C1A) );        
+            PM := XModAlgebraConst( Tail(C1A) );        
             Pact := XModAlgebraAction( PM );
-            type:=AlgebraActionType( Pact );
+            type := AlgebraActionType( Pact );
             #  Type 1
-            if (type="Type1") then
+            if ( type = "Type1" ) then
                 Print( "[", Range(PM)," IX ", Source( PM ), 
                        " -> ", Range( C1A ), "]" );
             fi;  
             #  Type 2 
-            if (type="Type2") then
+            if ( type = "Type2" ) then
                 Print( "Mul. Alg.(", Source( PM ),") IX ", Source( PM ), 
                        " -> Mul. Alg.(", Source( PM ), ")]" );;
             fi;
             #  Type 3
-            if (type="Type3") then          
+            if ( type = "Type3" ) then          
                 Print( "[", Range(PM)," IX ", Source( PM ), 
                        " -> ", Range( C1A ), "]" );
             fi;
             #  Type 4
-            if (type="Type4") then          
+            if ( type = "Type4" ) then          
                 Print( "[", Range(PM)," IX ", Source( PM ), 
                        " -> ", Range( C1A ), "]" );
             fi; 
             #  Type 5
-            if (type="Type5") then
+            if ( type = "Type5" ) then
                 Print( "[", Range(PM)," IX ", Source( PM ), 
                        " -> ", Range( C1A ), "]" );
             fi; 
@@ -1396,7 +1369,7 @@ end );
 ##
 InstallMethod( PrintObj, "method for a pre-cat1-algebra", true,
     [ IsPreCat1Algebra ], 0,
-    function( C1A )
+function( C1A )
     if HasName( C1A ) then
         Print( Name( C1A ), "\n" );
     else
@@ -1410,7 +1383,7 @@ end );
 ##
 InstallOtherMethod( Display, "display a pre-cat1-algebra", 
     true, [ IsPreCat1Algebra ], 0,
-    function( C1A )
+function( C1A )
 
     local  Csrc, Crng, Cker, gensrc, genrng, genker, name,
            t, h, e, b, k, imt, imh, ime, imb, imk;
@@ -1424,66 +1397,67 @@ InstallOtherMethod( Display, "display a pre-cat1-algebra",
     h := Head( C1A );
     e := RangeEmbedding( C1A );    
     if HasXModAlgebraOfCat1Algebra(C1A) then
-    gensrc := Csrc;
-    genker := Cker;    
+        gensrc := Csrc;
+        genker := Cker;    
         if IsCat1Algebra( C1A ) then
-        Print( "\nCat1-algebra ", name, " :- \n" );
-    else
-        Print( "\nPre-cat1-algebra ", name, " :- \n" );
-    fi;
-    ime := List( genrng, x -> Image( e, x ) );
+            Print( "\nCat1-algebra ", name, " :- \n" );
+        else
+            Print( "\nPre-cat1-algebra ", name, " :- \n" );
+        fi;
+        ime := List( genrng, x -> Image( e, x ) );
 
-    Print( ":  range algebra has generators:\n" );
-    Print( "  ", genrng, "\n" );
-    Print( ": tail homomorphism maps source generators to:\n" );
-    Print( ": range embedding maps range generators to:\n" );
-    Print( "  ", ime, "\n" );
-    if ( Size( Cker ) = 1 ) then
-        Print( ": the kernel is trivial.\n" );
+        Print( ":  range algebra has generators:\n" );
+        Print( "  ", genrng, "\n" );
+        Print( ": tail homomorphism maps source generators to:\n" );
+        Print( ": range embedding maps range generators to:\n" );
+        Print( "  ", ime, "\n" );
+        if ( Size( Cker ) = 1 ) then
+            Print( ": the kernel is trivial.\n" );
+        else
+            Print( ": kernel has generators:\n" );
+            Print( "  ", genker, "\n" );
+        fi;    
     else
-        Print( ": kernel has generators:\n" );
-        Print( "  ", genker, "\n" );
-    fi;    
-    else
-    b := Boundary( C1A );
-    gensrc := GeneratorsOfAlgebra( Csrc );
-    genker := GeneratorsOfAlgebra( Cker );
-    k := KernelEmbedding( C1A );
-    imt := List( gensrc, x -> Image( t, x ) );
-    imh := List( gensrc, x -> Image( h, x ) );
-    ime := List( genrng, x -> Image( e, x ) );
-    imb := List( genker, x -> Image( b, x ) );
-    imk := List( genker, x -> Image( k, x ) );
+        b := Boundary( C1A );
+        gensrc := GeneratorsOfAlgebra( Csrc );
+        genker := GeneratorsOfAlgebra( Cker );
+        k := KernelEmbedding( C1A );
+        imt := List( gensrc, x -> Image( t, x ) );
+        imh := List( gensrc, x -> Image( h, x ) );
+        ime := List( genrng, x -> Image( e, x ) );
+        imb := List( genker, x -> Image( b, x ) );
+        imk := List( genker, x -> Image( k, x ) );
 
-    if IsCat1Algebra( C1A ) then
-        Print( "\nCat1-algebra ", name, " :- \n" );
-    else
-        Print( "\nPre-cat1-algebra ", name, " :- \n" );
+        if IsCat1Algebra( C1A ) then
+            Print( "\nCat1-algebra ", name, " :- \n" );
+        else
+            Print( "\nPre-cat1-algebra ", name, " :- \n" );
+        fi;
+        Print( ": source algebra has generators:\n" );
+        Print( "  ", gensrc, "\n" );
+        Print( ":  range algebra has generators:\n" );
+        Print( "  ", genrng, "\n" );
+        Print( ": tail homomorphism maps source generators to:\n" );
+        Print( "  ", imt, "\n" );
+        Print( ": head homomorphism maps source generators to:\n" );
+        Print( "  ", imh, "\n" );
+        Print( ": range embedding maps range generators to:\n" );
+        Print( "  ", ime, "\n" );
+        if ( Size( Cker ) = 1 ) then
+            Print( ": the kernel is trivial.\n" );
+        else
+            Print( ": kernel has generators:\n" );
+            Print( "  ", genker, "\n" );
+            Print( ": boundary homomorphism maps generators of kernel to:\n" );
+            Print( "  ", imb, "\n" );
+            Print( ": kernel embedding maps generators of kernel to:\n" );
+            Print( "  ", imk, "\n" );
+        fi;
     fi;
-    Print( ": source algebra has generators:\n" );
-    Print( "  ", gensrc, "\n" );
-    Print( ":  range algebra has generators:\n" );
-    Print( "  ", genrng, "\n" );
-    Print( ": tail homomorphism maps source generators to:\n" );
-    Print( "  ", imt, "\n" );
-    Print( ": head homomorphism maps source generators to:\n" );
-    Print( "  ", imh, "\n" );
-    Print( ": range embedding maps range generators to:\n" );
-    Print( "  ", ime, "\n" );
-    if ( Size( Cker ) = 1 ) then
-        Print( ": the kernel is trivial.\n" );
-    else
-        Print( ": kernel has generators:\n" );
-        Print( "  ", genker, "\n" );
-        Print( ": boundary homomorphism maps generators of kernel to:\n" );
-        Print( "  ", imb, "\n" );
-        Print( ": kernel embedding maps generators of kernel to:\n" );
-        Print( "  ", imk, "\n" );
-    fi;
-    fi;
-    #if ( IsCat1Algebra( C1A ) and HasXModAlgebraOfCat1Algebra( C1A ) ) then
-    #    Print( ": associated crossed module is ", XModAlgebraOfCat1Algebra( C1A ), "\n" );
-    #fi;
+    # if ( IsCat1Algebra( C1A ) and HasXModAlgebraOfCat1Algebra( C1A ) ) then
+    #     Print( ": associated crossed module is ", 
+    #            XModAlgebraOfCat1Algebra( C1A ), "\n" );
+    # fi;
     Print( "\n" );
 end );
 
@@ -1491,7 +1465,8 @@ end );
 ##
 #M  Name                                               for a pre-cat1-alegbra
 ##
-InstallMethod( Name, "method for a pre-cat1-algebra", true, [ IsPreCat1Algebra ], 0,
+InstallMethod( Name, "method for a pre-cat1-algebra", true, 
+    [ IsPreCat1Algebra ], 0,
 function( C1A )
 
     local  nsrc, nrng, name, mor;
@@ -1524,8 +1499,7 @@ InstallGlobalFunction( PreCat1Algebra, function( arg )
     # two endomorphisms
     if ( ( nargs=2 ) and IsEndoMapping( arg[1] )
                      and IsEndoMapping( arg[2] ) ) then
-        return PreCat1GroupByEndomorphisms( arg[1], arg[2] );
-
+        return PreCat1AlgebraByEndomorphisms( arg[1], arg[2] );
     # two homomorphisms and an embedding
     elif ( ( nargs=3 ) and
            ForAll( arg, a -> IsAlgebraHomomorphism( a ) ) ) then
@@ -1562,14 +1536,14 @@ function( C1A )
     kert := Kernel( t );
     kerh := Kernel( h );
     if not ( Size( kert ) = 1 or Size( kerh ) = 1 ) then
-        genkert:=GeneratorsOfAlgebra(kert);
-        genkerh:=GeneratorsOfAlgebra(kerh);
-        uzGt:=Length(genkert);
-        uzGh:=Length(genkerh);
+        genkert := GeneratorsOfAlgebra(kert);
+        genkerh := GeneratorsOfAlgebra(kerh);
+        uzGt := Length(genkert);
+        uzGh := Length(genkerh);
         for i in [1..uzGt] do
-            t1:=genkert[i];
+            t1 := genkert[i];
             for j in [1..uzGh] do
-                h1:=genkerh[j];
+                h1 := genkerh[j];
                 z1 := t1*h1;
                 z2 := Zero(Csrc);
                 if ( z1 <> z2 ) then                
@@ -1593,9 +1567,9 @@ end );
 ##
 #M  IsIdentityCat1Algebra
 ##
-InstallMethod( IsIdentityCat1Algebra, "test a cat1-algebra", true, [ IsCat1Algebra ], 0,
+InstallMethod( IsIdentityCat1Algebra, "test a cat1-algebra", true, 
+    [ IsCat1Algebra ], 0,
 function( C1A )
-
     return ( ( Tail( C1A ) = IdentityMapping( Source( C1A ) ) ) and
              ( Tail( C1A ) = IdentityMapping( Source( C1A ) ) ) );
 end );
@@ -1607,7 +1581,8 @@ end );
 #F  Cat1Algebra( <t>, <h>, <e> )      cat1-algebra from tail, head, embed
 #F  Cat1Algebra( <t>, <h> )           cat1-algebra from tail, head endos
 ##
-InstallGlobalFunction( Cat1Algebra, function( arg )
+InstallGlobalFunction( Cat1Algebra, 
+function( arg )
 
     local  nargs, C1A, ok, usage1, usage2;
 
@@ -1683,40 +1658,38 @@ function( gf, size, gpnum, num )
         ReadPackage( "xmodalg", "lib/cat1algdata.g" );
     # fi;
      
-     usage_list1 := Set(CAT1ALG_LIST, i -> i[1]);
-     if not gf in usage_list1 then
-     Print( "|--------------------------------------------------------| \n" );   
-     Print( "| ",gf," is invalid number for Galois Field (gf) \t \t | \n");
-     Print( "| Possible numbers for the gf in the Data : \t \t | \n");
-     Print( "|--------------------------------------------------------| \n" ); 
-     Print( " ",usage_list1," \n");
-
-     Print( usage, "\n" );
-     return fail;
-     fi;
-     
-     usage_list2 := Set(Filtered(CAT1ALG_LIST, i -> i[1]=gf), i -> i[2]);
-     if not size in usage_list2 then
-     Print( "|--------------------------------------------------------| \n" );   
-     Print( "| ",size," is invalid number for size of group (gpsize)  \t | \n");
-     Print( "| Possible numbers for the gpsize for GF(",gf,") in the Data: | \n");
-     Print( "|--------------------------------------------------------| \n" ); 
-     Print( " ",usage_list2," \n");
-     Print( usage, "\n" );
-     return fail;
-     fi;
-     
-     usage_list3 := Set(Filtered(Filtered(CAT1ALG_LIST, i -> i[1]=gf), i -> i[2]=size), i -> i[3]);
-     if not gpnum in usage_list3 then
-     Print( "|--------------------------------------------------------| \n" );   
-     Print( "| ",gpnum," is invalid number for group of order ",size, "\t \t | \n");
-     Print( "| Possible numbers for the gpnum in the Data : \t \t | \n");
-     Print( "|--------------------------------------------------------| \n" ); 
-     Print( " ",usage_list3," \n");
-     Print( usage, "\n" );
-     return fail;
-     fi;
-    maxgsize:= CAT1ALG_LIST_GROUP_SIZES[gf+1]-CAT1ALG_LIST_GROUP_SIZES[gf];
+    usage_list1 := Set(CAT1ALG_LIST, i -> i[1]);
+    if not gf in usage_list1 then
+      Print( "|--------------------------------------------------------| \n" );   
+      Print( "| ",gf," is invalid number for Galois Field (gf) \t \t | \n");
+      Print( "| Possible numbers for the gf in the Data : \t \t | \n");
+      Print( "|--------------------------------------------------------| \n" ); 
+      Print( " ",usage_list1," \n");
+      Print( usage, "\n" );
+      return fail;
+    fi;
+    usage_list2 := Set(Filtered(CAT1ALG_LIST, i -> i[1]=gf), i -> i[2]);
+    if not size in usage_list2 then
+      Print( "|--------------------------------------------------------| \n" );   
+      Print( "| ",size," is invalid number for size of group (gpsize)  \t | \n") ;
+      Print( "| Possible numbers for the gpsize for GF(",gf,") in the Data: | \n");
+      Print( "|--------------------------------------------------------| \n" ); 
+      Print( " ",usage_list2," \n");
+      Print( usage, "\n" );
+      return fail;
+    fi;
+    usage_list3 := Set( Filtered( Filtered( CAT1ALG_LIST, i -> i[1] = gf), 
+                        i -> i[2] = size ), i -> i[3] );
+    if not gpnum in usage_list3 then
+      Print( "|--------------------------------------------------------| \n" );   
+      Print( "| ",gpnum," is invalid number for group of order ",size, "\t \t | \n");
+      Print( "| Possible numbers for the gpnum in the Data : \t \t | \n");
+      Print( "|--------------------------------------------------------| \n" ); 
+      Print( " ",usage_list3," \n");
+      Print( usage, "\n" );
+      return fail;
+    fi;
+    maxgsize := CAT1ALG_LIST_GROUP_SIZES[gf+1]-CAT1ALG_LIST_GROUP_SIZES[gf];
     iso := CAT1ALG_LIST_CLASS_SIZES;
     count := 1;
     start := [ 1 ];
@@ -1724,7 +1697,7 @@ function( gf, size, gpnum, num )
         count := count + j;
         Add( start, count );
     od;           
-    sizes:=size+CAT1ALG_LIST_GROUP_SIZES[gf]; 
+    sizes := size+CAT1ALG_LIST_GROUP_SIZES[gf]; 
     pos := start[ sizes ];
     pos2 := start[ sizes + 1 ] - 1;
     #if ( sizes < maxgsize ) then
@@ -1735,7 +1708,8 @@ function( gf, size, gpnum, num )
     names := List( [ pos..pos2], n -> CAT1ALG_LIST[n][5] );  
     if ( ( gpnum < 1 )  or (gpnum > iso[sizes] )) then        
         Print( " " ,gpnum, " is a invalid gpnum number.\n" ); 
-        Print( " where 0 < gpnum <= ", iso[sizes], " for gpsize " ,size, ".\n" );
+        Print( " where 0 < gpnum <= ", iso[sizes], 
+               " for gpsize " ,size, ".\n" );
         Print( usage, "\n" );
         return names;
     fi;
@@ -1751,60 +1725,60 @@ function( gf, size, gpnum, num )
     #G  := Group(M[4], ( ));    
     ncat1 := Length( M[6] ) + 1;
     genG := GeneratorsOfGroup( G );
-    A:=GroupRing(GF(gf),G);
-    #A:=GroupRing(GF(gf),SmallGroup(size,gpnum));
-    gA:=GeneratorsOfAlgebra(A); 
+    A := GroupRing(GF(gf),G);
+    #A := GroupRing(GF(gf),SmallGroup(size,gpnum));
+    gA := GeneratorsOfAlgebra(A); 
     SetName( A, M[5] );   
     if not ( ( num >= 1 ) and ( num <= ncat1 ) ) then
-        Print( "There are ", ncat1, " cat1-structures for the algebra ");
-        Print( A, ".\n" ); 
-        Print( " Range Alg     \tTail       \t\tHead      \n" ); 
-     Print( "|--------------------------------------------------------| \n" );      
-        Print( "| ", A, "  \tidentity map \t\tidentity map   \t |\n" ); 
-        for i in [2..ncat1] do
-            Print( "| ",M[6][i-1][3]," \t",M[6][i-1][4]," \t\t",M[6][i-1][5], "\t | \n" );
-        od;              
-     Print( "|--------------------------------------------------------| \n" ); 
-         Print( usage, "\n" ); 
-        Print( "Algebra has generators ", gA, "\n" );
-        return ncat1;
+      Print( "There are ", ncat1, " cat1-structures for the algebra ");
+      Print( A, ".\n" ); 
+      Print( " Range Alg     \tTail       \t\tHead      \n" ); 
+      Print( "|--------------------------------------------------------| \n" );      
+      Print( "| ", A, "  \tidentity map \t\tidentity map   \t |\n" ); 
+      for i in [2..ncat1] do
+          Print( "| ",M[6][i-1][3]," \t",M[6][i-1][4]," \t\t",M[6][i-1][5], "\t | \n" );
+      od;              
+      Print( "|--------------------------------------------------------| \n" ); 
+      Print( usage, "\n" ); 
+      Print( "Algebra has generators ", gA, "\n" );
+      return ncat1;
     fi;
     if ( num = 1 ) then
         L := [ genG, Name(A), Name(A), gA, gA ];
-        B :=A;
+        B := A;
         SetName( B, L[3] );
-        imt :=L[4];
-        imh :=L[5];
+        imt := L[4];
+        imh := L[5];
     else
         L := M[6][num-1]; 
         if ( L[3] = "-----" ) then
-        elA := Elements(A);;
-        imt:=[];
-        imh:=[];
-        for k in [1..Length(gA)] do
-          Add( imt, elA[L[4][k]] );
-        od;
-        for k in [1..Length(gA)] do
-          Add( imh, elA[L[5][k]] );
-        od;
-         t :=  AlgebraHomomorphismByImages( A, A, gA, imt );
-         h := AlgebraHomomorphismByImages( A, A, gA, imh );
-             return PreCat1GroupByEndomorphisms( t, h );
+            elA := Elements(A);;
+            imt := [];
+            imh := [];
+            for k in [1..Length(gA)] do
+                Add( imt, elA[L[4][k]] );
+            od;
+            for k in [1..Length(gA)] do
+                Add( imh, elA[L[5][k]] );
+            od;
+            t :=  AlgebraHomomorphismByImages( A, A, gA, imt );
+            h := AlgebraHomomorphismByImages( A, A, gA, imh );
+            return PreCat1AlgebraByEndomorphisms( t, h );
         fi;
         genR := L[1];
         R := Subgroup( G, genR );
-        emb:=Embedding(G,A);
-        H:=ImagesSet(emb,R);
-        B:=Algebra(GF(gf),GeneratorsOfGroup(H));
-        gB:=GeneratorsOfAlgebra(B);
+        emb := Embedding(G,A);
+        H := ImagesSet(emb,R);
+        B := Algebra(GF(gf),GeneratorsOfGroup(H));
+        gB := GeneratorsOfAlgebra(B);
         SetName( B, L[3] );
-        imt:=[];
-        imh:=[];
+        imt := [];
+        imh := [];
         for k in L[4] do
-          Add( imt, gB[k] );
+            Add( imt, gB[k] );
         od;
         for l in L[5] do
-          Add( imh, gB[l] );
+            Add( imh, gB[l] );
         od;
     fi;  
     t := AlgebraHomomorphismByImages( A, B, gA, imt );
@@ -1813,11 +1787,11 @@ function( gf, size, gpnum, num )
     SetName( Image( h ), L[3] );
     SetIsEndoMapping( t, true );
     SetIsEndoMapping( h, true );
-    #e:=InclusionMappingAlgebra(A,B);
+    # e := InclusionMappingAlgebra(A,B);
     kert := Kernel( t );
     SetName( kert, L[2] );
     SetEquivalence( t, false );
-    return PreCat1GroupByEndomorphisms( t, h );
+    return PreCat1AlgebraByEndomorphisms( t, h );
 end );
 
 #############################################################################
@@ -1862,15 +1836,14 @@ function( t, h, e )
     PC := PreCat1AlgebraObj( tres, hres, eres );
     SetBoundary( PC, bdy );
     SetKernelEmbedding( PC, f );
-    
     return PC;
 end );
 
 #############################################################################
 ##
-#M  PreCat1GroupByEndomorphisms( <et>, <eh> )
+#M  PreCat1AlgebraByEndomorphisms( <et>, <eh> )
 ##
-InstallOtherMethod( PreCat1GroupByEndomorphisms,
+InstallMethod( PreCat1AlgebraByEndomorphisms,
     "cat1-algebra from tail and head endomorphisms", true, 
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
 function( et, eh )
@@ -1902,9 +1875,7 @@ end );
 ##
 #M  Source( C1A ) . . . . . . . . . . . . . . . . . . . .  for a cat1-algebra
 ##
-InstallOtherMethod( Source,
-    "method for a pre-cat1-algebra",
-    true,
+InstallOtherMethod( Source, "method for a pre-cat1-algebra", true,
     [ IsPreCat1Algebra ], 0,
     C1A -> Source( Tail( C1A ) ) );
 
@@ -1912,9 +1883,7 @@ InstallOtherMethod( Source,
 ##
 #M  Range( C1A ) . . . . . . . . . . . . . . . . . . . . . for a cat1-algebra
 ##
-InstallOtherMethod( Range,
-    "method for a pre-cat1-algebra",
-    true,
+InstallOtherMethod( Range, "method for a pre-cat1-algebra", true,
     [ IsPreCat1Algebra ], 0,
     C1A -> Range( Tail( C1A ) ) );
 
@@ -1922,33 +1891,33 @@ InstallOtherMethod( Range,
 ##
 #M  Kernel( C1A ) . . . . . . . . . . . . . . . . . . . for a pre-cat1-algebra
 ##
-InstallOtherMethod( Kernel,
-    "method for a pre-cat1-algebra", true, [ IsPreCat1Algebra ], 0,
+InstallOtherMethod( Kernel, "method for a pre-cat1-algebra", true, 
+    [ IsPreCat1Algebra ], 0,
     C1A -> Kernel( Tail( C1A ) ) );
 
 #############################################################################
 ##
 #M  Boundary( C1A ) . . . . . . . . . . . . . . . . . . .  for a cat1-algebra
 ##
-InstallOtherMethod( Boundary,
-    "method for a pre-cat1-algebra", true, [ IsPreCat1Algebra ], 0,
+InstallOtherMethod( Boundary, "method for a pre-cat1-algebra", true, 
+    [ IsPreCat1Algebra ], 0,
     C1A -> RestrictionMappingAlgebra( Head( C1A ), Kernel( C1A ) ) );
 
 #############################################################################
 ##
 #M  KernelEmbedding( C1A ) . . .  . . . . . . . . . . . . .  for a cat1-algebra
 ##
-InstallMethod( KernelEmbedding,
-    "method for a pre-cat1-algebra", true, [ IsPreCat1Algebra ], 0,
+InstallMethod( KernelEmbedding, "method for a pre-cat1-algebra", true, 
+    [ IsPreCat1Algebra ], 0,
     C1A -> InclusionMappingAlgebra( Source( C1A ), Kernel( C1A ) ) );
-    
 
 #############################################################################
 ##
 #M  PreCat1GroupOfPreXMod . convert a pre-crossed module to a pre-cat1-algebra
 ##
 InstallOtherMethod( PreCat1GroupOfPreXMod,
-    "convert a pre-crossed module to a pre-cat1-algebra", true, [ IsPreXModAlgebra ], 0,
+    "convert a pre-crossed module to a pre-cat1-algebra", true, 
+    [ IsPreXModAlgebra ], 0,
 function( XM )
 
     local  A, gA, Xact, Xbdy, R, gR, zA, RA, x, t, h, e, C;
@@ -1959,50 +1928,46 @@ function( XM )
     #gR := GeneratorsOfAlgebra( R );
     zA := Zero( A );
     Xact := XModAlgebraAction( XM );
-    Xbdy := Boundary( XM );
-    
-     RA:=Cartesian(R,A);
-    
+    Xbdy := Boundary( XM );  
+    RA:=Cartesian(R,A);
     t := rec( fun:= x->x[1]);
     ObjectifyWithAttributes( t, 
-        NewType(GeneralMappingsFamily(ElementsFamily(FamilyObj(RA)),
-        ElementsFamily(FamilyObj(R))),
+        NewType( GeneralMappingsFamily( ElementsFamily( FamilyObj(RA) ),
+            ElementsFamily( FamilyObj(R) ) ),
         IsSPMappingByFunctionRep and IsSingleValued
             and IsTotal and IsGroupHomomorphism ),
-    Source, RA,
-    SourceForEquivalence, A,
-    Range, R,
-    Equivalence, true,
-    IsAlgebraHomomorphism, true,
-    IsEquivalenceTail, true,
-    IsEquivalenceHead, false,
-    IsXModAlgebraConst, true,
-    XModAlgebraConst, XM );
-    
+        Source, RA,
+        SourceForEquivalence, A,
+        Range, R,
+        Equivalence, true,
+        IsAlgebraHomomorphism, true,
+        IsEquivalenceTail, true,
+        IsEquivalenceHead, false,
+        IsXModAlgebraConst, true,
+        XModAlgebraConst, XM );
     h := rec( fun:= x->x[1]+Image(Xbdy,x[2]));
     ObjectifyWithAttributes( h, 
-        NewType(GeneralMappingsFamily(ElementsFamily(FamilyObj(RA)),
-        ElementsFamily(FamilyObj(R))),
+        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(RA) ),
+            ElementsFamily( FamilyObj(R) ) ),
         IsSPMappingByFunctionRep and IsSingleValued
             and IsTotal and IsGroupHomomorphism ),
-    Source, RA,
-    SourceForEquivalence, A,
-    Range, R,
-    IsAlgebraHomomorphism, true,
-    BoundaryForEquivalence, Xbdy,
-    XModAlgebraAction, Xact,
-    IsEquivalenceHead, true,
-    IsEquivalenceTail, false );
-
+        Source, RA,
+        SourceForEquivalence, A,
+        Range, R,
+        IsAlgebraHomomorphism, true,
+        BoundaryForEquivalence, Xbdy,
+        XModAlgebraAction, Xact,
+        IsEquivalenceHead, true,
+        IsEquivalenceTail, false );
     e := rec( fun:= x->[x,zA]);
     ObjectifyWithAttributes( e, 
-        NewType(GeneralMappingsFamily(ElementsFamily(FamilyObj(R)),
-        ElementsFamily(FamilyObj(RA))),
+        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(R) ),
+            ElementsFamily( FamilyObj(RA) ) ),
         IsSPMappingByFunctionRep and IsSingleValued
             and IsTotal and IsGroupHomomorphism ),
-    Source, R,
-    Range, RA,
-    IsAlgebraHomomorphism, true );
+        Source, R,
+        Range, RA,
+        IsAlgebraHomomorphism, true );
     C := PreCat1AlgebraObj( t, h, e );   
     return C;
 end ); 
@@ -2011,16 +1976,16 @@ end );
 ##
 #M  Kernel( t,h ) . . . . . . . . . . . . . . . . . . . for a pre-cat1-algebra
 ##
-InstallOtherMethod( Kernel,
-    "method for a pre-cat1-algebra", true, [  IsEquivalenceHead and  IsEquivalenceTail and IsAlgebraHomomorphism ], 0,
-    function( f )
+InstallOtherMethod( Kernel, "method for a pre-cat1-algebra", true, 
+    [ IsEquivalenceHead and  IsEquivalenceTail and IsAlgebraHomomorphism ], 0,
+function( f )
     
     local A;
     if  IsEquivalenceHead(f) then
-    return EquivalenceHead(f);
+        return EquivalenceHead(f);
     fi;
     if  IsEquivalenceTail(f) then
-    return EquivalenceTail(f);
+        return EquivalenceTail(f);
     fi;
 end );
    
@@ -2029,16 +1994,17 @@ end );
 #M  EquivalenceTail. . . . convert a pre-crossed module to a pre-cat1-algebra
 ##
 InstallMethod( EquivalenceTail,
-    "convert a pre-crossed module to a pre-cat1-algebra", true, [  IsEquivalenceTail ], 0,
+    "convert a pre-crossed module to a pre-cat1-algebra", true, 
+    [  IsEquivalenceTail ], 0,
 function( f )
 
     local  A, R, RA,zR,Ker ;
 
     RA := Source( f );
     R := Range( f );
-    A:=SourceForEquivalence(f);
+    A := SourceForEquivalence(f);
     zR := Zero( R );
-    Ker:=Cartesian([zR],A);      
+    Ker := Cartesian([zR],A);      
     return Ker;
 end ); 
 
@@ -2047,23 +2013,24 @@ end );
 #M  EquivalenceHead. . . . convert a pre-crossed module to a pre-cat1-algebra
 ##
 InstallMethod( EquivalenceHead,
-    "convert a pre-crossed module to a pre-cat1-algebra", true, [  IsEquivalenceHead ], 0,
+    "convert a pre-crossed module to a pre-cat1-algebra", true,
+    [  IsEquivalenceHead ], 0,
 function( f )
 
     local  A, R, RA, eA, uzA, Xbdy, list, i, a, x, Ker ;
 
     RA := Source( f );
     R := Range( f );
-    A:=SourceForEquivalence(f);
-    eA:=Elements(A);;
-    uzA:=Size(A);
-    Xbdy:=BoundaryForEquivalence(f);    
-    list:=[];;
+    A := SourceForEquivalence(f);
+    eA := Elements(A);;
+    uzA := Size(A);
+    Xbdy := BoundaryForEquivalence(f);    
+    list := [];;
     for i in [1..uzA] do
-            a:=eA[i];
-            x:=[-(Image(Xbdy,a)),a];
-            Add(list,x);
-        od;
+        a := eA[i];
+        x := [-(Image(Xbdy,a)),a];
+        Add( list, x );
+    od;
     return list;
 end ); 
 
@@ -2084,22 +2051,22 @@ function( C1A )
     h := Head( C1A );
     t := Tail( C1A );
     list:=[];;
-    kt:=Kernel(t);
-    kh:=Kernel(h);
-    uzkt:=Size(kt);
-    uzkh:=Size(kh);
-    a:=XModAlgebraAction(h);
+    kt := Kernel(t);
+    kh := Kernel(h);
+    uzkt := Size(kt);
+    uzkh := Size(kh);
+    a := XModAlgebraAction(h);
     for i in [1..uzkt] do
-        p:=kt[i];
+        p := kt[i];
         for j in [1..uzkh] do   
-            q:=kh[j];
-            t1:=p[2]*q[2];
-            m:=[p[2],q[1]];
-            t2:=Image(a,m);
-            s:=[p[1],q[2]];
-            t3:=Image(a,s);
-            x:=[(p[1]*q[1]),t1+t2+t3];            
-            Add(list,x);
+            q := kh[j];
+            t1 := p[2]*q[2];
+            m := [p[2],q[1]];
+            t2 := Image(a,m);
+            s := [p[1],q[2]];
+            t3 := Image(a,s);
+            x := [(p[1]*q[1]),t1+t2+t3];            
+            Add( list, x );
         od;
     od;
     return list;
@@ -2109,13 +2076,12 @@ end );
 ##
 #M  PreXModAlgebraByPreCat1Algebra
 ##
-InstallMethod( PreXModAlgebraByPreCat1Algebra, true, 
-    [ IsPreCat1Algebra ], 0,
+InstallMethod( PreXModAlgebraByPreCat1Algebra, true, [ IsPreCat1Algebra ], 0,
 function( C1A )
  
     local  usage, A, B, C, bdy, gA, im, sbdy, PM,act,R,s,t;
 
-    usage:="Usage : Boundary of Cat-1 Algebra not surjective";
+    usage := "Usage : Boundary of Cat-1 Algebra not surjective";
     if IsXModAlgebraConst(Tail(C1A)) then
         PM := XModAlgebraConst(Tail(C1A));
         return PM;   
@@ -2152,7 +2118,7 @@ function( C1 )
     if not IsCat1Algebra( C1 ) then
         Print( "Warning : C is only Pre-cat1-algebra\n" );        
     fi;    
-#   SetIsXMod( X1, true );
+    # SetIsXMod( X1, true );
     SetXModAlgebraOfCat1Algebra( C1, X1 );
     SetCat1AlgebraOfXModAlgebra( X1, C1 );
     return X1;
@@ -2181,7 +2147,7 @@ function( X1 )
     if not IsXModAlgebra( X1 ) then
         Print( "Warning : X1 is only Pre-xmod-algebra\n" );        
     fi;  
-#   SetIsCat1Algebra( C1, true );
+    # SetIsCat1Algebra( C1, true );
     SetXModAlgebraOfCat1Algebra( C1, X1 );
     SetCat1AlgebraOfXModAlgebra( X1, C1 );
     return C1;
@@ -2215,7 +2181,7 @@ function( G, H )
     else
         genG := GeneratorsOfAlgebra(G);
     fi;
-    if  (Length(genG) = 0) then
+    if (Length(genG) = 0) then
         genG := GeneratorsOfAlgebra(G);
     fi;
     mler := [];
@@ -2223,7 +2189,7 @@ function( G, H )
         for i in [1..Size(H)] do
             f := AlgebraHomomorphismByImages(G,H,genG,[eH[i]]);
             if ((f <> fail) and  (not f in mler))  then 
-                    Add(mler,f);
+                Add(mler,f);
             else 
                 continue; 
             fi;            
@@ -2451,9 +2417,9 @@ function( F, G )
     PreCat1_ler := [];
     for i in [1..Length(Iler)] do
         for j in [1..Length(Iler)] do
-            if PreCat1GroupByEndomorphisms(Iler[i],Iler[j]) <> fail then 
-                Add(PreCat1_ler,PreCat1GroupByEndomorphisms(Iler[i],Iler[j]));
-                Print(PreCat1GroupByEndomorphisms(Iler[i],Iler[j]));
+            if PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]) <> fail then 
+                Add(PreCat1_ler,PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]));
+                Print(PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]));
             else 
                 continue; 
             fi;                
@@ -2485,7 +2451,7 @@ function( C1A1, C1A2 )
         return false;
     fi;
     if ( ( LeftActingDomain(T1) <> LeftActingDomain(T2) ) 
-         or ( LeftActingDomain(G1) <> LeftActingDomain(G2) ) ) then
+      or ( LeftActingDomain(G1) <> LeftActingDomain(G2) ) ) then
         return false;
     fi;
     if ( T1 = T2 ) then
@@ -2505,16 +2471,15 @@ function( C1A1, C1A2 )
             if ( IsPreCat1AlgebraMorphism(Make2dAlgebraMorphism( 
                      C1A1, C1A2, alp, ph ) ) ) then
                 Add(m1_ler,PreCat1AlgebraMorphism(C1A1,C1A2,alp,ph));
-                if ( IsCat1AlgebraMorphism(Make2dAlgebraMorphism(
-                         C1A1, C1A2, alp, ph ) ) ) then
+                if ( IsCat1AlgebraMorphism( 
+                         Make2dAlgebraMorphism(C1A1,C1A2,alp,ph) ) ) then
                     return true;
                 fi;
             fi;
         od;
     od;    
-    
     ### m1_ler : komutator çaprazlanmış modüllerin tüm izomorfizmleri
-    m1_ler := Filtered(m1_ler,IsCat1AlgebraMorphism);        
+    m1_ler := Filtered( m1_ler, IsCat1AlgebraMorphism );        
     if Length(m1_ler) = 0 then 
         #Print("Hic m1 yok \n");
         sonuc := false;
@@ -2538,11 +2503,11 @@ function( C1A1, C1A1_ler )
     for C1A in C1A1_ler do
        if IsIsomorphicCat1Algebra(C1A,C1A1) then
            # Print(XM," ~ ",XM1,"\n" );    
-           Add(sonuc,Position(C1A1_ler,C1A));
+           Add( sonuc, Position(C1A1_ler,C1A) );
            # sayi := sayi + 1;
        fi; 
     od;
-    #Print(sayi,"\n");
+    # Print(sayi,"\n");
     return sonuc;
 end );
 
@@ -2564,8 +2529,8 @@ function( Cat1ler )
             continue;
         else
             isolar := IsomorphicCat1AlgebraFamily(Cat1ler[i],Cat1ler);
-            Append(liste1,isolar);        
-            Add(liste2,Cat1ler[i]);
+            Append( liste1, isolar );        
+            Add( liste2, Cat1ler[i] );
         fi; 
     od;
     return liste2;

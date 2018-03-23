@@ -56,7 +56,7 @@ gap> Print( mgig, "\n" );
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3) ] ], 
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,3,2) ] ] ]
-gap> C4 := PreCat1ByTailHeadEmbedding( f[6], f[6], g[8] );
+gap> C4 := PreCat1Obj( f[6], f[6], g[8] );
 [AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -> AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3) ] )]
 gap> IsCat1Algebra( C4 );
 true
@@ -114,7 +114,7 @@ Cat1-algebra [GF(2^2)_c6=>..] :-
 : kernel embedding maps generators of kernel to:
   [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)
     (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
-	
+
 gap> C := Cat1AlgebraSelect( 11 );
 |--------------------------------------------------------|
 | 11 is invalid number for Galois Field (gf)             |
@@ -305,10 +305,7 @@ Cat1-algebra [..=>GF(2^2)[k4]] :-
 
 
 gap> X3 := XModAlgebraByCat1Algebra( C3 ); 
-[Algebra( GF(2),
-[ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5),
-  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ] )->Algebra( GF(2),
-[ (Z(2)^0)*(), (Z(2)^0)*(1,2,3), (Z(2)^0)*(1,3,2) ] )]
+[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> Display( X3 ); 
 
 Crossed module [..->..] :-

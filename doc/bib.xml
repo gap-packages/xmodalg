@@ -2,6 +2,18 @@
 <!DOCTYPE file SYSTEM "bibxmlext.dtd">
 <file>
 
+<entry id="AutoDoc"><manual>
+  <author>
+    <name><first>Sebastian</first><last>Gutsche</last></name>
+    <name><first>Max</first><last>Horn</last></name>
+  </author>
+  <title><C>AutoDoc - Generate documentation from GAP source code (Version 2017.09.15)</C></title>
+  <year>2017</year>
+  <other type="note">
+    GAP package, <URL>https://github.com/gap-packages/AutoDoc</URL>
+  </other>
+</manual></entry>
+
 <entry id="GAPDoc"><manual>
   <author>
     <name><first>Frank</first><last>Lübeck</last></name>

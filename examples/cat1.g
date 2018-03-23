@@ -2,9 +2,7 @@
 ##
 #W  cat1.g                 XMODALG example files               Zekeriya Arvasi
 #W                                                                & Alper Odabas
-##  version 1.12, 10/11/2015 
-##
-#Y  Copyright (C) 2014-2015, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 Print("\nXModAlg test file cat1.g (version 10/11/15) :-");
@@ -14,7 +12,7 @@ A := GroupRing(GF(2),Group((1,2,3)(4,5)));
 R := GroupRing(GF(2),Group((1,2,3)));
 f := AllHomsOfAlgebras(A,R);
 g := AllHomsOfAlgebras(R,A);
-C4 := PreCat1ByTailHeadEmbedding(f[6],f[6],g[8]);
+C4 := PreCat1Obj(f[6],f[6],g[8]);
 IsCat1Algebra(C4);
 Size(C4);
 Display(C4);
