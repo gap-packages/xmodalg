@@ -3,7 +3,7 @@ env:
   global:
     - GAPROOT=gaproot
     - COVDIR=coverage
-    - GAP_PKGS_TO_BUILD="semigroups"
+    - GAP_PKGS_TO_BUILD="io profiling semigroups"
 
 addons:
   apt_packages:
