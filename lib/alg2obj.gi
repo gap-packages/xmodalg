@@ -209,10 +209,10 @@ end );
 
 #############################################################################
 ##
-#F  AlgebraHomomorphismByFunction( <D>, <E>, <fun> )
+#F  AlgebraHomomorphismByFunction2( <D>, <E>, <fun> )
 ##
-InstallMethod( AlgebraHomomorphismByFunction, "for,for,for", true, 
-    [ IsObject, IsObject, IsFunction ], 0,
+InstallMethod( AlgebraHomomorphismByFunction2, "for,for,for", true, 
+    [ IsAlgebra, IsAlgebra, IsFunction ], 0,
 function ( A,B,C )
     local act,arg,narg,usage,error,fun;        # mapping <map>, result
     error := "\n Error: Bir Cebir Girilmeli; \n";
@@ -242,8 +242,8 @@ function ( A )
 
     local mu, B; # mapping <map>, result
     B := MultipleAlgebra(A);
-    mu := AlgebraHomomorphismByFunction( A, B, 
-              r -> AlgebraHomomorphismByFunction(A,A,x->r*x) );
+    mu := AlgebraHomomorphismByFunction2( A, B, 
+              r -> AlgebraHomomorphismByFunction2(A,A,x->r*x) );
     SetSource(mu,A);
     SetRange(mu,B);
     # return the mapping
@@ -259,7 +259,7 @@ function ( M,R )
 
     local   mu,B;        # mapping <map>, result
      
-    mu := AlgebraHomomorphismByFunction(M,R,r->Zero(R));  
+    mu := AlgebraHomomorphismByFunction2(M,R,r->Zero(R));  
     SetSource(mu,M);
     SetRange(mu,R);
     # return the mapping
@@ -843,7 +843,7 @@ function( A,I )
     # AI := Cartesian(A,I);
     # act := AlgebraAction(A,AI,I);
     act := AlgebraAction5(A,I);
-    bdy := AlgebraHomomorphismByFunction(I,A,i->i);
+    bdy := AlgebraHomomorphismByFunction2(I,A,i->i);
     IsAlgebraAction(act);
     IsAlgebraHomomorphism(bdy);
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );

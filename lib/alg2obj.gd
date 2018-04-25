@@ -16,7 +16,7 @@ DeclareGlobalFunction( "MultipleAlgebra",
 
 DeclareProperty( "IsMultipleAlgebra", IsList );
 
-DeclareOperation( "AlgebraHomomorphismByFunction",
+DeclareOperation( "AlgebraHomomorphismByFunction2",
     [ IsObject, IsObject, IsFunction ] );
     
 DeclareOperation( "MultipleHomomorphism",

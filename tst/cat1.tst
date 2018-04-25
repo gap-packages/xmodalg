@@ -22,7 +22,7 @@ gap> SetName( S, "<e5>" );
 gap> RS := Cartesian( R, S );; 
 gap> SetName( RS, "GF(2^2)[k4] x <e5>" ); 
 gap> act := AlgebraAction( R, RS, S );;
-gap> bdy := AlgebraHomomorphismByFunction( S, R, r->r );;
+gap> bdy := AlgebraHomomorphismByFunction2( S, R, r->r );;
 gap> IsAlgebraAction( act );; 
 gap> IsAlgebraHomomorphism( bdy );; 
 gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
