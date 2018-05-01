@@ -241,10 +241,9 @@ true
 
 <Description>
 An <M>R</M>-algebra homomorphism 
-<M>\mathcal{X} := (\partial : S \rightarrow R)</M> which satisfy 
+<M>\mathcal{X} := (\partial : S \rightarrow R)</M> which satisfies 
 the condition <M>{\bf XModAlg\ 1}</M> is called a <E>precrossed module</E>.
 The details of these implementations can be found in <Cite Key="aodabas1"/>.
-
 </Description>
 </ManSection>
 
