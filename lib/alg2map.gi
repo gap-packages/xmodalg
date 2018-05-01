@@ -31,7 +31,7 @@ function( src, rng, shom, rhom )
       NewType( fam, filter ),
       Source, src,
       Range, rng,
-	  IsEmpty, true,
+      IsEmpty, true,
       SourceHom, shom,
       RangeHom, rhom );
     return mor;
@@ -46,8 +46,10 @@ InstallMethod( IsPreXModAlgebraMorphism,
     true, [ Is2dAlgebraMorphism ], 0,
 function( mor )
 
-    local  PM, Pact, Pbdy, Prng, Psrc, QM, Qact, Qbdy, Qrng, Qsrc, basPrng, vecPrng, dimPrng, basPsrc, maps, i, j, im, im2, basQrng, vecQrng, dimQrng, basQsrc, maps2,
-           morsrc, morrng, x2, x1, y2, z2, y1, z1, gensrc, genrng, cx1, gx1, gcx1, actx1, actgx1;
+    local PM, Pact, Pbdy, Prng, Psrc, QM, Qact, Qbdy, Qrng, Qsrc, basPrng, 
+          vecPrng, dimPrng, basPsrc, maps, i, j, im, im2, basQrng, vecQrng, 
+          dimQrng, basQsrc, maps2, morsrc, morrng, x2, x1, y2, z2, y1, z1, 
+          gensrc, genrng, cx1, gx1, gcx1, actx1, actgx1;
 
     PM := Source( mor );
     QM := Range( mor );
