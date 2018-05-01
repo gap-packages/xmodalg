@@ -377,12 +377,13 @@ InstallGlobalFunction( Cat1AlgebraMorphism, function( arg )
     return fail;
 end );
 
-#############################################################################
+##############################################################################
 ##
-#M  IsPreCat1AlgebraMorphism           check that the diagram of group homs commutes
+#M  IsPreCat1AlgebraMorphism . . check that the diagram of group homs commutes
 ##
 InstallMethod( IsPreCat1AlgebraMorphism,
-    "generic method for mappings of 2d-objects", true, [ Is2dAlgebraMorphism ], 0,
+    "generic method for mappings of 2d-objects", true, 
+    [ Is2dAlgebraMorphism ], 0,
 function( mor )
 
     local  PCG, Prng, Psrc, Pt, Ph, Pe, QCG, Qrng, Qsrc, Qt, Qh, Qe,
@@ -395,13 +396,13 @@ function( mor )
     fi;
     Psrc := Source( PCG );
     Prng := Range( PCG );
-    Pt := Tail( PCG );
-    Ph := Head( PCG );
+    Pt := TailMap( PCG );
+    Ph := HeadMap( PCG );
     Pe := RangeEmbedding( PCG );
     Qsrc := Source( QCG );
     Qrng := Range( QCG );
-    Qt := Tail( QCG );
-    Qh := Head( QCG );
+    Qt := TailMap( QCG );
+    Qh := HeadMap( QCG );
     Qe := RangeEmbedding( QCG );
     morsrc := SourceHom( mor );
     morrng := RangeHom( mor );

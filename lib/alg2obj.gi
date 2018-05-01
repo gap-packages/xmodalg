@@ -1020,8 +1020,8 @@ function( C1A )
         return false;
     fi;
     Crng := Range( C1A );
-    h := Head( C1A );
-    t := Tail( C1A );
+    h := HeadMap( C1A );
+    t := TailMap( C1A );
     e := RangeEmbedding( C1A );
     # checking the first condition of cat-1 group
     if Equivalence(t) then    
@@ -1067,8 +1067,8 @@ function( C0, S0 )
     ok := true;
     gensrc := GeneratorsOfAlgebra( Ssrc );
     genrng := GeneratorsOfAlgebra( Srng );
-    tc := Tail(C0);  hc := Head(C0);  ec := RangeEmbedding(C0);
-    ts := Tail(S0);  hs := Head(S0);  es := RangeEmbedding(S0);
+    tc := TailMap(C0);  hc := HeadMap(C0);  ec := RangeEmbedding(C0);
+    ts := TailMap(S0);  hs := HeadMap(S0);  es := RangeEmbedding(S0);
     for s in gensrc do
         if ( Image( tc, s ) <> Image( ts, s ) ) then
             ok := false;
@@ -1225,8 +1225,8 @@ function( C, R, S )
 
     Csrc := Source( C );
     Crng := Range( C );
-    Ct := Tail( C );
-    Ch := Head( C );
+    Ct := TailMap( C );
+    Ch := HeadMap( C );
     Ce := RangeEmbedding( C );
     ok := true;
     if not ( ( S = Image( Ct, R ) ) and
@@ -1267,7 +1267,8 @@ end );
 InstallMethod( \=, "generic method for pre-cat1-algebras",
     IsIdenticalObj, [ IsPreCat1Algebra, IsPreCat1Algebra ], 0,
     function( C1, C2 )
-    return ( ( Tail( C1 ) = Tail( C2 ) ) and ( Head( C1 ) = Head( C2 ) )
+    return ( ( TailMap( C1 ) = TailMap( C2 ) ) 
+             and ( HeadMap( C1 ) = HeadMap( C2 ) )
              and ( RangeEmbedding( C1 ) = RangeEmbedding( C2 ) ) );
 end );
 
@@ -1287,14 +1288,14 @@ InstallMethod( PreCat1AlgebraObj, "for tail, head, embedding", true,
     ObjectifyWithAttributes( C1A, NewType( fam, filter ),
         Source, Source( t ),
         Range, Range( t ),
-        Tail, t, 
-        Head, h, 
+        TailMap, t, 
+        HeadMap, h, 
         RangeEmbedding, e,
         IsPreCat1Domain, true );
     if not ( ( Source(h) = Source(t) ) and ( Range(h) = Range(t) ) ) then
         Error( "tail & head must have same source and range" );
     fi;
-    SetHead( C1A, h );
+    SetHeadMap( C1A, h );
     if not ( ( Source(e) = Range(t) ) and ( Range(e) = Source(t) ) ) then
         Error( "tail, embedding must have opposite source and range" );
     fi;
@@ -1322,8 +1323,8 @@ function( C1A )
     if HasName( C1A ) then
         Print( Name( C1A ), "\n" );
     else          
-        if IsXModAlgebraConst( Tail(C1A) ) then
-            PM := XModAlgebraConst( Tail(C1A) );        
+        if IsXModAlgebraConst( TailMap(C1A) ) then
+            PM := XModAlgebraConst( TailMap(C1A) );        
             Pact := XModAlgebraAction( PM );
             type := AlgebraActionType( Pact );
             #  Type 1
@@ -1387,8 +1388,8 @@ function( C1A )
     Crng := Range( C1A );
     Cker := Kernel( C1A );
     genrng := GeneratorsOfAlgebra( Crng );
-    t := Tail( C1A );
-    h := Head( C1A );
+    t := TailMap( C1A );
+    h := HeadMap( C1A );
     e := RangeEmbedding( C1A );    
     if HasXModAlgebraOfCat1Algebra(C1A) then
         gensrc := Csrc;
@@ -1519,8 +1520,8 @@ function( C1A )
     fi;
     Csrc := Source( C1A );
     Crng := Range( C1A );
-    h := Head( C1A );
-    t := Tail( C1A );
+    h := HeadMap( C1A );
+    t := TailMap( C1A );
     e := RangeEmbedding( C1A );
     if Equivalence(t) then    
         return true;
@@ -1564,8 +1565,8 @@ end );
 InstallMethod( IsIdentityCat1Algebra, "test a cat1-algebra", true, 
     [ IsCat1Algebra ], 0,
 function( C1A )
-    return ( ( Tail( C1A ) = IdentityMapping( Source( C1A ) ) ) and
-             ( Tail( C1A ) = IdentityMapping( Source( C1A ) ) ) );
+    return ( ( TailMap( C1A ) = IdentityMapping( Source( C1A ) ) ) and
+             ( TailMap( C1A ) = IdentityMapping( Source( C1A ) ) ) );
 end );
 
 #############################################################################
@@ -1871,7 +1872,7 @@ end );
 ##
 InstallOtherMethod( Source, "method for a pre-cat1-algebra", true,
     [ IsPreCat1Algebra ], 0,
-    C1A -> Source( Tail( C1A ) ) );
+    C1A -> Source( TailMap( C1A ) ) );
 
 ##############################################################################
 ##
@@ -1879,7 +1880,7 @@ InstallOtherMethod( Source, "method for a pre-cat1-algebra", true,
 ##
 InstallOtherMethod( Range, "method for a pre-cat1-algebra", true,
     [ IsPreCat1Algebra ], 0,
-    C1A -> Range( Tail( C1A ) ) );
+    C1A -> Range( TailMap( C1A ) ) );
 
 ##############################################################################
 ##
@@ -1887,7 +1888,7 @@ InstallOtherMethod( Range, "method for a pre-cat1-algebra", true,
 ##
 InstallOtherMethod( Kernel, "method for a pre-cat1-algebra", true, 
     [ IsPreCat1Algebra ], 0,
-    C1A -> Kernel( Tail( C1A ) ) );
+    C1A -> Kernel( TailMap( C1A ) ) );
 
 #############################################################################
 ##
@@ -1895,7 +1896,7 @@ InstallOtherMethod( Kernel, "method for a pre-cat1-algebra", true,
 ##
 InstallOtherMethod( Boundary, "method for a pre-cat1-algebra", true, 
     [ IsPreCat1Algebra ], 0,
-    C1A -> RestrictionMappingAlgebra( Head( C1A ), Kernel( C1A ) ) );
+    C1A -> RestrictionMappingAlgebra( HeadMap( C1A ), Kernel( C1A ) ) );
 
 #############################################################################
 ##
@@ -2042,8 +2043,8 @@ function( C1A )
     if not ( IsPreCat1AlgebraObj( C1A ) and IsPreCat1Algebra( C1A ) ) then
         return false;
     fi;    
-    h := Head( C1A );
-    t := Tail( C1A );
+    h := HeadMap( C1A );
+    t := TailMap( C1A );
     list:=[];;
     kt := Kernel(t);
     kh := Kernel(h);
@@ -2076,8 +2077,8 @@ function( C1A )
     local  usage, A, B, C, bdy, gA, im, sbdy, PM,act,R,s,t;
 
     usage := "Usage : Boundary of Cat-1 Algebra not surjective";
-    if IsXModAlgebraConst(Tail(C1A)) then
-        PM := XModAlgebraConst(Tail(C1A));
+    if IsXModAlgebraConst(TailMap(C1A)) then
+        PM := XModAlgebraConst(TailMap(C1A));
         return PM;   
     fi;   
     bdy := Boundary( C1A );
@@ -2088,8 +2089,8 @@ function( C1A )
             return XModAlgebra(B,A);
         fi;
     fi;
-    s := Head(C1A);
-    t := Tail(C1A);
+    s := HeadMap(C1A);
+    t := TailMap(C1A);
     A := Kernel(s);
     R := Image(s);
     gA := GeneratorsOfAlgebra(A);
