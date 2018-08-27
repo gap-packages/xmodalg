@@ -86,7 +86,8 @@ is a crossed module with the defined action.
 
 <Item>
 Let <M>S</M> be a <B>k</B>-algebra such that 
-<M>Ann(S)=0</M> or <M>S^{2} = S</M>. Then <M>\partial : S\rightarrow M(S)</M> is a crossed module, 
+<M>Ann(S)=0</M> or <M>S^{2} = S</M>. Then <M>\partial : S\rightarrow M(S)</M> 
+is a crossed module, 
 where <M>M(S)</M> is the algebra of multipliers of <M>S</M> 
 and <M>\partial </M> is the canonical homomorphism, 
 <Cite Key="arvasi4"/>. 
@@ -144,19 +145,19 @@ We also show usage of the attributes listed above.
 
 <Example>
 <![CDATA[
-gap> A := GroupRing(GF(5),DihedralGroup(4));
+gap> A := GroupRing( GF(5), DihedralGroup( 4 ) );
 <algebra-with-one over GF(5), with 2 generators>
-gap> Size(A);
+gap> Size( A );
 625
-gap> SetName(A,"GF5[D4]");
-gap> I := AugmentationIdeal(A);
+gap> SetName( A, "GF5[D4]" );
+gap> I := AugmentationIdeal( A );
 <two-sided ideal in GF5[D4], (2 generators)>
-gap> Size(I);
+gap> Size( I );
 125
-gap> SetName(I,"Aug");
-gap> CM := XModAlgebraByIdeal(A,I);
+gap> SetName( I, "Aug" );
+gap> CM := XModAlgebraByIdeal( A, I );
 [Aug->GF5[D4]]
-gap> Display(CM);
+gap> Display( CM );
 
 Crossed module [Aug->GF5[D4]] :- 
 : Source algebra Aug has generators:
@@ -168,11 +169,11 @@ Crossed module [Aug->GF5[D4]] :-
   [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...
   +(Z(5)^0)*f2 ]
 
-gap> Size(CM);
+gap> Size( CM );
 [ 125, 625 ]
-gap> f := Boundary(CM);
+gap> f := Boundary( CM );
 MappingByFunction( Aug, GF5[D4], function( i ) ... end )
-gap> Print( RepresentationsOfObject(CM), "\n" ); 
+gap> Print( RepresentationsOfObject( CM ), "\n" ); 
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
 gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements", 
 >  "IsDuplicateFree", "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", 
@@ -181,7 +182,7 @@ gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements",
 gap> known := KnownPropertiesOfObject(CM);;
 gap> ForAll( props, p -> (p in known) );
 true 
-gap> Print( KnownAttributesOfObject(CM), "\n" ); 
+gap> Print( KnownAttributesOfObject( CM ), "\n" ); 
 [ "Name", "Size", "Range", "Source", "Boundary", "XModAlgebraAction" ]
 ]]>
 </Example>
@@ -208,11 +209,11 @@ of a given crossed module.
 
 <Example>
 <![CDATA[
-gap> e4 := Elements(I)[4];
+gap> e4 := Elements( I )[4];
 (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
 gap> J := Ideal( I, [e4] );
 <two-sided ideal in Aug, (1 generators)>
-gap> Size(J);
+gap> Size( J );
 5
 gap> SetName( J, "<e4>" ); 
 gap> PM := XModAlgebraByIdeal( A, J );
@@ -249,16 +250,16 @@ The details of these implementations can be found in <Cite Key="aodabas1"/>.
 
 <Example>
 <![CDATA[
-gap> G := SmallGroup(4,2);
+gap> G := SmallGroup( 4, 2 );
 <pc group of size 4 with 2 generators>
-gap> F := GaloisField(4);
+gap> F := GaloisField( 4 );
 GF(2^2)
 gap> R := GroupRing( F, G );
 <algebra-with-one over GF(2^2), with 2 generators>
-gap> Size(R);
+gap> Size( R );
 256
 gap> SetName( R, "GF(2^2)[k4]" ); 
-gap> e5 := Elements(R)[5]; 
+gap> e5 := Elements( R )[5]; 
 (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
 gap> S := Subalgebra( R, [e5] ); 
 <algebra over GF(2^2), with 1 generators>
@@ -328,8 +329,8 @@ The conditions can be thought as the commutativity of the following diagrams:
 
 <P/> 
 In &GAP; we define the morphisms between algebraic structures such as 
-cat<M>^{1}</M>-algebras and crossed modules and they are investigated by the
-function <C>Make2dAlgebraMorphism</C>.
+cat<M>^{1}</M>-algebras and crossed modules and they are investigated 
+by the function <C>Make2dAlgebraMorphism</C>.
 
 <ManSection>
    <Func Name="XModAlgebraMorphism"
@@ -364,31 +365,31 @@ which may have the attributes listed.
 
 <Example>
 <![CDATA[
-gap> A:=GroupRing(GF(2),CyclicGroup(4));
+gap> A := GroupRing( GF(2), CyclicGroup( 4 ) );
 <algebra-with-one over GF(2), with 2 generators>
-gap> B:=AugmentationIdeal(A);
+gap> B := AugmentationIdeal( A );
 <two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, 
 (dimension 3)>
-gap> X1:=XModAlgebra(A,B);
+gap> X1 := XModAlgebra( A, B );
 [Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
   (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
  ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 ] )]
-gap> C:=GroupRing(GF(2),SmallGroup(4,2));
+gap> C := GroupRing( GF(2), SmallGroup( 4, 2 ) );
 <algebra-with-one over GF(2), with 2 generators>
-gap> D:=AugmentationIdeal(C);
+gap> D := AugmentationIdeal( C );
 <two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, 
 (dimension 3)>
-gap> X2:=XModAlgebra(C,D);
+gap> X2 := XModAlgebra( C, D );
 [Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
   (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
  ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 ] )]
 gap> B = D;
 false
-gap> all_f := AllHomsOfAlgebras(A,C);;
-gap> all_g := AllHomsOfAlgebras(B,D);;
-gap> mor := XModAlgebraMorphism(X1,X2,all_g[1],all_f[2]);
+gap> all_f := AllHomsOfAlgebras( A, C );;
+gap> all_g := AllHomsOfAlgebras( B, D );;
+gap> mor := XModAlgebraMorphism( X1, X2, all_g[1], all_f[2] );
 [[..] => [..]]
-gap> Display(mor);
+gap> Display( mor );
 
 Morphism of crossed modules :- 
 : Source = [Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
@@ -411,9 +412,9 @@ Morphism of crossed modules :-
   [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*<identity> of ..., 
   (Z(2)^0)*<identity> of ... ]
 
-gap> IsTotal(mor);
+gap> IsTotal( mor );
 true
-gap> IsSingleValued(mor);
+gap> IsSingleValued( mor );
 true
 
 ]]>
@@ -440,16 +441,16 @@ An example is given below.
 
 <Example>
 <![CDATA[
-gap> X3 := Kernel(mor);
+gap> X3 := Kernel( mor );
 [Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
   (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] )->Algebra( GF(2), 
 [ (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f1+(Z(2)^0)*f1*f2, 
   (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1 ] )]
-gap> IsXModAlgebra(X3);
+gap> IsXModAlgebra( X3 );
 true
-gap> Size(X3);
+gap> Size( X3 );
 [ 8, 8 ]
-gap> IsSubXModAlgebra(X1,X3);
+gap> IsSubXModAlgebra( X1, X3 );
 true
 ]]>
 </Example>
@@ -519,9 +520,6 @@ false
 ]]>
 </Example>
 
-
-
 </Section>
-
 
 </Chapter>
