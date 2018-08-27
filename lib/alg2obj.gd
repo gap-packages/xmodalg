@@ -39,7 +39,7 @@ DeclareRepresentation( "IsPreXModAlgebraObj",
     Is2dAlgebra and IsAttributeStoringRep, [ "boundary", "action" ] );
 DeclareRepresentation( "IsPreCat1AlgebraObj", 
     Is2dAlgebra and IsAttributeStoringRep, 
-    [ "tail", "head", "rangeEmbedding" ] );
+    [ "tailMap", "headMap", "rangeEmbedding" ] );
 
 DeclareProperty( "IsPreCat1Algebra", Is2dAlgebra );
 
@@ -91,8 +91,8 @@ DeclareOperation( "IsSubCat1Algebra", [ Is2dAlgebraObject, Is2dAlgebraObject ] )
 DeclareOperation( "PreCat1AlgebraObj",
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
 DeclareAttribute( "Equivalence", IsPreCat1Algebra );
-DeclareAttribute( "Head", IsPreCat1Algebra );
-DeclareAttribute( "Tail", IsPreCat1Algebra );
+DeclareAttribute( "HeadMap", IsPreCat1Algebra );
+DeclareAttribute( "TailMap", IsPreCat1Algebra );
 DeclareAttribute( "RangeEmbedding", IsPreCat1Algebra );
 DeclareAttribute( "KernelEmbedding", IsPreCat1Algebra );
 

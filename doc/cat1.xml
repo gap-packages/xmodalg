@@ -62,8 +62,8 @@ are satisfied, then the algebraic system
 is called a <E>cat<M>^{1}</M>-algebra</E>. 
 A system which satisfies the condition
 <M>\mathbf{Cat1Alg1}</M> is called a <E>precat<M>^{1}</M>-algebra</E>. 
-The homomorphisms <M>t,h</M> and <M>e</M> are called the 
-<E>tail</E>, <E>head</E> and <E>embedding</E> homomorphisms, respectively.
+The homomorphisms <M>t,h</M> and <M>e</M> are called the <E>tail map</E>, 
+<E>head map</E> and <E>range embedding</E> homomorphisms, respectively.
 
 <ManSection>
    <Func Name="Cat1Algebra"
@@ -98,11 +98,11 @@ The operation <C>PreCat1AlgebraObj</C> is used for preserving the implementation
          Arg="C" />
    <Attr Name="Range" Label="for cat1-algebras" 
          Arg="C" />
-   <Attr Name="Tail"
+   <Attr Name="TailMap"
          Arg="C" />
-   <Attr Name="Head"
+   <Attr Name="HeadMap"
          Arg="C" />
-   <Attr Name="Embedding"
+   <Attr Name="RangeEmbedding"
          Arg="C" />
    <Meth Name="Kernel" Label="for cat1-algebras"
          Arg="C" />
