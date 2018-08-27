@@ -1827,7 +1827,6 @@ function( t, h, e )
     imbdy := List( kergen, x -> Image( h, x) );
     bdy := AlgebraHomomorphismByImagesNC( kert, R, kergen, imbdy );
     SetEquivalence( tres, false );
-    SetIsXModAlgebraConst( tres, false );
     PC := PreCat1AlgebraObj( tres, hres, eres );
     SetBoundary( PC, bdy );
     SetKernelEmbedding( PC, f );
@@ -1971,19 +1970,14 @@ end );
 ##
 #M  Kernel( t,h ) . . . . . . . . . . . . . . . . . . . for a pre-cat1-algebra
 ##
-InstallOtherMethod( Kernel, "method for a pre-cat1-algebra", true, 
-    [ IsEquivalenceHead and  IsEquivalenceTail and IsAlgebraHomomorphism ], 0,
-function( f )
-    
-    local A;
-    if  IsEquivalenceHead(f) then
-        return EquivalenceHead(f);
-    fi;
-    if  IsEquivalenceTail(f) then
-        return EquivalenceTail(f);
-    fi;
-end );
-   
+InstallOtherMethod( Kernel, "method for a pre-cat1-algebra",
+    [ IsEquivalenceHead and IsAlgebraHomomorphism ],
+    EquivalenceHead );
+
+InstallOtherMethod( Kernel, "method for a pre-cat1-algebra",
+    [ IsEquivalenceTail and IsAlgebraHomomorphism ],
+    EquivalenceTail );
+
 #############################################################################
 ##
 #M  EquivalenceTail. . . . convert a pre-crossed module to a pre-cat1-algebra
@@ -2009,7 +2003,7 @@ end );
 ##
 InstallMethod( EquivalenceHead,
     "convert a pre-crossed module to a pre-cat1-algebra", true,
-    [  IsEquivalenceHead ], 0,
+    [ IsEquivalenceHead ], 0,
 function( f )
 
     local  A, R, RA, eA, uzA, Xbdy, list, i, a, x, Ker ;
