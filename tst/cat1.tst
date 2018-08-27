@@ -57,14 +57,15 @@ gap> Print( mgig, "\n" );
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,3,2) ] ] ]
 gap> C4 := PreCat1Obj( f[6], f[6], g[8] );
-[AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -> AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3) ] )]
+[AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -> AlgebraWithOne( GF(2), 
+[ (Z(2)^0)*(1,2,3) ] )]
 gap> IsCat1Algebra( C4 );
 true
 gap> Size( C4 );
 [ 64, 8 ]
 gap> Display( C4 );
 
-Cat1-algebra [..=>..] :-
+Cat1-algebra [..=>..] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
 :  range algebra has generators:
@@ -76,22 +77,24 @@ Cat1-algebra [..=>..] :-
 : range embedding maps range generators to:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
 : kernel has generators:
-  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
 : boundary homomorphism maps generators of kernel to:
   [ <zero> of ..., <zero> of ..., <zero> of ... ]
 : kernel embedding maps generators of kernel to:
-  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
 
 ## Chapter 3,  Section 3.1.3
 gap> C2 := Cat1AlgebraSelect( 4, 6, 2, 2 );
-[GF(2^2)_c6 -> Algebra( GF(2^2),
+[GF(2^2)_c6 -> Algebra( GF(2^2), 
 [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+(
     Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ] )]
 gap> Size( C2 ); 
 [ 4096, 1024 ]
 gap> Display( C2 ); 
 
-Cat1-algebra [GF(2^2)_c6=>..] :-
+Cat1-algebra [GF(2^2)_c6=>..] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ]
 :  range algebra has generators:
@@ -123,7 +126,6 @@ gap> C := Cat1AlgebraSelect( 11 );
  [ 2, 3, 4, 5, 7 ]
 Usage: Cat1Algebra( gf, gpsize, gpnum, num );
 fail
-
 gap> C := Cat1AlgebraSelect( 4, 12 );
 |--------------------------------------------------------|
 | 12 is invalid number for size of group (gpsize)        |
@@ -132,7 +134,6 @@ gap> C := Cat1AlgebraSelect( 4, 12 );
  [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 Usage: Cat1Algebra( gf, gpsize, gpnum, num );
 fail
-
 gap> C := Cat1AlgebraSelect( 2, 6, 3 );
 |--------------------------------------------------------|
 | 3 is invalid number for group of order 6               |
@@ -141,7 +142,6 @@ gap> C := Cat1AlgebraSelect( 2, 6, 3 );
  [ 1, 2 ]
 Usage: Cat1Algebra( gf, gpsize, gpnum, num );
 fail
-
 gap> C := Cat1AlgebraSelect( 2, 6, 2 );
 There are 4 cat1-structures for the algebra GF(2)_c6.
  Range Alg      Tail                    Head
@@ -154,10 +154,8 @@ There are 4 cat1-structures for the algebra GF(2)_c6.
 Usage: Cat1Algebra( gf, gpsize, gpnum, num );
 Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
 4
-
-
-## Chapter 3,  Section 3.1.4
-
+gap> ## Chapter 3,  Section 3.1.4
+gap> ## 
 gap> C3 := Cat1AlgebraSelect( 2, 6, 2, 4 );; 
 gap> A3 := Source( C3 );
 GF(2)_c6
@@ -178,7 +176,7 @@ gap> CC3 := SubCat1Algebra( C3, AA3, BB3 );
  ] ) -> Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*() ] )]
 gap> Display( CC3 );
 
-Cat1-algebra [..=>..] :-
+Cat1-algebra [..=>..] :- 
 : source algebra has generators:
   [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
 :  range algebra has generators:
@@ -283,34 +281,34 @@ gap> IsInjective( m );
 true
 gap> IsBijective( m );
 false
-
-
-## Chapter 3,  Section 3.3.1
-
+gap> ## Chapter 3,  Section 3.3.1
 gap> CXM := Cat1AlgebraByXModAlgebra( XM );
 [GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]]
 gap> Display( CXM );
 
-Cat1-algebra [..=>GF(2^2)[k4]] :-
+Cat1-algebra [..=>GF(2^2)[k4]] :- 
 :  range algebra has generators:
   [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
 : tail homomorphism maps source generators to:
 : range embedding maps range generators to:
-  [ [ (Z(2)^0)*<identity> of ..., <zero> of ... ], [ (Z(2)^0)*f1, <zero> of ... ], [ (Z(2)^0)*f2, <zero> of ... ] ]
+  [ [ (Z(2)^0)*<identity> of ..., <zero> of ... ], 
+  [ (Z(2)^0)*f1, <zero> of ... ], [ (Z(2)^0)*f2, <zero> of ... ] ]
 : kernel has generators:
-  [ [ <zero> of ..., <zero> of ... ],
-  [ <zero> of ..., (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ],
-  [ <zero> of ..., (Z(2^2))*<identity> of ...+(Z(2^2))*f1+(Z(2^2))*f2+(Z(2^2))*f1*f2 ],
-  [ <zero> of ..., (Z(2^2)^2)*<identity> of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+(Z(2^2)^2)*f1*f2 ] ]
-
+  [ [ <zero> of ..., <zero> of ... ], 
+  [ <zero> of ..., (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
+        0)*f1*f2 ], 
+  [ <zero> of ..., (Z(2^2))*<identity> of ...+(Z(2^2))*f1+(Z(2^2))*f2+(
+        Z(2^2))*f1*f2 ], 
+  [ <zero> of ..., (Z(2^2)^2)*<identity> of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+(
+        Z(2^2)^2)*f1*f2 ] ]
 
 gap> X3 := XModAlgebraByCat1Algebra( C3 ); 
 [ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> Display( X3 ); 
 
-Crossed module [..->..] :-
+Crossed module [..->..] :- 
 : Source algebra has generators:
-  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5),
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
   (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
 : Range algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3), (Z(2)^0)*(1,3,2) ]

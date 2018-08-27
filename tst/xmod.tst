@@ -18,16 +18,18 @@ gap> Size( I );
 125
 gap> SetName( I, "Aug" );
 gap> CM := XModAlgebraByIdeal( A, I );
-[Aug->GF5[D4]]
+[ Aug -> GF5[D4] ]
 gap> Display( CM );
 
 Crossed module [Aug->GF5[D4]] :- 
 : Source algebra Aug has generators:
-  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^0)*f2 ]
+  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^
+    0)*f2 ]
 : Range algebra GF5[D4] has generators:
   [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
 : Boundary homomorphism maps source generators to:
-  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^0)*f2 ]
+  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^
+    0)*f2 ]
 
 gap> Size( CM );
 [ 125, 625 ]
@@ -41,12 +43,10 @@ gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements",
 >  "IsPreXModAlgebra", "IsXModAlgebra" ];;
 gap> known := KnownPropertiesOfObject( CM );;
 gap> ForAll( props, p -> (p in known) );
-true 
+true
 gap> Print( KnownAttributesOfObject(CM), "\n" ); 
 [ "Name", "Size", "Range", "Source", "Boundary", "XModAlgebraAction" ]
-
-
-## Chapter 2,  Section 2.1.3
+gap> ## Chapter 2,  Section 2.1.3
 gap> e4 := Elements( I )[4];
 (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
 gap> J := Ideal( I, [e4] );
@@ -55,7 +55,7 @@ gap> Size( J );
 5
 gap> SetName( J, "<e4>" ); 
 gap> PM := XModAlgebraByIdeal( A, J );
-[<e4>->GF5[D4]]
+[ <e4> -> GF5[D4] ]
 gap> Display( PM );        
 
 Crossed module [<e4>->GF5[D4]] :- 
@@ -68,9 +68,7 @@ Crossed module [<e4>->GF5[D4]] :-
 
 gap> IsSubXModAlgebra( CM, PM );
 true
-
-
-## Chapter 2,  Section 2.1.4
+gap> ## Chapter 2,  Section 2.1.4
 gap> G := SmallGroup( 4, 2 );
 <pc group of size 4 with 2 generators>
 gap> F := GaloisField( 4 );
@@ -100,7 +98,7 @@ gap> IsXModAlgebra( XM );
 true
 gap> Display( XM );
 
-Crossed module [<e5>->GF(2^2)[k4]] :-
+Crossed module [<e5>->GF(2^2)[k4]] :- 
 : Source algebra has generators:
   [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 : Range algebra GF(2^2)[k4] has generators:
@@ -108,19 +106,20 @@ Crossed module [<e5>->GF(2^2)[k4]] :-
 : Boundary homomorphism maps source generators to:
   [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 
-## Chapter 2,  Section 2.2.1
-  
+gap> ## Chapter 2,  Section 2.2.1
 gap> A := GroupRing( GF(2), CyclicGroup(4) );
 <algebra-with-one over GF(2), with 2 generators>
 gap> B := AugmentationIdeal( A );
-<two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, (dimension 3)>
+<two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, 
+  (dimension 3)>
 gap> X1 := XModAlgebra( A, B );
 [ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>, 
   (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
 gap> C := GroupRing( GF(2), SmallGroup( 4, 2 ) );
 <algebra-with-one over GF(2), with 2 generators>
 gap> D := AugmentationIdeal( C );
-<two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, (dimension 3)>
+<two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, 
+  (dimension 3)>
 gap> X2 := XModAlgebra( C, D );
 [ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>, 
   (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
@@ -147,8 +146,7 @@ gap> IsTotal( mor );
 true
 gap> IsSingleValued( mor );
 true
-
-## Chapter 2,  Section 2.2.2
+gap> ## Chapter 2,  Section 2.2.2
 gap> X3 := Kernel(mor);
 [ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> IsXModAlgebra( X3 );
@@ -157,9 +155,7 @@ gap> Size( X3 );
 [ 8, 8 ]
 gap> IsSubXModAlgebra( X1, X3 );
 true
-
-## Chapter 2,  Section 2.2.4
-
+gap> ## Chapter 2,  Section 2.2.4
 gap> theta := SourceHom( mor );;
 gap> ## Print( MappingGeneratorsImages( theta ), "\n" ); 
 gap> phi := RangeHom( mor );
@@ -168,7 +164,6 @@ gap> IsInjective( mor );
 false
 gap> IsSurjective( mor );
 false
-
 gap> SetInfoLevel( InfoXModAlg, saved_infolevel_xmodalg );; 
 gap> STOP_TEST( "xmod.tst", 10000 );
 
