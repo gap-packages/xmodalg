@@ -94,9 +94,9 @@ The operation <C>PreCat1AlgebraObj</C> is used for preserving the implementation
 
 
 <ManSection>
-   <Attr Name="Source"
+   <Attr Name="Source" Label="for cat1-algebras"
          Arg="C" />
-   <Attr Name="Range"
+   <Attr Name="Range" Label="for cat1-algebras" 
          Arg="C" />
    <Attr Name="Tail"
          Arg="C" />
@@ -104,9 +104,9 @@ The operation <C>PreCat1AlgebraObj</C> is used for preserving the implementation
          Arg="C" />
    <Attr Name="Embedding"
          Arg="C" />
-   <Attr Name="Kernel"
+   <Meth Name="Kernel" Label="for cat1-algebras"
          Arg="C" />
-   <Attr Name="Boundary"
+   <Attr Name="Boundary" Label="for cat1-algebras"
          Arg="C" />
 <Description> 
 These are the seven main attributes of a pre-cat<M>^{1}</M>-algebra. 
@@ -173,32 +173,33 @@ Cat1-algebra [..=>..] :-
    <Oper Name="Cat1AlgebraSelect"
          Arg="gf gpsize gpnum num" />
 <Description> 
-
-The Cat1Algebra function may also be used to select a cat<M>^{1}</M>-algebra from a data file. All cat<M>^{1}</M>-structures on
+The <Ref Oper="Cat1Algebra"/> function may also be used to select a 
+cat<M>^{1}</M>-algebra from a data file. All cat<M>^{1}</M>-structures on
 commutative algebras are stored in a list in file cat1algdata.g. The data is read into the list CAT1ALG_LIST only when this function is called.
-
-The function Cat1AlgebraSelect may be used in four ways:
-
+<P/>
+The function <C>Cat1AlgebraSelect</C> may be used in four ways:
 <List>
 <Item> 
-Cat1AlgebraSelect( gf ) returns the list of possible size of Galois field or the list of possible size of 
-groups with given Galois field. 
+<C>Cat1AlgebraSelect( gf )</C> returns the list of possible size of 
+Galois field or the list of possible size of groups with given Galois field. 
 </Item>
 <Item> 
-Cat1AlgebraSelect( gf, gpsize ) returns the list of possible size of group with given Galois fields or the list of possible 
+<C>Cat1AlgebraSelect( gf, gpsize )</C> returns the list of possible sizes of a group with given Galois field, or the list of possible 
 number of groups with given Galois field and size of group.
 </Item>
 <Item> 
-Cat1AlgebraSelect( gf, gpsize, gpnum ) returns the list of possible number of group with given Galois field and size of group or the list of possible 
-cat<M>^{1}</M>-structures with given Galois field and group.
+<C>Cat1AlgebraSelect( gf, gpsize, gpnum )</C> returns the list of possible 
+number of group with given Galois field and size of group or the list of 
+possible cat<M>^{1}</M>-structures with given Galois field and group.
 </Item>
 <Item> 
-Cat1AlgebraSelect( gf, gpsize, gpnum, num ) (or just Cat1Algebra( gf, gpsize, gpnum, num )) returns the chosen cat<M>^{1}</M>-algebra.
+<C>Cat1AlgebraSelect( gf, gpsize, gpnum, num )</C> 
+(or just <C>Cat1Algebra( gf, gpsize, gpnum, num )</C>) 
+returns the chosen cat<M>^{1}</M>-algebra.
 </Item>
 </List>
-
 Now, we will give an example for the usage of this function.
-
+<P/>
 </Description> 
 </ManSection> 
 
@@ -374,17 +375,17 @@ If the diagram
 \ar@{->}@&lt;1.5pt>[d]^{h'} \\ R \ar@/^1.5pc/[u]^{e} \ar@{->}[r]_{\varphi} &amp; R' \ar@/_1.5pc/[u]_{e'}
 }
 </Display>
-commutes, (i.e <M>t^{\prime} \circ \phi = \varphi \circ t</M>, 
+commutes, (i.e. <M>t^{\prime} \circ \phi = \varphi \circ t</M>, 
 <M>h^{\prime} \circ \phi = \varphi \circ h</M> and 
 <M>e^{\prime } \circ \varphi = \phi \circ e</M>), 
-then the pair <M>(\phi ,\varphi )</M>is called
+then the pair <M>(\phi ,\varphi )</M> is called
 a cat<M>^{1}</M>-algebra morphism. 
 
 
 <ManSection>
    <Oper Name="Cat1AlgebraMorphism"
          Arg="arg" />
-   <Oper Name="IdentityMapping"
+   <Meth Name="IdentityMapping" Label="for cat1-algebras" 
          Arg="C" />
    <Oper Name="PreCat1AlgebraMorphismByHoms"
          Arg="f g" />
@@ -401,17 +402,17 @@ Details of the implementations can be found in <Cite Key="aodabas1"/>.
 </ManSection>
 
 <ManSection>
-   <Attr Name="Source"
+   <Attr Name="Source" Label="for morphisms of cat1-algebras"
          Arg="m" />
-   <Attr Name="Range"
+   <Attr Name="Range" Label="for morphisms of cat1-algebras"
          Arg="m" />
-   <Attr Name="IsTotal"
+   <Meth Name="IsTotal" Label="for morphisms of cat1-algebras"
          Arg="m" />
-   <Prop Name="IsSingleValued"
+   <Meth Name="IsSingleValued" Label="for morphisms of cat1-algebras"
          Arg="m" />
-   <Attr Name="Name"
+   <Meth Name="Name" Label="for morphisms of cat1-algebras"
          Arg="m" />
-   <Attr Name="Boundary"
+   <Attr Name="Boundary" Label="for morphisms of cat1-algebras"
          Arg="m" />
 <Description> 
 These are the six main attributes of a cat<M>^{1}</M>-algebra morphism. 
@@ -574,11 +575,11 @@ Crossed module [..->..] :-
 ]]>
 </Example>
 
-Since all these operations are linked to the functions <C>Cat1Algebra</C> and
-<C>XModAlgebra</C>, all of them can be done by using these two functions. 
-We may also use the function <C>Cat1Algebra</C> instead of the operation
-<C>Cat1AlgebraSelect</C>.
-
+Since all these operations are linked to the functions 
+<Ref Oper="Cat1Algebra"/> and <Ref Oper="XModAlgebra"/>, 
+all of them can be done by using these two functions. 
+We may also use the function <Ref Oper="Cat1Algebra"/> 
+instead of the operation <Ref Oper="Cat1AlgebraSelect"/>.
 
 </Section>
 

@@ -211,16 +211,10 @@ end );
 ##
 #F  AlgebraHomomorphismByFunction( <D>, <E>, <fun> )
 ##
-InstallMethod( AlgebraHomomorphismByFunction, "for,for,for", true, 
-    [ IsObject, IsObject, IsFunction ], 0,
+InstallMethod( AlgebraHomomorphismByFunction, "for 2 algebras and a function", 
+    true, [ IsAlgebra, IsAlgebra, IsFunction ], 0,
 function ( A,B,C )
     local act,arg,narg,usage,error,fun;        # mapping <map>, result
-    error := "\n Error: Bir Cebir Girilmeli; \n";
-    if ((IsAlgebra(A) or IsMultipleAlgebra(A))=false) 
-        or ((IsAlgebra(B) or IsMultipleAlgebra(B))=false) then
-        Print(error);
-        return false;
-    fi;
     act := rec( fun := C );
     ObjectifyWithAttributes( act, 
         NewType(GeneralMappingsFamily( ElementsFamily(FamilyObj(A)),

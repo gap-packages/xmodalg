@@ -96,11 +96,11 @@ and <M>\partial </M> is the canonical homomorphism,
 </ManSection>
 
 <ManSection>
-   <Attr Name="Source"
+   <Attr Name="Source" Label="for crossed modules of commutative algebras"
          Arg="X0" />
-   <Attr Name="Range"
+   <Attr Name="Range" Label="for crossed modules of commutative algebras" 
          Arg="X0" />
-   <Attr Name="Boundary"
+   <Attr Name="Boundary" Label="for crossed modules of commutative algebras"
          Arg="X0" />
    <Attr Name="XModAlgebraAction"
          Arg="X0" />
@@ -241,10 +241,9 @@ true
 
 <Description>
 An <M>R</M>-algebra homomorphism 
-<M>\mathcal{X} := (\partial : S \rightarrow R)</M> which satisfy 
+<M>\mathcal{X} := (\partial : S \rightarrow R)</M> which satisfies 
 the condition <M>{\bf XModAlg\ 1}</M> is called a <E>precrossed module</E>.
 The details of these implementations can be found in <Cite Key="aodabas1"/>.
-
 </Description>
 </ManSection>
 
@@ -330,12 +329,12 @@ The conditions can be thought as the commutativity of the following diagrams:
 <P/> 
 In &GAP; we define the morphisms between algebraic structures such as 
 cat<M>^{1}</M>-algebras and crossed modules and they are investigated by the
-function <C>Make2AlgMorphism</C>.
+function <C>Make2dAlgebraMorphism</C>.
 
 <ManSection>
    <Func Name="XModAlgebraMorphism"
          Arg="arg" />
-   <Oper Name="IdentityMapping"
+   <Meth Name="IdentityMapping" Label="for crossed modules of algebras"
          Arg="X0" />
    <Oper Name="PreXModAlgebraMorphismByHoms"
          Arg="f,g" />
@@ -345,15 +344,16 @@ function <C>Make2AlgMorphism</C>.
          Arg="f" />
    <Prop Name="IsXModAlgebraMorphism"
          Arg="f" />
-   <Attr Name="Source"
+   <Attr Name="Source" Label="for morphisms of crossed modules of algebras"
          Arg="m" />
-   <Attr Name="Range"
+   <Attr Name="Range" Label="for morphisms of crossed modules of algebras"
          Arg="m" />
-   <Prop Name="IsTotal"
+   <Meth Name="IsTotal" Label="for morphisms of crossed modules of algebras"
          Arg="m" />
-   <Prop Name="IsSingleValued"
+   <Meth Name="IsSingleValued" 
+         Label="for morphisms of crossed modules of algebras"
          Arg="m" />
-   <Attr Name="Name"
+   <Meth Name="Name" Label="for morphisms of crossed modules of algebras"
          Arg="m" />
 
 <Description>
@@ -421,7 +421,7 @@ true
 
 
 <ManSection>
-   <Oper Name="Kernel"
+   <Meth Name="Kernel" Label="for morphisms of crossed modules of algebras" 
          Arg="X0" />
 <Description>
 Let <M>(\theta,\varphi) : \mathcal{X} = (\partial : S \rightarrow R) 
@@ -472,7 +472,7 @@ Further, <M>\Im(\theta,\varphi)</M> is a subcrossed module of
 <M>(S^{\prime},R^{\prime},\partial^{\prime})</M>. 
 <P/> 
 In our package, the image of a crossed module homomorphism 
-can be obtained by the command <C>Image2dAlgMapping</C>. 
+can be obtained by the command <C>Image2dAlgebraMapping</C>. 
 The operation <C>Sub2dAlgObject</C> is effectively used 
 for finding the kernel and image crossed modules
 induced from a given crossed module homomorphism.
