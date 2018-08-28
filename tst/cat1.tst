@@ -28,7 +28,7 @@ gap> IsAlgebraHomomorphism( bdy );;
 gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
 gap> IsXModAlgebra( XM );;
 gap> ############################ 
-gap> ## Chapter 3,  Section 3.1.2
+gap> ## Chapter 2,  Section 2.1.2
 gap> Ac6 := GroupRing( GF(2), Group( (1,2,3)(4,5) ) );
 <algebra-with-one over GF(2), with 1 generators>
 gap> Rc3 := GroupRing( GF(2), Group( (1,2,3) ) );
@@ -155,7 +155,7 @@ Cat1-algebra [GF(2^2)_c6=>..] :-
   [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)
     (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
 
-gap> ## Chapter 3,  Section 3.1.4
+gap> ## Chapter 2,  Section 2.1.4
 gap> ## 
 gap> C3 := Cat1AlgebraSelect( 2, 6, 2, 4 );; 
 gap> A3 := Source( C3 );
@@ -195,7 +195,7 @@ Cat1-algebra [..=>..] :-
 : kernel embedding maps generators of kernel to:
   [ <zero> of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
 
-## Chapter 3,  Section 3.2.2
+## Chapter 2,  Section 2.2.2
 gap> C1 := Cat1AlgebraSelect( 2, 1, 1, 1 );
 [GF(2)_triv -> GF(2)_triv]
 gap> Display( C1 );
@@ -282,7 +282,7 @@ gap> IsInjective( m );
 true
 gap> IsBijective( m );
 false
-gap> ## Chapter 3,  Section 3.3.1
+gap> ## Chapter 2,  Section 2.3.1
 gap> CXM := Cat1AlgebraByXModAlgebra( XM );
 [GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]]
 gap> Display( CXM );
