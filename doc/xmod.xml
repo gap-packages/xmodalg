@@ -145,44 +145,44 @@ We also show usage of the attributes listed above.
 
 <Example>
 <![CDATA[
-gap> A := GroupRing( GF(5), DihedralGroup( 4 ) );
+gap> Ak4 := GroupRing( GF(5), DihedralGroup(4) );
 <algebra-with-one over GF(5), with 2 generators>
-gap> Size( A );
+gap> Size( Ak4 );
 625
-gap> SetName( A, "GF5[D4]" );
-gap> I := AugmentationIdeal( A );
-<two-sided ideal in GF5[D4], (2 generators)>
-gap> Size( I );
+gap> SetName( Ak4, "GF5[k4]" );
+gap> IAk4 := AugmentationIdeal( Ak4 );
+<two-sided ideal in GF5[k4], (2 generators)>
+gap> Size( IAk4 );
 125
-gap> SetName( I, "Aug" );
-gap> CM := XModAlgebraByIdeal( A, I );
-[Aug->GF5[D4]]
-gap> Display( CM );
+gap> SetName( IAk4, "I(GF5[k4])" );
+gap> XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );
+[ I(GF5[k4]) -> GF5[k4] ]
+gap> Display( XIAk4 );
 
-Crossed module [Aug->GF5[D4]] :- 
-: Source algebra Aug has generators:
-  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...
-  +(Z(5)^0)*f2 ]
-: Range algebra GF5[D4] has generators:
+Crossed module [I(GF5[k4])->GF5[k4]] :- 
+: Source algebra I(GF5[k4]) has generators:
+  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^
+    0)*f2 ]
+: Range algebra GF5[k4] has generators:
   [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
 : Boundary homomorphism maps source generators to:
-  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...
-  +(Z(5)^0)*f2 ]
+  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^
+    0)*f2 ]
 
-gap> Size( CM );
+gap> Size( XIAk4 );
 [ 125, 625 ]
-gap> f := Boundary( CM );
-MappingByFunction( Aug, GF5[D4], function( i ) ... end )
-gap> Print( RepresentationsOfObject( CM ), "\n" ); 
+gap> f := Boundary( XIAk4 );
+MappingByFunction( I(GF5[k4]), GF5[k4], function( i ) ... end )
+gap> Print( RepresentationsOfObject(XIAk4), "\n" ); 
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
 gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements", 
 >  "IsDuplicateFree", "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", 
 >  "IsLDistributive", "IsRDistributive", "IsPreXModDomain", "Is2dAlgebraObject", 
 >  "IsPreXModAlgebra", "IsXModAlgebra" ];;
-gap> known := KnownPropertiesOfObject(CM);;
+gap> known := KnownPropertiesOfObject( XIAk4 );;
 gap> ForAll( props, p -> (p in known) );
-true 
-gap> Print( KnownAttributesOfObject( CM ), "\n" ); 
+true
+gap> Print( KnownAttributesOfObject(XIAk4), "\n" ); 
 [ "Name", "Size", "Range", "Source", "Boundary", "XModAlgebraAction" ]
 ]]>
 </Example>
@@ -209,26 +209,26 @@ of a given crossed module.
 
 <Example>
 <![CDATA[
-gap> e4 := Elements( I )[4];
+gap> e4 := Elements( IAk4 )[4];
 (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
-gap> J := Ideal( I, [e4] );
-<two-sided ideal in Aug, (1 generators)>
-gap> Size( J );
+gap> Je4 := Ideal( IAk4, [e4] );
+<two-sided ideal in I(GF5[k4]), (1 generators)>
+gap> Size( Je4 );
 5
-gap> SetName( J, "<e4>" ); 
-gap> PM := XModAlgebraByIdeal( A, J );
-[<e4>->GF5[D4]]
-gap> Display( PM );        
+gap> SetName( Je4, "<e4>" ); 
+gap> XJe4 := XModAlgebraByIdeal( Ak4, Je4 );
+[ <e4> -> GF5[k4] ]
+gap> Display( XJe4 );        
 
-Crossed module [<e4>->GF5[D4]] :- 
+Crossed module [<e4>->GF5[k4]] :- 
 : Source algebra <e4> has generators:
   [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
-: Range algebra GF5[D(4)] has generators:
+: Range algebra GF5[k4] has generators:
   [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
 : Boundary homomorphism maps source generators to:
   [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
 
-gap> IsSubXModAlgebra( CM, PM );
+gap> IsSubXModAlgebra( XIAk4, XJe4 );
 true
 ]]>
 </Example>
@@ -286,6 +286,7 @@ Crossed module [<e5>->GF(2^2)[k4]] :-
   [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
 : Boundary homomorphism maps source generators to:
   [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
+
 ]]>
 </Example>
 
@@ -365,47 +366,35 @@ which may have the attributes listed.
 
 <Example>
 <![CDATA[
-gap> A := GroupRing( GF(2), CyclicGroup( 4 ) );
+gap> Ac4 := GroupRing( GF(2), CyclicGroup(4) );
 <algebra-with-one over GF(2), with 2 generators>
-gap> B := AugmentationIdeal( A );
+gap> IAc4 := AugmentationIdeal( Ac4 );
 <two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, 
-(dimension 3)>
-gap> X1 := XModAlgebra( A, B );
-[Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
- ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 ] )]
-gap> C := GroupRing( GF(2), SmallGroup( 4, 2 ) );
+  (dimension 3)>
+gap> XIAc4 := XModAlgebra( Ac4, IAc4 );
+[ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>, 
+  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
+gap> Bk4 := GroupRing( GF(2), SmallGroup( 4, 2 ) );
 <algebra-with-one over GF(2), with 2 generators>
-gap> D := AugmentationIdeal( C );
+gap> IBk4 := AugmentationIdeal( Bk4 );
 <two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, 
-(dimension 3)>
-gap> X2 := XModAlgebra( C, D );
-[Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
- ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 ] )]
-gap> B = D;
+  (dimension 3)>
+gap> XIBk4 := XModAlgebra( Bk4, IBk4 );
+[ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>, 
+  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
+gap> IAc4 = IBk4;
 false
-gap> all_f := AllHomsOfAlgebras( A, C );;
-gap> all_g := AllHomsOfAlgebras( B, D );;
-gap> mor := XModAlgebraMorphism( X1, X2, all_g[1], all_f[2] );
+gap> homAB := AllHomsOfAlgebras( Ac4, Bk4 );;
+gap> homIAIB := AllHomsOfAlgebras( IAc4, IBk4 );;
+gap> mor := XModAlgebraMorphism( XIAc4, XIBk4, homIAIB[1], homAB[2] );
 [[..] => [..]]
 gap> Display( mor );
 
 Morphism of crossed modules :- 
-: Source = [Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
- ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 
- ] )] with generating sets:
-  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, (Z(2)^0)*f1+(Z(2)^0)*f2, 
-  (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
-  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
-:  Range = [Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 
- ] )->AlgebraWithOne( GF(2), [ (Z(2)^0)*f1, (Z(2)^0)*f2 
- ] )] with generating sets:
-  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, (Z(2)^0)*f1+(Z(2)^0)*f2, 
-  (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
-  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
+: Source = [ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>,
+  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
+:  Range = [ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>,
+  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
 : Source Homomorphism maps source generators to:
   [ <zero> of ..., <zero> of ..., <zero> of ... ]
 : Range Homomorphism maps range generators to:
@@ -441,16 +430,13 @@ An example is given below.
 
 <Example>
 <![CDATA[
-gap> X3 := Kernel( mor );
-[Algebra( GF(2), [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, 
-  (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] )->Algebra( GF(2), 
-[ (Z(2)^0)*f1+(Z(2)^0)*f2, (Z(2)^0)*f1+(Z(2)^0)*f1*f2, 
-  (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1 ] )]
-gap> IsXModAlgebra( X3 );
+gap> Xmor := Kernel( mor );
+[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
+gap> IsXModAlgebra( Xmor );
 true
-gap> Size( X3 );
+gap> Size( Xmor );
 [ 8, 8 ]
-gap> IsSubXModAlgebra( X1, X3 );
+gap> IsSubXModAlgebra( XIAc4, Xmor );
 true
 ]]>
 </Example>
@@ -506,11 +492,10 @@ store the two algebra homomorphisms <M>\theta</M> and <M>\varphi</M>.
 
 <Example>
 <![CDATA[
-gap> theta := SourceHom( mor );;
-gap> Print( MappingGeneratorsImages( theta ), "\n" ); 
-[ [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1, (Z(2)^0)*f1+(Z(2)^0)*f2, 
-      (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ], 
-  [ <zero> of ..., <zero> of ..., <zero> of ... ] ]
+gap> theta;
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f2, (Z(2)^0)*f1+(Z(2)^0)*f2, 
+  (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] -> [ <zero> of ..., <zero> of ..., 
+  <zero> of ... ]
 gap> phi := RangeHom( mor );
 [ (Z(2)^0)*f1 ] -> [ (Z(2)^0)*<identity> of ... ]
 gap> IsInjective( mor );
