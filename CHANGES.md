@@ -1,5 +1,8 @@
 # CHANGES to the 'XModAlg' package
 
+## 1.16 -> 1.17 
+ * (28/08/18) update examples to avoid travis failures 
+
 ## 1.15 -> 1.16
  * (29/01/18) changed package releases to https://gap-packages.github.io/xmodalg
 
