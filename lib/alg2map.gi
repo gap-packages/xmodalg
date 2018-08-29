@@ -7,7 +7,7 @@
 
 ##############################################################################
 ##
-#M  Make2dAlgebraMorphism( <src>, <rng>, <shom>, <rhom> ) . . . map between 2d-objects
+#M  Make2dAlgebraMorphism( <src>, <rng>, <shom>, <rhom> ) . . . 2d-object map 
 ##
 InstallMethod( Make2dAlgebraMorphism,
     "for 2d-object, 2d-object, homomorphism, homomorphism", true,
@@ -39,7 +39,7 @@ end );
 
 #############################################################################
 ##
-#M  IsPreXModAlgebraMorphism           check that the diagram of algebra homs commutes
+#M  IsPreXModAlgebraMorphism           check diagram of algebra homs commutes
 ##
 InstallMethod( IsPreXModAlgebraMorphism,
     "generic method for pre-crossed module homomorphisms",
@@ -700,3 +700,22 @@ InstallOtherMethod( IsBijective,
     "method for a 2d-mapping", true, [ Is2dAlgebraMorphism ], 0,
     map -> (     IsBijective( SourceHom( map ) )
              and IsBijective( RangeHom( map ) ) )  );
+
+#############################################################################
+##
+#M  ImagesSource( <mor> ) . . . . for pre-xmod and pre-cat1 algebra morphisms
+##
+InstallOtherMethod( ImagesSource, "image of pre-xmod/cat1 algebra morphism", 
+    true, [ Is2DimensionalMapping and Is2dAlgebraMorphism ], 0, 
+function( mor )
+    
+    local Shom, Rhom, imS, imR, sub;
+
+    Shom := SourceHom( mor );
+    Rhom := RangeHom( mor );
+    imS := ImagesSource( Shom );
+    imR := ImagesSource( Rhom );
+    sub := Sub2dAlgebra( Range( mor ), imS, imR );
+    return sub;
+end );
+

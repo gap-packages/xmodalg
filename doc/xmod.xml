@@ -455,8 +455,8 @@ is called the image of <M>(\theta,\varphi)</M>.
 Further, <M>\Im(\theta,\varphi)</M> is a subcrossed module of 
 <M>(S^{\prime},R^{\prime},\partial^{\prime})</M>. 
 <P/> 
-In our package, the image of a crossed module homomorphism 
-can be obtained by the command <C>Image2dAlgebraMapping</C>. 
+In this package, the image of a crossed module homomorphism 
+can be obtained by the command <C>ImagesSource</C>. 
 The operation <C>Sub2dAlgObject</C> is effectively used 
 for finding the kernel and image crossed modules
 induced from a given crossed module homomorphism.
@@ -489,12 +489,17 @@ store the two algebra homomorphisms <M>\theta</M> and <M>\varphi</M>.
 
 <Example>
 <![CDATA[
-gap> theta := SourceHom( mor );
-[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f2, (Z(2)^0)*f1+(Z(2)^0)*f2, 
-  (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] -> [ <zero> of ..., <zero> of ..., 
-  <zero> of ... ]
-gap> phi := RangeHom( mor );
-[ (Z(2)^0)*f1 ] -> [ (Z(2)^0)*<identity> of ... ]
+gap> ic4 := One( Ac4 );;                                      
+gap> theta := SourceHom( mor );;
+gap> e1 := ic4*c4.1 + ic4*c4.2;
+(Z(2)^0)*f1+(Z(2)^0)*f2
+gap> ImageElm( theta, e1 );  
+<zero> of ...
+gap> phi := RangeHom( mor );;
+gap> e2 := ic4*c4.1;
+(Z(2)^0)*f1
+gap> ImageElm( phi, e2 );
+(Z(2)^0)*<identity> of ...
 gap> IsInjective( mor );
 false
 gap> IsSurjective( mor );

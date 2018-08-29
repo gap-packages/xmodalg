@@ -1,6 +1,7 @@
 # CHANGES to the 'XModAlg' package
 
 ## 1.16 -> 1.17 
+ * (29/08/18) added method for ImagesSource at end of alg2map.gi 
  * (28/08/18) update examples to avoid travis failures 
 
 ## 1.15 -> 1.16

@@ -1148,7 +1148,7 @@ function( PM, Ssrc, Srng )
         return fail;
     fi;
     if not IsIdeal( Prng, Srng ) then
-        Print( "Srng is not a ideal of Prng\n" );
+        Print( "Srng is not an ideal of Prng\n" );
         return fail;
     fi;
     Pbdy := Boundary( PM );

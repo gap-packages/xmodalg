@@ -108,8 +108,9 @@ Crossed module [<e5>->GF(2^2)[k4]] :-
   [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 
 gap> ############################
-gap> ## Chapter 3,  Section 3.2.1
-gap> Ac4 := GroupRing( GF(2), CyclicGroup(4) );
+gap> ## Chapter 3,  Section 3.2.1 
+gap> c4 := CyclicGroup( 4 );;
+gap> Ac4 := GroupRing( GF(2), c4 );
 <algebra-with-one over GF(2), with 2 generators>
 gap> SetName( Ac4, "GF2[c4]" );
 gap> IAc4 := AugmentationIdeal( Ac4 );
@@ -158,16 +159,24 @@ gap> IsSubXModAlgebra( XIAc4, Xmor );
 true
 gap> ############################
 gap> ## Chapter 3,  Section 3.2.4
-gap> theta := SourceHom( mor );
-[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f2, (Z(2)^0)*f1+(Z(2)^0)*f2, 
-  (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] -> [ <zero> of ..., <zero> of ..., 
-  <zero> of ... ]
-gap> phi := RangeHom( mor );
-[ (Z(2)^0)*f1 ] -> [ (Z(2)^0)*<identity> of ... ]
+gap> ic4 := One( Ac4 );;                                      
+gap> theta := SourceHom( mor );;
+gap> e1 := ic4*c4.1 + ic4*c4.2;
+(Z(2)^0)*f1+(Z(2)^0)*f2
+gap> ImageElm( theta, e1 );  
+<zero> of ...
+gap> phi := RangeHom( mor );;
+gap> e2 := ic4*c4.1;
+(Z(2)^0)*f1
+gap> ImageElm( phi, e2 );
+(Z(2)^0)*<identity> of ...
 gap> IsInjective( mor );
 false
 gap> IsSurjective( mor );
 false
+gap> Image( mor );
+Srng is not an ideal of Prng
+fail
 gap> STOP_TEST( "xmod.tst", 10000 );
 
 ############################################################################
