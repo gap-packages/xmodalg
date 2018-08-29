@@ -108,36 +108,35 @@ Crossed module [<e5>->GF(2^2)[k4]] :-
   [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 
 gap> ############################
-gap> ## Chapter 3,  Section 3.2.1
-gap> Ac4 := GroupRing( GF(2), CyclicGroup(4) );
+gap> ## Chapter 3,  Section 3.2.1 
+gap> c4 := CyclicGroup( 4 );;
+gap> Ac4 := GroupRing( GF(2), c4 );
 <algebra-with-one over GF(2), with 2 generators>
+gap> SetName( Ac4, "GF2[c4]" );
 gap> IAc4 := AugmentationIdeal( Ac4 );
-<two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, 
-  (dimension 3)>
+<two-sided ideal in GF2[c4], (dimension 3)>
+gap> SetName( IAc4, "I(GF2[c4])" );
 gap> XIAc4 := XModAlgebra( Ac4, IAc4 );
-[ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>, 
-  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
+[ I(GF2[c4]) -> GF2[c4] ]
 gap> Bk4 := GroupRing( GF(2), SmallGroup( 4, 2 ) );
 <algebra-with-one over GF(2), with 2 generators>
+gap> SetName( Bk4, "GF2[k4]" );
 gap> IBk4 := AugmentationIdeal( Bk4 );
-<two-sided ideal in <algebra-with-one over GF(2), with 2 generators>, 
-  (dimension 3)>
+<two-sided ideal in GF2[k4], (dimension 3)>
+gap> SetName( IBk4, "I(GF2[k4])" );
 gap> XIBk4 := XModAlgebra( Bk4, IBk4 );
-[ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>, 
-  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
+[ I(GF2[k4]) -> GF2[k4] ]
 gap> IAc4 = IBk4;
 false
 gap> homAB := AllHomsOfAlgebras( Ac4, Bk4 );;
 gap> homIAIB := AllHomsOfAlgebras( IAc4, IBk4 );;
 gap> mor := XModAlgebraMorphism( XIAc4, XIBk4, homIAIB[1], homAB[2] );
-[[..] => [..]]
+[[I(GF2[c4])->GF2[c4]] => [I(GF2[k4])->GF2[k4]]]
 gap> Display( mor );
 
 Morphism of crossed modules :- 
-: Source = [ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>,
-  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
-:  Range = [ <two-sided ideal in <algebra-with-one of dimension 4 over GF(2)>,
-  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(2)> ]
+: Source = [I(GF2[c4])->GF2[c4]]
+:  Range = [I(GF2[k4])->GF2[k4]]
 : Source Homomorphism maps source generators to:
   [ <zero> of ..., <zero> of ..., <zero> of ... ]
 : Range Homomorphism maps range generators to:
@@ -160,16 +159,24 @@ gap> IsSubXModAlgebra( XIAc4, Xmor );
 true
 gap> ############################
 gap> ## Chapter 3,  Section 3.2.4
-gap> theta := SourceHom( mor );
-[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f2, (Z(2)^0)*f1+(Z(2)^0)*f2, 
-  (Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] -> [ <zero> of ..., <zero> of ..., 
-  <zero> of ... ]
-gap> phi := RangeHom( mor );
-[ (Z(2)^0)*f1 ] -> [ (Z(2)^0)*<identity> of ... ]
+gap> ic4 := One( Ac4 );;                                      
+gap> theta := SourceHom( mor );;
+gap> e1 := ic4*c4.1 + ic4*c4.2;
+(Z(2)^0)*f1+(Z(2)^0)*f2
+gap> ImageElm( theta, e1 );  
+<zero> of ...
+gap> phi := RangeHom( mor );;
+gap> e2 := ic4*c4.1;
+(Z(2)^0)*f1
+gap> ImageElm( phi, e2 );
+(Z(2)^0)*<identity> of ...
 gap> IsInjective( mor );
 false
 gap> IsSurjective( mor );
 false
+gap> Image( mor );
+Srng is not an ideal of Prng
+fail
 gap> STOP_TEST( "xmod.tst", 10000 );
 
 ############################################################################

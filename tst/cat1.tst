@@ -8,7 +8,7 @@ gap> SetInfoLevel( InfoXModAlg, 0 );
 
 gap> ## make cat1.tst independent of xmod.tst 
 gap> Ak4 := GroupRing( GF(5), DihedralGroup(4) );;
-gap> SetName( Ak4, "GF5[54]" );
+gap> SetName( Ak4, "GF5[k4]" );
 gap> IAk4 := AugmentationIdeal( Ak4 );;
 gap> SetName( IAk4, "I(GF5[k4])" );
 gap> XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );;
