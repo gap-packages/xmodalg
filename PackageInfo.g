@@ -9,7 +9,7 @@ SetPackageInfo( rec(
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 Version := "1.17",
-Date := "28/08/2018",
+Date := "30/08/2018",
 
 Persons := [
     rec(
