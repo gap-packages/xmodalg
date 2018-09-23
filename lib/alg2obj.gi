@@ -1237,7 +1237,7 @@ function( C, R, S )
     t := RestrictionMappingAlgebra( Ct, R, S );
     h := RestrictionMappingAlgebra( Ch, R, S );
     e := RestrictionMappingAlgebra( Ce, S, R );
-    CC := PreCat1Obj( t, h, e );
+    CC := PreCat1AlgebraByTailHeadEmbedding( t, h, e );
     if not ( C = CC ) then
         SetParent( CC, C );
     fi;
@@ -1498,10 +1498,10 @@ InstallGlobalFunction( PreCat1Algebra, function( arg )
     # two homomorphisms and an embedding
     elif ( ( nargs=3 ) and
            ForAll( arg, a -> IsAlgebraHomomorphism( a ) ) ) then
-        return PreCat1Obj( arg[1], arg[2], arg[3] );
+        return PreCat1AlgebraByTailHeadEmbedding( arg[1], arg[2], arg[3] );
     fi;
     # alternatives not allowed
-    Error( "standard usage: PreCat1Algebra( tail, head [,embed] );" );
+    Error( "standard usage: PreCat1Algebra( tail, head [,embedding] );" );
 end );
 
 #############################################################################
@@ -1791,9 +1791,9 @@ end );
 
 #############################################################################
 ##
-#M  PreCat1Obj
+#M  PreCat1AlgebraByTailHeadEmbedding
 ##
-InstallOtherMethod( PreCat1Obj,
+InstallMethod( PreCat1AlgebraByTailHeadEmbedding,
     "cat1-algebra from tail, head and embedding", true, 
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
 function( t, h, e )
@@ -1845,16 +1845,16 @@ function( et, eh )
     local  G, gG, R, t, h, e;
 
     if not ( IsEndoMapping( et ) and IsEndoMapping( eh ) ) then
-       # Error( "et, eh must both be group endomorphisms" );
-       return fail;
+        Info( InfoXModAlg, 1, "et, eh must both be group endomorphisms" );
+        return fail;
     fi;
     if not ( Source( et ) = Source( eh ) ) then
-      #  Error( "et and eh must have same source" );
+        Info( InfoXModAlg, 1, "et and eh must have same source" );
         return fail;
     fi;
     G := Source( et );
     if not ( Image( et ) = Image( eh ) ) then
-       # Error( "et and eh must have same image" );
+        Info( InfoXModAlg, 1, "et and eh must have same image" );
         return fail;
     fi;
     R := Image( et );
@@ -1862,7 +1862,7 @@ function( et, eh )
     t := AlgebraHomomorphismByImages( G, R, gG, List( gG, g->Image( et, g ) ) );
     h := AlgebraHomomorphismByImages( G, R, gG, List( gG, g->Image( eh, g ) ) );
     e := InclusionMappingAlgebra( G, R );
-    return PreCat1Obj( t, h, e );
+    return PreCat1AlgebraByTailHeadEmbedding( t, h, e );
 end );
 
 #############################################################################

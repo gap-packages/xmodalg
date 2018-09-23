@@ -90,6 +90,8 @@ DeclareOperation( "IsSubCat1Algebra", [ Is2dAlgebraObject, Is2dAlgebraObject ] )
 
 DeclareOperation( "PreCat1AlgebraObj",
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
+DeclareOperation( "PreCat1AlgebraByTailHeadEmbedding",
+    [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
 DeclareAttribute( "Equivalence", IsPreCat1Algebra );
 DeclareAttribute( "HeadMap", IsPreCat1Algebra );
 DeclareAttribute( "TailMap", IsPreCat1Algebra );
