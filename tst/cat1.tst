@@ -56,7 +56,7 @@ gap> Print( mgiRA, "\n" );
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3) ] ], 
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,3,2) ] ] ]
-gap> C4 := PreCat1Obj( homAR[6], homAR[6], homRA[8] );
+gap> C4 := PreCat1AlgebraByTailHeadEmbedding( homAR[6], homAR[6], homRA[8] );
 [AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -> AlgebraWithOne( GF(2), 
 [ (Z(2)^0)*(1,2,3) ] )]
 gap> IsCat1Algebra( C4 );
