@@ -1647,7 +1647,7 @@ function( gf, size, gpnum, num )
            G, genG, M, L, genR, R, t, kert, e, h, imt, imh, C1A, XC, elA;
 
     maxsize := CAT1ALG_LIST_MAX_SIZE;   
-    usage := "Usage: Cat1Algebra( gf, gpsize, gpnum, num );";
+    usage := "Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );";
     
     # if ( CAT1ALG_LIST_LOADED = false ) then    
         ReadPackage( "xmodalg", "lib/cat1algdata.g" );
@@ -1656,8 +1656,8 @@ function( gf, size, gpnum, num )
     usage_list1 := Set(CAT1ALG_LIST, i -> i[1]);
     if not gf in usage_list1 then
       Print( "|--------------------------------------------------------| \n" );   
-      Print( "| ",gf," is invalid number for Galois Field (gf) \t \t | \n");
-      Print( "| Possible numbers for the gf in the Data : \t \t | \n");
+      Print( "| ",gf," is invalid number for Galois Field (GFnum) \t \t | \n");
+      Print( "| Possible numbers for GFnum in the Data : \t \t | \n");
       Print( "|--------------------------------------------------------| \n" ); 
       Print( " ",usage_list1," \n");
       Print( usage, "\n" );
@@ -2025,47 +2025,9 @@ end );
 
 #############################################################################
 ##
-#M  SDproduct. . . . convert a pre-crossed module to a pre-cat1-algebra
+#M  PreXModAlgebraOfPreCat1Algebra
 ##
-InstallMethod( SDproduct,
-    "convert a pre-crossed module to a pre-cat1-algebra", true, 
-    [ Is2dAlgebraObject ], 0,
-function( C1A )
-
-    local  h, t, list, kt, kh, uzkt, uzkh, a, i, j, p, q, t1, m, t2, t3, s, x;
-
-    if not ( IsPreCat1AlgebraObj( C1A ) and IsPreCat1Algebra( C1A ) ) then
-        return false;
-    fi;    
-    h := HeadMap( C1A );
-    t := TailMap( C1A );
-    list:=[];;
-    kt := Kernel(t);
-    kh := Kernel(h);
-    uzkt := Size(kt);
-    uzkh := Size(kh);
-    a := XModAlgebraAction(h);
-    for i in [1..uzkt] do
-        p := kt[i];
-        for j in [1..uzkh] do   
-            q := kh[j];
-            t1 := p[2]*q[2];
-            m := [p[2],q[1]];
-            t2 := Image(a,m);
-            s := [p[1],q[2]];
-            t3 := Image(a,s);
-            x := [(p[1]*q[1]),t1+t2+t3];            
-            Add( list, x );
-        od;
-    od;
-    return list;
-end ); 
-
-#############################################################################
-##
-#M  PreXModAlgebraByPreCat1Algebra
-##
-InstallMethod( PreXModAlgebraByPreCat1Algebra, true, [ IsPreCat1Algebra ], 0,
+InstallMethod( PreXModAlgebraOfPreCat1Algebra, true, [ IsPreCat1Algebra ], 0,
 function( C1A )
  
     local  usage, A, B, C, bdy, gA, im, sbdy, PM,act,R,s,t;
@@ -2096,14 +2058,14 @@ end );
 
 ##############################################################################
 ##
-#M  XModAlgebraByCat1Algebra
+#M  XModAlgebraOfCat1Algebra
 ##
-InstallMethod( XModAlgebraByCat1Algebra, "generic method for cat1-algebras",
+InstallMethod( XModAlgebraOfCat1Algebra, "generic method for cat1-algebras",
     true, [ IsPreCat1Algebra ], 0,
 function( C1 )
 
     local  X1;
-    X1 := PreXModAlgebraByPreCat1Algebra( C1 );
+    X1 := PreXModAlgebraOfPreCat1Algebra( C1 );
     if not IsCat1Algebra( C1 ) then
         Print( "Warning : C is only Pre-cat1-algebra\n" );        
     fi;    
@@ -2115,19 +2077,9 @@ end );
 
 ##############################################################################
 ##
-#M  XModAlgebraOfCat1Algebra
+#M  Cat1AlgebraOfXModAlgebra
 ##
-InstallMethod( XModAlgebraOfCat1Algebra, "generic method for cat1-algebras",
-    true, [ IsPreCat1Algebra ], 0,
-function( C1 )
-    return XModAlgebraByCat1Algebra( C1 );
-end );
-
-##############################################################################
-##
-#M  Cat1AlgebraByXModAlgebra
-##
-InstallMethod( Cat1AlgebraByXModAlgebra, "generic method for crossed modules",
+InstallMethod( Cat1AlgebraOfXModAlgebra, "generic method for crossed modules",
     true, [ IsPreXModAlgebra ], 0,
 function( X1 )
 
@@ -2140,16 +2092,6 @@ function( X1 )
     SetXModAlgebraOfCat1Algebra( C1, X1 );
     SetCat1AlgebraOfXModAlgebra( X1, C1 );
     return C1;
-end );
-
-##############################################################################
-##
-#M  Cat1AlgebraOfXModAlgebra
-##
-InstallMethod( Cat1AlgebraOfXModAlgebra, "generic method for cat1-algebras",
-    true, [ IsPreXModAlgebra ], 0,
-function( X1 )
-    return Cat1AlgebraByXModAlgebra( X1 );
 end );
 
 ##############################################################################

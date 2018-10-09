@@ -102,7 +102,6 @@ DeclareGlobalFunction( "PreCat1Algebra" );
 
 DeclareProperty( "IsCat1Algebra", Is2dAlgebra );
 
-DeclareOperation( "PreXModAlgebraByPreCat1Algebra", [ IsPreCat1Algebra ] );
 DeclareAttribute( "Equivalence", IsPreCat1Algebra );
 DeclareAttribute( "SourceForEquivalence", IsCat1Algebra );
 DeclareAttribute( "BoundaryForEquivalence", IsCat1Algebra );
@@ -110,10 +109,11 @@ DeclareFilter( "IsEquivalenceHead", IsCat1Algebra );
 DeclareFilter( "IsEquivalenceTail", IsCat1Algebra );
 DeclareFilter( "IsXModAlgebraConst", IsCat1Algebra );
 DeclareAttribute( "XModAlgebraConst", IsCat1Algebra );
+
+DeclareAttribute( "PreXModAlgebraOfPreCat1Algebra", IsPreCat1Algebra );
+DeclareAttribute( "PreCat1AlgebraOfPreXModAlgebra", IsPreXModAlgebra );
 DeclareAttribute( "XModAlgebraOfCat1Algebra", IsPreCat1Algebra );
-DeclareOperation( "XModAlgebraByCat1Algebra", [ IsPreCat1Algebra ] );
 DeclareAttribute( "Cat1AlgebraOfXModAlgebra", IsPreXModAlgebra );
-DeclareOperation( "Cat1AlgebraByXModAlgebra", [ IsPreXModAlgebra ] );
 DeclareOperation( "EquivalenceTail", [ IsEquivalenceTail ] );
 DeclareOperation( "EquivalenceHead", [ IsEquivalenceHead ] );
 DeclareOperation( "SDproduct", [ Is2dAlgebraObject ] );
