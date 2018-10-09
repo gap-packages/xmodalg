@@ -27,9 +27,10 @@ gap> IsAlgebraAction( act );;
 gap> IsAlgebraHomomorphism( bdy );; 
 gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
 gap> IsXModAlgebra( XM );;
+
 gap> ############################ 
 gap> ## Chapter 4,  Section 4.1.1
-gap> CXM := Cat1AlgebraByXModAlgebra( XM );
+gap> CXM := Cat1AlgebraOfXModAlgebra( XM );
 [GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]]
 gap> Display( CXM );
 
@@ -49,7 +50,7 @@ Cat1-algebra [..=>GF(2^2)[k4]] :-
   [ <zero> of ..., (Z(2^2)^2)*<identity> of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+(
         Z(2^2)^2)*f1*f2 ] ]
 
-gap> X3 := XModAlgebraByCat1Algebra( C3 ); 
+gap> X3 := XModAlgebraOfCat1Algebra( C3 ); 
 [ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> Display( X3 ); 
 

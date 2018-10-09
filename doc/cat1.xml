@@ -175,34 +175,38 @@ Cat1-algebra [..=>..] :-
 
 <ManSection>
    <Oper Name="Cat1AlgebraSelect"
-         Arg="gf gpsize gpnum num" />
+         Arg="n gpsize gpnum num" />
 <Description> 
 The <Ref Oper="Cat1Algebra"/> function may also be used to select a 
-cat<M>^{1}</M>-algebra from a data file. All cat<M>^{1}</M>-structures on
-commutative algebras are stored in a list in file cat1algdata.g. The data is read into the list CAT1ALG_LIST only when this function is called.
+cat<M>^{1}</M>-algebra from a data file. 
+All cat<M>^{1}</M>-structures on commutative algebras are stored in a list 
+in file <File>cat1algdata.g</File>. 
+The data is read into the list <C>CAT1ALG_LIST</C> 
+only when this function is called.
 <P/>
 The function <C>Cat1AlgebraSelect</C> may be used in four ways:
 <List>
 <Item> 
-<C>Cat1AlgebraSelect( gf )</C> returns the list of possible size of 
-Galois field or the list of possible size of groups with given Galois field. 
+<C>Cat1AlgebraSelect( n )</C> returns the list of possible sizes of groups 
+for group algebras with Galois field <M>GF(n)</M>. 
 </Item>
 <Item> 
-<C>Cat1AlgebraSelect( gf, gpsize )</C> returns the list of possible sizes of a group with given Galois field, or the list of possible 
-number of groups with given Galois field and size of group.
+<C>Cat1AlgebraSelect( n, m )</C> returns the list of allowable 
+group numbers with given Galois field <M>GF(n)</M> 
+and groups of size <M>m</M>.
 </Item>
 <Item> 
-<C>Cat1AlgebraSelect( gf, gpsize, gpnum )</C> returns the list of possible 
-number of group with given Galois field and size of group or the list of 
-possible cat<M>^{1}</M>-structures with given Galois field and group.
+<C>Cat1AlgebraSelect( n, m, k )</C> returns the list of possible 
+cat<M>^{1}</M>-algebra structures with given Galois field <M>GF(n)</M> 
+and group number <M>k</M> of size <M>m</M>.
 </Item>
 <Item> 
-<C>Cat1AlgebraSelect( gf, gpsize, gpnum, num )</C> 
-(or just <C>Cat1Algebra( gf, gpsize, gpnum, num )</C>) 
-returns the chosen cat<M>^{1}</M>-algebra.
+<C>Cat1AlgebraSelect( n, m, k, j )</C> 
+(or simply <C>Cat1Algebra( n, m, k, j )</C>) returns the 
+<M>j</M>-th cat<M>^{1}</M>-algebra structure with these other parameters.
 </Item>
 </List>
-Now, we will give an example for the usage of this function.
+Now, we give examples of the use of this function.
 <P/>
 </Description> 
 </ManSection> 
@@ -211,11 +215,11 @@ Now, we will give an example for the usage of this function.
 <![CDATA[
 gap> C := Cat1AlgebraSelect( 11 );
 |--------------------------------------------------------|
-| 11 is invalid number for Galois Field (gf)             |
-| Possible numbers for the gf in the Data :              |
+| 11 is invalid number for Galois Field (GFnum)             |
+| Possible numbers for GFnum in the Data :              |
 |--------------------------------------------------------|
  [ 2, 3, 4, 5, 7 ]
-Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 fail
 gap> C := Cat1AlgebraSelect( 4, 12 );
 |--------------------------------------------------------|
@@ -223,7 +227,7 @@ gap> C := Cat1AlgebraSelect( 4, 12 );
 | Possible numbers for the gpsize for GF(4) in the Data: |
 |--------------------------------------------------------|
  [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 fail
 gap> C := Cat1AlgebraSelect( 2, 6, 3 );
 |--------------------------------------------------------|
@@ -231,7 +235,7 @@ gap> C := Cat1AlgebraSelect( 2, 6, 3 );
 | Possible numbers for the gpnum in the Data :           |
 |--------------------------------------------------------|
  [ 1, 2 ]
-Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 fail
 gap> C := Cat1AlgebraSelect( 2, 6, 2 );
 There are 4 cat1-structures for the algebra GF(2)_c6.
@@ -242,7 +246,7 @@ There are 4 cat1-structures for the algebra GF(2)_c6.
 | -----         [ 2, 14 ]               [ 2, 14 ]        |
 | -----         [ 2, 50 ]               [ 2, 50 ]        |
 |--------------------------------------------------------|
-Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
 4
 gap> C0 := Cat1AlgebraSelect( 4, 6, 2, 2 );

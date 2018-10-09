@@ -18,7 +18,13 @@
 /doc/*.six
 /doc/*.tex
 /doc/*.toc
+/doc/title.xml
+/doc/XModAlg.xml
 /doc/manual.pdf
 /doc/bib.xml.bib
+
+/tst/cat1.g
+/tst/xmod.g
+/tst/convert.g
 
 /gh-pages/
