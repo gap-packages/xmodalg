@@ -9,7 +9,7 @@ LoadPackage( "AutoDoc" );
 AutoDoc( rec( 
     scaffold := rec(
         ## MainPage := false, 
-        includes := [ "intro.xml", "cat1.xml", "xmod.xml" ],
+        includes := [ "intro.xml", "cat1.xml", "xmod.xml", "convert.xml" ],
         bib := "bib.xml", 
         gapdoc_latex_options := rec( EarlyExtraPreamble := """
             \usepackage[all]{xy} 

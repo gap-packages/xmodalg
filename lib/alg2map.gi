@@ -321,7 +321,7 @@ function( src, rng, srchom, rnghom )
     else
         nsrc := "[..]";
     fi;
-    if ( HasName( Source(rng) )and HasName( Range(rng) ) ) then
+    if ( HasName( Source(rng) ) and HasName( Range(rng) ) ) then
         nrng := Name( rng );
     else
         nrng := "[..]";

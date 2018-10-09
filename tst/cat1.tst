@@ -56,7 +56,7 @@ gap> Print( mgiRA, "\n" );
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3) ] ], 
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
   [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,3,2) ] ] ]
-gap> C4 := PreCat1Obj( homAR[6], homAR[6], homRA[8] );
+gap> C4 := PreCat1AlgebraByTailHeadEmbedding( homAR[6], homAR[6], homRA[8] );
 [AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -> AlgebraWithOne( GF(2), 
 [ (Z(2)^0)*(1,2,3) ] )]
 gap> IsCat1Algebra( C4 );
@@ -89,11 +89,11 @@ gap> ############################
 gap> ## Chapter 2,  Section 2.1.3
 gap> C := Cat1AlgebraSelect( 11 );
 |--------------------------------------------------------|
-| 11 is invalid number for Galois Field (gf)             |
-| Possible numbers for the gf in the Data :              |
+| 11 is invalid number for Galois Field (GFnum)             |
+| Possible numbers for GFnum in the Data :              |
 |--------------------------------------------------------|
  [ 2, 3, 4, 5, 7 ]
-Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 fail
 gap> C := Cat1AlgebraSelect( 4, 12 );
 |--------------------------------------------------------|
@@ -101,7 +101,7 @@ gap> C := Cat1AlgebraSelect( 4, 12 );
 | Possible numbers for the gpsize for GF(4) in the Data: |
 |--------------------------------------------------------|
  [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 fail
 gap> C := Cat1AlgebraSelect( 2, 6, 3 );
 |--------------------------------------------------------|
@@ -109,7 +109,7 @@ gap> C := Cat1AlgebraSelect( 2, 6, 3 );
 | Possible numbers for the gpnum in the Data :           |
 |--------------------------------------------------------|
  [ 1, 2 ]
-Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 fail
 gap> C := Cat1AlgebraSelect( 2, 6, 2 );
 There are 4 cat1-structures for the algebra GF(2)_c6.
@@ -120,7 +120,7 @@ There are 4 cat1-structures for the algebra GF(2)_c6.
 | -----         [ 2, 14 ]               [ 2, 14 ]        |
 | -----         [ 2, 50 ]               [ 2, 50 ]        |
 |--------------------------------------------------------|
-Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
 4
 gap> C0 := Cat1AlgebraSelect( 4, 6, 2, 2 );
@@ -282,39 +282,6 @@ gap> IsInjective( m );
 true
 gap> IsBijective( m );
 false
-gap> ## Chapter 2,  Section 2.3.1
-gap> CXM := Cat1AlgebraByXModAlgebra( XM );
-[GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]]
-gap> Display( CXM );
-
-Cat1-algebra [..=>GF(2^2)[k4]] :- 
-:  range algebra has generators:
-  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
-: tail homomorphism maps source generators to:
-: range embedding maps range generators to:
-  [ [ (Z(2)^0)*<identity> of ..., <zero> of ... ], 
-  [ (Z(2)^0)*f1, <zero> of ... ], [ (Z(2)^0)*f2, <zero> of ... ] ]
-: kernel has generators:
-  [ [ <zero> of ..., <zero> of ... ], 
-  [ <zero> of ..., (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
-        0)*f1*f2 ], 
-  [ <zero> of ..., (Z(2^2))*<identity> of ...+(Z(2^2))*f1+(Z(2^2))*f2+(
-        Z(2^2))*f1*f2 ], 
-  [ <zero> of ..., (Z(2^2)^2)*<identity> of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+(
-        Z(2^2)^2)*f1*f2 ] ]
-
-gap> X3 := XModAlgebraByCat1Algebra( C3 ); 
-[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
-gap> Display( X3 ); 
-
-Crossed module [..->..] :- 
-: Source algebra has generators:
-  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
-  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
-: Range algebra has generators:
-  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3), (Z(2)^0)*(1,3,2) ]
-: Boundary homomorphism maps source generators to:
-  [ <zero> of ..., <zero> of ..., <zero> of ... ]
 
 gap> SetInfoLevel( InfoXModAlg, saved_infolevel_xmodalg );; 
 gap> STOP_TEST( "cat1.tst", 10000 );

@@ -1,6 +1,11 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.16 -> 1.17 
+## 1.17 -> 1.18 (00/10/18)
+ * (09/10/18) Conversion files: use "Of", not "By".  Delete SDproduct. 
+ * (23/09/18) PreCat1Obj replaced by PreCat1AlgebraByTailHeadEmbedding 
+ * (22/09/18) split off convert.xml and convert.tst from cat1.xml and cat1.tst 
+
+## 1.16 -> 1.17 (30/08/18)
  * (29/08/18) added method for ImagesSource at end of alg2map.gi 
  * (28/08/18) update examples to avoid travis failures 
 

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-#W  testing.g, 30/10/17          XModAlg test files     Z. Arvasi - A. Odabas 
+#W  testing.g                XModAlg test files         Z. Arvasi - A. Odabas 
 ##
 #############################################################################
 
@@ -12,7 +12,7 @@ TestXModAlg := function( pkgname )
     pkgdir := DirectoriesPackageLibrary( pkgname, "tst" );
     # Arrange chapters as required
     testfiles := 
-        [ "xmod.tst", "cat1.tst" ];
+        [ "cat1.tst", "xmod.tst", "convert.tst" ];
     testresult := true;
     for ff in testfiles do
         fn := Filename( pkgdir, ff );

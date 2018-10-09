@@ -1,0 +1,115 @@
+<!-- ------------------------------------------------------------------- -->
+<!--                                                                     -->
+<!--  convert.xml          XModAlg documentation              Z. Arvasi  -->
+<!--                                                        & A. Odabas  -->
+<!--  Copyright (C) 2014-2018, Z. Arvasi & A. Odabas,                    --> 
+<!--  Osmangazi University, Eskisehir, Turkey                            --> 
+<!--                                                                     -->
+<!-- ------------------------------------------------------------------- -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Chapter Label="chap-convert">
+
+<Heading>Conversion between cat1-algebras and crossed modules</Heading>
+
+<Section> 
+
+<Heading>Equivalent Categories</Heading> 
+
+The categories <M>\mathbf{Cat1Alg}</M> (cat<M>^{1}</M>-algebras) 
+and <M>\mathbf{XModAlg}</M> (crossed modules) 
+are naturally equivalent <Cite Key="ellis1"/>.  
+This equivalence is outlined in what follows. 
+For a given crossed module <M>(\partial : A \rightarrow R)</M> 
+we can construct the semidirect product <M>R\ltimes A</M>
+thanks to the action of <M>R</M> on <M>A</M>. 
+If we define <M>t,h : R\ltimes A \rightarrow R</M> 
+and <M>e : R \rightarrow R \ltimes A</M> by 
+<Display>
+t(r,a) = r, \qquad 
+h(r,a) = r+\partial(a), \qquad 
+e(r) = (r,0), 
+</Display>
+respectively, then 
+<M>\mathcal{C} = (e;t,h : R \ltimes A \rightarrow R)</M> 
+is a cat<M>^{1}-</M>algebra.
+<P/> 
+Conversely, for a given cat<M>^{1}</M>-algebra 
+<M>\mathcal{C}=(e;t,h : A \rightarrow R)</M>, 
+the map <M>\partial : \ker t \rightarrow R</M> is a crossed module, 
+where the action is multiplication action and 
+<M>\partial</M> is the restriction of <M>h</M> to <M>\ker t</M>. 
+<P/> 
+Since all of these operations are linked to the functions 
+<Ref Oper="Cat1Algebra"/> and <Ref Oper="XModAlgebra"/>, 
+they can be permormed by calling these two functions. 
+We may also use the function <Ref Oper="Cat1Algebra"/> 
+instead of the operation <Ref Oper="Cat1AlgebraSelect"/>.
+
+<ManSection>
+   <Oper Name="Cat1AlgebraOfXModAlgebra"
+         Arg="X0" />
+   <Oper Name="PreCat1AlgebraOfPreXModAlgebra"
+         Arg="X0" />
+<Description> 
+These operations are used for constructing a cat<M>^{1}</M>-algebra 
+from a given crossed module of algebras.
+</Description>
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> CXM := Cat1AlgebraOfXModAlgebra( XM );
+[GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]]
+gap> Display( CXM );
+
+Cat1-algebra [..=>GF(2^2)[k4]] :- 
+:  range algebra has generators:
+  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
+: tail homomorphism maps source generators to:
+: range embedding maps range generators to:
+  [ [ (Z(2)^0)*<identity> of ..., <zero> of ... ], 
+  [ (Z(2)^0)*f1, <zero> of ... ], [ (Z(2)^0)*f2, <zero> of ... ] ]
+: kernel has generators:
+  [ [ <zero> of ..., <zero> of ... ], 
+  [ <zero> of ..., (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
+        0)*f1*f2 ], 
+  [ <zero> of ..., (Z(2^2))*<identity> of ...+(Z(2^2))*f1+(Z(2^2))*f2+(
+        Z(2^2))*f1*f2 ], 
+  [ <zero> of ..., (Z(2^2)^2)*<identity> of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+(
+        Z(2^2)^2)*f1*f2 ] ]
+]]>
+</Example>
+
+<ManSection>
+   <Oper Name="XModAlgebraOfCat1Algebra"
+         Arg="C" />
+   <Oper Name="PreXModAlgebraOfPreCat1Algebra"
+         Arg="C" />
+<Description> 
+These operations are used for constructing a crossed module of algebras 
+from a given cat<M>^{1}</M>-algebra.
+</Description>
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> X3 := XModAlgebraOfCat1Algebra( C3 ); 
+[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
+gap> Display( X3 ); 
+
+Crossed module [..->..] :- 
+: Source algebra has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+: Range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3), (Z(2)^0)*(1,3,2) ]
+: Boundary homomorphism maps source generators to:
+  [ <zero> of ..., <zero> of ..., <zero> of ... ]
+]]>
+</Example>
+
+</Section>
+
+</Chapter>
