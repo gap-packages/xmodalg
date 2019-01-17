@@ -11,8 +11,7 @@ DeclareProperty( "IsAlgebraAction", IsMapping );
 
 DeclareInfoClass( "InfoXModAlg" );
 
-DeclareGlobalFunction( "MultipleAlgebra",
-    [ IsAlgebra ] );
+DeclareGlobalFunction( "MultipleAlgebra" );
 
 DeclareProperty( "IsMultipleAlgebra", IsList );
 
