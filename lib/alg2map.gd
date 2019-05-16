@@ -15,6 +15,8 @@ BindGlobal( "Family2dAlgebraMorphism",
 
 DeclareProperty( "IsPreXModAlgebraMorphism", Is2dAlgebraMorphism );
 DeclareProperty( "IsXModAlgebraMorphism", Is2dAlgebraMorphism );
+InstallTrueMethod(Is2dAlgebraMorphism, IsPreXModAlgebraMorphism);
+InstallTrueMethod(Is2dAlgebraMorphism, IsXModAlgebraMorphism);
 
 DeclareRepresentation( "Is2dAlgebraMorphismRep", 
     Is2dAlgebraMorphism and IsAttributeStoringRep,
@@ -40,6 +42,8 @@ DeclareOperation( "Cat1AlgebraMorphismByHoms",
 
 DeclareProperty( "IsPreCat1AlgebraMorphism", Is2dAlgebraMorphism );
 DeclareProperty( "IsCat1AlgebraMorphism", Is2dAlgebraMorphism );
+InstallTrueMethod(Is2dAlgebraMorphism, IsPreCat1AlgebraMorphism);
+InstallTrueMethod(Is2dAlgebraMorphism, IsCat1AlgebraMorphism);
 
 
 
