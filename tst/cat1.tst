@@ -29,10 +29,8 @@ gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
 gap> IsXModAlgebra( XM );;
 gap> ############################ 
 gap> ## Chapter 2,  Section 2.1.2
-gap> Ac6 := GroupRing( GF(2), Group( (1,2,3)(4,5) ) );
-<algebra-with-one over GF(2), with 1 generators>
-gap> Rc3 := GroupRing( GF(2), Group( (1,2,3) ) );
-<algebra-with-one over GF(2), with 1 generators>
+gap> Ac6 := GroupRing( GF(2), Group( (1,2,3)(4,5) ) );;
+gap> Rc3 := GroupRing( GF(2), Group( (1,2,3) ) );;
 gap> homAR := AllHomsOfAlgebras( Ac6, Rc3 );;
 gap> mgiAR := List( homAR, h -> MappingGeneratorsImages(h) );;
 gap> Print( mgiAR, "\n" );

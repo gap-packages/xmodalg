@@ -211,8 +211,7 @@ of a given crossed module.
 <![CDATA[
 gap> e4 := Elements( IAk4 )[4];
 (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
-gap> Je4 := Ideal( IAk4, [e4] );
-<two-sided ideal in I(GF5[k4]), (1 generators)>
+gap> Je4 := Ideal( IAk4, [e4] );;
 gap> Size( Je4 );
 5
 gap> SetName( Je4, "<e4>" ); 
@@ -261,8 +260,7 @@ gap> Size( R );
 gap> SetName( R, "GF(2^2)[k4]" ); 
 gap> e5 := Elements( R )[5]; 
 (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
-gap> S := Subalgebra( R, [e5] ); 
-<algebra over GF(2^2), with 1 generators>
+gap> S := Subalgebra( R, [e5] );;
 gap> SetName( S, "<e5>" );
 gap> RS := Cartesian( R, S );; 
 gap> SetName( RS, "GF(2^2)[k4] x <e5>" ); 
