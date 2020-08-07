@@ -1905,16 +1905,17 @@ InstallMethod( KernelEmbedding, "method for a pre-cat1-algebra", true,
     [ IsPreCat1Algebra ], 0,
     C1A -> InclusionMappingAlgebra( Source( C1A ), Kernel( C1A ) ) );
 
-#############################################################################
+##############################################################################
 ##
-#M  PreCat1GroupOfPreXMod . convert a pre-crossed module to a pre-cat1-algebra
+#M  PreCat1GroupRecordOfPreXMod . convert pre-xmod-algebra to pre-cat1-algebra
+#M  Cat1GroupOfXMod . . convert a crossed module of algebras to a cat1-algebra
 ##
-InstallOtherMethod( PreCat1GroupOfPreXMod,
-    "convert a pre-crossed module to a pre-cat1-algebra", true, 
+InstallOtherMethod( PreCat1GroupRecordOfPreXMod,
+    "convert a pre-xmod-algebra to a pre-cat1-algebra record", true, 
     [ IsPreXModAlgebra ], 0,
 function( XM )
 
-    local  A, gA, Xact, Xbdy, R, gR, zA, RA, x, t, h, e, C;
+    local  A, gA, Xact, Xbdy, R, gR, zA, RA, x, t, h, e, C, pcrec;
 
     A := Source( XM );
     gA := GeneratorsOfAlgebra( A );
@@ -1923,7 +1924,9 @@ function( XM )
     zA := Zero( A );
     Xact := XModAlgebraAction( XM );
     Xbdy := Boundary( XM );  
-    RA:=Cartesian(R,A);
+    RA := Cartesian(R,A);
+    #? should DirectSumOfAlgebras be used here? 
+    #? no Embedding available for  R -> RA  or  A -> RA 
     t := rec( fun:= x->x[1]);
     ObjectifyWithAttributes( t, 
         NewType( GeneralMappingsFamily( ElementsFamily( FamilyObj(RA) ),
@@ -1962,8 +1965,31 @@ function( XM )
         Source, R,
         Range, RA,
         IsAlgebraHomomorphism, true );
-    C := PreCat1AlgebraObj( t, h, e );   
-    return C;
+    C := PreCat1AlgebraObj( t, h, e ); 
+    pcrec := rec( precat1 := C 
+                  ## xmodRangeEmbedding := Image( eR ), 
+                  ## xmodRangeEmbeddingIsomorphism := eR, 
+                  ## xmodSourceEmbedding := Image( eS ), 
+                  ## xmodSourceEmbeddingIsomorphism := eS 
+             ); 
+    if HasIsXModAlgebra( XM ) and IsXModAlgebra( XM ) then 
+        pcrec.iscat1 := true; 
+    fi; 
+    return pcrec; 
+end ); 
+
+InstallOtherMethod( Cat1GroupOfXMod, 
+    "convert a crossed module of algebras to a cat1-algebra", true, 
+    [ IsPreXModAlgebra ], 0,
+function( XM )
+
+    local pcrec, CA1; 
+
+    pcrec := PreCat1GroupRecordOfPreXMod( XM ); 
+    CA1 := pcrec.precat1; 
+    SetXModOfCat1Group( CA1, XM ); 
+    return CA1; 
+
 end ); 
 
 ##############################################################################
@@ -2083,8 +2109,9 @@ InstallMethod( Cat1AlgebraOfXModAlgebra, "generic method for crossed modules",
     true, [ IsPreXModAlgebra ], 0,
 function( X1 )
 
-    local  C1;
-    C1 := PreCat1GroupOfPreXMod( X1 );
+    local  pcrec, C1;
+    pcrec := PreCat1GroupRecordOfPreXMod( X1 ); 
+    C1 := pcrec.precat1;
     if not IsXModAlgebra( X1 ) then
         Print( "Warning : X1 is only Pre-xmod-algebra\n" );        
     fi;  
