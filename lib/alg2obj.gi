@@ -1908,7 +1908,6 @@ InstallMethod( KernelEmbedding, "method for a pre-cat1-algebra", true,
 ##############################################################################
 ##
 #M  PreCat1GroupRecordOfPreXMod . convert pre-xmod-algebra to pre-cat1-algebra
-#M  Cat1GroupOfXMod . . convert a crossed module of algebras to a cat1-algebra
 ##
 InstallOtherMethod( PreCat1GroupRecordOfPreXMod,
     "convert a pre-xmod-algebra to a pre-cat1-algebra record", true, 
@@ -1976,20 +1975,6 @@ function( XM )
         pcrec.iscat1 := true; 
     fi; 
     return pcrec; 
-end ); 
-
-InstallOtherMethod( Cat1GroupOfXMod, 
-    "convert a crossed module of algebras to a cat1-algebra", true, 
-    [ IsPreXModAlgebra ], 0,
-function( XM )
-
-    local pcrec, CA1; 
-
-    pcrec := PreCat1GroupRecordOfPreXMod( XM ); 
-    CA1 := pcrec.precat1; 
-    SetXModOfCat1Group( CA1, XM ); 
-    return CA1; 
-
 end ); 
 
 ##############################################################################
