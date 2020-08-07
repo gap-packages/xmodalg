@@ -9,6 +9,7 @@ DeclareCategory( "Is2dAlgebraMorphism", IsGeneral2DimensionalMapping );
 DeclareCategoryCollections( "Is2dAlgebraMorphism" );
 DeclareCategoryCollections( "Is2dAlgebraMorphismCollection" );
 DeclareCategoryCollections( "Is2dAlgebraMorphismCollColl" );
+
 BindGlobal( "Family2dAlgebraMorphism", 
     NewFamily( "Family2dAlgebraMorphism", Is2dAlgebraMorphism, 
                CanEasilySortElements, CanEasilySortElements ) ); 
@@ -22,26 +23,29 @@ DeclareRepresentation( "Is2dAlgebraMorphismRep",
 DeclareAttribute( "SourceHom", Is2dAlgebraMorphism );
 DeclareAttribute( "RangeHom", Is2dAlgebraMorphism );
 DeclareOperation( "Make2dAlgebraMorphism",
-    [ Is2dAlgebraObject, Is2dAlgebraObject, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
+    [ Is2dAlgebraObject, Is2dAlgebraObject, IsAlgebraHomomorphism, 
+      IsAlgebraHomomorphism ] );
     
 DeclareGlobalFunction( "PreXModAlgebraMorphism" );
 DeclareOperation( "PreXModAlgebraMorphismByHoms",
-    [ IsPreXModAlgebra, IsPreXModAlgebra, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
+    [ IsPreXModAlgebra, IsPreXModAlgebra, IsAlgebraHomomorphism, 
+      IsAlgebraHomomorphism ] );
 DeclareGlobalFunction( "PreCat1AlgebraMorphism" );
 DeclareOperation( "PreCat1AlgebraMorphismByHoms",
-    [ IsPreCat1Algebra, IsPreCat1Algebra, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
+    [ IsPreCat1Algebra, IsPreCat1Algebra, IsAlgebraHomomorphism, 
+      IsAlgebraHomomorphism ] );
 
 DeclareGlobalFunction( "XModAlgebraMorphism" );
 DeclareOperation( "XModAlgebraMorphismByHoms",
-    [ IsXModAlgebra, IsXModAlgebra, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
+    [ IsXModAlgebra, IsXModAlgebra, IsAlgebraHomomorphism, 
+      IsAlgebraHomomorphism ] );
 DeclareGlobalFunction( "Cat1AlgebraMorphism" );
 DeclareOperation( "Cat1AlgebraMorphismByHoms",
-    [ IsCat1Algebra, IsCat1Algebra, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
+    [ IsCat1Algebra, IsCat1Algebra, IsAlgebraHomomorphism, 
+      IsAlgebraHomomorphism ] );
 
 DeclareProperty( "IsPreCat1AlgebraMorphism", Is2dAlgebraMorphism );
 DeclareProperty( "IsCat1AlgebraMorphism", Is2dAlgebraMorphism );
 
-
-
-
-
+DeclareOperation( "ImagesSource2DimensionalMapping",
+    [ Is2DimensionalMapping ] );

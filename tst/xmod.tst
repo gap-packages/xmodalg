@@ -174,7 +174,7 @@ gap> IsInjective( mor );
 false
 gap> IsSurjective( mor );
 false
-gap> Image( mor );
+gap> ImagesSource2DimensionalMapping( mor );
 Srng is not an ideal of Prng
 fail
 gap> STOP_TEST( "xmod.tst", 10000 );
