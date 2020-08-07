@@ -7,14 +7,16 @@ LoadPackage( "GAPDoc" );
 LoadPackage( "AutoDoc" ); 
 
 AutoDoc( rec( 
+    gapdoc := rec( 
+        LaTeXOptions := rec( EarlyExtraPreamble := """
+            \usepackage[all]{xy} 
+            \newcommand{\hello} {\mathrm{hello}}
+        """ )
+    ),  
     scaffold := rec(
         ## MainPage := false, 
         includes := [ "intro.xml", "cat1.xml", "xmod.xml", "convert.xml" ],
         bib := "bib.xml", 
-        gapdoc_latex_options := rec( EarlyExtraPreamble := """
-            \usepackage[all]{xy} 
-            \newcommand{\hello} {\mathrm{hello}}
-        """ ),  
         entities := rec( 
             AutoDoc := "<Package>AutoDoc</Package>"
         )
