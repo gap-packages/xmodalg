@@ -703,14 +703,18 @@ InstallOtherMethod( IsBijective,
 
 #############################################################################
 ##
-#M  ImagesSource( <mor> ) . . . . for pre-xmod and pre-cat1 algebra morphisms
+#M  ImagesSource2DimensionalMapping( <mor> ) . . for pre-xmod/cat1 alg morphs
 ##
-InstallOtherMethod( ImagesSource, "image of pre-xmod/cat1 algebra morphism", 
-    true, [ Is2DimensionalMapping and Is2dAlgebraMorphism ], 0, 
+InstallOtherMethod( ImagesSource2DimensionalMapping, 
+    "image of pre-xmod/cat1 algebra morphism", true, 
+    [ Is2DimensionalMapping and Is2dAlgebraMorphism ], 0, 
 function( mor )
     
     local Shom, Rhom, imS, imR, sub;
 
+    if not Is2dAlgebraMorphism( mor ) then 
+        Error( "general method not yet implemented" ); 
+    fi; 
     Shom := SourceHom( mor );
     Rhom := RangeHom( mor );
     imS := ImagesSource( Shom );
