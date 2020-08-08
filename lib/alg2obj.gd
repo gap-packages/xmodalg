@@ -111,8 +111,8 @@ DeclareAttribute( "XModAlgebraConst", IsCat1Algebra );
 
 DeclareAttribute( "PreXModAlgebraOfPreCat1Algebra", IsPreCat1Algebra );
 DeclareAttribute( "PreCat1AlgebraOfPreXModAlgebra", IsPreXModAlgebra );
-DeclareAttribute( "XModAlgebraOfCat1Algebra", IsPreCat1Algebra );
-DeclareAttribute( "Cat1AlgebraOfXModAlgebra", IsPreXModAlgebra );
+DeclareAttribute( "XModAlgebraOfCat1Algebra", IsCat1Algebra );
+DeclareAttribute( "Cat1AlgebraOfXModAlgebra", IsXModAlgebra );
 DeclareOperation( "EquivalenceTail", [ IsEquivalenceTail ] );
 DeclareOperation( "EquivalenceHead", [ IsEquivalenceHead ] );
 DeclareOperation( "SDproduct", [ Is2dAlgebraObject ] );

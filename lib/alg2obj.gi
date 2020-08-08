@@ -1907,78 +1907,6 @@ InstallMethod( KernelEmbedding, "method for a pre-cat1-algebra", true,
 
 ##############################################################################
 ##
-#M  PreCat1GroupRecordOfPreXMod . convert pre-xmod-algebra to pre-cat1-algebra
-##
-InstallOtherMethod( PreCat1GroupRecordOfPreXMod,
-    "convert a pre-xmod-algebra to a pre-cat1-algebra record", true, 
-    [ IsPreXModAlgebra ], 0,
-function( XM )
-
-    local  A, gA, Xact, Xbdy, R, gR, zA, RA, x, t, h, e, C, pcrec;
-
-    A := Source( XM );
-    gA := GeneratorsOfAlgebra( A );
-    R := Range( XM );
-    #gR := GeneratorsOfAlgebra( R );
-    zA := Zero( A );
-    Xact := XModAlgebraAction( XM );
-    Xbdy := Boundary( XM );  
-    RA := Cartesian(R,A);
-    #? should DirectSumOfAlgebras be used here? 
-    #? no Embedding available for  R -> RA  or  A -> RA 
-    t := rec( fun:= x->x[1]);
-    ObjectifyWithAttributes( t, 
-        NewType( GeneralMappingsFamily( ElementsFamily( FamilyObj(RA) ),
-            ElementsFamily( FamilyObj(R) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        Source, RA,
-        SourceForEquivalence, A,
-        Range, R,
-        Equivalence, true,
-        IsAlgebraHomomorphism, true,
-        IsEquivalenceTail, true,
-        IsEquivalenceHead, false,
-        IsXModAlgebraConst, true,
-        XModAlgebraConst, XM );
-    h := rec( fun:= x->x[1]+Image(Xbdy,x[2]));
-    ObjectifyWithAttributes( h, 
-        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(RA) ),
-            ElementsFamily( FamilyObj(R) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        Source, RA,
-        SourceForEquivalence, A,
-        Range, R,
-        IsAlgebraHomomorphism, true,
-        BoundaryForEquivalence, Xbdy,
-        XModAlgebraAction, Xact,
-        IsEquivalenceHead, true,
-        IsEquivalenceTail, false );
-    e := rec( fun:= x->[x,zA]);
-    ObjectifyWithAttributes( e, 
-        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(R) ),
-            ElementsFamily( FamilyObj(RA) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        Source, R,
-        Range, RA,
-        IsAlgebraHomomorphism, true );
-    C := PreCat1AlgebraObj( t, h, e ); 
-    pcrec := rec( precat1 := C 
-                  ## xmodRangeEmbedding := Image( eR ), 
-                  ## xmodRangeEmbeddingIsomorphism := eR, 
-                  ## xmodSourceEmbedding := Image( eS ), 
-                  ## xmodSourceEmbeddingIsomorphism := eS 
-             ); 
-    if HasIsXModAlgebra( XM ) and IsXModAlgebra( XM ) then 
-        pcrec.iscat1 := true; 
-    fi; 
-    return pcrec; 
-end ); 
-
-##############################################################################
-##
 #M  Kernel( t,h ) . . . . . . . . . . . . . . . . . . . for a pre-cat1-algebra
 ##
 InstallOtherMethod( Kernel, "method for a pre-cat1-algebra",
@@ -2072,37 +2000,98 @@ end );
 #M  XModAlgebraOfCat1Algebra
 ##
 InstallMethod( XModAlgebraOfCat1Algebra, "generic method for cat1-algebras",
-    true, [ IsPreCat1Algebra ], 0,
+    true, [ IsCat1Algebra ], 0,
 function( C1 )
 
-    local  X1;
+    local  X1; 
+
     X1 := PreXModAlgebraOfPreCat1Algebra( C1 );
-    if not IsCat1Algebra( C1 ) then
-        Print( "Warning : C is only Pre-cat1-algebra\n" );        
+    if not IsXModAlgebra( X1 ) then
+        Info( InfoXModAlg, 1, "X1 is only a pre-xmod-algebra" ); 
+        return fail;        
     fi;    
-    # SetIsXMod( X1, true );
-    SetXModAlgebraOfCat1Algebra( C1, X1 );
     SetCat1AlgebraOfXModAlgebra( X1, C1 );
     return X1;
 end );
 
 ##############################################################################
 ##
+#M  PreCat1AlgebraOfPreXModAlgebra . . . pre-xmod-algebra -> pre-cat1-algebra
+##
+InstallMethod( PreCat1AlgebraOfPreXModAlgebra,
+    "convert a pre-xmod-algebra to a pre-cat1-algebra record", true, 
+    [ IsPreXModAlgebra ], 0,
+function( XM )
+
+    local  A, gA, Xact, Xbdy, R, gR, zA, RA, x, t, h, e;
+
+    A := Source( XM );
+    gA := GeneratorsOfAlgebra( A );
+    R := Range( XM );
+    #gR := GeneratorsOfAlgebra( R );
+    zA := Zero( A );
+    Xact := XModAlgebraAction( XM );
+    Xbdy := Boundary( XM );  
+    RA := Cartesian(R,A);
+    #? should DirectSumOfAlgebras be used here? 
+    #? but no Embedding available for  R -> RA  or  A -> RA 
+    t := rec( fun:= x->x[1]);
+    ObjectifyWithAttributes( t, 
+        NewType( GeneralMappingsFamily( ElementsFamily( FamilyObj(RA) ),
+            ElementsFamily( FamilyObj(R) ) ),
+        IsSPMappingByFunctionRep and IsSingleValued
+            and IsTotal and IsGroupHomomorphism ),
+        Source, RA,
+        SourceForEquivalence, A,
+        Range, R,
+        Equivalence, true,
+        IsAlgebraHomomorphism, true,
+        IsEquivalenceTail, true,
+        IsEquivalenceHead, false,
+        IsXModAlgebraConst, true,
+        XModAlgebraConst, XM );
+    h := rec( fun:= x->x[1]+Image(Xbdy,x[2]));
+    ObjectifyWithAttributes( h, 
+        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(RA) ),
+            ElementsFamily( FamilyObj(R) ) ),
+        IsSPMappingByFunctionRep and IsSingleValued
+            and IsTotal and IsGroupHomomorphism ),
+        Source, RA,
+        SourceForEquivalence, A,
+        Range, R,
+        IsAlgebraHomomorphism, true,
+        BoundaryForEquivalence, Xbdy,
+        XModAlgebraAction, Xact,
+        IsEquivalenceHead, true,
+        IsEquivalenceTail, false );
+    e := rec( fun:= x->[x,zA]);
+    ObjectifyWithAttributes( e, 
+        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(R) ),
+            ElementsFamily( FamilyObj(RA) ) ),
+        IsSPMappingByFunctionRep and IsSingleValued
+            and IsTotal and IsGroupHomomorphism ),
+        Source, R,
+        Range, RA,
+        IsAlgebraHomomorphism, true );
+    return PreCat1AlgebraObj( t, h, e ); 
+end ); 
+
+##############################################################################
+##
 #M  Cat1AlgebraOfXModAlgebra
 ##
 InstallMethod( Cat1AlgebraOfXModAlgebra, "generic method for crossed modules",
-    true, [ IsPreXModAlgebra ], 0,
+    true, [ IsXModAlgebra ], 0,
 function( X1 )
 
-    local  pcrec, C1;
-    pcrec := PreCat1GroupRecordOfPreXMod( X1 ); 
-    C1 := pcrec.precat1;
-    if not IsXModAlgebra( X1 ) then
-        Print( "Warning : X1 is only Pre-xmod-algebra\n" );        
-    fi;  
-    # SetIsCat1Algebra( C1, true );
+    local C1; 
+
+    C1 := PreCat1AlgebraOfPreXModAlgebra( X1 );
+    if not IsCat1Algebra( C1 ) then
+        Info( InfoXModAlg, 1, "C1 is only a pre-cat1-algebra" ); 
+        return fail;        
+    fi;    
     SetXModAlgebraOfCat1Algebra( C1, X1 );
-    SetCat1AlgebraOfXModAlgebra( X1, C1 );
     return C1;
 end );
 
