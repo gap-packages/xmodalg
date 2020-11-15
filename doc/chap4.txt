@@ -1,0 +1,85 @@
+  
+  [1X4 [33X[0;0YConversion between cat1-algebras and crossed modules[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YEquivalent Categories[133X[101X
+  
+  [33X[0;0YThe  categories  [22XmathbfCat1Alg[122X  (cat[22X^1[122X-algebras)  and [22XmathbfXModAlg[122X (crossed
+  modules)  are  naturally equivalent [Ell88]. This equivalence is outlined in
+  what  follows.  For  a given crossed module [22X(∂ : A → R)[122X we can construct the
+  semidirect  product  [22XR⋉ A[122X thanks to the action of [22XR[122X on [22XA[122X. If we define [22Xt,h :
+  R⋉ A → R[122X and [22Xe : R → R ⋉ A[122X by[133X
+  
+  
+  [24X[33X[0;6Yt(r,a) = r, \qquad h(r,a) = r+\partial(a), \qquad e(r) = (r,0),[133X
+  
+  [124X
+  
+  [33X[0;0Yrespectively, then [22XmathcalC = (e;t,h : R ⋉ A → R)[122X is a cat[22X^1-[122Xalgebra.[133X
+  
+  [33X[0;0YConversely,  for a given cat[22X^1[122X-algebra [22XmathcalC=(e;t,h : A → R)[122X, the map [22X∂ :
+  ker t → R[122X is a crossed module, where the action is multiplication action and
+  [22X∂[122X is the restriction of [22Xh[122X to [22Xker t[122X.[133X
+  
+  [33X[0;0YSince  all  of  these  operations  are  linked  to the functions [2XCat1Algebra[102X
+  ([14X2.1-1[114X)  and [2XXModAlgebra[102X ([14X3.1-1[114X), they can be permormed by calling these two
+  functions.  We  may also use the function [2XCat1Algebra[102X ([14X2.1-1[114X) instead of the
+  operation [2XCat1AlgebraSelect[102X ([14X2.1-3[114X).[133X
+  
+  [1X4.1-1 Cat1AlgebraOfXModAlgebra[101X
+  
+  [33X[1;0Y[29X[2XCat1AlgebraOfXModAlgebra[102X( [3XX0[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XPreCat1AlgebraOfPreXModAlgebra[102X( [3XX0[103X ) [32X operation[133X
+  
+  [33X[0;0YThese  operations  are  used  for  constructing a cat[22X^1[122X-algebra from a given
+  crossed module of algebras.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XCXM := Cat1AlgebraOfXModAlgebra( XM );[127X[104X
+    [4X[28X[GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( CXM );[127X[104X
+    [4X[28X[128X[104X
+    [4X[28XCat1-algebra [..=>GF(2^2)[k4]] :- [128X[104X
+    [4X[28X:  range algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ][128X[104X
+    [4X[28X: tail homomorphism maps source generators to:[128X[104X
+    [4X[28X: range embedding maps range generators to:[128X[104X
+    [4X[28X  [ [ (Z(2)^0)*<identity> of ..., <zero> of ... ], [128X[104X
+    [4X[28X  [ (Z(2)^0)*f1, <zero> of ... ], [ (Z(2)^0)*f2, <zero> of ... ] ][128X[104X
+    [4X[28X: kernel has generators:[128X[104X
+    [4X[28X  [ [ <zero> of ..., <zero> of ... ], [128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^[128X[104X
+    [4X[28X        0)*f1*f2 ], [128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2^2))*<identity> of ...+(Z(2^2))*f1+(Z(2^2))*f2+([128X[104X
+    [4X[28X        Z(2^2))*f1*f2 ], [128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2^2)^2)*<identity> of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+([128X[104X
+    [4X[28X        Z(2^2)^2)*f1*f2 ] ][128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [1X4.1-2 XModAlgebraOfCat1Algebra[101X
+  
+  [33X[1;0Y[29X[2XXModAlgebraOfCat1Algebra[102X( [3XC[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XPreXModAlgebraOfPreCat1Algebra[102X( [3XC[103X ) [32X operation[133X
+  
+  [33X[0;0YThese operations are used for constructing a crossed module of algebras from
+  a given cat[22X^1[122X-algebra.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XX3 := XModAlgebraOfCat1Algebra( C3 ); [127X[104X
+    [4X[28X[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( X3 ); [127X[104X
+    [4X[28X[128X[104X
+    [4X[28XCrossed module [..->..] :- [128X[104X
+    [4X[28X: Source algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), [128X[104X
+    [4X[28X  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ][128X[104X
+    [4X[28X: Range algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3), (Z(2)^0)*(1,3,2) ][128X[104X
+    [4X[28X: Boundary homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ <zero> of ..., <zero> of ..., <zero> of ... ][128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  

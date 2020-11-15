@@ -1,0 +1,34 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  [33X[0;0YIn  1950  S.  MacLane  and  J.H.C. Whitehead, [Whi49] suggested that crossed
+  modules modeled homotopy [22X2[122X-types. Later crossed modules have been considered
+  as  [22X2[122X[13X-dimensional  groups[113X, [Bro82], [Bro87]. The commutative algebra version
+  of  this  construction  has been adapted by T. Porter, [AP96], [Por87]. This
+  algebraic  version  is  called  [13Xcombinatorial algebra theory[113X, which contains
+  potentially important new ideas (see [AP96], [AP98], [AE03]).[133X
+  
+  [33X[0;0YA  share  package  [5XXMod[105X,  [AOUW17],  [AW00], was prepared by M. Alp and C.D.
+  Wensley  for the [5XGAP[105X computational group theory language, initially for [5XGAP[105X3
+  then  revised  for  [5XGAP[105X4.  The [22X2[122X-dimensional part of this programme contains
+  functions for computing crossed modules and cat[22X^1[122X-groups and their morphisms
+  [AOUW17].[133X
+  
+  [33X[0;0YThis  package  includes functions for computing crossed modules of algebras,
+  cat[22X^1[122X-algebras  and  their  morphisms  by  analogy  with [13Xcomputational group
+  theory[113X.  We  will  concentrate  on  group  rings over of abelian groups over
+  finite  fields  because  these algebras are conveniently implemented in [5XGAP[105X.
+  The  tools  needed are the group algebras in which the group algebra functor
+  [22XmathcalK(.):Gr→   Alg[122X   is   left   adjoint   to   the  unit  group  functor
+  [22XmathcalU(.):Alg→ Gr[122X.[133X
+  
+  [33X[0;0YThe   categories   [10XXModAlg[110X   (crossed   modules  of  algebras)  and  [10XCat1Alg[110X
+  (cat[22X^1[122X-algebras) are equivalent, and we include functions to convert objects
+  and  morphisms  between them. The algorithms implemented in this package are
+  analyzed in A. Odabas's Ph.D. thesis, [Oda09] and described in detail in the
+  paper [AO16].[133X
+  
+  [33X[0;0YThere  are  aspects  of  commutative algebras for which no [5XGAP[105X functions yet
+  exist,  for example semidirect products. We have included here functions for
+  all homomorphisms of algebras.[133X
+  
