@@ -9,7 +9,7 @@ SetPackageInfo( rec(
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 Version := "1.18",
-Date := "07/08/2020", # dd/mm/yyyy format
+Date := "15/11/2020", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -81,9 +81,9 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">=4.9.2",
-  NeededOtherPackages := [ ["XMod", ">=2.69"], 
-                           ["LAGUNA", ">=3.7.0"] ],
+  GAP := ">=4.11.0",
+  NeededOtherPackages := [ ["XMod", ">=2.82"], 
+                           ["LAGUNA", ">=3.9.3"] ],
   SuggestedOtherPackages := [ ],   ## ["GAPDoc", ">= 1.6.1" ] ],   
   ExternalConditions := [ ]
 ),
@@ -92,7 +92,7 @@ AvailabilityTest := ReturnTrue,
 
 BannerString := Concatenation( 
   "-----------------------------------------------------------------------------\n",
-  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.9 \n", 
+  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.11 \n", 
   "Methods for crossed modules of commutative algebras and cat1-algebras\n",
   "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n",
   "-----------------------------------------------------------------------------\n"
@@ -107,7 +107,7 @@ Keywords := ["crossed module of algebras", "cat1-algebra"],
 AutoDoc := rec(
     TitlePage := rec(
         Copyright := Concatenation(
-            "&copyright; 2014-2018, Zekeriya Arvasi and Alper Odabas. <P/>\n", 
+            "&copyright; 2014-2020, Zekeriya Arvasi and Alper Odabas. <P/>\n", 
             "The &XModAlg; package is free software; you can redistribute it ", 
             "and/or modify it under the terms of the GNU General ", 
             "Public License as published by the Free Software Foundation; ", 

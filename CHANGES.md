@@ -1,6 +1,8 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.17 -> 1.18 (00/10/18)
+## 1.17 -> 1.18 (15/11/20)
+ * (07/08/20) fixed problem with Cat1AlgebraOfXModAlgebra 
+              introduced ImagesSource2DimensionalMapping
  * (09/10/18) Conversion files: use "Of", not "By".  Delete SDproduct. 
  * (23/09/18) PreCat1Obj replaced by PreCat1AlgebraByTailHeadEmbedding 
  * (22/09/18) split off convert.xml and convert.tst from cat1.xml and cat1.tst 
