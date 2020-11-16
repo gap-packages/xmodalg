@@ -1,6 +1,7 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.17 -> 1.18 (16/11/20) 
+## 1.17 -> 1.18 
+ * (16/11/20) released version 1.18 
  * (07/08/20) fixed problem with Cat1AlgebraOfXModAlgebra 
               introduced ImagesSource2DimensionalMapping
  * (09/10/18) Conversion files: use "Of", not "By".  Delete SDproduct. 
