@@ -39,6 +39,6 @@ For details, see \URL{http://www.gnu.org/licenses/gpl.html}
 ## Contact
 
 If you have a question relating to 'XModAlg', encounter any problems, or have a suggestion for extending the package in any way, please 
- * email: `aodabas@ogu.edu.tr`
- * or report an issue at: <https://github.com/gap-packages/xmodalg/issues/new>  
+ * report an issue at: <https://github.com/gap-packages/xmodalg/issues/new>  
+ * or email: `aodabas@ogu.edu.tr`
 
