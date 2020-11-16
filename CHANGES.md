@@ -1,6 +1,6 @@
-# CHANGES to the 'XModAlg' package
+# CHANGES to the 'XModAlg' package/Applications/gap/my-dev/pkg/xmodalg/CHANGES.md
 
-## 1.17 -> 1.19 
+## 1.17 -> 1.18 (16/11/20)
  * (16/11/20) released version 1.19 
  * (07/08/20) fixed problem with Cat1AlgebraOfXModAlgebra 
               introduced ImagesSource2DimensionalMapping
