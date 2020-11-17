@@ -1,7 +1,7 @@
 name: XModAlg
 version: "1.18"
 license: "GPL-2.0-or-later"
-date: 2020-11-15
+date: 2020-11-17
 description: |
     Crossed Modules and Cat1-Algebras
 
