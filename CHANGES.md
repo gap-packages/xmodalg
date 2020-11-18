@@ -1,5 +1,7 @@
 # CHANGES to the 'XModAlg' package
 
+## 1.18 -> 1.18dev (18/11/20) 
+
 ## 1.17 -> 1.18 (17/11/20) 
  * (07/08/20) fixed problem with Cat1AlgebraOfXModAlgebra 
               introduced ImagesSource2DimensionalMapping
