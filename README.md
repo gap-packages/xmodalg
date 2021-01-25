@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/gap-packages/xmodalg.svg?branch=master)](https://travis-ci.org/gap-packages/xmodalg)
+[![Build Status](https://travis-ci.com/gap-packages/xmodalg.svg?branch=master)](https://travis-ci.com/gap-packages/xmodalg)
 [![Code Coverage](https://codecov.io/github/gap-packages/xmodalg/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/xmodalg)
 
 # The GAP 4 package XModAlg  
