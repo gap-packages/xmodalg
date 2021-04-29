@@ -505,20 +505,6 @@ gap> IsInjective( mor );
 false
 gap> IsSurjective( mor );
 false
-]]>
-</Example>
-
-<ManSection>
-   <Oper Name="ImagesSource2DimensionalMapping"
-         Arg="m" />
-<Description>
-When <M>(\theta,\varphi)</M> is a homomorphism of crossed modules, 
-this operation returns the image crossed module. 
-</Description>
-</ManSection>
-
-<Example>
-<![CDATA[
 gap> immor := ImagesSource2DimensionalMapping( mor );;
 gap> Display( immor );
 

@@ -512,6 +512,37 @@ false
 ]]>
 </Example>
 
+<ManSection>
+   <Oper Name="ImagesSource2DimensionalMapping"
+         Arg="m" />
+<Description>
+When <M>(\theta,\varphi)</M> is a homomorphism of cat1-algebras 
+(or crossed modules)  
+this operation returns the image crossed module. 
+</Description>
+</ManSection>
+
+<Example>
+<![CDATA[
+gap> imm := ImagesSource2DimensionalMapping( m );;
+gap> Display( imm ); 
+
+Cat1-algebra [..=>..] :- 
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+:  range algebra has generators:
+  [ (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*() ]
+: the kernel is trivial.
+
+]]>
+</Example>
+
 </Section> 
 
 </Chapter>
