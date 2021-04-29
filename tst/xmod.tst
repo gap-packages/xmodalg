@@ -126,9 +126,11 @@ gap> XIBk4 := XModAlgebra( Bk4, IBk4 );
 [ I(GF2[k4]) -> GF2[k4] ]
 gap> IAc4 = IBk4;
 false
+gap> homIAIB := AllHomsOfAlgebras( IAc4, IBk4 );; 
+gap> theta := homIAIB[3];; 
 gap> homAB := AllHomsOfAlgebras( Ac4, Bk4 );;
-gap> homIAIB := AllHomsOfAlgebras( IAc4, IBk4 );;
-gap> mor := XModAlgebraMorphism( XIAc4, XIBk4, homIAIB[1], homAB[2] );
+gap> phi := homAB[7];; 
+gap> mor := XModAlgebraMorphism( XIAc4, XIBk4, theta, phi );
 [[I(GF2[c4])->GF2[c4]] => [I(GF2[k4])->GF2[k4]]]
 gap> Display( mor );
 
@@ -136,9 +138,11 @@ Morphism of crossed modules :-
 : Source = [I(GF2[c4])->GF2[c4]]
 :  Range = [I(GF2[k4])->GF2[k4]]
 : Source Homomorphism maps source generators to:
-  [ <zero> of ..., <zero> of ..., <zero> of ... ]
+  [ <zero> of ..., (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
+    0)*f1*f2, (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
+    0)*f1*f2 ]
 : Range Homomorphism maps range generators to:
-  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*<identity> of ..., 
+  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2, 
   (Z(2)^0)*<identity> of ... ]
 
 gap> IsTotal( mor );
@@ -148,33 +152,39 @@ true
 gap> ############################
 gap> ## Chapter 3,  Section 3.2.2
 gap> Xmor := Kernel( mor );
-[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
+[ <algebra of dimension 2 over GF(2)> -> <algebra of dimension 2 over GF(2)> ]
 gap> IsXModAlgebra( Xmor );
 true
 gap> Size( Xmor );
-[ 8, 8 ]
+[ 4, 4 ]
 gap> IsSubXModAlgebra( XIAc4, Xmor );
 true
 gap> ############################
 gap> ## Chapter 3,  Section 3.2.4
-gap> ic4 := One( Ac4 );;                                      
-gap> theta := SourceHom( mor );;
+gap> ic4 := One( Ac4 );; 
 gap> e1 := ic4*c4.1 + ic4*c4.2;
 (Z(2)^0)*f1+(Z(2)^0)*f2
 gap> ImageElm( theta, e1 );  
-<zero> of ...
-gap> phi := RangeHom( mor );;
+(Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
 gap> e2 := ic4*c4.1;
 (Z(2)^0)*f1
 gap> ImageElm( phi, e2 );
-(Z(2)^0)*<identity> of ...
+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
 gap> IsInjective( mor );
 false
 gap> IsSurjective( mor );
 false
-gap> ImagesSource2DimensionalMapping( mor );
-Srng is not an ideal of Prng
-fail
+gap> immor := ImagesSource2DimensionalMapping( mor );;
+gap> Display( immor );
+
+Crossed module [..->..] :- 
+: Source algebra has generators:
+  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
+: Range algebra has generators:
+  [ (Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2, (Z(2)^0)*<identity> of ... ]
+: Boundary homomorphism maps source generators to:
+  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
+
 gap> STOP_TEST( "xmod.tst", 10000 );
 
 ############################################################################

@@ -2,7 +2,7 @@
 ##
 #W  alg2map.gd                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
 ##
    
 DeclareCategory( "Is2dAlgebraMorphism", IsGeneral2DimensionalMapping ); 

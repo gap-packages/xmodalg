@@ -2,7 +2,7 @@
 ##
 #W  alg2map.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ##############################################################################
@@ -206,10 +206,9 @@ function( mor )
     if not ispre then
         return false;
     else
-        return ( IsXModAlgebra( Source( mor ) ) and IsXModAlgebra(  Range( mor ) ) );
+        return IsXModAlgebra( Source(mor) and IsXModAlgebra( Range(mor) ) );
     fi;
 end );
-
 
 ##############################################################################
 ##
@@ -288,6 +287,9 @@ function( src, rng, srchom, rnghom )
 
     local  mor, ok;
     mor := PreXModAlgebraMorphismByHoms( src, rng, srchom, rnghom );
+    if ( mor = fail ) then
+        return fail;
+    fi;
     ok := IsXModAlgebraMorphism( mor );
     if not ok then
         return fail;
