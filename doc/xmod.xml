@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  xmod.xml            XModAlg documentation               Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2018, Z. Arvasi & A. Odabas,                    --> 
+<!--  Copyright (C) 2014-2021, Z. Arvasi & A. Odabas,                    --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -54,7 +54,7 @@ We can produce crossed modules by using the following methods.
          Arg="M R" />
    <Oper Name="XModAlgebraByCentralExtension"
          Arg="f" />
-   <Oper Name="XModAlgebraByMultipleAlgebra"
+   <Oper Name="XModAlgebraByMultiplierAlgebra"
          Arg="A" />
 <Description>
 Here are the standard constructions which these operations implement:
