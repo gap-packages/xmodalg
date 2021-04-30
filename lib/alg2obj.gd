@@ -2,7 +2,7 @@
 ##
 #W  alg2obj.gd                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 DeclareGlobalFunction( "ElementsLeftActing" );
@@ -11,14 +11,14 @@ DeclareProperty( "IsAlgebraAction", IsMapping );
 
 DeclareInfoClass( "InfoXModAlg" );
 
-DeclareGlobalFunction( "MultipleAlgebra" );
+DeclareGlobalFunction( "MultiplierAlgebra" );
 
-DeclareProperty( "IsMultipleAlgebra", IsList );
+DeclareProperty( "IsMultiplierAlgebra", IsList );
 
 DeclareOperation( "AlgebraHomomorphismByFunction",
     [ IsAlgebra, IsAlgebra, IsFunction ] );
     
-DeclareOperation( "MultipleHomomorphism",
+DeclareOperation( "MultiplierHomomorphism",
     [ IsAlgebra ] );
     
 DeclareOperation( "ModuleHomomorphism",
@@ -75,7 +75,7 @@ DeclareGlobalFunction( "XModAlgebra" );
 DeclareOperation( "XModAlgebraByBoundaryAndAction",
    [ IsAlgebraHomomorphism, IsAlgebraAction ] );
 DeclareOperation( "XModAlgebraByCentralExtension", [ IsAlgebraHomomorphism ] );
-DeclareOperation( "XModAlgebraByMultipleAlgebra", 
+DeclareOperation( "XModAlgebraByMultiplierAlgebra", 
     [ IsAlgebra ] );
 DeclareOperation( "XModAlgebraByModule", 
     [ IsAlgebra, IsRing ] );

@@ -2,7 +2,7 @@
 ##
 #W  alg2obj.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2018, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
 ##
     
 CAT1ALG_LIST_MAX_SIZE := 7;
@@ -104,7 +104,7 @@ end );
 InstallMethod( AlgebraAction2, "for,for,for", true, [ IsAlgebra ], 0,
 function ( A )
     local act,MA,MAA;        # mapping <map>, result
-    MA := MultipleAlgebra(A);
+    MA := MultiplierAlgebra(A);
     MAA := Cartesian(MA,A);
     act := rec( fun:= x->Image(x[1],x[2]) );
     ObjectifyWithAttributes( act, 
@@ -229,13 +229,13 @@ end );
 
 #############################################################################
 ##
-#F  MultipleHomomorphism( <D>, <E>, <fun> )
+#F  MultiplierHomomorphism( <D>, <E>, <fun> )
 ##
-InstallMethod( MultipleHomomorphism, "for,for,for", true, [ IsAlgebra ], 0,
+InstallMethod( MultiplierHomomorphism, "for,for,for", true, [ IsAlgebra ], 0,
 function ( A )
 
     local mu, B; # mapping <map>, result
-    B := MultipleAlgebra(A);
+    B := MultiplierAlgebra(A);
     mu := AlgebraHomomorphismByFunction( A, B, 
               r -> AlgebraHomomorphismByFunction(A,A,x->r*x) );
     SetSource(mu,A);
@@ -273,9 +273,9 @@ end );
 
 #############################################################################
 ##
-#M  IsMultipleAlgebra
+#M  IsMultiplierAlgebra
 ##
-InstallMethod( IsMultipleAlgebra, "generic method for 2-dim algebra objects",
+InstallMethod( IsMultiplierAlgebra, "generic method for 2-dim algebra objects",
     true, [ IsList ], 0,
 function( obj )
     return ( ForAll( obj, IsMapping ) );
@@ -283,9 +283,9 @@ end );
 
 #############################################################################
 ##
-#F  MultipleAlgebra( <R> )
+#F  MultiplierAlgebra( <R> )
 ##
-InstallGlobalFunction( MultipleAlgebra, 
+InstallGlobalFunction( MultiplierAlgebra, 
 function ( R )
     local   uzR, elR,MR,r,f,i;
     if not (IsAlgebra(R)=true) then
@@ -301,7 +301,7 @@ function ( R )
            Add(MR,f);
         #fi;
     od;
-    SetIsMultipleAlgebra(MR,true);
+    SetIsMultiplierAlgebra(MR,true);
     # return the mapping
     return MR;
 end );
@@ -320,7 +320,7 @@ function( arg )
     if ( ( nargs = 3 ) and IsAlgebra( arg[1] )
                        and IsAlgebra( arg[3] ) ) then
         return AlgebraAction1( arg[1], arg[2], arg[3] );
-    # Multiple Action
+    # Multiplier Action
     elif ( ( nargs = 1 ) and IsAlgebra( arg[1] ) ) then
         return AlgebraAction2( arg[1] );
     # surjective homomorphism
@@ -537,7 +537,7 @@ InstallMethod( ViewObj, "method for a pre-crossed module", true,
             #  Type 2
             if (type="Type2") then
                 Print( "[", Source( PM ), 
-                       "-> MultipleAlgebra(", Source( PM ), ")]" );
+                       "-> MultiplierAlgebra(", Source( PM ), ")]" );
             fi;
             #  Type 3
             if (type="Type3") then
@@ -759,15 +759,15 @@ end );
 
 #############################################################################
 ##
-#M  XModAlgebraByMultipleAlgebra
+#M  XModAlgebraByMultiplierAlgebra
 ##
-InstallMethod( XModAlgebraByMultipleAlgebra,
-    "crossed module from multiple algebra", true,
+InstallMethod( XModAlgebraByMultiplierAlgebra,
+    "crossed module from Multiplier algebra", true,
     [ IsAlgebra ], 0,
 function( A )
     local  PM,act,bdy;
     act := AlgebraAction(A);
-    bdy := MultipleHomomorphism(A);
+    bdy := MultiplierHomomorphism(A);
     SetIsAlgebraAction( act, true );
     IsAlgebraAction(act);
     IsAlgebraHomomorphism(bdy);
@@ -874,9 +874,9 @@ InstallGlobalFunction( XModAlgebra, function( arg )
     # convert a cat1-algebra
     elif ( ( nargs = 1 ) and Is2dAlgebra( arg[1] ) ) then
         return XModAlgebraOfCat1Algebra( arg[1] );
-    # multiple algebra
+    # Multiplier algebra
     elif ( ( nargs = 1 ) and IsAlgebra( arg[1] )) then
-        return XModAlgebraByMultipleAlgebra( arg[1] );
+        return XModAlgebraByMultiplierAlgebra( arg[1] );
     fi;
     # alternatives not allowed
     Error( "usage: XModAlgebra( bdy, act ); " );
@@ -1161,7 +1161,7 @@ function( PM, Ssrc, Srng )
     #  Type 2
     elif (type="Type2") then
         Print( "2. tip icin alt xmod olustur\n" );
-        SM := XModAlgebraByMultipleAlgebra( Ssrc );
+        SM := XModAlgebraByMultiplierAlgebra( Ssrc );
     #  Type 3
     elif (type="Type3") then
         Print( "3. tip icin alt xmod olustur\n" );
