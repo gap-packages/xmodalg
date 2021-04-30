@@ -1143,12 +1143,12 @@ function( PM, Ssrc, Srng )
 
     Psrc := Source( PM );
     Prng := Range( PM );    
-    if not IsIdeal( Psrc, Ssrc ) then
-        Print( "Ssrc is not a ideal of Psrc\n" );
+    if not IsSubset( Psrc, Ssrc ) then
+        Print( "Ssrc is not a subalgebra of Psrc\n" );
         return fail;
     fi;
-    if not IsIdeal( Prng, Srng ) then
-        Print( "Srng is not an ideal of Prng\n" );
+    if not IsSubset( Prng, Srng ) then
+        Print( "Srng is not an subalgebra of Prng\n" );
         return fail;
     fi;
     Pbdy := Boundary( PM );

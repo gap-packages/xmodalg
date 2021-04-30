@@ -281,6 +281,22 @@ true
 gap> IsBijective( m );
 false
 
+gap> imm := ImagesSource2DimensionalMapping( m );;
+gap> Display( imm ); 
+
+Cat1-algebra [..=>..] :- 
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+:  range algebra has generators:
+  [ (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*() ]
+: the kernel is trivial.
+
 gap> SetInfoLevel( InfoXModAlg, saved_infolevel_xmodalg );; 
 gap> STOP_TEST( "cat1.tst", 10000 );
 
