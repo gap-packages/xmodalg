@@ -1,6 +1,7 @@
 # CHANGES to the 'XModAlg' package
 
 ## 1.18 -> 1.18dev (18/11/20) 
+ * (11/05/21) added lib/vspchom.gi as a temporary fix 
 
 ## 1.17 -> 1.18 (17/11/20) 
  * (07/08/20) fixed problem with Cat1AlgebraOfXModAlgebra 
