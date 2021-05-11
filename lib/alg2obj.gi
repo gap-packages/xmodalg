@@ -498,9 +498,9 @@ end );
 
 ##############################################################################
 ##
-#M  Size( <P> )  . . . . . . . . . . . . . . . . size for a pre-crossed module
+#M  Size( <P> )  . . . . . . . . . . . . . . . . . . . . size for a 2d-algebra
 ##
-InstallOtherMethod( Size, "generic method for a 2d-object",
+InstallOtherMethod( Size, "generic method for a 2d-algebra",
     [ Is2dAlgebraObject ], 0,
 function ( obj )
     return [ Size( Source(obj) ), Size( Range(obj) ) ];

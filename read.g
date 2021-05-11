@@ -2,9 +2,9 @@
 ##
 #W  read.g                 The XMODALG package               Zekeriya Arvasi
 #W                                                             & Alper Odabas
-##  version 1.18, 07/08/2020 
+##  version 1.19, 11/05/2021 
 ##
-#Y  Copyright (C) 2014-2020, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ## read the actual code 
@@ -12,3 +12,5 @@ ReadPackage( "xmodalg", "lib/alg2obj.gi" );
 ReadPackage( "xmodalg", "lib/util.gi" );
 ReadPackage( "xmodalg", "lib/alg2map.gi" );  
 
+## temporary fix 
+RereadPackage( "xmodalg", "lib/vspchom.gi" ); 
