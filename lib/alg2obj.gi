@@ -849,6 +849,18 @@ end );
 
 #############################################################################
 ##
+#M  AugmentationXMod
+##
+InstallMethod( AugmentationXMod, "XModByIdeal using the augmentation ideal", 
+    true, [ IsAlgebra ], 0,
+function( A )
+    local AI;
+    AI := AugmentationIdeal( A ); 
+    return XModAlgebraByIdeal( A, AI ); 
+end );
+
+#############################################################################
+##
 #F  XModAlgebra( <bdy>, <act> )   crossed module from given boundary & action
 ##
 InstallGlobalFunction( XModAlgebra, function( arg )

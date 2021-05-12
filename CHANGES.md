@@ -1,6 +1,7 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.18 -> 1.18dev (18/11/20) 
+## 1.18 -> 1.18dev (12/05/21) 
+ * (12/05/21) added algebra attribute AugmentationXMod 
  * (11/05/21) added lib/vspchom.gi as a temporary fix 
 
 ## 1.17 -> 1.18 (17/11/20) 

@@ -50,6 +50,8 @@ We can produce crossed modules by using the following methods.
          Arg="bdy act" />
    <Oper Name="XModAlgebraByIdeal"
          Arg="A I" />
+   <Attr Name="AugmentationXMod" 
+         Arg="A" />
    <Oper Name="XModAlgebraByModule"
          Arg="M R" />
    <Oper Name="XModAlgebraByCentralExtension"
@@ -66,6 +68,10 @@ is a crossed module with the multiplication action of <M>A</M> on <M>I</M>.
 Conversely, given a crossed module 
 <M>\mathcal{X} = (\partial : S \rightarrow R)</M>,
 it is the case that <M>{\partial(S)}</M> is an ideal of <M>R</M>. 
+<P/>
+In particular, the attribute <C>AugmentationXMod(A)</C> of an algebra 
+is the <C>XModAlgebraByIdeal</C> formed using the <C>AugmentationIdeal</C> 
+of the algebra. 
 </Item>
 
 <Item>
