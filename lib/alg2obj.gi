@@ -42,7 +42,7 @@ end );
 ##
 #F  IsAlgebraAction( <fun> )
 ##
-InstallMethod( IsAlgebraAction, "for,for,for", true,[ IsMapping ], 0,
+InstallMethod( IsAlgebraAction, "for,for,for", true, [ IsMapping ], 0,
 function ( ac )
     local AB,A,B,uzB,uzA,j,i,k; 
     # mapping <map>, result
@@ -845,6 +845,18 @@ function( A,I )
     #   Error( "this boundary and action only defines a pre-crossed module" );
     # fi;
     return PM;
+end );
+
+#############################################################################
+##
+#M  AugmentationXMod
+##
+InstallMethod( AugmentationXMod, "XModByIdeal using the augmentation ideal", 
+    true, [ IsGroupAlgebra ], 0,
+function( A )
+    local AI;
+    AI := AugmentationIdeal( A ); 
+    return XModAlgebraByIdeal( A, AI ); 
 end );
 
 #############################################################################

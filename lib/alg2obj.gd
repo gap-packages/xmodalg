@@ -80,7 +80,8 @@ DeclareOperation( "XModAlgebraByMultiplierAlgebra",
 DeclareOperation( "XModAlgebraByModule", 
     [ IsAlgebra, IsRing ] );
 DeclareOperation( "XModAlgebraByIdeal", 
-    [ IsAlgebra, IsAlgebra ] );
+    [ IsAlgebra, IsAlgebra ] ); 
+DeclareAttribute( "AugmentationXMod", IsGroupAlgebra ); 
 
 DeclareOperation( "IsSubPreXModAlgebra", [ Is2dAlgebraObject, Is2dAlgebraObject ] );
 DeclareOperation( "IsSubXModAlgebra", [ Is2dAlgebraObject, Is2dAlgebraObject ] );
