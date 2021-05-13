@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  convert.xml          XModAlg documentation              Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2018, Z. Arvasi & A. Odabas,                    --> 
+<!--  Copyright (C) 2014-2021, Z. Arvasi & A. Odabas,                    --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -79,6 +79,13 @@ Cat1-algebra [..=>GF(2^2)[k4]] :-
         Z(2^2))*f1*f2 ], 
   [ <zero> of ..., (Z(2^2)^2)*<identity> of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+(
         Z(2^2)^2)*f1*f2 ] ]
+gap> 
+gap> SCXM := Source( CXM );;
+gap> Length( SCXM );
+1024
+gap> KnownAttributesOfObject( SCXM );
+[ "LENGTH" ]
+gap> ## not very satisfactory - the source should be an algebra! 
 ]]>
 </Example>
 

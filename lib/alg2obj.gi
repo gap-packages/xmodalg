@@ -42,7 +42,7 @@ end );
 ##
 #F  IsAlgebraAction( <fun> )
 ##
-InstallMethod( IsAlgebraAction, "for,for,for", true,[ IsMapping ], 0,
+InstallMethod( IsAlgebraAction, "for,for,for", true, [ IsMapping ], 0,
 function ( ac )
     local AB,A,B,uzB,uzA,j,i,k; 
     # mapping <map>, result
@@ -852,7 +852,7 @@ end );
 #M  AugmentationXMod
 ##
 InstallMethod( AugmentationXMod, "XModByIdeal using the augmentation ideal", 
-    true, [ IsAlgebra ], 0,
+    true, [ IsGroupAlgebra ], 0,
 function( A )
     local AI;
     AI := AugmentationIdeal( A ); 

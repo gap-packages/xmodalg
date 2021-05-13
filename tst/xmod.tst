@@ -6,7 +6,27 @@ gap> START_TEST( "XModAlg package: xmod.tst" );
 gap> saved_infolevel_xmodalg := InfoLevel( InfoXModAlg );; 
 gap> SetInfoLevel( InfoXModAlg, 0 );
 
-## Chapter 3,  Section 3.1.2
+## Chapter 3, Section 3.1.2 
+gap> m := [ [ 0, 1, 2, 3 ], [ 0, 0, 4, 5 ], [0, 0, 0, 6 ], [ 0, 0, 0, 0 ] ];; 
+gap> A := Algebra( Rationals, [ m ] );
+<algebra over Rationals, with 1 generators>
+gap> m^2; m^3;
+[ [ 0, 0, 4, 17 ], [ 0, 0, 0, 24 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
+[ [ 0, 0, 0, 24 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
+gap> B := Subalgebra( A, [ m^2, m^3 ] );;  
+gap> X1 := XModAlgebraByIdeal( A, B ); 
+[ <algebra of dimension 2 over Rationals> -> <algebra of dimension 
+3 over Rationals> ]
+gap> act1 := XModAlgebraAction( X1 );; 
+gap> aut1 := ImageElm( act1, m );; 
+gap> ImageElm( aut1, m^2 );
+[ [ 0, 0, 0, 24 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
+
+## Chapter 3, Section 3.1.3 
+
+
+
+
 gap> Ak4 := GroupRing( GF(5), DihedralGroup(4) );
 <algebra-with-one over GF(5), with 2 generators>
 gap> Size( Ak4 );
