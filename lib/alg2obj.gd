@@ -33,6 +33,8 @@ DeclareProperty( "IsPreXModAlgebra", Is2dAlgebra );
 DeclareProperty( "IsXModAlgebra", Is2dAlgebra );
 InstallTrueMethod( IsPreXModAlgebra, IsXModAlgebra );
 
+DeclareAttribute( "XModAlgebraAction", IsPreXModAlgebra );
+
 DeclareOperation( "XModAlgebraObj",
     [ IsAlgebraHomomorphism, IsAlgebraAction ] );
 
@@ -60,6 +62,12 @@ DeclareOperation( "IsSubXModAlgebra", [ Is2dAlgebraObject, Is2dAlgebraObject ] )
 
 #############################  cat1-algebras  ########################## 
 
+DeclareProperty( "IsPreCat1Algebra", Is2dAlgebra );
+DeclareProperty( "IsCat1Algebra", Is2dAlgebra );
+
+DeclareGlobalFunction( "PreCat1Algebra" );
+DeclareGlobalFunction( "Cat1Algebra" );
+
 DeclareOperation( "PreCat1AlgebraObj",
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
 DeclareOperation( "PreCat1AlgebraByTailHeadEmbedding",
@@ -69,12 +77,6 @@ DeclareAttribute( "HeadMap", IsPreCat1Algebra );
 DeclareAttribute( "TailMap", IsPreCat1Algebra );
 DeclareAttribute( "RangeEmbedding", IsPreCat1Algebra );
 DeclareAttribute( "KernelEmbedding", IsPreCat1Algebra );
-
-DeclareGlobalFunction( "PreCat1Algebra" );
-DeclareGlobalFunction( "Cat1Algebra" );
-
-DeclareProperty( "IsPreCat1Algebra", Is2dAlgebra );
-DeclareProperty( "IsCat1Algebra", Is2dAlgebra );
 
 DeclareAttribute( "Equivalence", IsPreCat1Algebra );
 DeclareAttribute( "SourceForEquivalence", IsCat1Algebra );

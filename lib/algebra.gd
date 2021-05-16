@@ -34,8 +34,6 @@ DeclareGlobalFunction( "ElementsLeftActing" );
 
 DeclareProperty( "IsAlgebraAction", IsMapping );
 
-DeclareAttribute( "XModAlgebraAction", IsPreXModAlgebra );
-
 DeclareGlobalFunction( "AlgebraAction" );
 DeclareOperation( "AlgebraAction1",
     [ IsAlgebra, IsList, IsAlgebra ] );
