@@ -11,7 +11,7 @@ DeclareInfoClass( "InfoXModAlg" );
 
 DeclareGlobalFunction( "MultiplierAlgebra" );
 
-DeclareProperty( "IsMultiplierAlgebra", IsList );
+DeclareProperty( "IsMultiplierAlgebra", IsList ); 
 
 #############################  algebra mappings  #################### 
 
@@ -44,6 +44,10 @@ DeclareAttribute( "HasZeroModuleProduct", IsAlgebraAction );
 DeclareOperation( "AlgebraAction2",[ IsAlgebra ] );
 DeclareOperation( "AlgebraAction3",[ IsAlgebraHomomorphism ] );
 DeclareOperation( "AlgebraAction4",[ IsAlgebra, IsRing ] );
-DeclareOperation( "AlgebraAction5",[ IsAlgebra, IsAlgebra ] );
+DeclareOperation( "AlgebraActionByMultiplication",[ IsAlgebra, IsAlgebra ] );
+
+DeclareOperation ( "SemidirectProductOfAlgebras", 
+    [ IsAlgebra, IsAlgebraAction, IsAlgebra ] ); 
+DeclareAttribute( "SemidirectProductOfAlgebrasInfo", IsAlgebra, "mutable" );
 
 ##################################################################### 

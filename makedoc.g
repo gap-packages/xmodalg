@@ -15,7 +15,8 @@ AutoDoc( rec(
     ),  
     scaffold := rec(
         ## MainPage := false, 
-        includes := [ "intro.xml", "cat1.xml", "xmod.xml", "convert.xml" ],
+        includes := [ "intro.xml", "algebra.xml", "cat1.xml", 
+                      "xmod.xml",  "convert.xml" ],
         bib := "bib.xml", 
         entities := rec( 
             AutoDoc := "<Package>AutoDoc</Package>"
