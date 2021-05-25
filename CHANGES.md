@@ -1,6 +1,9 @@
 # CHANGES to the 'XModAlg' package
 
 ## 1.18 -> 1.18dev (12/05/21) 
+ * (25/05/21) renamed AlgebraAction1 AlgebraActionByMultiplication 
+              added operation SemidirectProductofAlgebras 
+              added chapter Commutative algebras and their actions to manual
  * (12/05/21) added algebra attribute AugmentationXMod 
  * (11/05/21) added lib/vspchom.gi as a temporary fix 
 

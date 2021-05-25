@@ -791,7 +791,7 @@ function( A,I )
     fi;
     # AI := Cartesian(A,I);
     # act := AlgebraAction(A,AI,I);
-    act := AlgebraAction5(A,I);
+    act := AlgebraActionByMultiplication(A,I);
     bdy := AlgebraHomomorphismByFunction(I,A,i->i);
     IsAlgebraAction(act);
     IsAlgebraHomomorphism(bdy);
@@ -2080,7 +2080,7 @@ function( C1A )
     gA := GeneratorsOfAlgebra(A);
     im := List(gA, x -> Image(t,x));
     sbdy := AlgebraHomomorphismByImages(A,R,gA,im);
-    act := AlgebraAction5(R,A);
+    act := AlgebraActionByMultiplication(R,A);
     return XModAlgebraByBoundaryAndAction(sbdy,act);    
 end );
 

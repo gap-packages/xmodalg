@@ -267,7 +267,7 @@ end );
 ##
 InstallMethod( AlgebraAction1, "for,for,for", true,
     [ IsAlgebra, IsList, IsAlgebra ], 0,
-function ( A,B,C )
+function ( A, B, C )
     local act,arg,narg,usage,error;        # mapping <map>, result
     narg := 3;
     usage := "\n Usage: input two propositions; \n";
@@ -371,9 +371,10 @@ end );
 
 #############################################################################
 ##
-#F  AlgebraAction5( <A>, <I> )
+#F  AlgebraActionByMultiplication( <A>, <I> )
 ##
-InstallMethod( AlgebraAction5, "for,for", true, [ IsAlgebra, IsAlgebra ], 0,
+InstallMethod( AlgebraActionByMultiplication, "for an algebra and an ideal", 
+    true, [ IsAlgebra, IsAlgebra ], 0,
 function ( A,I )
     local basA,basI,vecA,genA,dimA,maps,j,im,M,act,eA;
     genA := GeneratorsOfAlgebra(A);
@@ -402,3 +403,200 @@ function ( A,I )
     return act;
 end );
 
+#############################################################################
+##
+#M  SemidirectProductOfAlgebras( <A1>, <act>, <A2> )
+##
+##  Construct a s.c. algebra.
+##  (There are special methods for appropriate matrix algebras.)
+##
+#T  embeddings/projections should be provided!
+##
+InstallMethod( SemidirectProductOfAlgebras,
+    "for two algebras and an action",
+    [ IsAlgebra, IsAlgebraAction, IsAlgebra ],
+    function( A1, act, A2 ) 
+    local F,           # the common domain of scalars 
+          z,           # the zero of F 
+          n,           # dimension of the resulting algebra.
+          n1,n2,       # dimensions of A1,A2 
+          B,           # range of the action 
+          vecB,        # basis vectors (endomorphisms of A1) for B 
+          i,j,k,       # loop variables 
+          r,s,u,v,     # basis vectors 
+          T,           # table of structure constants of the product 
+          bas1,bas2,   # bases of A1,A2 
+          vec1,vec2,   # basis vectors of A1,A2 
+          L1,L2,       # lists of zeroes 
+          imr,imu,     # images of r,u under act 
+          ru,rv,su,sv, # 4 terms in a typical product 
+          L,           # the non-zero entries in these positions 
+          sym,         # if both products are (anti)symmetric, then the result
+                       # will have the same property.
+          P;           # the answer is the semidirect product algebra 
+
+    F := LeftActingDomain( A1 ); 
+    z := Zero( F ); 
+    if ( F <> LeftActingDomain( A2 ) ) then
+        Error( "<A1> and <A2> must be written over the same field" );
+    fi; 
+    if not ( Source( act ) = A1 ) then 
+        Error( "the source of act should be A1" ); 
+    fi; 
+    B := Range( act ); 
+    vecB := BasisVectors( Basis( B ) ); 
+    if not ForAll( vecB, v -> ( Source(v)=A2 ) and ( Range(v)=A2 ) ) then 
+        Error( "image B of act is not an algebra of endomorphisms of A2" ); 
+    fi; 
+    n1 := Dimension( A1 );
+    n2 := Dimension( A2 );
+    n := n1 + n2; 
+    if not IsPosInt( n ) then 
+        Error( "require A1,A2 to be algebras of finite dimension" ); 
+    fi; 
+    bas1 := Basis( A1 ); 
+    vec1 := BasisVectors( bas1 ); 
+    bas2 := Basis( A2 ); 
+    vec2 := BasisVectors( bas2 ); 
+    L1 := ListWithIdenticalEntries( n1, z ); 
+    L2 := ListWithIdenticalEntries( n2, z ); 
+    # Initialize the s.c. table.
+    T := EmptySCTable( n, Zero(F), "symmetric" );
+    for i in [1..n1] do 
+        r := vec1[i]; 
+        imr := ImageElm( act, r ); 
+        for j in [1..n1] do 
+            u := vec1[j]; 
+            ru := Coefficients( bas1, r*u ); 
+            L := [ ]; 
+            for k in [1..n1] do 
+                if ( ru[k] <> z ) then 
+                    Append( L, [ ru[k], k ] ); 
+                fi; 
+            od; 
+            SetEntrySCTable( T, i, j, L ); 
+        od; 
+        for j in [1..n2] do 
+            v := vec2[j]; 
+            rv := Coefficients( bas2, ImageElm( imr, v ) ); 
+            L := [ ]; 
+            for k in [1..n2] do 
+                if ( rv[k] <> z ) then 
+                    Append( L, [ rv[k], k+n1 ] ); 
+                fi; 
+            od; 
+            SetEntrySCTable( T, i, j+n1, L ); 
+        od; 
+    od; 
+    for i in [1..n2] do 
+        s := vec2[i]; 
+        for j in [1..n1] do 
+            u := vec1[j]; 
+            imu := ImageElm( act, u ); 
+            su := Coefficients( bas2, ImageElm( imu, s ) ); 
+            L := [ ]; 
+            for k in [1..n2] do 
+                if ( su[k] <> z ) then 
+                    Append( L, [ su[k], k+n1 ] ); 
+                fi; 
+            od; 
+            SetEntrySCTable( T, i+n1, j, L ); 
+        od; 
+        for j in [1..n2] do 
+            v := vec2[j]; 
+            sv := Coefficients( bas2, s*v ); 
+            L := [ ]; 
+            for k in [1..n2] do 
+                if ( sv[k] <> z ) then 
+                    Append( L, [ sv[k], k+n1 ] ); 
+                fi; 
+            od; 
+            SetEntrySCTable( T, i+n1, j+n1, L ); 
+        od; 
+    od; 
+    P := AlgebraByStructureConstants( F, T ); 
+    SetSemidirectProductOfAlgebrasInfo( P, rec( algebras := [ A1, A2 ], 
+                                                action := act, 
+                                                embeddings := [ ], 
+                                                projections := [ ] ) ); 
+    return P; 
+end );
+
+
+#############################################################################
+##
+#A Embedding
+##
+InstallMethod( Embedding, "semidirect product of algebras and integer",
+    [ IsAlgebra and HasSemidirectProductOfAlgebrasInfo, IsPosInt ], 
+    function( P, i )
+    local info, vecP, A1, dim1, A2, dim2, vec1, vec2, p1, imgs, hom;
+
+    # check
+    info := SemidirectProductOfAlgebrasInfo( P );
+    if IsBound( info.embeddings[i] ) then 
+        return info.embeddings[i];
+    fi;
+    vecP := BasisVectors( Basis( P ) ); 
+    A1 := info.algebras[1]; 
+    dim1 := Dimension( A1 ); 
+    A2 := info.algebras[2]; 
+    dim2 := Dimension( A2 ); 
+    vec1 := BasisVectors( Basis( A1 ) ); 
+    vec2 := BasisVectors( Basis( A2 ) ); 
+    if ( i = 1 ) then 
+        imgs := List( [1..dim1], i -> vecP[i] ); 
+        hom := AlgebraHomomorphismByImages( A1, P, vec1, imgs );  
+    elif ( i = 2 ) then 
+        imgs := List( [1..dim2], i -> vecP[i+dim1] );  
+        hom := AlgebraHomomorphismByImages( A2, P, vec2, imgs ); 
+    else 
+        Error( "only two embeddings possible" ); 
+    fi; 
+    ## SetIsInjective( hom, true );
+    info.embeddings[i] := hom;
+    return hom;
+end );
+
+#############################################################################
+##
+#A  Projection
+##
+InstallMethod( Projection, "semidirect product of algebras and integer",
+    [ IsAlgebra and HasSemidirectProductOfAlgebrasInfo, IsPosInt ], 
+function( P, i )
+    local info, vecP, dimP, A1, dim1, z1, A2, dim2, z2, vec1, vec2, 
+          imgs, j, hom;
+    # check
+    info := SemidirectProductOfAlgebrasInfo( P );
+    if IsBound( info.projections[i] ) then 
+        return info.projections[i];
+    fi;
+    vecP := BasisVectors( Basis( P ) ); 
+    dimP := Length( vecP ); 
+    A1 := info.algebras[1]; 
+    dim1 := Dimension( A1 ); 
+    z1 := Zero( A1 ); 
+    A2 := info.algebras[2]; 
+    dim2 := Dimension( A2 ); 
+    z2 := Zero( A2 ); 
+    vec1 := BasisVectors( Basis( A1 ) ); 
+    vec2 := BasisVectors( Basis( A2 ) ); 
+    imgs := ListWithIdenticalEntries( dimP, 0 ); 
+    if ( i = 1 ) then 
+        for j in [1..dim1] do 
+            imgs[j] := vec1[j]; 
+        od; 
+        for j in [dim1+1..dimP] do 
+            imgs[j] := z1; 
+        od; 
+        hom := AlgebraHomomorphismByImages( P, A1, vecP, imgs ); 
+    elif ( i = 2 ) then 
+        return fail; 
+    else 
+        Error( "only the first projection is available" ); 
+    fi; 
+    ## SetIsSurjective( hom, true ); 
+    info.projections[i] := hom;
+    return hom;
+end );
