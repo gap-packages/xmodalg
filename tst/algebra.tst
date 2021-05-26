@@ -10,17 +10,17 @@ gap> SetInfoLevel( InfoXModAlg, 0 );
 gap> SetInfoLevel( InfoXModAlg, saved_infolevel_xmodalg );; 
 gap> STOP_TEST( "algebra.tst", 10000 );
 
-gap> Ac6 := GroupRing( GF(5), Group( (1,2,3,4,5,6) ) );;
-gap> vecA := BasisVectors( Basis( Ac6 ) );; 
+gap> A5c6 := GroupRing( GF(5), Group( (1,2,3,4,5,6) ) );;
+gap> vecA := BasisVectors( Basis( A5c6 ) );; 
 gap> v := vecA[1] + vecA[3] + vecA[5];
 (Z(5)^0)*()+(Z(5)^0)*(1,3,5)(2,4,6)+(Z(5)^0)*(1,5,3)(2,6,4)
-gap> Ic6 := Ideal( Ac6, [v] );; 
-gap> act := AlgebraActionByMultiplication( Ac6, Ic6 );; 
+gap> I5c6 := Ideal( A5c6, [v] );; 
+gap> act := AlgebraActionByMultiplication( A5c6, I5c6 );; 
 gap> act2 := Image( act, vecA[2] );; 
 gap> Image( act2, v );
 (Z(5)^0)*(1,2,3,4,5,6)+(Z(5)^0)*(1,4)(2,5)(3,6)+(Z(5)^0)*(1,6,5,4,3,2)
 
-gap> P := SemidirectProductOfAlgebras( Ac6, act, Ic6 ); 
+gap> P := SemidirectProductOfAlgebras( A5c6, act, I5c6 ); 
 <algebra of dimension 8 over GF(5)>
 gap> Embedding( P, 1 );
 [ (Z(5)^0)*(), (Z(5)^0)*(1,2,3,4,5,6), (Z(5)^0)*(1,3,5)(2,4,6), 
@@ -36,6 +36,48 @@ gap> Projection( P, 1 );
   (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2), 
   <zero> of ..., <zero> of ... ]
 
+
+gap> A2c6 := GroupRing( GF(2), Group( (1,2,3,4,5,6) ) );;
+gap> R2c3 := GroupRing( GF(2), Group( (7,8,9) ) );;
+gap> homAR := AllAlgebraHomomorphisms( A2c6, R2c3 );;
+gap> List( homAR, h -> MappingGeneratorsImages(h) );
+[ [ [ (Z(2)^0)*(1,6,5,4,3,2) ], [ <zero> of ... ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], [ (Z(2)^0)*() ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], [ (Z(2)^0)*()+(Z(2)^0)*(7,8,9) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], 
+      [ (Z(2)^0)*()+(Z(2)^0)*(7,8,9)+(Z(2)^0)*(7,9,8) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], [ (Z(2)^0)*()+(Z(2)^0)*(7,9,8) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], [ (Z(2)^0)*(7,8,9) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], [ (Z(2)^0)*(7,8,9)+(Z(2)^0)*(7,9,8) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], [ (Z(2)^0)*(7,9,8) ] ] ]
+gap> homRA := AllAlgebraHomomorphisms( R2c3, A2c6 );;
+gap> List( homRA, h -> MappingGeneratorsImages(h) );
+[ [ [ (Z(2)^0)*(7,8,9) ], [ <zero> of ... ] ], 
+  [ [ (Z(2)^0)*(7,8,9) ], [ (Z(2)^0)*() ] ], 
+  [ [ (Z(2)^0)*(7,8,9) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6) ] ], 
+  [ [ (Z(2)^0)*(7,8,9) ], 
+      [ (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,5,3)(2,6,4) ] ], 
+  [ [ (Z(2)^0)*(7,8,9) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,5,3)(2,6,4) ] ], 
+  [ [ (Z(2)^0)*(7,8,9) ], [ (Z(2)^0)*(1,3,5)(2,4,6) ] ], 
+  [ [ (Z(2)^0)*(7,8,9) ], [ (Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,5,3)(2,6,4) ] 
+     ], [ [ (Z(2)^0)*(7,8,9) ], [ (Z(2)^0)*(1,5,3)(2,6,4) ] ] ]
+gap> bijAA := AllBijectiveAlgebraHomomorphisms( A2c6, A2c6 );;
+gap> List( bijAA, h -> MappingGeneratorsImages(h) );
+[ [ [ (Z(2)^0)*(1,6,5,4,3,2) ], 
+      [ (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], 
+      [ (Z(2)^0)*()+(Z(2)^0)*(1,4)(2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], [ (Z(2)^0)*(1,2,3,4,5,6) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], 
+      [ (Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,5,3)
+            (2,6,4) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], 
+      [ (Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*
+            (1,6,5,4,3,2) ] ], 
+  [ [ (Z(2)^0)*(1,6,5,4,3,2) ], [ (Z(2)^0)*(1,6,5,4,3,2) ] ] ]
+gap> ideAA := AllIdempotentAlgebraHomomorphisms( A2c6, A2c6 );; 
+gap> Length( ideAA );
+14
 
 
 ############################################################################

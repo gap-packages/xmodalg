@@ -28,6 +28,13 @@ DeclareOperation( "MultiplierHomomorphism",
 DeclareOperation( "ModuleHomomorphism",
     [ IsAlgebra, IsRing ] ); 
 
+DeclareOperation( "AllAlgebraHomomorphisms", 
+    [ IsAlgebra, IsAlgebra ] );
+DeclareOperation( "AllBijectiveAlgebraHomomorphisms", 
+    [ IsAlgebra, IsAlgebra ] );
+DeclareOperation( "AllIdempotentAlgebraHomomorphisms", 
+    [ IsAlgebra, IsAlgebra ] );
+
 ##############################  algebra actions  #################### 
 
 DeclareGlobalFunction( "ElementsLeftActing" );

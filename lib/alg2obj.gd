@@ -17,9 +17,6 @@ DeclareProperty( "Is2dAlgebraObject", Is2DimensionalDomain );
 
 DeclareOperation( "Sub2dAlgebra", [ Is2dAlgebra, IsAlgebra, IsAlgebra ] );
 
-DeclareOperation( "AllHomsOfAlgebras", [ IsAlgebra, IsAlgebra ] );
-DeclareOperation( "AllBijectiveHomsOfAlgebras", [ IsAlgebra, IsAlgebra ] );
-DeclareOperation( "AllIdempotentHomsOfAlgebras", [ IsAlgebra, IsAlgebra ] );
 
 #########################  (pre-)crossed modules  ###################### 
 
@@ -72,17 +69,11 @@ DeclareOperation( "PreCat1AlgebraObj",
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
 DeclareOperation( "PreCat1AlgebraByTailHeadEmbedding",
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
-DeclareAttribute( "Equivalence", IsPreCat1Algebra );
 DeclareAttribute( "HeadMap", IsPreCat1Algebra );
 DeclareAttribute( "TailMap", IsPreCat1Algebra );
 DeclareAttribute( "RangeEmbedding", IsPreCat1Algebra );
 DeclareAttribute( "KernelEmbedding", IsPreCat1Algebra );
 
-DeclareAttribute( "Equivalence", IsPreCat1Algebra );
-DeclareAttribute( "SourceForEquivalence", IsCat1Algebra );
-DeclareAttribute( "BoundaryForEquivalence", IsCat1Algebra );
-DeclareFilter( "IsEquivalenceHead", IsCat1Algebra );
-DeclareFilter( "IsEquivalenceTail", IsCat1Algebra );
 DeclareFilter( "IsXModAlgebraConst", IsCat1Algebra );
 DeclareAttribute( "XModAlgebraConst", IsCat1Algebra );
 
@@ -110,6 +101,4 @@ DeclareAttribute( "PreXModAlgebraOfPreCat1Algebra", IsPreCat1Algebra );
 DeclareAttribute( "PreCat1AlgebraOfPreXModAlgebra", IsPreXModAlgebra );
 DeclareAttribute( "XModAlgebraOfCat1Algebra", IsCat1Algebra );
 DeclareAttribute( "Cat1AlgebraOfXModAlgebra", IsXModAlgebra );
-DeclareOperation( "EquivalenceTail", [ IsEquivalenceTail ] );
-DeclareOperation( "EquivalenceHead", [ IsEquivalenceHead ] );
 DeclareOperation( "SDproduct", [ Is2dAlgebraObject ] );
