@@ -27,36 +27,16 @@ gap> IsAlgebraAction( act );;
 gap> IsAlgebraHomomorphism( bdy );; 
 gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
 gap> IsXModAlgebra( XM );;
+
 gap> ############################ 
-gap> ## Chapter 2,  Section 2.1.2
-gap> Ac6 := GroupRing( GF(2), Group( (1,2,3)(4,5) ) );;
-gap> Rc3 := GroupRing( GF(2), Group( (1,2,3) ) );;
-gap> homAR := AllHomsOfAlgebras( Ac6, Rc3 );;
-gap> mgiAR := List( homAR, h -> MappingGeneratorsImages(h) );;
-gap> Print( mgiAR, "\n" );
-[ [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ <zero> of ... ] ], 
-  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*() ] ], 
-  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3) ] ], 
-  [ [ (Z(2)^0)*(1,3,2)(4,5) ], 
-      [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
-  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,3,2) ] ], 
-  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*(1,2,3) ] ], 
-  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
-  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*(1,3,2) ] ] ]
-gap> homRA := AllHomsOfAlgebras( Rc3, Ac6 );;
-gap> mgiRA := List( homRA, h -> MappingGeneratorsImages(h) );;
-gap> Print( mgiRA, "\n" );
-[ [ [ (Z(2)^0)*(1,2,3) ], [ <zero> of ... ] ], 
-  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*() ] ], 
-  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3) ] ], 
-  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ],
-  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,3,2) ] ], 
-  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3) ] ], 
-  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
-  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,3,2) ] ] ]
-gap> C4 := PreCat1AlgebraByTailHeadEmbedding( homAR[6], homAR[6], homRA[8] );
-[AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -> AlgebraWithOne( GF(2), 
-[ (Z(2)^0)*(1,2,3) ] )]
+gap> ## Chapter 2,  Section 2.1.2 
+gap> t4 := homAR[8]; 
+[ (Z(2)^0)*(1,6,5,4,3,2) ] -> [ (Z(2)^0)*(7,9,8) ]
+gap> e4 := homRA[8];
+[ (Z(2)^0)*(7,8,9) ] -> [ (Z(2)^0)*(1,5,3)(2,6,4) ]
+gap> C4 := PreCat1AlgebraByTailHeadEmbedding( t4, t4, e4 );
+[AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3,4,5,6) 
+ ] ) -> AlgebraWithOne( GF(2), [ (Z(2)^0)*(7,8,9) ] )]
 gap> IsCat1Algebra( C4 );
 true
 gap> Size( C4 );
@@ -65,23 +45,23 @@ gap> Display( C4 );
 
 Cat1-algebra [..=>..] :- 
 : source algebra has generators:
-  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ]
 :  range algebra has generators:
-  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3) ]
+  [ (Z(2)^0)*(), (Z(2)^0)*(7,8,9) ]
 : tail homomorphism maps source generators to:
-  [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
+  [ (Z(2)^0)*(), (Z(2)^0)*(7,8,9) ]
 : head homomorphism maps source generators to:
-  [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
+  [ (Z(2)^0)*(), (Z(2)^0)*(7,8,9) ]
 : range embedding maps range generators to:
-  [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,5,3)(2,6,4) ]
 : kernel has generators:
-  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
-  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,4)(2,5)(3,6), (Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*
+    (1,5,3)(2,6,4), (Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,6,5,4,3,2) ]
 : boundary homomorphism maps generators of kernel to:
   [ <zero> of ..., <zero> of ..., <zero> of ... ]
 : kernel embedding maps generators of kernel to:
-  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
-  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,4)(2,5)(3,6), (Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*
+    (1,5,3)(2,6,4), (Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,6,5,4,3,2) ]
 
 gap> ############################
 gap> ## Chapter 2,  Section 2.1.3

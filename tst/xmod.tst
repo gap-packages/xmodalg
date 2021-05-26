@@ -7,25 +7,26 @@ gap> saved_infolevel_xmodalg := InfoLevel( InfoXModAlg );;
 gap> SetInfoLevel( InfoXModAlg, 0 );
 
 ## Chapter 3, Section 3.1.2 
-gap> m := [ [ 0, 1, 2, 3 ], [ 0, 0, 4, 5 ], [0, 0, 0, 6 ], [ 0, 0, 0, 0 ] ];; 
-gap> A := Algebra( Rationals, [ m ] );
-<algebra over Rationals, with 1 generators>
-gap> m^2; m^3;
-[ [ 0, 0, 4, 17 ], [ 0, 0, 0, 24 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
-[ [ 0, 0, 0, 24 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
-gap> B := Subalgebra( A, [ m^2, m^3 ] );;  
-gap> X1 := XModAlgebraByIdeal( A, B ); 
-[ <algebra of dimension 2 over Rationals> -> <algebra of dimension 
-3 over Rationals> ]
-gap> act1 := XModAlgebraAction( X1 );; 
-gap> aut1 := ImageElm( act1, m );; 
-gap> ImageElm( aut1, m^2 );
-[ [ 0, 0, 0, 24 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
+gap> F := GF(5);;
+gap> one := One(F);;
+gap> two := Z(5);; 
+gap> z := Zero( F );; 
+gap> l := [ [one,z,z], [z,one,z], [z,z,one] ];; 
+gap> m := [ [z,one,two^3], [z,z,one], [z,z,z] ];;
+gap> n := [ [z,z,one], [z,z,z], [z,z,z] ];; 
+gap> A := Algebra( F, [l,m] );; 
+gap> SetName( A, "A(l,m)" ); 
+gap> B := Subalgebra( A, [m] );; 
+gap> SetName( B, "A(m)" ); 
+gap> IsIdeal( A, B ); 
+true
+gap> act := AlgebraActionByMultiplication( A, B );; 
+gap> XAB := XModAlgebraByIdeal( A, B ); 
+[ A(m) -> A(l,m) ]
+gap> SetName( XAB, "XAB" ); 
+
 
 ## Chapter 3, Section 3.1.3 
-
-
-
 
 gap> Ak4 := GroupRing( GF(5), DihedralGroup(4) );
 <algebra-with-one over GF(5), with 2 generators>
@@ -146,9 +147,9 @@ gap> XIBk4 := XModAlgebra( Bk4, IBk4 );
 [ I(GF2[k4]) -> GF2[k4] ]
 gap> IAc4 = IBk4;
 false
-gap> homIAIB := AllHomsOfAlgebras( IAc4, IBk4 );; 
+gap> homIAIB := AllAlgebraHomomorphisms( IAc4, IBk4 );; 
 gap> theta := homIAIB[3];; 
-gap> homAB := AllHomsOfAlgebras( Ac4, Bk4 );;
+gap> homAB := AllAlgebraHomomorphisms( Ac4, Bk4 );;
 gap> phi := homAB[7];; 
 gap> mor := XModAlgebraMorphism( XIAc4, XIBk4, theta, phi );
 [[I(GF2[c4])->GF2[c4]] => [I(GF2[k4])->GF2[k4]]]

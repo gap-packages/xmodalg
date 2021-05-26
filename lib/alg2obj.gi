@@ -59,245 +59,6 @@ function( obj, src, rng )
     fi;
 end );
 
-##############################################################################
-##
-#M  AllHomsOfAlgebras
-##
-InstallMethod( AllHomsOfAlgebras, "generic method for algebras",
-    true, [ IsAlgebra, IsAlgebra ], 0,
-function( G, H )
-
-    local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
-
-    eH := Elements(H);
-    if ( "IsGroupAlgebra" in KnownPropertiesOfObject(G) ) then
-        H_G := UnderlyingGroup(G);
-        L := MinimalGeneratingSet(H_G);
-        genG := List( L , g -> g^Embedding(H_G,G) );
-    else
-        genG := GeneratorsOfAlgebra(G);
-    fi;
-    if (Length(genG) = 0) then
-        genG := GeneratorsOfAlgebra(G);
-    fi;
-    mler := [];
-    if Length(genG) = 1 then
-        for i in [1..Size(H)] do
-            f := AlgebraHomomorphismByImages(G,H,genG,[eH[i]]);
-            if ((f <> fail) and  (not f in mler))  then 
-                Add(mler,f);
-            else 
-                continue; 
-            fi;            
-        od;
-    elif Length(genG) = 2 then
-        for i in [1..Size(H)] do
-            for j in [1..Size(H)] do
-                f := AlgebraHomomorphismByImages(G,H,genG,[eH[i],eH[j]]);
-                if ((f <> fail) and  (not f in mler))  then 
-                    Add(mler,f);
-                else 
-                    continue; 
-                fi; 
-            od;
-        od;
-    elif Length(genG) = 3 then
-        for i in [1..Size(H)] do
-            for j in [1..Size(H)] do
-                for k in [1..Size(H)] do
-                    f := AlgebraHomomorphismByImages( G, H, genG,
-                             [eH[i],eH[j],eH[k]]);
-                    if ((f <> fail) and  (not f in mler))  then 
-                        Add(mler,f);
-                    else 
-                        continue; 
-                    fi; 
-                od;
-            od;
-        od;
-    elif Length(genG) = 4 then
-        for i in [1..Size(H)] do
-            for j in [1..Size(H)] do
-                for k in [1..Size(H)] do
-                    for l in [1..Size(H)] do
-                        f := AlgebraHomomorphismByImages( G, H, genG, 
-                                 [eH[i],eH[j],eH[k],eH[l]]);
-                        if ((f <> fail) and  (not f in mler))  then 
-                            Add(mler,f);
-                        else 
-                            continue; 
-                       fi;    
-                    od;
-                od;
-            od;
-        od;
-    else
-        Print("not implemented yet");    
-    fi;
-    #Print(Length(mler));
-    #Print("\n");
-    return mler;
-end );
-
-##############################################################################
-##
-#M  AllBijectiveHomsOfAlgebras
-##
-InstallMethod( AllBijectiveHomsOfAlgebras, "generic method for algebras",
-    true, [ IsAlgebra, IsAlgebra ], 0,
-function( G, H )
-
-    local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
-
-    eH := Elements(H);
-    if ( "IsGroupAlgebra" in KnownPropertiesOfObject(G) ) then
-        H_G := UnderlyingGroup(G);
-        L := MinimalGeneratingSet(H_G);
-        genG := List( L , g -> g^Embedding(H_G,G) );
-    else
-        genG := GeneratorsOfAlgebra(G);
-    fi;
-    if  (Length(genG) = 0) then
-        genG := GeneratorsOfAlgebra(G);
-    fi;
-    mler := [];
-    if Length(genG) = 1 then 
-        for i in [1..Size(H)] do
-            f := AlgebraHomomorphismByImages(G,H,genG,[eH[i]]);
-            if ((f <> fail) and  (not f in mler) and (IsBijective(f)))  then 
-                Add(mler,f);
-            else 
-                continue; 
-            fi;            
-        od;
-    elif Length(genG) = 2 then
-        for i in [1..Size(H)] do
-            for j in [1..Size(H)] do
-                f := AlgebraHomomorphismByImages(G,H,genG,[eH[i],eH[j]]);
-                if ((f <> fail) and (not f in mler) and (IsBijective(f))) then 
-                    Add(mler,f);
-                else 
-                    continue; 
-                fi;        
-            od;
-        od;
-    elif Length(genG) = 3 then
-        for i in [1..Size(H)] do
-            for j in [1..Size(H)] do
-                for k in [1..Size(H)] do
-                    f := AlgebraHomomorphismByImages( G, H, genG, 
-                             [eH[i],eH[j],eH[k]]);
-                    if ((f <> fail) and (not f in mler) 
-                                    and (IsBijective(f))) then 
-                        Add(mler,f);
-                    else 
-                        continue; 
-                    fi;    
-                od;
-            od;
-        od;
-    elif Length(genG) = 4 then
-        for i in [1..Size(H)] do
-            for j in [1..Size(H)] do
-                for k in [1..Size(H)] do
-                    for l in [1..Size(H)] do
-                        f := AlgebraHomomorphismByImages( G, H, genG, 
-                                 [eH[i],eH[j],eH[k],eH[l]]);
-                        if ((f <> fail) and (not f in mler) 
-                                        and (IsBijective(f))) then 
-                            Add(mler,f);
-                        else 
-                            continue; 
-                        fi;    
-                    od;
-                od;
-            od;
-        od;
-    else
-        Print("not implemented yet");    
-    fi;
-    #Print(Length(mler));
-    #Print("\n");
-    return mler;
-end );
-
-##############################################################################
-##
-#M  AllIdempotentHomsOfAlgebras
-##
-InstallMethod( AllIdempotentHomsOfAlgebras, "generic method for algebras",
-    true, [ IsAlgebra, IsAlgebra ], 0,
-function( G, H )
-
-local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
-
-    eH := Elements(H);
-    H_G := UnderlyingGroup(G);
-    L := MinimalGeneratingSet(H_G);
-    genG := List( L , g -> g^Embedding(H_G,G) );
-    if ( Length(genG) = 0 ) then
-            genG := GeneratorsOfAlgebra(G);
-    fi;
-    mler := [];
-    if Length(genG) = 1 then
-        for i in [1..Size(H)] do
-            f := AlgebraHomomorphismByImages(G,H,genG,[eH[i]]);
-            if ((f <> fail) and  (not f in mler) and (f*f=f))  then 
-                Add(mler,f);
-            else 
-                continue; 
-            fi; 
-        od;
-    elif Length(genG) = 2 then
-        for i in [1..Size(H)] do
-            for j in [1..Size(H)] do
-                f := AlgebraHomomorphismByImages(G,H,genG,[eH[i],eH[j]]);
-                if ((f <> fail) and  (not f in mler) and (f*f=f))  then 
-                    Add(mler,f);
-                else 
-                    continue; 
-                fi;        
-            od;
-        od;
-    elif Length(genG) = 3 then
-        for i in [1..Size(H)] do
-            for j in [1..Size(H)] do
-                for k in [1..Size(H)] do
-                    f := AlgebraHomomorphismByImages( G, H, genG, 
-                             [eH[i],eH[j],eH[k]]);
-                    if ((f <> fail) and  (not f in mler) and (f*f=f)) then 
-                        Add(mler,f);
-                    else 
-                        continue; 
-                    fi;    
-                od;
-            od;
-        od;
-    elif Length(genG) = 4 then
-        for i in [1..Size(H)] do
-            for j in [1..Size(H)] do
-                for k in [1..Size(H)] do
-                    for l in [1..Size(H)] do
-                        f := AlgebraHomomorphismByImages( G, H, genG, 
-                                 [eH[i],eH[j],eH[k],eH[l]]);
-                        if ((f <> fail) and  (not f in mler) and (f*f=f)) then 
-                            Add(mler,f);
-                        else 
-                            continue; 
-                        fi;    
-                    od;
-                od;
-            od;
-        od;
-    else
-        Print("not implemented yet");    
-    fi;
-    #Print(Length(mler));
-    #Print("\n");
-    return mler;
-end );
-
-
 
 #########################  (pre-)crossed modules  ########################### 
 
@@ -1078,9 +839,6 @@ function( C1A )
     t := TailMap( C1A );
     e := RangeEmbedding( C1A );
     # checking the first condition of cat-1 group
-    if Equivalence(t) then    
-        return true;
-    fi;
     idrng := IdentityMapping( Crng );
     he := CompositionMapping( h, e );
     te := CompositionMapping( t, e );
@@ -1257,7 +1015,7 @@ InstallMethod( PreCat1AlgebraObj, "for tail, head, embedding", true,
     if not ok then
         return fail;
     fi;
-    ok := IsCat1Algebra( C1A );
+##    ok := IsCat1Algebra( C1A );
     return C1A;
 end );
 
@@ -1474,9 +1232,6 @@ function( C1A )
     h := HeadMap( C1A );
     t := TailMap( C1A );
     e := RangeEmbedding( C1A );
-    if Equivalence(t) then    
-        return true;
-    fi;
     kerC := Kernel( C1A );
     f := KernelEmbedding( C1A );
     kert := Kernel( t );
@@ -1736,7 +1491,6 @@ function( gf, size, gpnum, num )
     # e := InclusionMappingAlgebra(A,B);
     kert := Kernel( t );
     SetName( kert, L[2] );
-    SetEquivalence( t, false );
     return PreCat1AlgebraByEndomorphisms( t, h );
 end );
 
@@ -1777,7 +1531,6 @@ function( t, h, e )
     kergen := GeneratorsOfAlgebra( kert );
     imbdy := List( kergen, x -> Image( h, x) );
     bdy := AlgebraHomomorphismByImagesNC( kert, R, kergen, imbdy );
-    SetEquivalence( tres, false );
     PC := PreCat1AlgebraObj( tres, hres, eres );
     SetBoundary( PC, bdy );
     SetKernelEmbedding( PC, f );
@@ -1793,7 +1546,7 @@ InstallMethod( PreCat1AlgebraByEndomorphisms,
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
 function( et, eh )
 
-    local  G, gG, R, t, h, e;
+    local  G, gG, R, t, h, e, A, ok;
 
     if not ( IsEndoMapping( et ) and IsEndoMapping( eh ) ) then
         Info( InfoXModAlg, 1, "et, eh must both be group endomorphisms" );
@@ -1812,8 +1565,14 @@ function( et, eh )
     gG := GeneratorsOfAlgebra( G );
     t := AlgebraHomomorphismByImages( G, R, gG, List( gG, g->Image( et, g ) ) );
     h := AlgebraHomomorphismByImages( G, R, gG, List( gG, g->Image( eh, g ) ) );
-    e := InclusionMappingAlgebra( G, R );
-    return PreCat1AlgebraByTailHeadEmbedding( t, h, e );
+    e := InclusionMappingAlgebra( G, R ); 
+    A := PreCat1AlgebraByTailHeadEmbedding( t, h, e ); 
+    if ( A = fail ) then 
+        return fail; 
+    fi; 
+    SetIsPreCat1Algebra( A, true ); 
+    ok := IsCat1Algebra( A ); 
+    return A; 
 end );
 
 #############################################################################
@@ -1858,18 +1617,6 @@ InstallMethod( KernelEmbedding, "method for a pre-cat1-algebra", true,
 
 ##############################################################################
 ##
-#M  Kernel( t,h ) . . . . . . . . . . . . . . . . . . . for a pre-cat1-algebra
-##
-InstallOtherMethod( Kernel, "method for a pre-cat1-algebra",
-    [ IsEquivalenceHead and IsAlgebraHomomorphism ],
-    EquivalenceHead );
-
-InstallOtherMethod( Kernel, "method for a pre-cat1-algebra",
-    [ IsEquivalenceTail and IsAlgebraHomomorphism ],
-    EquivalenceTail );
-
-##############################################################################
-##
 #M  AllCat1Algebras
 ##
 InstallMethod( AllCat1Algebras, "generic method for cat1-algebras",
@@ -1880,7 +1627,7 @@ function( F, G )
 
     A := GroupRing( F, G );
     PreCat1_ler := [];
-    Iler := AllIdempotentHomsOfAlgebras( A, A );
+    Iler := AllIdempotentAlgebraHomomorphisms( A, A );
     PreCat1_ler := [];
     for i in [1..Length(Iler)] do
         for j in [1..Length(Iler)] do
@@ -1925,13 +1672,13 @@ function( C1A1, C1A2 )
         if ( "AllAutosOfAlgebras" in KnownAttributesOfObject(T1) ) then
             alpha1 := AllAutosOfAlgebras(T1);
         else
-            alpha1 := AllBijectiveHomsOfAlgebras(T1,T1);
+            alpha1 := AllBijectiveAlgebraHomomorphisms(T1,T1);
             SetAllAutosOfAlgebras(T1,alpha1);
         fi;
     else
-        alpha1 := AllBijectiveHomsOfAlgebras(T1,T2);
+        alpha1 := AllBijectiveAlgebraHomomorphisms(T1,T2);
     fi;
-    phi1 := AllBijectiveHomsOfAlgebras(G1,G2);
+    phi1 := AllBijectiveAlgebraHomomorphisms(G1,G2);
     m1_ler := [];        
     for alp in alpha1 do
         for ph in phi1 do
@@ -2006,51 +1753,6 @@ end );
 
 ##########################  conversion functions  ##########################  
 
-############################################################################
-##
-#M  EquivalenceTail. . . . convert a pre-crossed module to a pre-cat1-algebra
-##
-InstallMethod( EquivalenceTail,
-    "convert a pre-crossed module to a pre-cat1-algebra", true, 
-    [  IsEquivalenceTail ], 0,
-function( f )
-
-    local  A, R, RA,zR,Ker ;
-
-    RA := Source( f );
-    R := Range( f );
-    A := SourceForEquivalence(f);
-    zR := Zero( R );
-    Ker := Cartesian([zR],A);      
-    return Ker;
-end ); 
-
-#############################################################################
-##
-#M  EquivalenceHead. . . . convert a pre-crossed module to a pre-cat1-algebra
-##
-InstallMethod( EquivalenceHead,
-    "convert a pre-crossed module to a pre-cat1-algebra", true,
-    [ IsEquivalenceHead ], 0,
-function( f )
-
-    local  A, R, RA, eA, uzA, Xbdy, list, i, a, x, Ker ;
-
-    RA := Source( f );
-    R := Range( f );
-    A := SourceForEquivalence(f);
-    eA := Elements(A);;
-    uzA := Size(A);
-    Xbdy := BoundaryForEquivalence(f);    
-    list := [];;
-    for i in [1..uzA] do
-        a := eA[i];
-        x := [-(Image(Xbdy,a)),a];
-        Add( list, x );
-    od;
-    return list;
-end ); 
-
 #############################################################################
 ##
 #M  PreXModAlgebraOfPreCat1Algebra
@@ -2112,57 +1814,35 @@ InstallMethod( PreCat1AlgebraOfPreXModAlgebra,
     [ IsPreXModAlgebra ], 0,
 function( XM )
 
-    local  A, gA, Xact, Xbdy, R, gR, zA, RA, x, t, h, e;
+    local  S, R, act, bdy, P, info, vecP, dimP, dimR, vecR, zR, dimS, vecS, zS, 
+           j, imgs, t, h, e, C;
 
-    A := Source( XM );
-    gA := GeneratorsOfAlgebra( A );
+    S := Source( XM );
     R := Range( XM );
-    #gR := GeneratorsOfAlgebra( R );
-    zA := Zero( A );
-    Xact := XModAlgebraAction( XM );
-    Xbdy := Boundary( XM );  
-    RA := Cartesian(R,A);
-    #? should DirectSumOfAlgebras be used here? 
-    #? but no Embedding available for  R -> RA  or  A -> RA 
-    t := rec( fun:= x->x[1]);
-    ObjectifyWithAttributes( t, 
-        NewType( GeneralMappingsFamily( ElementsFamily( FamilyObj(RA) ),
-            ElementsFamily( FamilyObj(R) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        Source, RA,
-        SourceForEquivalence, A,
-        Range, R,
-        Equivalence, true,
-        IsAlgebraHomomorphism, true,
-        IsEquivalenceTail, true,
-        IsEquivalenceHead, false,
-        IsXModAlgebraConst, true,
-        XModAlgebraConst, XM );
-    h := rec( fun:= x->x[1]+Image(Xbdy,x[2]));
-    ObjectifyWithAttributes( h, 
-        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(RA) ),
-            ElementsFamily( FamilyObj(R) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        Source, RA,
-        SourceForEquivalence, A,
-        Range, R,
-        IsAlgebraHomomorphism, true,
-        BoundaryForEquivalence, Xbdy,
-        XModAlgebraAction, Xact,
-        IsEquivalenceHead, true,
-        IsEquivalenceTail, false );
-    e := rec( fun:= x->[x,zA]);
-    ObjectifyWithAttributes( e, 
-        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(R) ),
-            ElementsFamily( FamilyObj(RA) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        Source, R,
-        Range, RA,
-        IsAlgebraHomomorphism, true );
-    return PreCat1AlgebraObj( t, h, e ); 
+    act := XModAlgebraAction( XM );
+    bdy := Boundary( XM ); 
+    P := SemidirectProductOfAlgebras( R, act, S ); 
+    info := SemidirectProductOfAlgebrasInfo( P );
+    vecP := BasisVectors( Basis( P ) ); 
+    dimP := Length( vecP ); 
+    dimR := Dimension( R ); 
+    zR := Zero( R ); 
+    dimS := Dimension( S ); 
+    zS := Zero( S ); 
+    vecR := BasisVectors( Basis( R ) ); 
+    vecS := BasisVectors( Basis( S ) ); 
+    imgs := ListWithIdenticalEntries( dimP, 0 ); 
+    for j in [1..dimR] do 
+        imgs[j] := vecR[j]; 
+    od; 
+    for j in [dimR+1..dimP] do 
+        imgs[j] := Image( bdy, vecS[j-dimR] ); 
+    od; 
+    h := AlgebraHomomorphismByImages( P, R, vecP, imgs ); 
+    t := Projection( P, 1 ); 
+    e := Embedding( P, 1 );
+    C := PreCat1AlgebraObj( t, h, e ); 
+    return C; 
 end ); 
 
 ##############################################################################

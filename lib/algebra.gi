@@ -44,6 +44,243 @@ function ( R )
     return MR;
 end );
 
+##############################################################################
+##
+#M  AllAlgebraHomomorphisms
+##
+InstallMethod( AllAlgebraHomomorphisms, "generic method for algebras",
+    true, [ IsAlgebra, IsAlgebra ], 0,
+function( G, H )
+
+    local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
+
+    eH := Elements(H);
+    if ( "IsGroupAlgebra" in KnownPropertiesOfObject(G) ) then
+        H_G := UnderlyingGroup(G);
+        L := MinimalGeneratingSet(H_G);
+        genG := List( L , g -> g^Embedding(H_G,G) );
+    else
+        genG := GeneratorsOfAlgebra(G);
+    fi;
+    if (Length(genG) = 0) then
+        genG := GeneratorsOfAlgebra(G);
+    fi;
+    mler := [];
+    if Length(genG) = 1 then
+        for i in [1..Size(H)] do
+            f := AlgebraHomomorphismByImages(G,H,genG,[eH[i]]);
+            if ((f <> fail) and  (not f in mler))  then 
+                Add(mler,f);
+            else 
+                continue; 
+            fi;            
+        od;
+    elif Length(genG) = 2 then
+        for i in [1..Size(H)] do
+            for j in [1..Size(H)] do
+                f := AlgebraHomomorphismByImages(G,H,genG,[eH[i],eH[j]]);
+                if ((f <> fail) and  (not f in mler))  then 
+                    Add(mler,f);
+                else 
+                    continue; 
+                fi; 
+            od;
+        od;
+    elif Length(genG) = 3 then
+        for i in [1..Size(H)] do
+            for j in [1..Size(H)] do
+                for k in [1..Size(H)] do
+                    f := AlgebraHomomorphismByImages( G, H, genG,
+                             [eH[i],eH[j],eH[k]]);
+                    if ((f <> fail) and  (not f in mler))  then 
+                        Add(mler,f);
+                    else 
+                        continue; 
+                    fi; 
+                od;
+            od;
+        od;
+    elif Length(genG) = 4 then
+        for i in [1..Size(H)] do
+            for j in [1..Size(H)] do
+                for k in [1..Size(H)] do
+                    for l in [1..Size(H)] do
+                        f := AlgebraHomomorphismByImages( G, H, genG, 
+                                 [eH[i],eH[j],eH[k],eH[l]]);
+                        if ((f <> fail) and  (not f in mler))  then 
+                            Add(mler,f);
+                        else 
+                            continue; 
+                       fi;    
+                    od;
+                od;
+            od;
+        od;
+    else
+        Print("not implemented yet");    
+    fi;
+    #Print(Length(mler));
+    #Print("\n");
+    return mler;
+end );
+
+##############################################################################
+##
+#M  AllBijectiveAlgebraHomomorphisms
+##
+InstallMethod( AllBijectiveAlgebraHomomorphisms, "generic method for algebras",
+    true, [ IsAlgebra, IsAlgebra ], 0,
+function( G, H )
+
+    local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
+
+    eH := Elements(H);
+    if ( "IsGroupAlgebra" in KnownPropertiesOfObject(G) ) then
+        H_G := UnderlyingGroup(G);
+        L := MinimalGeneratingSet(H_G);
+        genG := List( L , g -> g^Embedding(H_G,G) );
+    else
+        genG := GeneratorsOfAlgebra(G);
+    fi;
+    if  (Length(genG) = 0) then
+        genG := GeneratorsOfAlgebra(G);
+    fi;
+    mler := [];
+    if Length(genG) = 1 then 
+        for i in [1..Size(H)] do
+            f := AlgebraHomomorphismByImages(G,H,genG,[eH[i]]);
+            if ((f <> fail) and  (not f in mler) and (IsBijective(f)))  then 
+                Add(mler,f);
+            else 
+                continue; 
+            fi;            
+        od;
+    elif Length(genG) = 2 then
+        for i in [1..Size(H)] do
+            for j in [1..Size(H)] do
+                f := AlgebraHomomorphismByImages(G,H,genG,[eH[i],eH[j]]);
+                if ((f <> fail) and (not f in mler) and (IsBijective(f))) then 
+                    Add(mler,f);
+                else 
+                    continue; 
+                fi;        
+            od;
+        od;
+    elif Length(genG) = 3 then
+        for i in [1..Size(H)] do
+            for j in [1..Size(H)] do
+                for k in [1..Size(H)] do
+                    f := AlgebraHomomorphismByImages( G, H, genG, 
+                             [eH[i],eH[j],eH[k]]);
+                    if ((f <> fail) and (not f in mler) 
+                                    and (IsBijective(f))) then 
+                        Add(mler,f);
+                    else 
+                        continue; 
+                    fi;    
+                od;
+            od;
+        od;
+    elif Length(genG) = 4 then
+        for i in [1..Size(H)] do
+            for j in [1..Size(H)] do
+                for k in [1..Size(H)] do
+                    for l in [1..Size(H)] do
+                        f := AlgebraHomomorphismByImages( G, H, genG, 
+                                 [eH[i],eH[j],eH[k],eH[l]]);
+                        if ((f <> fail) and (not f in mler) 
+                                        and (IsBijective(f))) then 
+                            Add(mler,f);
+                        else 
+                            continue; 
+                        fi;    
+                    od;
+                od;
+            od;
+        od;
+    else
+        Print("not implemented yet");    
+    fi;
+    #Print(Length(mler));
+    #Print("\n");
+    return mler;
+end );
+
+##############################################################################
+##
+#M  AllIdempotentAlgebraHomomorphisms
+##
+InstallMethod( AllIdempotentAlgebraHomomorphisms, "generic method for algebras",
+    true, [ IsAlgebra, IsAlgebra ], 0,
+function( G, H )
+
+local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
+
+    eH := Elements(H);
+    H_G := UnderlyingGroup(G);
+    L := MinimalGeneratingSet(H_G);
+    genG := List( L , g -> g^Embedding(H_G,G) );
+    if ( Length(genG) = 0 ) then
+            genG := GeneratorsOfAlgebra(G);
+    fi;
+    mler := [];
+    if Length(genG) = 1 then
+        for i in [1..Size(H)] do
+            f := AlgebraHomomorphismByImages(G,H,genG,[eH[i]]);
+            if ((f <> fail) and  (not f in mler) and (f*f=f))  then 
+                Add(mler,f);
+            else 
+                continue; 
+            fi; 
+        od;
+    elif Length(genG) = 2 then
+        for i in [1..Size(H)] do
+            for j in [1..Size(H)] do
+                f := AlgebraHomomorphismByImages(G,H,genG,[eH[i],eH[j]]);
+                if ((f <> fail) and  (not f in mler) and (f*f=f))  then 
+                    Add(mler,f);
+                else 
+                    continue; 
+                fi;        
+            od;
+        od;
+    elif Length(genG) = 3 then
+        for i in [1..Size(H)] do
+            for j in [1..Size(H)] do
+                for k in [1..Size(H)] do
+                    f := AlgebraHomomorphismByImages( G, H, genG, 
+                             [eH[i],eH[j],eH[k]]);
+                    if ((f <> fail) and  (not f in mler) and (f*f=f)) then 
+                        Add(mler,f);
+                    else 
+                        continue; 
+                    fi;    
+                od;
+            od;
+        od;
+    elif Length(genG) = 4 then
+        for i in [1..Size(H)] do
+            for j in [1..Size(H)] do
+                for k in [1..Size(H)] do
+                    for l in [1..Size(H)] do
+                        f := AlgebraHomomorphismByImages( G, H, genG, 
+                                 [eH[i],eH[j],eH[k],eH[l]]);
+                        if ((f <> fail) and  (not f in mler) and (f*f=f)) then 
+                            Add(mler,f);
+                        else 
+                            continue; 
+                        fi;    
+                    od;
+                od;
+            od;
+        od;
+    else
+        Print("not implemented yet");    
+    fi;
+    #Print(Length(mler));
+    #Print("\n");
+    return mler;
+end );
 
 
 #############################  algebra mappings  ############################ 
@@ -406,11 +643,6 @@ end );
 #############################################################################
 ##
 #M  SemidirectProductOfAlgebras( <A1>, <act>, <A2> )
-##
-##  Construct a s.c. algebra.
-##  (There are special methods for appropriate matrix algebras.)
-##
-#T  embeddings/projections should be provided!
 ##
 InstallMethod( SemidirectProductOfAlgebras,
     "for two algebras and an action",
