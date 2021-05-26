@@ -28,27 +28,41 @@ gap> IsAlgebraHomomorphism( bdy );;
 gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
 gap> IsXModAlgebra( XM );;
 
+gap> F := GF(5);;
+gap> one := One(F);;
+gap> two := Z(5);; 
+gap> z := Zero( F );; 
+gap> l := [ [one,z,z], [z,one,z], [z,z,one] ];; 
+gap> m := [ [z,one,two^3], [z,z,one], [z,z,z] ];;
+gap> n := [ [z,z,one], [z,z,z], [z,z,z] ];; 
+gap> A := Algebra( F, [l,m] );; 
+gap> SetName( A, "A(l,m)" ); 
+gap> B := Subalgebra( A, [m] );; 
+gap> SetName( B, "A(m)" ); 
+gap> IsIdeal( A, B );; 
+gap> act := AlgebraActionByMultiplication( A, B );; 
+gap> XAB := XModAlgebraByIdeal( A, B );; 
+gap> SetName( XAB, "XAB" ); 
+
 gap> ############################ 
 gap> ## Chapter 4,  Section 4.1.1
-gap> CXM := Cat1AlgebraOfXModAlgebra( XM );
-[GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]]
-gap> Display( CXM );
+gap> CAB := Cat1AlgebraOfXModAlgebra( XAB );
+[Algebra( GF(5), [ v.1, v.2, v.3, v.4, v.5 ] ) -> A(l,m)]
+gap> Display( CAB );
 
-Cat1-algebra [..=>GF(2^2)[k4]] :- 
+Cat1-algebra [..=>A(l,m)] :- 
 :  range algebra has generators:
-  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
+  
+[ 
+  [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
+  [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
 : tail homomorphism maps source generators to:
 : range embedding maps range generators to:
-  [ [ (Z(2)^0)*<identity> of ..., <zero> of ... ], 
-  [ (Z(2)^0)*f1, <zero> of ... ], [ (Z(2)^0)*f2, <zero> of ... ] ]
+  [ v.1, v.2 ]
 : kernel has generators:
-  [ [ <zero> of ..., <zero> of ... ], 
-  [ <zero> of ..., (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
-        0)*f1*f2 ], 
-  [ <zero> of ..., (Z(2^2))*<identity> of ...+(Z(2^2))*f1+(Z(2^2))*f2+(
-        Z(2^2))*f1*f2 ], 
-  [ <zero> of ..., (Z(2^2)^2)*<identity> of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+(
-        Z(2^2)^2)*f1*f2 ] ]
+  Algebra( GF(5), [ v.4, v.5 ] )
 
 gap> X3 := XModAlgebraOfCat1Algebra( C3 ); 
 [ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]

@@ -21,20 +21,29 @@ The categories <M>\mathbf{Cat1Alg}</M> (cat<M>^{1}</M>-algebras)
 and <M>\mathbf{XModAlg}</M> (crossed modules) 
 are naturally equivalent <Cite Key="ellis1"/>.  
 This equivalence is outlined in what follows. 
-For a given crossed module <M>(\partial : A \rightarrow R)</M> 
-we can construct the semidirect product <M>R\ltimes A</M>
-thanks to the action of <M>R</M> on <M>A</M>. 
-If we define <M>t,h : R\ltimes A \rightarrow R</M> 
-and <M>e : R \rightarrow R \ltimes A</M> by 
+For a given crossed module <M>(\partial : S \rightarrow R)</M> 
+we can construct the semidirect product <M>R \ltimes S</M>
+thanks to the action of <M>R</M> on <M>S</M>. 
+If we define <M>t,h : R \ltimes S \rightarrow R</M> 
+and <M>e : R \rightarrow R \ltimes S</M> by 
 <Display>
-t(r,a) = r, \qquad 
-h(r,a) = r+\partial(a), \qquad 
+t(r,s) = r, \qquad 
+h(r,s) = r + \partial(s), \qquad 
 e(r) = (r,0), 
 </Display>
 respectively, then 
-<M>\mathcal{C} = (e;t,h : R \ltimes A \rightarrow R)</M> 
+<M>\mathcal{C} = (e;t,h : R \ltimes S \rightarrow R)</M> 
 is a cat<M>^{1}-</M>algebra.
 <P/> 
+Notice that <M>h</M> <E>is</E> an algebra homomorphism, since: 
+<Display>
+h(r_1r_2,~ r_1 \cdot s_2 + r_2 \cdot s_1 + s_1s_2) 
+~=~ 
+r_1r_2 + r_1(\partial s_2) + r_2(\partial s_1) + (\partial s_1)(\partial s_2) 
+~=~ 
+(r_1 + \partial s_1)(r_2 + \partial s_2). 
+</Display>
+<P/>
 Conversely, for a given cat<M>^{1}</M>-algebra 
 <M>\mathcal{C}=(e;t,h : A \rightarrow R)</M>, 
 the map <M>\partial : \ker t \rightarrow R</M> is a crossed module, 
@@ -43,7 +52,7 @@ where the action is multiplication action and
 <P/> 
 Since all of these operations are linked to the functions 
 <Ref Oper="Cat1Algebra"/> and <Ref Oper="XModAlgebra"/>, 
-they can be permormed by calling these two functions. 
+they can be performed by calling these two functions. 
 We may also use the function <Ref Oper="Cat1Algebra"/> 
 instead of the operation <Ref Oper="Cat1AlgebraSelect"/>.
 
@@ -54,38 +63,32 @@ instead of the operation <Ref Oper="Cat1AlgebraSelect"/>.
          Arg="X0" />
 <Description> 
 These operations are used for constructing a cat<M>^{1}</M>-algebra 
-from a given crossed module of algebras.
+from a given crossed module of algebras. 
+As an example we use the crossed module <C>XAB</C> constructed in 
+<Ref Oper="XModAlgebraByIdeal"/> 
+(The output from <C>Display</C> needs to be improved.) 
 </Description>
 </ManSection> 
 
 <Example>
 <![CDATA[
-gap> CXM := Cat1AlgebraOfXModAlgebra( XM );
-[GF(2^2)[k4] IX <e5> -> GF(2^2)[k4]]
-gap> Display( CXM );
+gap> CAB := Cat1AlgebraOfXModAlgebra( XAB );
+[Algebra( GF(5), [ v.1, v.2, v.3, v.4, v.5 ] ) -> A(l,m)]
+gap> Display( CAB );
 
-Cat1-algebra [..=>GF(2^2)[k4]] :- 
+Cat1-algebra [..=>A(l,m)] :- 
 :  range algebra has generators:
-  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
+  
+[ 
+  [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
+  [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
 : tail homomorphism maps source generators to:
 : range embedding maps range generators to:
-  [ [ (Z(2)^0)*<identity> of ..., <zero> of ... ], 
-  [ (Z(2)^0)*f1, <zero> of ... ], [ (Z(2)^0)*f2, <zero> of ... ] ]
+  [ v.1, v.2 ]
 : kernel has generators:
-  [ [ <zero> of ..., <zero> of ... ], 
-  [ <zero> of ..., (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
-        0)*f1*f2 ], 
-  [ <zero> of ..., (Z(2^2))*<identity> of ...+(Z(2^2))*f1+(Z(2^2))*f2+(
-        Z(2^2))*f1*f2 ], 
-  [ <zero> of ..., (Z(2^2)^2)*<identity> of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+(
-        Z(2^2)^2)*f1*f2 ] ]
-gap> 
-gap> SCXM := Source( CXM );;
-gap> Length( SCXM );
-1024
-gap> KnownAttributesOfObject( SCXM );
-[ "LENGTH" ]
-gap> ## not very satisfactory - the source should be an algebra! 
+  Algebra( GF(5), [ v.4, v.5 ] )
 ]]>
 </Example>
 
