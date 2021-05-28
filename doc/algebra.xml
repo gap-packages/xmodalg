@@ -99,17 +99,12 @@ where the product is given by:
 (r_1,s_1)(r_2,s_2) ~=~ (r_1r_2,~ r_1 \cdot s_2 + r_2 \cdot s_1 + s_1s_2). 
 </Display> 
 
-It appears that this product is not associative! 
+This product, as wekll as being commutative, is associative: 
+<M>(r_1,s_1)(r_2,s_2)(r_3,s_3)</M> expands as: 
 <Display>
-(r_1,s_1)(r_2r_3,~ r_2 \cdot s_3 + r_3 \cdot s_2 + s_2s_3) 
-~=~ (r_1r_2r_3,~ (r_1r_2)\cdot s3 + (r_1r_3)\cdot s_2 
-                + (r_2r_3)\cdot s_1 + s_1s_2s_3 + r_1 \cdot (s_2s_3), 
-</Display> 
-but the last term differs in the alternative expansion: 
-<Display>
-(r_1r_2,~ r_1 \cdot s_2 + r_2 \cdot s_1 + s_1s_2)(r_3,s_3) 
-~=~ (r_1r_2r_3,~ (r_1r_2)\cdot s_3 + (r_1r_3)\cdot s_2 
-                + (r_2r_3)\cdot s_1 + s_1s_2s_3 + r_3 \cdot (s_1s_2). 
+(r_1r_2r_3,~ \left (r_1r_2)\cdot s3 + (r_1r_3)\cdot s_2 + (r_2r_3)\cdot s_1 
+            + r_1 \cdot (s_2s_3) + r_2 \cdot (s_1s_3) + r_3 \cdot (s_1s_2) 
+            + s_1s_2s_3 \right).
 </Display> 
 
 If <M>B_R, B_S</M> are the sets of basis vectors for <M>R</M> and <M>S</M> 
