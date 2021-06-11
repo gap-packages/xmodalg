@@ -120,6 +120,38 @@ gap> Size( XA5k4 );
 ]]>
 </Example>
 
+<ManSection>
+   <Oper Name="XModAlgebraBySurjection"
+         Arg="f" />
+<Description> 
+Let <M>\partial : S\rightarrow R</M> be a surjective algebra homomorphism 
+whose kernel lise in the annihilator of <M>S</M>. 
+Define the action of <M>R</M> on <M>S</M> by <M>r\cdot s = \widetilde{r}s</M>
+where <M>\widetilde{r} \in \partial^{-1}(r)</M>, 
+as described in section <Ref Oper="AlgebraActionBySurjection"/>
+Then <M>\mathcal{X}=(\partial : S\rightarrow R)</M> 
+is a crossed module with the defined action.
+<P/> 
+Continuing with the example in that section, 
+<P/>
+</Description>
+</ManSection>
+
+<Example>
+<![CDATA[
+gap> X3 := XModAlgebraBySurjection( nat3 );; 
+gap> Display( X3 ); 
+
+Crossed module [..->..] :- 
+: Source algebra has generators:
+  [ [ [ 0, 1, 2, 3 ], [ 0, 0, 1, 2 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ] ] ]
+: Range algebra has generators:
+  [ v.1, v.2 ]
+: Boundary homomorphism maps source generators to:
+  [ v.1 ]
+]]>
+</Example>
+
 <Index>precrossed module</Index>
 <ManSection>
    <Oper Name="PreXModAlgebraByBoundaryAndAction"
@@ -211,27 +243,6 @@ gap> ## example needed
 </Example>
 
 <ManSection>
-   <Oper Name="XModAlgebraByCentralExtension"
-         Arg="f" />
-<Description> 
-Let <M>\partial : S\rightarrow R</M> be a surjective algebra homomorphism. 
-Define the action of <M>R</M> on <M>S</M> by <M>r\cdot s = \widetilde{r}s</M>
-where <M>\widetilde{r} \in \partial^{-1}(r)</M>. 
-Then <M>\mathcal{X}=(\partial : S\rightarrow R)</M> 
-is a crossed module with the defined action.
-<P/>
-</Description>
-</ManSection>
-
-<Example>
-<![CDATA[
-gap> ## example needed 
-]]>
-</Example>
-
-
-
-<ManSection>
    <Oper Name="XModAlgebraByMultiplierAlgebra"
          Arg="A" />
 <Description> 
@@ -250,8 +261,6 @@ and <M>\partial </M> is the canonical homomorphism,
 gap> ## example needed 
 ]]>
 </Example>
-
-
 
 
 <ManSection>

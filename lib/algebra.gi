@@ -488,7 +488,7 @@ function( arg )
     # surjective homomorphism
     elif ( ( nargs = 1 ) and IsAlgebraHomomorphism( arg[1] )
                          and IsSurjective( arg[1] ) ) then
-        return AlgebraAction3( arg[1] );
+        return AlgebraActionBySurjection( arg[1] );
     # module and zero map
     elif ( ( nargs = 2 ) and IsAlgebra( arg[1] ) 
                          and IsRing( arg[2] ) ) then
@@ -556,29 +556,53 @@ end );
 
 #############################################################################
 ##
-#F  AlgebraAction3( <f> )
+#F  AlgebraActionBySurjection( <hom> )
 ##
-InstallMethod( AlgebraAction3, "for,for,for", true, [IsAlgebraHomomorphism], 0,
-function ( f )
-    local act,g,BA,A,B;        # mapping <map>, result
-    A := Source(f);
-    B := Range(f);
-    BA := Cartesian(B,A);
-    g := InverseGeneralMapping(f);
-    ### act := rec( fun:= x->PreImage(g,x[1])*x[2]); 
-    act := rec( fun:= x->ImagesRepresentative(g,x[1])*x[2]);
-    ObjectifyWithAttributes( act, 
-        NewType(GeneralMappingsFamily( ElementsFamily( FamilyObj(BA) ),
-            ElementsFamily( FamilyObj(A) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        LeftElementOfCartesianProduct, B,
-        AlgebraActionType, "Type3",
-        Source, BA,
-        Range, A,
-        HasZeroModuleProduct, false,
-        IsAlgebraAction, true );
-    # return the mapping
+InstallMethod( AlgebraActionBySurjection, "for a surjective algebra hom", 
+    true, [ IsAlgebraHomomorphism ], 0,
+function ( hom )
+    local A, basA, vecA, dom, B, basB, vecB, dimA, dimB, K, basK, vecK, 
+          zA, a, k, maps, j, b, p, im, M, act; 
+    if not IsSurjective( hom ) then 
+        Error( "hom is not a surjective algebra homomorphism" ); 
+    fi; 
+    A := Source( hom ); 
+    basA := Basis( A ); 
+    vecA := BasisVectors( basA ); 
+    dimA := Dimension( A ); 
+    dom := LeftActingDomain( A ); 
+    B := Range( hom ); 
+    basB := Basis( B ); 
+    vecB := BasisVectors( basB ); 
+    dimB := Dimension( B ); 
+    if not ( dom = LeftActingDomain( B ) ) then 
+        Error( "A and B have different LeftActingDomains" ); 
+    fi; 
+    ## check that the kernel is contained in the annihilator 
+    zA := Zero( A ); 
+    K := Kernel( hom ); 
+    basK := Basis( K );
+    vecK := BasisVectors( basK ); 
+    for k in vecK do 
+        for a in vecA do 
+            if not ( k*a = zA ) then 
+                Print( "kernel of hom is not in the annihilator of A\n" ); 
+                return fail;  
+            fi; 
+        od; 
+    od; 
+    maps := ListWithIdenticalEntries( dimB, 0 );
+    for j in [1..dimB] do 
+        b := vecB[j]; 
+        p := PreImagesRepresentative( hom, b ); 
+        im := List( vecA, a -> p*a );
+        maps[j] := LeftModuleHomomorphismByImages( A, A, vecA, im );
+    od;
+    M := Algebra( dom, maps );
+    act := LeftModuleGeneralMappingByImages( B, M, vecB, maps );
+    SetIsAlgebraAction( act, true );
+    SetAlgebraActionType( act, "Type3" );
+    SetHasZeroModuleProduct( act, false );
     return act;
 end );
 
@@ -612,24 +636,24 @@ end );
 ##
 InstallMethod( AlgebraActionByMultiplication, "for an algebra and an ideal", 
     true, [ IsAlgebra, IsAlgebra ], 0,
-function ( A,I )
-    local basA,basI,vecA,genA,dimA,maps,j,im,M,act,eA;
-    genA := GeneratorsOfAlgebra(A);
-    basA := Basis(A);
-    vecA := BasisVectors(basA);
-    dimA := Dimension(A);
-    basI := Basis(I);
-    maps := ListWithIdenticalEntries(dimA,0);
+function ( A, I )
+    local basA, basI, vecA, genA, dimA, maps, j, im, M, act, eA;
+    genA := GeneratorsOfAlgebra( A );
+    basA := Basis( A );
+    vecA := BasisVectors( basA );
+    dimA := Dimension( A );
+    basI := Basis( I );
+    maps := ListWithIdenticalEntries( dimA, 0 );
     if ( dimA > 0  ) then
         for j in [1..dimA] do
-            im := List(basI, b -> vecA[j]*b);
-            maps[j] := LeftModuleHomomorphismByImages(I,I,basI,im);
+            im := List( basI, b -> vecA[j]*b );
+            maps[j] := LeftModuleHomomorphismByImages( I, I, basI, im );
         od;
-        M := Algebra( LeftActingDomain(A),maps);
-        act := LeftModuleGeneralMappingByImages(A,M,vecA,maps);
+        M := Algebra( LeftActingDomain(A), maps );
+        act := LeftModuleGeneralMappingByImages( A, M, vecA, maps );
     else
         maps := [ IdentityMapping(I) ];
-        M := Algebra( LeftActingDomain(A),maps);
+        M := Algebra( LeftActingDomain( A ), maps );
         eA := Elements(A);
         act := LeftModuleGeneralMappingByImages( A, M, [eA[1]], 
                    GeneratorsOfAlgebra( M ) );

@@ -6,12 +6,19 @@ gap> START_TEST( "XModAlg package: cat1.tst" );
 gap> saved_infolevel_xmodalg := InfoLevel( InfoXModAlg );; 
 gap> SetInfoLevel( InfoXModAlg, 0 );
 
-gap> ## make cat1.tst independent of xmod.tst 
+## make cat1.tst independent of xmod.tst 
 gap> Ak4 := GroupRing( GF(5), DihedralGroup(4) );;
 gap> SetName( Ak4, "GF5[k4]" );
 gap> IAk4 := AugmentationIdeal( Ak4 );;
 gap> SetName( IAk4, "I(GF5[k4])" );
 gap> XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );;
+
+gap> m := [ [0,1,2,3], [0,0,1,2], [0,0,0,1], [0,0,0,0] ];; 
+gap> A1 := Algebra( Rationals, [m] );;
+gap> A3 := Subalgebra( A1, [m^3] );; 
+gap> nat3 := NaturalHomomorphismByIdeal( A1, A3 );; 
+gap> X3 := XModAlgebraBySurjection( nat3 );; 
+
 gap> G := SmallGroup( 4, 2 );;
 gap> F := GaloisField( 4 );;
 gap> R := GroupRing( F, G );;
@@ -19,17 +26,20 @@ gap> SetName( R, "GF(2^2)[k4]" );
 gap> e5 := Elements(R)[5];; 
 gap> S := Subalgebra( R, [e5] );; 
 gap> SetName( S, "<e5>" );
-gap> RS := Cartesian( R, S );; 
-gap> SetName( RS, "GF(2^2)[k4] x <e5>" ); 
-gap> act := AlgebraAction( R, RS, S );;
-gap> bdy := AlgebraHomomorphismByFunction( S, R, r->r );;
+gap> act := AlgebraActionByMultiplication( R, S );;
+gap> bdy := AlgebraHomomorphismByFunction( S, R, s->s );;
 gap> IsAlgebraAction( act );; 
 gap> IsAlgebraHomomorphism( bdy );; 
 gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
 gap> IsXModAlgebra( XM );;
 
-gap> ############################ 
-gap> ## Chapter 2,  Section 2.1.2 
+gap> A2c6 := GroupRing( GF(2), Group( (1,2,3,4,5,6) ) );;
+gap> R2c3 := GroupRing( GF(2), Group( (7,8,9) ) );;
+gap> homAR := AllAlgebraHomomorphisms( A2c6, R2c3 );;
+gap> homRA := AllAlgebraHomomorphisms( R2c3, A2c6 );; 
+
+############################ 
+## Chapter 3,  Section 3.1.2 
 gap> t4 := homAR[8]; 
 [ (Z(2)^0)*(1,6,5,4,3,2) ] -> [ (Z(2)^0)*(7,9,8) ]
 gap> e4 := homRA[8];
@@ -63,8 +73,8 @@ Cat1-algebra [..=>..] :-
   [ (Z(2)^0)*()+(Z(2)^0)*(1,4)(2,5)(3,6), (Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*
     (1,5,3)(2,6,4), (Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,6,5,4,3,2) ]
 
-gap> ############################
-gap> ## Chapter 2,  Section 2.1.3
+############################
+## Chapter 3,  Section 3.1.3
 gap> C := Cat1AlgebraSelect( 11 );
 |--------------------------------------------------------|
 | 11 is invalid number for Galois Field (GFnum)             |
@@ -133,8 +143,9 @@ Cat1-algebra [GF(2^2)_c6=>..] :-
   [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)
     (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
 
-gap> ## Chapter 2,  Section 2.1.4
-gap> ## 
+############################ 
+## Chapter 3,  Section 3.1.4
+## 
 gap> C3 := Cat1AlgebraSelect( 2, 6, 2, 4 );; 
 gap> A3 := Source( C3 );
 GF(2)_c6
@@ -173,7 +184,8 @@ Cat1-algebra [..=>..] :-
 : kernel embedding maps generators of kernel to:
   [ <zero> of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
 
-## Chapter 2,  Section 2.2.2
+############################ 
+## Chapter 3,  Section 3.2.2
 gap> C1 := Cat1AlgebraSelect( 2, 1, 1, 1 );
 [GF(2)_triv -> GF(2)_triv]
 gap> Display( C1 );
@@ -261,6 +273,8 @@ true
 gap> IsBijective( m );
 false
 
+########################### 
+## Chapter 3, Section 3.2.3 
 gap> imm := ImagesSource2DimensionalMapping( m );;
 gap> Display( imm ); 
 

@@ -41,7 +41,7 @@ DeclareOperation( "PreXModAlgebraByBoundaryAndAction",
 DeclareGlobalFunction( "XModAlgebra" );
 DeclareOperation( "XModAlgebraByBoundaryAndAction",
    [ IsAlgebraHomomorphism, IsAlgebraAction ] );
-DeclareOperation( "XModAlgebraByCentralExtension", [ IsAlgebraHomomorphism ] );
+DeclareOperation( "XModAlgebraBySurjection", [ IsAlgebraHomomorphism ] );
 DeclareOperation( "XModAlgebraByMultiplierAlgebra", 
     [ IsAlgebra ] );
 DeclareOperation( "XModAlgebraByModule", 

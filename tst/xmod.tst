@@ -6,7 +6,13 @@ gap> START_TEST( "XModAlg package: xmod.tst" );
 gap> saved_infolevel_xmodalg := InfoLevel( InfoXModAlg );; 
 gap> SetInfoLevel( InfoXModAlg, 0 );
 
-## Chapter 3, Section 3.1.2 
+## make this test independent of algebra.tst
+gap> m := [ [0,1,2,3], [0,0,1,2], [0,0,0,1], [0,0,0,0] ];; 
+gap> A1 := Algebra( Rationals, [m] );;
+gap> A3 := Subalgebra( A1, [m^3] );; 
+gap> nat3 := NaturalHomomorphismByIdeal( A1, A3 );; 
+
+## Chapter 4, Section 4.1.2 
 gap> F := GF(5);;
 gap> one := One(F);;
 gap> two := Z(5);; 
@@ -26,8 +32,7 @@ gap> XAB := XModAlgebraByIdeal( A, B );
 gap> SetName( XAB, "XAB" ); 
 
 
-## Chapter 3, Section 3.1.3 
-
+## Section 4.1.3 
 gap> Ak4 := GroupRing( GF(5), DihedralGroup(4) );
 <algebra-with-one over GF(5), with 2 generators>
 gap> Size( Ak4 );
@@ -88,8 +93,22 @@ Crossed module [<e4>->GF5[k4]] :-
 
 gap> IsSubXModAlgebra( XIAk4, XJe4 );
 true
+
 gap> ############################
-gap> ## Chapter 3,  Section 3.1.4
+gap> ## Section 4.1.4
+gap> X3 := XModAlgebraBySurjection( nat3 );; 
+gap> Display( X3 ); 
+
+Crossed module [..->..] :- 
+: Source algebra has generators:
+  [ [ [ 0, 1, 2, 3 ], [ 0, 0, 1, 2 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ] ] ]
+: Range algebra has generators:
+  [ v.1, v.2 ]
+: Boundary homomorphism maps source generators to:
+  [ v.1 ]
+
+gap> ############################
+gap> ## Section 4.1.5
 gap> G := SmallGroup( 4, 2 );
 <pc group of size 4 with 2 generators>
 gap> F := GaloisField( 4 );
@@ -103,11 +122,9 @@ gap> e5 := Elements( R )[5];
 (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
 gap> S := Subalgebra( R, [e5] );;
 gap> SetName( S, "<e5>" );
-gap> RS := Cartesian( R, S );; 
-gap> SetName( RS, "GF(2^2)[k4] x <e5>" ); 
-gap> act := AlgebraAction( R, RS, S );;
-gap> bdy := AlgebraHomomorphismByFunction( S, R, r->r );
-MappingByFunction( <e5>, GF(2^2)[k4], function( r ) ... end )
+gap> act := AlgebraActionByMultiplication( R, S );;
+gap> bdy := AlgebraHomomorphismByFunction( S, R, s->s );
+MappingByFunction( <e5>, GF(2^2)[k4], function( s ) ... end )
 gap> IsAlgebraAction( act ); 
 true
 gap> IsAlgebraHomomorphism( bdy );

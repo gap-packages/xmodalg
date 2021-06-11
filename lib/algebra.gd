@@ -49,7 +49,7 @@ DeclareAttribute( "AlgebraActionType", IsAlgebraAction );
 DeclareAttribute( "HasZeroModuleProduct", IsAlgebraAction );
 
 DeclareOperation( "AlgebraAction2",[ IsAlgebra ] );
-DeclareOperation( "AlgebraAction3",[ IsAlgebraHomomorphism ] );
+DeclareOperation( "AlgebraActionBySurjection",[ IsAlgebraHomomorphism ] );
 DeclareOperation( "AlgebraAction4",[ IsAlgebra, IsRing ] );
 DeclareOperation( "AlgebraActionByMultiplication",[ IsAlgebra, IsAlgebra ] );
 
