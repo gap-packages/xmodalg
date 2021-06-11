@@ -70,18 +70,17 @@ InstallMethod( IsPreXModAlgebra, "generic method for pre-crossed modules",
     true, [ Is2dAlgebra ], 0,
 function( P )
 
-    local A,B,AB,bdy,act,UzAB,i,a1,a2,z1,z2,basA,vecA,dimA,
-          genrng,gensrc,basB,maps,ca,acta,a,b,j,im;
+    local R, S, bdy, act, UzAB, vecR, dimR, vecS, maps, cr, actr, r, s, j;
 
     if not IsPreXModAlgebraObj( P ) then
         return false;
     fi;
-    A:= Range(P);
-    B:= Source(P);
-    bdy:=Boundary(P);
-    act:=XModAlgebraAction(P);
+    R := Range( P );
+    S := Source( P );
+    bdy := Boundary( P );
+    act := XModAlgebraAction( P );
     # Check  P.boundary: P.source -> P.range
-    if not ( ( Source( bdy ) = B ) and ( Range( bdy ) = A ) ) then
+    if not ( ( Source( bdy ) = S ) and ( Range( bdy ) = R ) ) then
         return false;
     fi;
     # checking
@@ -91,47 +90,27 @@ function( P )
     
     if ( IsLeftModuleGeneralMapping(act) = true ) then
         # Check  P.action: P.source
-        if not ( ( Source( act ) = A ) ) then
+        if not ( ( Source( act ) = R ) ) then
             return false;
-        fi;
-        basA := Basis(A);
-        vecA := BasisVectors(basA);
-        dimA := Dimension(A);
-        genrng := GeneratorsOfAlgebra( A );
-        gensrc := GeneratorsOfAlgebra( B );
-        basB := Basis(B);
-        maps := ListWithIdenticalEntries(dimA,0);
-        for j in [1..dimA] do
-            im := List(basB, b -> vecA[j]*b);
-            maps[j] := LeftModuleHomomorphismByImages(B,B,basB,im);
-        od;
-        for a in genrng do
-            ca := Coefficients(basA,a);
-            acta := Sum(List([1..dimA], i -> ca[i]*maps[i]));
-            for b in gensrc do
-                z1 := ( b^acta )^bdy;
-                z2 := a*( b^bdy );
-                if ( z1 <> z2 ) then
+        fi; 
+        vecR := BasisVectors( Basis( R ) );
+        dimR := Dimension( R );
+        vecS := BasisVectors( Basis( S ) ); 
+        maps := ListWithIdenticalEntries( dimR, 0 );
+        for j in [1..dimR] do 
+            maps[j] := Image( act, vecR[j] );
+        od; 
+        for j in [1..dimR] do
+            for s in vecS do
+                if ( (s^maps[j])^bdy <> vecR[j]*(s^bdy) ) then 
                     return false;
                 fi;
             od;
         od;
     else
-        AB := Source(act);
-        UzAB := Length(AB);
-        # Check  P.action: P.range 
-        if not ( ( Range( act ) = B ) ) then
-            return false;
-        fi;
-        for i in [1..UzAB] do
-            # Print( "x1,x2 = ", x1, ",  ", x2, "\n" );
-            a1 := ( AB[i]^act)^bdy;
-            a2 := AB[i][1]*(AB[i][2] ^ bdy );
-            if ( a1 <> a2 ) then
-                return false;
-            fi;
-        od;
-    fi;
+        Error( "should not get to here" ); 
+        return false; 
+    fi; 
     return true;
 end );
 
@@ -143,14 +122,14 @@ InstallMethod( XModAlgebraObj, "for homomorphism and action", true,
     [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
 function( bdy, act )
 
-    local  A,B,filter,fam,PM,AB,BB;
+    local A, B, filter, fam, PM, AB, BB;
     fam := Family2dAlgebra;
     filter := IsPreXModAlgebraObj;
-    B := Source(bdy);
-    A := Range(bdy);
-    AB := Source(act);
-    BB := Range(act);
-    if ( IsLeftModuleGeneralMapping(act) = true ) then
+    B := Source( bdy );
+    A := Range( bdy );
+    AB := Source( act );
+    BB := Range( act );
+    if ( IsLeftModuleGeneralMapping( act ) = true ) then
         if not ( A = AB ) then
             Error( "require Range( bdy ) = Source( act )" );
         fi;
@@ -370,53 +349,47 @@ end );
 ##
 InstallMethod( IsXModAlgebra, "generic method for pre-crossed modules",
     true, [ Is2dAlgebra ], 0,
-    function( CM )
+    function( P )
 
-    local  A, B, bdy, act, elB, uzB, b1, b2, z1, z2, i, j, a, 
-           basA, basB, vecA, ca, acta, gensrc, dimA, maps, im;
+    local  R, S, bdy, act, elS, uzS, s1, s2, z1, z2, i, j, r, 
+           basR, basS, vecR, cr, actr, genS, dimR, maps, im;
 
-    if not ( IsPreXModAlgebraObj( CM ) and IsPreXModAlgebra( CM ) ) then
+    if not ( IsPreXModAlgebraObj( P ) and IsPreXModAlgebra( P ) ) then
         return false;
     fi;
-    bdy := Boundary( CM );
-    act := XModAlgebraAction( CM );
-    B := Source(bdy);
-    A := Range(bdy);
-    if ( IsLeftModuleGeneralMapping(act) = true ) then
-        basA := Basis(A);
-        vecA := BasisVectors(basA);
-        dimA := Dimension(A);
-        gensrc := GeneratorsOfAlgebra( B );
-        basB := Basis(B);
-        maps := ListWithIdenticalEntries(dimA,0);
-        for j in [1..dimA] do
-            im := List(basB, b -> vecA[j]*b);
-            maps[j] := LeftModuleHomomorphismByImages(B,B,basB,im);
-        od;
-        for b1 in gensrc do
-            a := b1 ^ bdy;
-            ca := Coefficients(basA,a);
-            acta := Sum(List([1..dimA], i -> ca[i]*maps[i]));
-            for b2 in gensrc do
-                z1 := ( b2^acta );
-                z2 := b1 * b2;;
-                if ( z1 <> z2 ) then
+    bdy := Boundary( P );
+    act := XModAlgebraAction( P );
+    S := Source( bdy );
+    R := Range( bdy );
+    if ( IsLeftModuleGeneralMapping( act ) = true ) then
+        basR := Basis( R );
+        vecR := BasisVectors( basR );
+        dimR := Dimension( R );
+        genS := GeneratorsOfAlgebra( S );
+        basS := Basis( S );
+        maps := List( [1..dimR], j -> Image( act, vecR[j] ) ); 
+        for s1 in genS do
+            r := s1^bdy;
+            cr := Coefficients( basR, r );
+            actr := Sum( List( [1..dimR], i -> cr[i]*maps[i] ) );
+            for s2 in genS do
+                if ( s2^actr <> s1*s2 ) then
                     return false;
                 fi;
             od;
         od;
     else
-        if ( HasZeroModuleProduct(act) ) then                
+        if ( HasZeroModuleProduct( act ) ) then                
             return true;
         fi;
-        elB := Elements(B);
-        uzB := Length(elB);
-        for i in [1..uzB] do
-            b1 := elB[i];
-            for j in [1..uzB] do
-                b2 := elB[j];
-                z1 := [ b1 ^ bdy, b2 ] ^ act;
-                z2 := b1 * b2;
+        elS := Elements( S );
+        uzS := Length( elS );
+        for i in [1..uzS] do
+            s1 := elS[i];
+            for j in [1..uzS] do
+                s2 := elS[j];
+                z1 := [ s1 ^ bdy, s2 ] ^ act;
+                z2 := s1 * s2;
                 if ( z1 <> z2 ) then                
                     return false;
                 fi;
@@ -496,22 +469,17 @@ end );
 
 #############################################################################
 ##
-#M  XModAlgebraByCentralExtension
+#M  XModAlgebraBySurjection
 ##
-InstallMethod( XModAlgebraByCentralExtension,
+InstallMethod( XModAlgebraBySurjection,
     "crossed module from Central Extension", true, [IsAlgebraHomomorphism], 0,
-function( f )
+function( hom )
     local  PM,act,bdy;
-    if IsSubset(Source(f),Range(f)) then
-        if ( IsIdeal(Source(f),Range(f)) and Size(Range(f))=1 ) then
-            return XModAlgebraByIdeal( Source(f), Range(f) );
-        fi;
+    if not IsSurjective( hom ) then
+        Error( " hom is not a surjective algebra homomorphism" ); 
     fi;
-    act := AlgebraAction(f);
-    bdy := f;
-    IsAlgebraAction(act);
-    IsAlgebraHomomorphism(bdy);
-    PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
+    act := AlgebraActionBySurjection( hom );
+    PM := PreXModAlgebraByBoundaryAndAction( hom, act );
     if not IsXModAlgebra( PM ) then
         Error( "this boundary and action only defines a pre-crossed module" );
     fi;
@@ -545,17 +513,15 @@ end );
 InstallMethod( XModAlgebraByIdeal,
     "crossed module from module", true,
     [ IsAlgebra, IsAlgebra ], 0,
-function( A,I )
-    local  PM,act,bdy,AI;
+function( A, I )
+    local PM, act, bdy, AI;
     if not IsIdeal( A,I ) then
         Error( "I not a ideal" );
     fi;
-    # AI := Cartesian(A,I);
-    # act := AlgebraAction(A,AI,I);
-    act := AlgebraActionByMultiplication(A,I);
-    bdy := AlgebraHomomorphismByFunction(I,A,i->i);
-    IsAlgebraAction(act);
-    IsAlgebraHomomorphism(bdy);
+    act := AlgebraActionByMultiplication( A, I );
+    bdy := AlgebraHomomorphismByFunction( I, A, i->i );
+    IsAlgebraAction( act );
+    IsAlgebraHomomorphism( bdy );
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     # if not IsXModAlgebra( PM ) then
     #   Error( "this boundary and action only defines a pre-crossed module" );
@@ -598,7 +564,7 @@ InstallGlobalFunction( XModAlgebra, function( arg )
     # surjective homomorphism
     elif ( ( nargs = 1 ) and IsAlgebraHomomorphism( arg[1] )
                          and IsSurjective( arg[1] ) ) then
-        return XModAlgebraByCentralExtension( arg[1] );
+        return XModAlgebraBySurjection( arg[1] );
     # convert a cat1-algebra
     elif ( ( nargs = 1 ) and Is2dAlgebra( arg[1] ) ) then
         return XModAlgebraOfCat1Algebra( arg[1] );
@@ -778,7 +744,7 @@ function( PM, Ssrc, Srng )
         f := AlgebraHomomorphismByImages( Ssrc, B, genSsrc, list );
         K := Image(f);
         surf := AlgebraHomomorphismByImages( Ssrc,K,genSsrc,list );
-        SM := XModAlgebraByCentralExtension( surf );
+        SM := XModAlgebraBySurjection( surf );
     #  Type 4
     elif (type="Type4") then
         Print( "4. tip icin alt xmod olustur\n" );

@@ -12,6 +12,7 @@ gap> SetName( Ak4, "GF5[k4]" );
 gap> IAk4 := AugmentationIdeal( Ak4 );;
 gap> SetName( IAk4, "I(GF5[k4])" );
 gap> XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );;
+
 gap> G := SmallGroup( 4, 2 );;
 gap> F := GaloisField( 4 );;
 gap> R := GroupRing( F, G );;
@@ -19,10 +20,8 @@ gap> SetName( R, "GF(2^2)[k4]" );
 gap> e5 := Elements(R)[5];; 
 gap> S := Subalgebra( R, [e5] );; 
 gap> SetName( S, "<e5>" );
-gap> RS := Cartesian( R, S );; 
-gap> SetName( RS, "GF(2^2)[k4] x <e5>" ); 
-gap> act := AlgebraAction( R, RS, S );;
-gap> bdy := AlgebraHomomorphismByFunction( S, R, r->r );;
+gap> act := AlgebraActionByMultiplication( R, S );;
+gap> bdy := AlgebraHomomorphismByFunction( S, R, s->s );;
 gap> IsAlgebraAction( act );; 
 gap> IsAlgebraHomomorphism( bdy );; 
 gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
@@ -44,8 +43,10 @@ gap> act := AlgebraActionByMultiplication( A, B );;
 gap> XAB := XModAlgebraByIdeal( A, B );; 
 gap> SetName( XAB, "XAB" ); 
 
+gap> C3 := Cat1AlgebraSelect( 2, 6, 2, 4 );; 
+
 gap> ############################ 
-gap> ## Chapter 4,  Section 4.1.1
+gap> ## Chapter 5,  Section 5.1.1
 gap> CAB := Cat1AlgebraOfXModAlgebra( XAB );
 [Algebra( GF(5), [ v.1, v.2, v.3, v.4, v.5 ] ) -> A(l,m)]
 gap> Display( CAB );

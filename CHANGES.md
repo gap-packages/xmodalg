@@ -1,6 +1,9 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.18 -> 1.18dev (12/05/21) 
+## 1.18 -> 1.18dev (11/06/21) 
+ * (09/06/21) renamed AlgebraAction3 AlgebraActionBySurjection 
+              renamed XModAlgebraByCentralExtension XModAlgebraBySurjection 
+              revised these operations and added examples
  * (25/05/21) renamed AlgebraAction1 AlgebraActionByMultiplication 
               added operation SemidirectProductofAlgebras 
               added chapter Commutative algebras and their actions to manual
