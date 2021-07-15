@@ -20,7 +20,7 @@ gap> SetName( R, "GF(2^2)[k4]" );
 gap> e5 := Elements(R)[5];; 
 gap> S := Subalgebra( R, [e5] );; 
 gap> SetName( S, "<e5>" );
-gap> act := AlgebraActionByMultiplication( R, S );;
+gap> act := AlgebraActionByMultipliers( R, S, R );;
 gap> bdy := AlgebraHomomorphismByFunction( S, R, s->s );;
 gap> IsAlgebraAction( act );; 
 gap> IsAlgebraHomomorphism( bdy );; 
@@ -39,7 +39,7 @@ gap> SetName( A, "A(l,m)" );
 gap> B := Subalgebra( A, [m] );; 
 gap> SetName( B, "A(m)" ); 
 gap> IsIdeal( A, B );; 
-gap> act := AlgebraActionByMultiplication( A, B );; 
+gap> act := AlgebraActionByMultipliers( A, B, A );; 
 gap> XAB := XModAlgebraByIdeal( A, B );; 
 gap> SetName( XAB, "XAB" ); 
 
@@ -65,7 +65,7 @@ Cat1-algebra [..=>A(l,m)] :-
 : kernel has generators:
   Algebra( GF(5), [ v.4, v.5 ] )
 
-gap> X3 := XModAlgebraOfCat1Algebra( C3 ); 
+gap> X3 := XModAlgebraOfCat1Algebra( C3 );
 [ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> Display( X3 ); 
 
@@ -74,7 +74,7 @@ Crossed module [..->..] :-
   [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
   (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
 : Range algebra has generators:
-  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3), (Z(2)^0)*(1,3,2) ]
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3) ]
 : Boundary homomorphism maps source generators to:
   [ <zero> of ..., <zero> of ..., <zero> of ... ]
 

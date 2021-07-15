@@ -70,7 +70,7 @@ InstallMethod( IsPreXModAlgebra, "generic method for pre-crossed modules",
     true, [ Is2dAlgebra ], 0,
 function( P )
 
-    local R, S, bdy, act, UzAB, vecR, dimR, vecS, maps, cr, actr, r, s, j;
+    local R, S, bdy, act, genR, genS, r, m, s, ims, acts, z1, z2;
 
     if not IsPreXModAlgebraObj( P ) then
         return false;
@@ -87,30 +87,24 @@ function( P )
     if not IsAlgebraHomomorphism( bdy ) then
         return false;
     fi;
-    
-    if ( IsLeftModuleGeneralMapping(act) = true ) then
-        # Check  P.action: P.source
-        if not ( ( Source( act ) = R ) ) then
-            return false;
-        fi; 
-        vecR := BasisVectors( Basis( R ) );
-        dimR := Dimension( R );
-        vecS := BasisVectors( Basis( S ) ); 
-        maps := ListWithIdenticalEntries( dimR, 0 );
-        for j in [1..dimR] do 
-            maps[j] := Image( act, vecR[j] );
-        od; 
-        for j in [1..dimR] do
-            for s in vecS do
-                if ( (s^maps[j])^bdy <> vecR[j]*(s^bdy) ) then 
-                    return false;
-                fi;
-            od;
-        od;
-    else
-        Error( "should not get to here" ); 
-        return false; 
+    if not ( ( Source( act ) = R ) ) then
+        return false;
     fi; 
+    genR := GeneratorsOfAlgebra( R );
+    genS := GeneratorsOfAlgebra( S ); 
+    for r in genR do 
+        m := ImageElm( act, r ); 
+        for s in genS do 
+            ims := Image( bdy, s ); 
+            acts := Image( m, s ); 
+            z1 := ImageElm( bdy, acts ); 
+            z2 := r * ims; 
+            if not ( z1 = z2 ) then 
+                Info( InfoXModAlg, 1, z1, " <> ", z2 ); 
+                return false; 
+            fi; 
+        od; 
+    od; 
     return true;
 end );
 
@@ -226,20 +220,20 @@ InstallMethod( ViewObj, "method for a pre-crossed module", true,
         else
             type := AlgebraActionType( Pact ); 
             #  Type 1
-            if (type="Type1") then
+            if (type = "multiplier") then
                 Print( "[", Source( PM ), "->", Range( PM ), "]" );
             fi;  
             #  Type 2
-            if (type="Type2") then
+            if (type = "Type2") then
                 Print( "[", Source( PM ), 
                        "-> MultiplierAlgebra(", Source( PM ), ")]" );
             fi;
             #  Type 3
-            if (type="Type3") then
+            if (type = "surjection") then
                 Print( "[", Source( PM ), "->", Range( PM ), "]" );
             fi;
             #  Type 4
-            if (type="Type4") then
+            if (type = "module") then
                 Print( "[", Source( PM ), "->", Range( PM ), "]" );
             fi;
         fi;
@@ -351,51 +345,27 @@ InstallMethod( IsXModAlgebra, "generic method for pre-crossed modules",
     true, [ Is2dAlgebra ], 0,
     function( P )
 
-    local  R, S, bdy, act, elS, uzS, s1, s2, z1, z2, i, j, r, 
-           basR, basS, vecR, cr, actr, genS, dimR, maps, im;
+    local  bdy, act, S, genS, s1, r1, m1, s2, z1, z2;
 
     if not ( IsPreXModAlgebraObj( P ) and IsPreXModAlgebra( P ) ) then
         return false;
     fi;
     bdy := Boundary( P );
     act := XModAlgebraAction( P );
-    S := Source( bdy );
-    R := Range( bdy );
-    if ( IsLeftModuleGeneralMapping( act ) = true ) then
-        basR := Basis( R );
-        vecR := BasisVectors( basR );
-        dimR := Dimension( R );
-        genS := GeneratorsOfAlgebra( S );
-        basS := Basis( S );
-        maps := List( [1..dimR], j -> Image( act, vecR[j] ) ); 
-        for s1 in genS do
-            r := s1^bdy;
-            cr := Coefficients( basR, r );
-            actr := Sum( List( [1..dimR], i -> cr[i]*maps[i] ) );
-            for s2 in genS do
-                if ( s2^actr <> s1*s2 ) then
-                    return false;
-                fi;
-            od;
+    S := Source( bdy ); 
+    genS := GeneratorsOfAlgebra( S ); 
+    for s1 in genS do
+        r1 := ImageElm( bdy, s1 ); 
+        m1 := ImageElm( act, r1 ); 
+        for s2 in genS do
+            z1 := ImageElm( m1, s2 ); 
+            z2 := s1 * s2;
+            if ( z1 <> z2 ) then                
+                Info( InfoXModAlg, 1, z1, " <> ", z2 ); 
+                return false;
+            fi;
         od;
-    else
-        if ( HasZeroModuleProduct( act ) ) then                
-            return true;
-        fi;
-        elS := Elements( S );
-        uzS := Length( elS );
-        for i in [1..uzS] do
-            s1 := elS[i];
-            for j in [1..uzS] do
-                s2 := elS[j];
-                z1 := [ s1 ^ bdy, s2 ] ^ act;
-                z2 := s1 * s2;
-                if ( z1 <> z2 ) then                
-                    return false;
-                fi;
-            od;
-        od;
-    fi;
+    od;
     return true;
 end );
 
@@ -454,12 +424,11 @@ InstallMethod( XModAlgebraByMultiplierAlgebra,
     "crossed module from Multiplier algebra", true,
     [ IsAlgebra ], 0,
 function( A )
-    local  PM,act,bdy;
-    act := AlgebraAction(A);
-    bdy := MultiplierHomomorphism(A);
-    SetIsAlgebraAction( act, true );
-    IsAlgebraAction(act);
-    IsAlgebraHomomorphism(bdy);
+    local MA, PM, act, bdy; 
+    MA := MultiplierAlgebra( A ); 
+    bdy := MultiplierHomomorphism( A );
+    act := IdentityMapping( MA ); 
+    SetIsAlgebraAction( act, true ); 
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     if not IsXModAlgebra( PM ) then
         Error( "this boundary and action only defines a pre-crossed module" );
@@ -518,7 +487,7 @@ function( A, I )
     if not IsIdeal( A,I ) then
         Error( "I not a ideal" );
     fi;
-    act := AlgebraActionByMultiplication( A, I );
+    act := AlgebraActionByMultipliers( A, I, A );
     bdy := AlgebraHomomorphismByFunction( I, A, i->i );
     IsAlgebraAction( act );
     IsAlgebraHomomorphism( bdy );
@@ -725,16 +694,16 @@ function( PM, Ssrc, Srng )
     Pact := XModAlgebraAction( PM );
     type := AlgebraActionType( Pact );
     #  Type 1
-    if (type="Type1") then
-        Print( "1. tip icin alt xmod olustur\n" );
+    if ( type = "multiplier" ) then
+        Info( InfoXModAlg, 1, "1. multiplier type" );
         SM := XModAlgebraByIdeal( Srng, Ssrc );
     #  Type 2
-    elif (type="Type2") then
-        Print( "2. tip icin alt xmod olustur\n" );
+    elif ( type = "Type2" ) then
+        Info( InfoXModAlg, 1, "2. tip icin alt xmod olustur" );
         SM := XModAlgebraByMultiplierAlgebra( Ssrc );
     #  Type 3
-    elif (type="Type3") then
-        Print( "3. tip icin alt xmod olustur\n" );
+    elif ( type = "surjection") then
+        Info( InfoXModAlg, 1, "3. surjection type" );
         genSsrc := GeneratorsOfAlgebra( Ssrc );
         B := Range(Pbdy);
         list := [];    
@@ -746,12 +715,9 @@ function( PM, Ssrc, Srng )
         surf := AlgebraHomomorphismByImages( Ssrc,K,genSsrc,list );
         SM := XModAlgebraBySurjection( surf );
     #  Type 4
-    elif (type="Type4") then
-        Print( "4. tip icin alt xmod olustur\n" );
+    elif ( type = "module" ) then
+        Info( InfoXModAlg, 1, "4. module type" );
         SM := XModAlgebraByModule( Ssrc, Srng );
-    #  Type 5
-    elif (type="Type5") then
-        SM := XModAlgebraByIdeal( Srng, Ssrc );
     else
         Print( "Uyumsuz xmod\n" );
         return false;
@@ -1013,7 +979,7 @@ function( C1A )
                        " -> Mul. Alg.(", Source( PM ), ")]" );;
             fi;
             #  Type 3
-            if ( type = "Type3" ) then          
+            if ( type = "Surjection" ) then          
                 Print( "[", Range(PM)," IX ", Source( PM ), 
                        " -> ", Range( C1A ), "]" );
             fi;
@@ -1023,7 +989,7 @@ function( C1A )
                        " -> ", Range( C1A ), "]" );
             fi; 
             #  Type 5
-            if ( type = "Type5" ) then
+            if ( type = "Multiplier" ) then
                 Print( "[", Range(PM)," IX ", Source( PM ), 
                        " -> ", Range( C1A ), "]" );
             fi; 
@@ -1726,30 +1692,30 @@ end );
 InstallMethod( PreXModAlgebraOfPreCat1Algebra, true, [ IsPreCat1Algebra ], 0,
 function( C1A )
  
-    local  usage, A, B, C, bdy, gA, im, sbdy, PM,act,R,s,t;
+    local  usage, A, B, s, t, e, bdy, S, R, vecR, evecR, eR, M, act, PM;
 
-    usage := "Usage : Boundary of Cat-1 Algebra not surjective";
-    if IsXModAlgebraConst(TailMap(C1A)) then
-        PM := XModAlgebraConst(TailMap(C1A));
+    usage := "Usage : Boundary of cat1-algebra not surjective";
+    if IsXModAlgebraConst( TailMap( C1A ) ) then ## what is this for ??? 
+        PM := XModAlgebraConst( TailMap( C1A ) );
         return PM;   
-    fi;   
+    fi; 
+    A := Source( C1A ); 
+    B := Range( C1A );
+    s := HeadMap( C1A );
+    t := TailMap( C1A );
+    e := RangeEmbedding( C1A ); 
     bdy := Boundary( C1A );
-    A := Source( bdy );
-    B := Range( bdy );
-    if IsSubset(B,A) then
-        if (IsIdeal(B,A)) then
-            return XModAlgebra(B,A);
-        fi;
-    fi;
-    s := HeadMap(C1A);
-    t := TailMap(C1A);
-    A := Kernel(s);
-    R := Image(s);
-    gA := GeneratorsOfAlgebra(A);
-    im := List(gA, x -> Image(t,x));
-    sbdy := AlgebraHomomorphismByImages(A,R,gA,im);
-    act := AlgebraActionByMultiplication(R,A);
-    return XModAlgebraByBoundaryAndAction(sbdy,act);    
+    S := Source( bdy );
+    R := Range( bdy );
+    vecR := BasisVectors( Basis( R ) ); 
+    evecR := List( vecR, v -> ImageElm( e, v ) ); 
+    eR := Subalgebra( A, evecR ); 
+    M := MultiplierAlgebraOfIdealBySubalgebra( A, S, eR ); 
+    act := MultiplierHomomorphism( M ); 
+    SetIsAlgebraAction( act, true ); 
+    SetAlgebraActionType( act, "multiplier" ); 
+    PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
+    return PM; 
 end );
 
 ##############################################################################

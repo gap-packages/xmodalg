@@ -1,10 +1,14 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.18 -> 1.18dev (11/06/21) 
+## 1.18 -> 1.18dev (15/07/21) 
+ * (15/07/21) revised PreXModAlgebraOfPreCat1Algebra 
+ * (14/07/21) revised IsPreXModAlgebra and IsXModAlgebra 
+              renamed AlgebraAction4 AlgebraActionByModule 
+ * (09/07/21) added section on Multipliers and MultiplierAlgebras 
  * (09/06/21) renamed AlgebraAction3 AlgebraActionBySurjection 
               renamed XModAlgebraByCentralExtension XModAlgebraBySurjection 
               revised these operations and added examples
- * (25/05/21) renamed AlgebraAction1 AlgebraActionByMultiplication 
+ * (25/05/21) renamed AlgebraAction1 AlgebraActionByMultipliers 
               added operation SemidirectProductofAlgebras 
               added chapter Commutative algebras and their actions to manual
  * (12/05/21) added algebra attribute AugmentationXMod 

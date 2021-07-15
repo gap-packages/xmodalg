@@ -9,8 +9,17 @@ DeclareInfoClass( "InfoXModAlg" );
 
 ############################  algebra operations  ################### 
 
-DeclareGlobalFunction( "MultiplierAlgebra" );
+DeclareProperty( "HasZeroAnnihilator", IsAlgebra and IsCommutative ); 
 
+DeclareOperation( "RegularAlgebraMultiplier", 
+    [ IsAlgebra, IsAlgebra, IsObject ] ); 
+DeclareProperty( "IsAlgebraMultiplier", IsMapping ); 
+
+DeclareOperation( "MultiplierAlgebraOfIdealBySubalgebra", 
+    [ IsAlgebra, IsAlgebra, IsAlgebra ] );
+DeclareOperation( "MultiplierAlgebraByGenerators", [ IsAlgebra, IsList ] ); 
+DeclareAttribute( "MultiplierAlgebra", IsAlgebra, "mutable" ); 
+DeclareAttribute( "MultiplierHomomorphism", IsAlgebra, "mutable" );
 DeclareProperty( "IsMultiplierAlgebra", IsList ); 
 
 #############################  algebra mappings  #################### 
@@ -21,9 +30,6 @@ DeclareOperation( "RestrictionMappingAlgebra",
 
 DeclareOperation( "AlgebraHomomorphismByFunction",
     [ IsAlgebra, IsAlgebra, IsFunction ] );
-    
-DeclareOperation( "MultiplierHomomorphism",
-    [ IsAlgebra ] );
     
 DeclareOperation( "ModuleHomomorphism",
     [ IsAlgebra, IsRing ] ); 
@@ -42,16 +48,15 @@ DeclareGlobalFunction( "ElementsLeftActing" );
 DeclareProperty( "IsAlgebraAction", IsMapping );
 
 DeclareGlobalFunction( "AlgebraAction" );
-DeclareOperation( "AlgebraAction1",
-    [ IsAlgebra, IsList, IsAlgebra ] );
 DeclareAttribute( "LeftElementOfCartesianProduct", IsAlgebraAction );
 DeclareAttribute( "AlgebraActionType", IsAlgebraAction );
 DeclareAttribute( "HasZeroModuleProduct", IsAlgebraAction );
 
-DeclareOperation( "AlgebraAction2",[ IsAlgebra ] );
-DeclareOperation( "AlgebraActionBySurjection",[ IsAlgebraHomomorphism ] );
-DeclareOperation( "AlgebraAction4",[ IsAlgebra, IsRing ] );
-DeclareOperation( "AlgebraActionByMultiplication",[ IsAlgebra, IsAlgebra ] );
+DeclareOperation( "AlgebraAction2", [ IsAlgebra ] );
+DeclareOperation( "AlgebraActionBySurjection", [ IsAlgebraHomomorphism ] );
+DeclareOperation( "AlgebraActionByModule", [ IsAlgebra, IsRing ] );
+DeclareOperation( "AlgebraActionByMultipliers", 
+    [ IsAlgebra, IsAlgebra, IsAlgebra ] );
 
 DeclareOperation ( "SemidirectProductOfAlgebras", 
     [ IsAlgebra, IsAlgebraAction, IsAlgebra ] ); 
