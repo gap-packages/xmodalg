@@ -47,7 +47,7 @@ r_1r_2 + r_1(\partial s_2) + r_2(\partial s_1) + (\partial s_1)(\partial s_2)
 Conversely, for a given cat<M>^{1}</M>-algebra 
 <M>\mathcal{C}=(e;t,h : A \rightarrow R)</M>, 
 the map <M>\partial : \ker t \rightarrow R</M> is a crossed module, 
-where the action is multiplication action and 
+where the action is multiplication action by <M>eR</M>, and 
 <M>\partial</M> is the restriction of <M>h</M> to <M>\ker t</M>. 
 <P/> 
 Since all of these operations are linked to the functions 

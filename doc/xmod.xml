@@ -99,24 +99,52 @@ is the <C>XModAlgebraByIdeal</C> formed using the
 
 <Example>
 <![CDATA[
-gap> A5k4 := GroupRing( GF(5), Group( (1,2), (3,4) ) );
+gap> Ak4 := GroupRing( GF(5), DihedralGroup(4) );
 <algebra-with-one over GF(5), with 2 generators>
-gap> XA5k4 := AugmentationXMod( A5k4 );
-[ <two-sided ideal in <algebra-with-one of dimension 4 over GF(5)>, 
-  (dimension 3)> -> <algebra-with-one of dimension 4 over GF(5)> ]
-gap> SetName( A5k4, "GF5(k4)" ); 
-gap> SetName( Source( XA5k4 ), "Aug(GF5(k4))" );
-gap> Display( XA5k4 );
-Crossed module [Aug(GF5(k4))->GF5(k4)] :- 
-: Source algebra Aug(GF5(k4)) has generators:
-  [ (Z(5)^2)*()+(Z(5)^0)*(1,2), (Z(5)^2)*()+(Z(5)^0)*(3,4) ]
-: Range algebra GF5(k4) has generators:
-  [ (Z(5)^0)*(), (Z(5)^0)*(1,2), (Z(5)^0)*(3,4) ]
-: Boundary homomorphism maps source generators to:
-  [ (Z(5)^2)*()+(Z(5)^0)*(1,2), (Z(5)^2)*()+(Z(5)^0)*(3,4) ]
+gap> Size( Ak4 );
+625
+gap> SetName( Ak4, "GF5[k4]" );
+gap> IAk4 := AugmentationIdeal( Ak4 );
+<two-sided ideal in GF5[k4], (2 generators)>
+gap> Size( IAk4 );
+125
+gap> SetName( IAk4, "I(GF5[k4])" );
+gap> XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );
+[ I(GF5[k4]) -> GF5[k4] ]
+gap> Display( XIAk4 );
 
-gap> Size( XA5k4 );
+Crossed module [I(GF5[k4])->GF5[k4]] :- 
+: Source algebra I(GF5[k4]) has generators:
+  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^
+    0)*f2 ]
+: Range algebra GF5[k4] has generators:
+  [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
+: Boundary homomorphism maps source generators to:
+  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^
+    0)*f2 ]
+
+gap> Size( XIAk4 );
 [ 125, 625 ]
+]]>
+</Example>
+
+<ManSection>
+   <Oper Name="XModAlgebraByMultiplierAlgebra"
+         Arg="A" />
+<Description> 
+When <M>A</M> is an algebra with multiplier algebra <M>M</M>, 
+then the map <M>A \to M, ~ a \mapsto \mu_a</M> is the boundary 
+of a crossed module in which the action is the identity map on <M>M</M>. 
+<P/>
+</Description>
+</ManSection>
+
+<Example>
+<![CDATA[
+gap> XA := XModAlgebraByMultiplierAlgebra( A );
+[ A(l,m) -> <algebra of dimension 3 over GF(5)> ]
+gap> XModAlgebraAction( XA );
+IdentityMapping( <algebra of dimension 3 over GF(5)> )
 ]]>
 </Example>
 
@@ -154,6 +182,8 @@ Crossed module [..->..] :-
 
 <Index>precrossed module</Index>
 <ManSection>
+   <Oper Name="XModAlgebraByBoundaryAndAction"
+         Arg="bdy act" />
    <Oper Name="PreXModAlgebraByBoundaryAndAction"
          Arg="bdy,act" />
    <Prop Name="IsPreXModAlgebra"
@@ -209,21 +239,6 @@ Crossed module [<e5>->GF(2^2)[k4]] :-
 </Example>
 
 <ManSection>
-   <Oper Name="XModAlgebraByBoundaryAndAction"
-         Arg="bdy act" />
-<Description> 
-<P/>
-</Description>
-</ManSection>
-
-<Example>
-<![CDATA[
-gap> ## example needed 
-]]>
-</Example>
-
-
-<ManSection>
    <Oper Name="XModAlgebraByModule"
          Arg="M R" />
 <Description> 
@@ -241,27 +256,6 @@ one can get that <M>\ker\partial</M> is a <M>(R/\partial M)</M>-module.
 gap> ## example needed 
 ]]>
 </Example>
-
-<ManSection>
-   <Oper Name="XModAlgebraByMultiplierAlgebra"
-         Arg="A" />
-<Description> 
-Let <M>S</M> be a <B>k</B>-algebra such that 
-<M>Ann(S)=0</M> or <M>S^{2} = S</M>. Then <M>\partial : S\rightarrow M(S)</M> 
-is a crossed module, 
-where <M>M(S)</M> is the algebra of multipliers of <M>S</M> 
-and <M>\partial </M> is the canonical homomorphism, 
-<Cite Key="arvasi4"/>. 
-<P/>
-</Description>
-</ManSection>
-
-<Example>
-<![CDATA[
-gap> ## example needed 
-]]>
-</Example>
-
 
 <ManSection>
    <Attr Name="Source" Label="for crossed modules of commutative algebras"

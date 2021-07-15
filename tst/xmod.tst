@@ -59,43 +59,16 @@ Crossed module [I(GF5[k4])->GF5[k4]] :-
 
 gap> Size( XIAk4 );
 [ 125, 625 ]
-gap> f := Boundary( XIAk4 );
-MappingByFunction( I(GF5[k4]), GF5[k4], function( i ) ... end )
-gap> Print( RepresentationsOfObject(XIAk4), "\n" ); 
-[ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
-gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements", 
->  "IsDuplicateFree", "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", 
->  "IsLDistributive", "IsRDistributive", "IsPreXModDomain", "Is2dAlgebraObject", 
->  "IsPreXModAlgebra", "IsXModAlgebra" ];;
-gap> known := KnownPropertiesOfObject( XIAk4 );;
-gap> ForAll( props, p -> (p in known) );
-true
-gap> Print( KnownAttributesOfObject(XIAk4), "\n" ); 
-[ "Name", "Size", "Range", "Source", "Boundary", "XModAlgebraAction" ]
-gap> ## Chapter 3,  Section 3.1.3
-gap> e4 := Elements( IAk4 )[4];
-(Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
-gap> Je4 := Ideal( IAk4, [e4] );;
-gap> Size( Je4 );
-5
-gap> SetName( Je4, "<e4>" ); 
-gap> XJe4 := XModAlgebraByIdeal( Ak4, Je4 );
-[ <e4> -> GF5[k4] ]
-gap> Display( XJe4 );        
-
-Crossed module [<e4>->GF5[k4]] :- 
-: Source algebra <e4> has generators:
-  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
-: Range algebra GF5[k4] has generators:
-  [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
-: Boundary homomorphism maps source generators to:
-  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
-
-gap> IsSubXModAlgebra( XIAk4, XJe4 );
-true
 
 gap> ############################
 gap> ## Section 4.1.4
+gap> XA := XModAlgebraByMultiplierAlgebra( A );
+[ A(l,m) -> <algebra of dimension 3 over GF(5)> ]
+gap> XModAlgebraAction( XA );
+IdentityMapping( <algebra of dimension 3 over GF(5)> )
+
+gap> ############################
+gap> ## Section 4.1.5
 gap> X3 := XModAlgebraBySurjection( nat3 );; 
 gap> Display( X3 ); 
 
@@ -108,7 +81,7 @@ Crossed module [..->..] :-
   [ v.1 ]
 
 gap> ############################
-gap> ## Section 4.1.5
+gap> ## Section 4.1.6
 gap> G := SmallGroup( 4, 2 );
 <pc group of size 4 with 2 generators>
 gap> F := GaloisField( 4 );
@@ -144,7 +117,47 @@ Crossed module [<e5>->GF(2^2)[k4]] :-
   [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 
 gap> ############################
-gap> ## Chapter 3,  Section 3.2.1 
+gap> ## Section 4.1.8
+gap> f := Boundary( XIAk4 );
+MappingByFunction( I(GF5[k4]), GF5[k4], function( i ) ... end )
+gap> Print( RepresentationsOfObject(XIAk4), "\n" ); 
+[ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
+gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements", 
+>  "IsDuplicateFree", "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", 
+>  "IsLDistributive", "IsRDistributive", "IsPreXModDomain", "Is2dAlgebraObject", 
+>  "IsPreXModAlgebra", "IsXModAlgebra" ];;
+gap> known := KnownPropertiesOfObject( XIAk4 );;
+gap> ForAll( props, p -> (p in known) );
+true
+gap> Print( KnownAttributesOfObject(XIAk4), "\n" ); 
+[ "Name", "Size", "Range", "Source", "Boundary", "XModAlgebraAction" ]
+
+gap> ############################
+gap> ## Section 4.1.9
+gap> e4 := Elements( IAk4 )[4];
+(Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
+gap> Je4 := Ideal( IAk4, [e4] );;
+gap> Size( Je4 );
+5
+gap> SetName( Je4, "<e4>" ); 
+gap> XJe4 := XModAlgebraByIdeal( Ak4, Je4 );
+[ <e4> -> GF5[k4] ]
+gap> Display( XJe4 );        
+
+Crossed module [<e4>->GF5[k4]] :- 
+: Source algebra <e4> has generators:
+  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
+: Range algebra GF5[k4] has generators:
+  [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
+: Boundary homomorphism maps source generators to:
+  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
+
+gap> IsSubXModAlgebra( XIAk4, XJe4 );
+true
+
+
+gap> ############################
+gap> ## Chapter 4,  Section 4.2.1 
 gap> c4 := CyclicGroup( 4 );;
 gap> Ac4 := GroupRing( GF(2), c4 );
 <algebra-with-one over GF(2), with 2 generators>
@@ -188,7 +201,7 @@ true
 gap> IsSingleValued( mor );
 true
 gap> ############################
-gap> ## Chapter 3,  Section 3.2.2
+gap> ## Section 4.2.2
 gap> Xmor := Kernel( mor );
 [ <algebra of dimension 2 over GF(2)> -> <algebra of dimension 2 over GF(2)> ]
 gap> IsXModAlgebra( Xmor );
@@ -198,7 +211,7 @@ gap> Size( Xmor );
 gap> IsSubXModAlgebra( XIAc4, Xmor );
 true
 gap> ############################
-gap> ## Chapter 3,  Section 3.2.4
+gap> ## Section 4.2.4
 gap> ic4 := One( Ac4 );; 
 gap> e1 := ic4*c4.1 + ic4*c4.2;
 (Z(2)^0)*f1+(Z(2)^0)*f2
