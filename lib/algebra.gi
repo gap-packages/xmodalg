@@ -9,39 +9,145 @@
 
 #############################################################################
 ##
-#M  IsMultiplierAlgebra
+#M  HasZeroAnnihilator
 ##
-InstallMethod( IsMultiplierAlgebra, "generic method for 2-dim algebra objects",
-    true, [ IsList ], 0,
-function( obj )
-    return ( ForAll( obj, IsMapping ) );
+InstallMethod( HasZeroAnnihilator, "generic method for a commutative algebra",
+    true, [ IsAlgebra and IsCommutative ], 0,
+function( A )
+    ## this method assumes that Ann(A)=0 is equivalent to A^2=A 
+    local genA, num, a, b, i, j, L, B; 
+    genA := GeneratorsOfAlgebra( A ); 
+    num := Length( genA ); 
+    L := [ ]; 
+    for i in [1..num] do 
+        a := genA[i]; 
+        for j in [i..num] do 
+            b := genA[j]; 
+            Add( L, a*b ); 
+        od; 
+    od; 
+    B := Subalgebra( A, L );
+    return ( A = B ); 
 end );
 
 #############################################################################
 ##
-#F  MultiplierAlgebra( <R> )
+#M  RegularAlgebraMultiplier
 ##
-#T  expect this to return an algebra? 
-## 
-InstallGlobalFunction( MultiplierAlgebra, 
-function ( R )
-    local   uzR, elR,MR,r,f,i;
-    if not (IsAlgebra(R)=true) then
-        return false;
+InstallMethod( RegularAlgebraMultiplier, 
+    "generic method for a commutative algebra, an ideal, and an element",
+    true, [ IsAlgebra, IsAlgebra, IsObject ], 0,
+function( A, I, a )
+    local vecI, imf, f; 
+    if not IsCommutative( A ) then 
+        Info( InfoXModAlg, 1, "A is not commutative" ); 
+        return fail; 
     fi; 
-    uzR := Size(R);
-    elR := Elements(R);
-    MR := [];
-    for i in [1..uzR] do 
-        r := elR[i];
-        f := GroupHomomorphismByFunction( R, R, x->r*x );
-        #if ( (f in MR) = false ) then
-           Add(MR,f);
-        #fi;
-    od;
-    SetIsMultiplierAlgebra(MR,true);
-    # return the mapping
-    return MR;
+    if not IsIdeal( A, I ) then 
+        Info( InfoXModAlg, 1, "I is not an ideal in A" ); 
+        return fail; 
+    fi; 
+    if not a in A then 
+        Info( InfoXModAlg, 1, "a is not an element of A" ); 
+        return fail; 
+    fi; 
+    vecI := BasisVectors( Basis( I ) ); 
+    imf := List( vecI, v -> a*v ); 
+    f := LeftModuleHomomorphismByImages( I, I, vecI, imf );
+    return f; 
+end );
+
+#############################################################################
+##
+#M  IsAlgebraMultiplier
+##
+InstallMethod( IsAlgebraMultiplier, "generic method for a mapping", true, 
+    [ IsMapping ], 0,
+function( m )
+    local A, vecA, len, i, a, j, b, c, ok; 
+    A := Source( m ); 
+    if not IsAlgebra( A ) and ( A = Range( m ) ) then 
+        return false; 
+    fi; 
+    vecA := BasisVectors( Basis( A ) ); 
+    len := Length( vecA ); 
+    for i in [1..len] do 
+        a := vecA[i]; 
+        for j in [i..len] do 
+            b := vecA[j]; 
+            c := ImageElm( m, a*b ); 
+            ok := ( c = a * ImageElm(m,b) ) and ( c = b * ImageElm(m,a) ); 
+            if not ok then 
+                return false; 
+            fi; 
+        od; 
+    od; 
+    return true; 
+end );
+
+#############################################################################
+##
+#F  MultiplierAlgebraOfIdealBySubalgebra( <A I B> )
+## 
+InstallMethod( MultiplierAlgebraOfIdealBySubalgebra, 
+    "for an algebra, an ideal, and a subalgebra", true,  
+    [ IsAlgebra, IsAlgebra, IsAlgebra ], 0,
+function ( A, I, B )
+    local domA, vecA, vecB, imhom, M, hom; 
+    if not IsIdeal( A, I ) then 
+        Info( InfoXModAlg, 1, "I is not an ideal in A" ); 
+    fi; 
+    vecB := BasisVectors( Basis( B ) ); 
+    if not ForAll( vecB, b -> b in A ) then 
+        Info( InfoXModAlg, 1, "B is not a subalgebra of A" ); 
+        return fail; 
+    fi; 
+    domA := LeftActingDomain( A ); 
+    imhom := List( vecB, b -> RegularAlgebraMultiplier( A, I, b ) ); 
+    M := FLMLORByGenerators( domA, imhom ); 
+    SetIsMultiplierAlgebra( M, true ); 
+    if ( Dimension( M ) = 0 ) then 
+        hom := ZeroMapping( B, M ); 
+    else 
+        hom := AlgebraHomomorphismByImages( B, M, vecB, imhom ); 
+    fi; 
+    SetMultiplierHomomorphism( M, hom ); 
+    return M;
+end ); 
+
+#############################################################################
+##
+#F  MultiplierAlgebra( <A> )
+## 
+InstallMethod( MultiplierAlgebra, "generic method for an algebra", 
+    true, [ IsAlgebra  ], 0,
+function ( A )
+    return MultiplierAlgebraOfIdealBySubalgebra( A, A, A ); 
+end ); 
+
+#############################################################################
+##
+#F  MultiplierAlgebraByGenerators 
+## 
+InstallMethod( MultiplierAlgebraByGenerators, 
+    "generic method for an algebra and a list of multipliers", true, 
+    [ IsAlgebra, IsList ], 0,
+function ( A, L )
+    local I, ok, domA, M;
+    ok := ForAll( L, m -> IsAlgebraMultiplier( m ) ); 
+    if not ok then 
+        Info( InfoXModAlg, 1, "L is not a list of multipliers" ); 
+        return fail; 
+    fi; 
+    I := Source( L[1] ); 
+    if not IsIdeal( A, I ) then 
+        Info( InfoXModAlg, 1, "I is not an ideal in A" ); 
+        return fail; 
+    fi; 
+    domA := LeftActingDomain( A ); 
+    M := FLMLORByGenerators( domA, L ); 
+    SetIsMultiplierAlgebra( M, true ); 
+    return M;
 end );
 
 ##############################################################################
@@ -478,10 +584,9 @@ function( arg )
     local  nargs;
 
     nargs := Length( arg );
-    # Algebra and Ideal
-    if ( ( nargs = 3 ) and IsAlgebra( arg[1] )
-                       and IsAlgebra( arg[3] ) ) then
-        return AlgebraAction1( arg[1], arg[2], arg[3] );
+    # Algebra, Ideal, and Subalgebra
+    if ( ( nargs = 3 ) and ForAll( arg, a -> IsAlgebra(a) ) ) then
+        return AlgebraActionByMultipliers( arg[1], arg[2], arg[3] );
     # Multiplier Action
     elif ( ( nargs = 1 ) and IsAlgebra( arg[1] ) ) then
         return AlgebraAction2( arg[1] );
@@ -492,41 +597,10 @@ function( arg )
     # module and zero map
     elif ( ( nargs = 2 ) and IsAlgebra( arg[1] ) 
                          and IsRing( arg[2] ) ) then
-        return AlgebraAction4( arg[1],arg[2] );   
+        return AlgebraActionByModule( arg[1],arg[2] );   
     fi;
     # alternatives not allowed
-    Error( "usage: XModAlgebra( bdy, act );  or  XModAlgebra( G, N );" );
-end );
-
-#############################################################################
-##
-#F  AlgebraAction1( <D>, <E>, <fun> )
-##
-InstallMethod( AlgebraAction1, "for,for,for", true,
-    [ IsAlgebra, IsList, IsAlgebra ], 0,
-function ( A, B, C )
-    local act,arg,narg,usage,error;        # mapping <map>, result
-    narg := 3;
-    usage := "\n Usage: input two propositions; \n";
-    error := "\n Error: input positive value; \n";
-    if ((narg < 3) or (narg >= 4)) then
-        Print(usage);
-        return false;
-    fi;
-    act := rec( fun:= x->x[1]*x[2]);
-    ObjectifyWithAttributes( act, 
-        NewType(GeneralMappingsFamily( ElementsFamily(FamilyObj(B) ),
-        ElementsFamily( FamilyObj(C)) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        LeftElementOfCartesianProduct, A,
-        AlgebraActionType, "Type1",
-        Source, B,
-        Range, C,
-        HasZeroModuleProduct, false,
-        IsAlgebraAction, true);
-    # return the mapping
-    return act;
+    Error( "usage: AlgebraAcrion( A, I, B );  or various options" );
 end );
 
 #############################################################################
@@ -598,20 +672,21 @@ function ( hom )
         im := List( vecA, a -> p*a );
         maps[j] := LeftModuleHomomorphismByImages( A, A, vecA, im );
     od;
-    M := Algebra( dom, maps );
+    M := FLMLORByGenerators( dom, maps );
     act := LeftModuleGeneralMappingByImages( B, M, vecB, maps );
     SetIsAlgebraAction( act, true );
-    SetAlgebraActionType( act, "Type3" );
+    SetAlgebraActionType( act, "surjection" );
     SetHasZeroModuleProduct( act, false );
     return act;
 end );
 
 #############################################################################
 ##
-#F  AlgebraAction4( <D>, <E>, <fun> )
+#F  AlgebraActionByModule( <D>, <E>, <fun> )
 ##
-InstallMethod( AlgebraAction4, "for,for,for", true, [ IsAlgebra, IsRing ], 0,
-function ( M,R )
+InstallMethod( AlgebraActionByModule, "for,for,for", true, 
+    [ IsAlgebra, IsRing ], 0,
+function( M, R )
     local   act,RM;        # mapping <map>, result
     RM := Cartesian(R,M);
     act := rec( fun:= x->x[1]*x[2]);
@@ -621,7 +696,7 @@ function ( M,R )
         IsSPMappingByFunctionRep and IsSingleValued
             and IsTotal and IsGroupHomomorphism ),
         LeftElementOfCartesianProduct, R,
-        AlgebraActionType, "Type4",
+        AlgebraActionType, "module",
         Source, RM,
         Range, M,
         HasZeroModuleProduct, true,
@@ -632,34 +707,17 @@ end );
 
 #############################################################################
 ##
-#F  AlgebraActionByMultiplication( <A>, <I> )
+#F  AlgebraActionByMultipliers( <A>, <I>, <B> )
 ##
-InstallMethod( AlgebraActionByMultiplication, "for an algebra and an ideal", 
-    true, [ IsAlgebra, IsAlgebra ], 0,
-function ( A, I )
-    local basA, basI, vecA, genA, dimA, maps, j, im, M, act, eA;
-    genA := GeneratorsOfAlgebra( A );
-    basA := Basis( A );
-    vecA := BasisVectors( basA );
-    dimA := Dimension( A );
-    basI := Basis( I );
-    maps := ListWithIdenticalEntries( dimA, 0 );
-    if ( dimA > 0  ) then
-        for j in [1..dimA] do
-            im := List( basI, b -> vecA[j]*b );
-            maps[j] := LeftModuleHomomorphismByImages( I, I, basI, im );
-        od;
-        M := Algebra( LeftActingDomain(A), maps );
-        act := LeftModuleGeneralMappingByImages( A, M, vecA, maps );
-    else
-        maps := [ IdentityMapping(I) ];
-        M := Algebra( LeftActingDomain( A ), maps );
-        eA := Elements(A);
-        act := LeftModuleGeneralMappingByImages( A, M, [eA[1]], 
-                   GeneratorsOfAlgebra( M ) );
-    fi;    
+InstallMethod( AlgebraActionByMultipliers, 
+    "for an algebra, an ideal, and a subalgebra", true,  
+    [ IsAlgebra, IsAlgebra, IsAlgebra ], 0,
+function ( A, I, B )
+    local M, act;
+    M := MultiplierAlgebraOfIdealBySubalgebra( A, I, B ); 
+    act := MultiplierHomomorphism( M );
     SetIsAlgebraAction( act, true );
-    SetAlgebraActionType( act, "Type5" );
+    SetAlgebraActionType( act, "multiplier" );
     SetHasZeroModuleProduct( act, false );
     return act;
 end );

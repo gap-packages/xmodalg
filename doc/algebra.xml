@@ -19,8 +19,159 @@ All the algebras considered in this package will be associative
 and commutative. 
 Scalars belong to a commutative ring <B>k</B> with <M>1 \neq 0</M>. 
 <P/>
-<E>Why not a field?  A group ring over the integers is not an algebra?</E>
+<E>Why not a field?  A group ring over the integers is not an algebra.</E>
 <P/>
+
+
+<Section>
+
+<Heading>Multipliers</Heading> 
+
+A <E>multiplier</E> in a commutative algebra <M>A</M> 
+is a function <M>\mu : A \to A</M> such that 
+<Display>
+\mu(ab) ~=~ (\mu a)b ~=~ a(\mu b) \quad \forall~ a,b \in A. 
+</Display> 
+The <E>regular multipliers</E> of <M>A</M> are the functions 
+<Display>
+\mu_a : A \to A ~:~ \mu_ab = ab \quad \forall~ b \in A. 
+</Display>
+When <M>A</M> has a one, it follows from the defining condition that 
+<M>\mu(b1) = (\mu 1)b</M> and so <M>\mu = \mu_a</M> where <M>a = \mu 1</M>. 
+Since an ideal <M>I</M> of <M>A</M> is closed under multiplication, 
+a multiplier <M>\mu</M> may be restricted to <M>I</M>. 
+<P/> 
+<B>Question:</B> 
+Is there an example of an algebra <M>A</M> <E>without</E> a one 
+which has multipliers <E>not</E> of the form <M>\mu_a</M>? 
+<P/>
+
+<ManSection>
+   <Oper Name="RegularAlgebraMultiplier"
+         Arg="A I a" />
+<Description> 
+This operation defines the multiplier <M>\mu_a : I \to I</M> 
+on an ideal <M>I</M> of <M>A</M>. 
+</Description> 
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> A5c6 := GroupRing( GF(5), Group( (1,2,3,4,5,6) ) );;
+gap> vecA := BasisVectors( Basis( A5c6 ) );; 
+gap> v := vecA[1] + vecA[3] + vecA[5];
+(Z(5)^0)*()+(Z(5)^0)*(1,3,5)(2,4,6)+(Z(5)^0)*(1,5,3)(2,6,4)
+gap> I5c6 := Ideal( A5c6, [v] );; 
+gap> v2 := vecA[2];
+(Z(5)^0)*(1,2,3,4,5,6)
+gap> m2 := RegularAlgebraMultiplier( A5c6, I5c6, v2 ); 
+[ (Z(5)^0)*()+(Z(5)^0)*(1,3,5)(2,4,6)+(Z(5)^0)*(1,5,3)(2,6,4), 
+  (Z(5)^0)*(1,2,3,4,5,6)+(Z(5)^0)*(1,4)(2,5)(3,6)+(Z(5)^0)*(1,6,5,4,3,2) ] -> 
+[ (Z(5)^0)*(1,2,3,4,5,6)+(Z(5)^0)*(1,4)(2,5)(3,6)+(Z(5)^0)*(1,6,5,4,3,2), 
+  (Z(5)^0)*()+(Z(5)^0)*(1,3,5)(2,4,6)+(Z(5)^0)*(1,5,3)(2,6,4) ]
+]]>
+</Example>
+
+<ManSection>
+   <Oper Name="IsAlgebraMultiplier"
+         Arg="m" />
+<Description> 
+This function tests the condition <M>\mu(ab) = (\mu a)b = a(\mu b)</M> 
+for all <M>a,b</M> in the basis for <M>A</M>. 
+</Description> 
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> IsAlgebraMultiplier( m2 ); 
+true
+gap> one := One( A5c6 );; 
+gap> L := List( vecA, v -> one );; 
+gap> m1 := LeftModuleHomomorphismByImages( A5c6, A5c6, vecA, L ); 
+[ (Z(5)^0)*(), (Z(5)^0)*(1,2,3,4,5,6), (Z(5)^0)*(1,3,5)(2,4,6), 
+  (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2) 
+ ] -> [ (Z(5)^0)*(), (Z(5)^0)*(), (Z(5)^0)*(), (Z(5)^0)*(), (Z(5)^0)*(), 
+  (Z(5)^0)*() ]
+gap> IsAlgebraMultiplier( m1 );                                                
+false
+]]>
+</Example>
+
+<ManSection>
+   <Oper Name="MultiplierAlgebraOfIdealBySubalgebra "
+         Arg="A I B" />
+<Description>
+The regular multipliers <M>\mu_b : I \to I</M> for all <M>b \in B</M>, 
+where <M>I</M> is an ideal in <M>A</M> and <M>B</M> is a subalgebra of <M>A</M>, 
+form an algebra with product <M>\mu_b \circ \mu_{b'} = \mu_{bb'}</M>.  
+<P/>
+</Description> 
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> v3 := vecA[3];
+(Z(5)^0)*(1,3,5)(2,4,6)
+gap> B5c3 := Subalgebra( A5c6, [ v3 ] );; 
+gap> M := MultiplierAlgebraOfIdealBySubalgebra( A5c6, I5c6, B5c3 );
+<algebra of dimension 1 over GF(5)>
+gap> vecM := BasisVectors( Basis( M ) );; 
+gap> vecM[1];
+<linear mapping by matrix, 
+<two-sided ideal in <algebra-with-one of dimension 6 over GF(5)>, (dimension 2
+ )> -> <two-sided ideal in <algebra-with-one of dimension 6 over GF(5)>, 
+  (dimension 2)>>
+]]>
+</Example>
+
+<ManSection>
+   <Attr Name="MultiplierAlgebra"
+         Arg="A" />
+<Description>
+The regular multipliers <M>\mu_a : A \to A</M> for all <M>a \in A</M> 
+form an algebra isomorphic to <M>A</M> by the map <M>a \mapsto \mu_a</M>. 
+This operation returns <C>MultiplierAlgebraOfIdealBySubalgebra(A,A,A);</C>. 
+<P/>
+</Description> 
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> MA5c6 := RegularMultiplierAlgebra( A5c6 );
+<algebra of dimension 6 over GF(5)>
+gap> vecM := BasisVectors( Basis( MA5c6 ) );; 
+gap> vecM[3];
+<linear mapping by matrix, <algebra-with-one of dimension 
+6 over GF(5)> -> <algebra-with-one of dimension 6 over GF(5)>>
+]]>
+</Example>
+
+<ManSection>
+   <Attr Name="MultiplierHomomorphism"
+         Arg="M" />
+<Description>
+If <M>M</M> is a multiplier algebra with elements of algebra <M>A</M> 
+multiplying an ideal <M>I</M> then this operation returns the 
+homomorphism from <M>A</M> to <M>M</M> mapping <M>a</M> to <M>\mu_a</M>. 
+</Description> 
+</ManSection> 
+
+<Example>
+<![CDATA[
+gap> hom := MultiplierHomomorphism( MA5c6 );; 
+gap> ImageElm( hom, vecA[2] ); 
+Basis( <two-sided ideal in <algebra-with-one of dimension 6 over GF(5)>, 
+  (dimension 2)>, 
+[ (Z(5)^0)*()+(Z(5)^0)*(1,3,5)(2,4,6)+(Z(5)^0)*(1,5,3)(2,6,4), 
+  (Z(5)^0)*(1,2,3,4,5,6)+(Z(5)^0)*(1,4)(2,5)(3,6)+(Z(5)^0)*(1,6,5,4,3,2) 
+ ] ) -> 
+[ (Z(5)^0)*(1,2,3,4,5,6)+(Z(5)^0)*(1,4)(2,5)(3,6)+(Z(5)^0)*(1,6,5,4,3,2), 
+  (Z(5)^0)*()+(Z(5)^0)*(1,3,5)(2,4,6)+(Z(5)^0)*(1,5,3)(2,6,4) ]
+]]>
+</Example> 
+
+</Section>
+
 
 <Section>
 
@@ -57,10 +208,13 @@ for all <M>k \in </M><B>k</B>, <M>r,r' \in R</M>, and <M>s,s' \in S</M>.
 <P/> 
 
 <ManSection>
-   <Oper Name="AlgebraActionByMultiplication"
+   <Oper Name="AlgebraActionByMultipliers"
          Arg="A I" />
 <Description>
-When <M>I</M> is an ideal in <M>A</M> then multiplication is an action.  
+When <M>I</M> is an ideal in <M>A</M> we have seen that the multiplier 
+homomorphism from <M>A</M> to <C>MultiplierAlgebraOf(Ideal(A,I)</C> 
+is an action. 
+<P/> 
 In the example the algebra is the group ring of the cyclic group <M>C_6</M> 
 over the field <M>GF(5)</M>. 
 The ideal is generated by <M>v = () + (1,3,5)(2,4,6) + (1,5,3)(2,6,4)</M>. 
@@ -77,7 +231,7 @@ gap> vecA := BasisVectors( Basis( A5c6 ) );;
 gap> v := vecA[1] + vecA[3] + vecA[5];
 (Z(5)^0)*()+(Z(5)^0)*(1,3,5)(2,4,6)+(Z(5)^0)*(1,5,3)(2,6,4)
 gap> I5c6 := Ideal( A5c6, [v] );; 
-gap> actm := AlgebraActionByMultiplication( A5c6, I5c6 );; 
+gap> actm := AlgebraActionByMultipliers( A5c6, I5c6 );; 
 gap> actm2 := Image( actm, vecA[2] );; 
 gap> Image( actm2, v );
 (Z(5)^0)*(1,2,3,4,5,6)+(Z(5)^0)*(1,4)(2,5)(3,6)+(Z(5)^0)*(1,6,5,4,3,2)

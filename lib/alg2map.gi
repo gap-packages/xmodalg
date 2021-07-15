@@ -641,7 +641,8 @@ end );
 
 ##############################################################################
 ##
-#M  Kernel . . . . . . of morphisms of pre-crossed modules of algebras and pre-cat1-groups of algebras
+#M  Kernel . . . . . . of morphisms of pre-crossed modules of algebras 
+#M         . . . . . . and pre-cat1-groups of algebras
 ##
 InstallOtherMethod( Kernel, "generic method for 2d-mappings",
      true, [ Is2DimensionalMapping and Is2dAlgebraMorphism ], 0,

@@ -26,7 +26,7 @@ gap> B := Subalgebra( A, [m] );;
 gap> SetName( B, "A(m)" ); 
 gap> IsIdeal( A, B ); 
 true
-gap> act := AlgebraActionByMultiplication( A, B );; 
+gap> act := AlgebraActionByMultipliers( A, B, A );; 
 gap> XAB := XModAlgebraByIdeal( A, B ); 
 [ A(m) -> A(l,m) ]
 gap> SetName( XAB, "XAB" ); 
@@ -122,7 +122,7 @@ gap> e5 := Elements( R )[5];
 (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
 gap> S := Subalgebra( R, [e5] );;
 gap> SetName( S, "<e5>" );
-gap> act := AlgebraActionByMultiplication( R, S );;
+gap> act := AlgebraActionByMultipliers( R, S, R );;
 gap> bdy := AlgebraHomomorphismByFunction( S, R, s->s );
 MappingByFunction( <e5>, GF(2^2)[k4], function( s ) ... end )
 gap> IsAlgebraAction( act ); 

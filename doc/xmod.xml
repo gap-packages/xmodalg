@@ -78,7 +78,7 @@ gap> B := Subalgebra( A, [m] );;
 gap> SetName( B, "A(m)" ); 
 gap> IsIdeal( A, B ); 
 true
-gap> act := AlgebraActionByMultiplication( A, B );; 
+gap> act := AlgebraActionByMultipliers( A, B );; 
 gap> XAB := XModAlgebraByIdeal( A, B ); 
 [ A(m) -> A(l,m) ]
 gap> SetName( XAB, "XAB" ); 

@@ -26,7 +26,7 @@ gap> SetName( R, "GF(2^2)[k4]" );
 gap> e5 := Elements(R)[5];; 
 gap> S := Subalgebra( R, [e5] );; 
 gap> SetName( S, "<e5>" );
-gap> act := AlgebraActionByMultiplication( R, S );;
+gap> act := AlgebraActionByMultipliers( R, S, R );;
 gap> bdy := AlgebraHomomorphismByFunction( S, R, s->s );;
 gap> IsAlgebraAction( act );; 
 gap> IsAlgebraHomomorphism( bdy );; 
