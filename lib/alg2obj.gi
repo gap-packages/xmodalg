@@ -152,7 +152,7 @@ end );
 ##
 #M  \=( <P>, <Q> )  . . . . . . . .  test if two pre-crossed modules are equal
 ##
-InstallMethod( \=, "generic method for two pre-crossed modules",
+InstallMethod( \=, "generic method for two pre-crossed modules of algebras",
     IsIdenticalObj, [ IsPreXModAlgebra, IsPreXModAlgebra ], 0,
 function ( P, Q )
     
@@ -199,7 +199,7 @@ end );
 ##
 #M  ViewObj( <PM> ) . . . . . . . . . . . . . . . view a (pre-)crossed module
 ##
-InstallMethod( ViewObj, "method for a pre-crossed module", true,
+InstallMethod( ViewObj, "method for a pre-crossed module of algebras", true,
     [ IsPreXModAlgebra ], 0,
     function( PM )
     
@@ -339,6 +339,16 @@ end );
 
 #############################################################################
 ##
+#M  Dimension( <PM> )  . . . . . . . . . dimension of a (pre-)crossed module
+##
+InstallMethod( Dimension, "method for a pre-crossed algebra module", true,
+    [ IsPreXModAlgebra ], 0,
+    function( PM )
+    return [ Dimension( Source( PM ) ), Dimension( Range( PM ) ) ]; 
+end );
+
+#############################################################################
+##
 #M  IsXModAlgebra            check that the second crossed module axiom holds
 ##
 InstallMethod( IsXModAlgebra, "generic method for pre-crossed modules",
@@ -429,6 +439,7 @@ function( A )
     bdy := MultiplierHomomorphism( A );
     act := IdentityMapping( MA ); 
     SetIsAlgebraAction( act, true ); 
+    SetAlgebraActionType( act, "multiplier" ); 
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     if not IsXModAlgebra( PM ) then
         Error( "this boundary and action only defines a pre-crossed module" );
