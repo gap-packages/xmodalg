@@ -10,7 +10,7 @@ This package allows for computation with crossed modules of commutative algebras
 ## Distribution
 
  * The 'XModAlg' package is distributed with the deposited GAP packages, see: 
-     <http://www.gap-system.org/Packages/xmodalg.html>
+     <https://www.gap-system.org/Packages/xmodalg.html>
  * It will, in due course, be available from the GitHub repository at:
      <https://gap-packages.github.io/xmodalg/> 
 
@@ -23,7 +23,7 @@ it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version. 
 
-For details, see \URL{http://www.gnu.org/licenses/gpl.html}
+For details, see \URL{https://www.gnu.org/licenses/gpl.html}
 
 ## Installation
 

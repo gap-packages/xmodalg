@@ -121,7 +121,7 @@ AutoDoc := rec(
             "<P/>\n", 
             "Bug reports, suggestions and comments are, of course, welcome. ", 
             "Please submit an issue on GitHub at ", 
-            "<URL>http://github.com/gap-packages/xmodalg/issues/</URL> ", 
+            "<URL>https://github.com/gap-packages/xmodalg/issues/</URL> ", 
             "or contact the second author at ", 
             "<Email>aodabas@ogu.edu.tr</Email>. \n", 
             "<P/>\n"
