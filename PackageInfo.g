@@ -82,7 +82,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.11.0",
-  NeededOtherPackages := [ ["XMod", ">=2.83"], 
+  NeededOtherPackages := [ ["XMod", ">=2.86"], 
                            ["LAGUNA", ">=3.9.3"] ],
   SuggestedOtherPackages := [ ],   ## ["GAPDoc", ">= 1.6.1" ] ],   
   ExternalConditions := [ ]
