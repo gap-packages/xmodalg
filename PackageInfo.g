@@ -9,7 +9,7 @@ SetPackageInfo( rec(
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 Version := "1.18dev",
-Date := "15/07/2021", # dd/mm/yyyy format
+Date := "11/04/2022", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -107,7 +107,7 @@ Keywords := ["crossed module of algebras", "cat1-algebra"],
 AutoDoc := rec(
     TitlePage := rec(
         Copyright := Concatenation(
-            "&copyright; 2014-2021, Zekeriya Arvasi and Alper Odabas. <P/>\n", 
+            "&copyright; 2014-2022, Zekeriya Arvasi and Alper Odabas. <P/>\n", 
             "The &XModAlg; package is free software; you can redistribute it ", 
             "and/or modify it under the terms of the GNU General ", 
             "Public License as published by the Free Software Foundation; ", 
@@ -135,7 +135,7 @@ AutoDoc := rec(
           "<Cite Key='GitHubPagesForGAP' /> ", 
           "and the package <Package>ReleaseTools</Package>.<P/>\n", 
           "Both authors are very grateful to Chris Wensley ", 
-          "(<URL>http://pages.bangor.ac.uk/~mas023/</URL>) ",            
+          "(<URL>https://github.com/cdwensley</URL>) ",            
           "for helpful suggestions.<P/>\n",
           "This work was partially supported by T&#220;B&#304;TAK ", 
           "(The Scientific and Technical Research Council of Turkey), ", 
