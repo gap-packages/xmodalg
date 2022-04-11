@@ -14,7 +14,7 @@
  * (12/05/21) added algebra attribute AugmentationXMod 
  * (11/05/21) added lib/vspchom.gi as a temporary fix 
 
-## 1.17 -> 1.18 (17/11/20) 
+## 1.17 -> 1.18 (16/11/20) 
  * (07/08/20) fixed problem with Cat1AlgebraOfXModAlgebra 
               introduced ImagesSource2DimensionalMapping
  * (09/10/18) Conversion files: use "Of", not "By".  Delete SDproduct. 
