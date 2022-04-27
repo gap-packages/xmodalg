@@ -1,6 +1,8 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.18 -> 1.18dev (15/07/21) 
+## 1.18 -> 1.19 (27/04/22) 
+ * (27/04/22) required XMod version 2.87 which uses Size2d in place of Size, 
+              and so used Size2d for 2d-algebras 
  * (15/07/21) revised PreXModAlgebraOfPreCat1Algebra 
  * (14/07/21) revised IsPreXModAlgebra and IsXModAlgebra 
               renamed AlgebraAction4 AlgebraActionByModule 
