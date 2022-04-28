@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/gap-packages/xmodalg.svg?branch=master)](https://travis-ci.org/gap-packages/xmodalg)
+[![CI](https://github.com/gap-packages/xmodalg/workflows/CI/badge.svg?branch=master)](https://github.com/gap-packages/xmodalg/actions?query=workflow%3ACI+branch%3Amaster)
 [![Code Coverage](https://codecov.io/github/gap-packages/xmodalg/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/xmodalg)
 
 # The GAP 4 package XModAlg  
@@ -10,20 +10,20 @@ This package allows for computation with crossed modules of commutative algebras
 ## Distribution
 
  * The 'XModAlg' package is distributed with the deposited GAP packages, see: 
-     <http://www.gap-system.org/Packages/xmodalg.html>
+     <https://www.gap-system.org/Packages/xmodalg.html>
  * It will, in due course, be available from the GitHub repository at:
      <https://gap-packages.github.io/xmodalg/> 
 
 ## Copyright
 
-The 'XModAlg' package is Copyright {\copyright} Zekeriya Arvasi and Alper Odabas et al, 2014--2020. 
+The 'XModAlg' package is Copyright {\copyright} Zekeriya Arvasi and Alper Odabas et al, 2014--2022. 
 
 'XModAlg' is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version. 
 
-For details, see \URL{http://www.gnu.org/licenses/gpl.html}
+For details, see \URL{https://www.gnu.org/licenses/gpl.html}
 
 ## Installation
 
@@ -39,6 +39,6 @@ For details, see \URL{http://www.gnu.org/licenses/gpl.html}
 ## Contact
 
 If you have a question relating to 'XModAlg', encounter any problems, or have a suggestion for extending the package in any way, please 
- * email: `aodabas@ogu.edu.tr`
- * or report an issue at: <https://github.com/gap-packages/xmodalg/issues/new>  
+ * report an issue at: <https://github.com/gap-packages/xmodalg/issues/new>  
+ * or email: `aodabas@ogu.edu.tr`
 

@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>GAP (XModAlg) - Chapter 4: Conversion between cat1-algebras and crossed modules</title>
+<title>GAP (XModAlg) - Chapter 4: Crossed modules</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
 <link rel="stylesheet" type="text/css" href="manual.css" />
@@ -15,105 +15,518 @@
 <body class="chap4"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
 
 <p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
-<p><a id="X7D65751085F46462" name="X7D65751085F46462"></a></p>
-<div class="ChapSects"><a href="chap4.html#X7D65751085F46462">4 <span class="Heading">Conversion between cat1-algebras and crossed modules</span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8617844F86989A78">4.1 <span class="Heading">Equivalent Categories</span></a>
+<p><a id="X808C6B357F8BADC1" name="X808C6B357F8BADC1"></a></p>
+<div class="ChapSects"><a href="chap4.html#X808C6B357F8BADC1">4 <span class="Heading">Crossed modules</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7BB9D67179296AA0">4.1 <span class="Heading">Definition and Examples</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7A7328237B8ABDD1">4.1-1 Cat1AlgebraOfXModAlgebra</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7EDFD11181CE143B">4.1-2 XModAlgebraOfCat1Algebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X813D94F97D8E71A8">4.1-1 XModAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B31475D7C030075">4.1-2 XModAlgebraByIdeal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CD49D5A84FB05FC">4.1-3 AugmentationXMod</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X814C89667B997FE8">4.1-4 XModAlgebraByMultiplierAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X824D4DD88323EF70">4.1-5 XModAlgebraBySurjection</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7AB09A158148290F">4.1-6 XModAlgebraByBoundaryAndAction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78400B837A2C8FB9">4.1-7 XModAlgebraByModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83C5D98B828DD1DD">4.1-8 Source</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CA213397B334CBC">4.1-9 SubXModAlgebra</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X866610BC7C41E1EC">4.2 <span class="Heading">(Pre-)Crossed Module Morphisms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D575D07810640EB">4.2-1 XModAlgebraMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83F45A3E8554ABE9">4.2-2 Kernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87F4D35A826599C6">4.2-3 Image</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B7975DA7E870690">4.2-4 SourceHom</a></span>
 </div></div>
 </div>
 
-<h3>4 <span class="Heading">Conversion between cat1-algebras and crossed modules</span></h3>
+<h3>4 <span class="Heading">Crossed modules</span></h3>
 
-<p><a id="X8617844F86989A78" name="X8617844F86989A78"></a></p>
+<p>In this chapter we will present the notion of crossed modules of commutative algebras and their implementation in this package.</p>
 
-<h4>4.1 <span class="Heading">Equivalent Categories</span></h4>
+<p><a id="X7BB9D67179296AA0" name="X7BB9D67179296AA0"></a></p>
 
-<p>The categories <span class="SimpleMath">mathbfCat1Alg</span> (cat<span class="SimpleMath">^1</span>-algebras) and <span class="SimpleMath">mathbfXModAlg</span> (crossed modules) are naturally equivalent <a href="chapBib.html#biBellis1">[Ell88]</a>. This equivalence is outlined in what follows. For a given crossed module <span class="SimpleMath">(∂ : A → R)</span> we can construct the semidirect product <span class="SimpleMath">R⋉ A</span> thanks to the action of <span class="SimpleMath">R</span> on <span class="SimpleMath">A</span>. If we define <span class="SimpleMath">t,h : R⋉ A → R</span> and <span class="SimpleMath">e : R → R ⋉ A</span> by</p>
+<h4>4.1 <span class="Heading">Definition and Examples</span></h4>
+
+<p>A <em>crossed module</em> is a <strong class="button">k</strong>-algebra morphism <span class="SimpleMath">mathcalX:=(∂:S→ R)</span> with a left action of <span class="SimpleMath">R</span> on <span class="SimpleMath">S</span> satisfying</p>
 
 <p class="pcenter">
-t(r,a) = r, \qquad 
-h(r,a) = r+\partial(a), \qquad 
-e(r) = (r,0), 
+{\bf XModAlg\ 1} ~:~  \partial(r \cdot s) 
+   = r(\partial s),
+\qquad
+{\bf XModAlg\ 2} ~:~  (\partial s) \cdot s^{\prime} = ss^{\prime}, 
 </p>
 
-<p>respectively, then <span class="SimpleMath">mathcalC = (e;t,h : R ⋉ A → R)</span> is a cat<span class="SimpleMath">^1-</span>algebra.</p>
+<p>for all <span class="SimpleMath">s,s^' ∈ S, r∈ R</span>. The morphism <span class="SimpleMath">∂</span> is called the <em>boundary map</em> of <span class="SimpleMath">mathcalX</span></p>
 
-<p>Conversely, for a given cat<span class="SimpleMath">^1</span>-algebra <span class="SimpleMath">mathcalC=(e;t,h : A → R)</span>, the map <span class="SimpleMath">∂ : ker t → R</span> is a crossed module, where the action is multiplication action and <span class="SimpleMath">∂</span> is the restriction of <span class="SimpleMath">h</span> to <span class="SimpleMath">ker t</span>.</p>
+<p>Note that, although in this definition we have used a left action, in the category of commutative algebras left and right actions coincide.</p>
 
-<p>Since all of these operations are linked to the functions <code class="func">Cat1Algebra</code> (<a href="chap2.html#X7B761CD9812972F6"><span class="RefLink">2.1-1</span></a>) and <code class="func">XModAlgebra</code> (<a href="chap3.html#X813D94F97D8E71A8"><span class="RefLink">3.1-1</span></a>), they can be permormed by calling these two functions. We may also use the function <code class="func">Cat1Algebra</code> (<a href="chap2.html#X7B761CD9812972F6"><span class="RefLink">2.1-1</span></a>) instead of the operation <code class="func">Cat1AlgebraSelect</code> (<a href="chap2.html#X82EC94BA7E7F8DEA"><span class="RefLink">2.1-3</span></a>).</p>
+<p><a id="X813D94F97D8E71A8" name="X813D94F97D8E71A8"></a></p>
 
-<p><a id="X7A7328237B8ABDD1" name="X7A7328237B8ABDD1"></a></p>
+<h5>4.1-1 XModAlgebra</h5>
 
-<h5>4.1-1 Cat1AlgebraOfXModAlgebra</h5>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebra</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This global function calls one of the following six operations, depending on the arguments supplied.</p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraOfXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraOfPreXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>These operations are used for constructing a cat<span class="SimpleMath">^1</span>-algebra from a given crossed module of algebras.</p>
+<p><a id="X7B31475D7C030075" name="X7B31475D7C030075"></a></p>
+
+<h5>4.1-2 XModAlgebraByIdeal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraByIdeal</code>( <var class="Arg">A</var>, <var class="Arg">I</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">A</span> be an algebra and <span class="SimpleMath">I</span> an ideal of <span class="SimpleMath">A</span>. Then <span class="SimpleMath">mathcalX = (inc:I→ A)</span> is a crossed module whose action is left multiplication of <span class="SimpleMath">A</span> on <span class="SimpleMath">I</span>. Conversely, given a crossed module <span class="SimpleMath">mathcalX = (∂ : S → R)</span>, it is the case that <span class="SimpleMath">∂(S)</span> is an ideal of <span class="SimpleMath">R</span>.</p>
 
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CXM := Cat1AlgebraOfXModAlgebra( XM );</span>
-[GF(2^2)[k4] IX &lt;e5&gt; -&gt; GF(2^2)[k4]]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( CXM );</span>
-
-Cat1-algebra [..=&gt;GF(2^2)[k4]] :- 
-:  range algebra has generators:
-  [ (Z(2)^0)*&lt;identity&gt; of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
-: tail homomorphism maps source generators to:
-: range embedding maps range generators to:
-  [ [ (Z(2)^0)*&lt;identity&gt; of ..., &lt;zero&gt; of ... ], 
-  [ (Z(2)^0)*f1, &lt;zero&gt; of ... ], [ (Z(2)^0)*f2, &lt;zero&gt; of ... ] ]
-: kernel has generators:
-  [ [ &lt;zero&gt; of ..., &lt;zero&gt; of ... ], 
-  [ &lt;zero&gt; of ..., (Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
-        0)*f1*f2 ], 
-  [ &lt;zero&gt; of ..., (Z(2^2))*&lt;identity&gt; of ...+(Z(2^2))*f1+(Z(2^2))*f2+(
-        Z(2^2))*f1*f2 ], 
-  [ &lt;zero&gt; of ..., (Z(2^2)^2)*&lt;identity&gt; of ...+(Z(2^2)^2)*f1+(Z(2^2)^2)*f2+(
-        Z(2^2)^2)*f1*f2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := GF(5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">one := One(F);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">two := Z(5);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := Zero( F );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := [ [one,z,z], [z,one,z], [z,z,one] ];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := [ [z,one,two^3], [z,z,one], [z,z,z] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := [ [z,z,one], [z,z,z], [z,z,z] ];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := Algebra( F, [l,m] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( A, "A(l,m)" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := Subalgebra( A, [m] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( B, "A(m)" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdeal( A, B ); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act := AlgebraActionByMultipliers( A, B );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XAB := XModAlgebraByIdeal( A, B ); </span>
+[ A(m) -&gt; A(l,m) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( XAB, "XAB" ); </span>
 
 </pre></div>
 
-<p><a id="X7EDFD11181CE143B" name="X7EDFD11181CE143B"></a></p>
+<p><a id="X7CD49D5A84FB05FC" name="X7CD49D5A84FB05FC"></a></p>
 
-<h5>4.1-2 XModAlgebraOfCat1Algebra</h5>
+<h5>4.1-3 AugmentationXMod</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraOfCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreXModAlgebraOfPreCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>These operations are used for constructing a crossed module of algebras from a given cat<span class="SimpleMath">^1</span>-algebra.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AugmentationXMod</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>As a special case of the previous operation, the attribute <code class="code">AugmentationXMod(A)</code> of a group algebra <span class="SimpleMath">A</span> is the <code class="code">XModAlgebraByIdeal</code> formed using the <code class="code">AugmentationIdeal</code> of the group algebra.</p>
 
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X3 := XModAlgebraOfCat1Algebra( C3 ); </span>
-[ &lt;algebra of dimension 3 over GF(2)&gt; -&gt; &lt;algebra of dimension 3 over GF(2)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Ak4 := GroupRing( GF(5), DihedralGroup(4) );</span>
+&lt;algebra-with-one over GF(5), with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( Ak4 );</span>
+625
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( Ak4, "GF5[k4]" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IAk4 := AugmentationIdeal( Ak4 );</span>
+&lt;two-sided ideal in GF5[k4], (2 generators)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( IAk4 );</span>
+125
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( IAk4, "I(GF5[k4])" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );</span>
+[ I(GF5[k4]) -&gt; GF5[k4] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( XIAk4 );</span>
+
+Crossed module [I(GF5[k4])-&gt;GF5[k4]] :- 
+: Source algebra I(GF5[k4]) has generators:
+  [ (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^0)*f1, (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^
+    0)*f2 ]
+: Range algebra GF5[k4] has generators:
+  [ (Z(5)^0)*&lt;identity&gt; of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
+: Boundary homomorphism maps source generators to:
+  [ (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^0)*f1, (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^
+    0)*f2 ]
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size2d( XIAk4 );</span>
+[ 125, 625 ]
+
+</pre></div>
+
+<p><a id="X814C89667B997FE8" name="X814C89667B997FE8"></a></p>
+
+<h5>4.1-4 XModAlgebraByMultiplierAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraByMultiplierAlgebra</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>When <span class="SimpleMath">A</span> is an algebra with multiplier algebra <span class="SimpleMath">M</span>, then the map <span class="SimpleMath">A -&gt; M, ~ a ↦ μ_a</span> is the boundary of a crossed module in which the action is the identity map on <span class="SimpleMath">M</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XA := XModAlgebraByMultiplierAlgebra( A );</span>
+[ A(l,m) -&gt; &lt;algebra of dimension 3 over GF(5)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XModAlgebraAction( XA );</span>
+IdentityMapping( &lt;algebra of dimension 3 over GF(5)&gt; )
+
+</pre></div>
+
+<p><a id="X824D4DD88323EF70" name="X824D4DD88323EF70"></a></p>
+
+<h5>4.1-5 XModAlgebraBySurjection</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraBySurjection</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">∂ : S→ R</span> be a surjective algebra homomorphism whose kernel lise in the annihilator of <span class="SimpleMath">S</span>. Define the action of <span class="SimpleMath">R</span> on <span class="SimpleMath">S</span> by <span class="SimpleMath">r⋅ s = widetilders</span> where <span class="SimpleMath">widetilder ∈ ∂^-1(r)</span>, as described in section <code class="func">AlgebraActionBySurjection</code> (<a href="chap2.html#X7EAF09677CAE12D5"><span class="RefLink">2.2-2</span></a>) Then <span class="SimpleMath">mathcalX=(∂ : S→ R)</span> is a crossed module with the defined action.</p>
+
+<p>Continuing with the example in that section,</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X3 := XModAlgebraBySurjection( nat3 );; </span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( X3 ); </span>
 
 Crossed module [..-&gt;..] :- 
 : Source algebra has generators:
-  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
-  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+  [ [ [ 0, 1, 2, 3 ], [ 0, 0, 1, 2 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ] ] ]
 : Range algebra has generators:
-  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3), (Z(2)^0)*(1,3,2) ]
+  [ v.1, v.2 ]
 : Boundary homomorphism maps source generators to:
-  [ &lt;zero&gt; of ..., &lt;zero&gt; of ..., &lt;zero&gt; of ... ]
+  [ v.1 ]
+
+</pre></div>
+
+<p><a id="X7AB09A158148290F" name="X7AB09A158148290F"></a></p>
+
+<h5>4.1-6 XModAlgebraByBoundaryAndAction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraByBoundaryAndAction</code>( <var class="Arg">bdy</var>, <var class="Arg">act</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreXModAlgebraByBoundaryAndAction</code>( <var class="Arg">bdy</var>, <var class="Arg">act</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPreXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>An <span class="SimpleMath">R</span>-algebra homomorphism <span class="SimpleMath">mathcalX := (∂ : S → R)</span> which satisfies the condition <span class="SimpleMath">XModAlg 1</span> is called a <em>precrossed module</em>. The details of these implementations can be found in <a href="chapBib.html#biBaodabas1">[Oda09]</a>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := SmallGroup( 4, 2 );</span>
+&lt;pc group of size 4 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := GaloisField( 4 );</span>
+GF(2^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := GroupRing( F, G );</span>
+&lt;algebra-with-one over GF(2^2), with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( R );</span>
+256
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( R, "GF(2^2)[k4]" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e5 := Elements( R )[5]; </span>
+(Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := Subalgebra( R, [e5] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( S, "&lt;e5&gt;" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RS := Cartesian( R, S );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( RS, "GF(2^2)[k4] x &lt;e5&gt;" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act := AlgebraAction( R, RS, S );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bdy := AlgebraHomomorphismByFunction( S, R, r-&gt;r );</span>
+MappingByFunction( &lt;e5&gt;, GF(2^2)[k4], function( r ) ... end )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAlgebraAction( act ); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAlgebraHomomorphism( bdy );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XM := PreXModAlgebraByBoundaryAndAction( bdy, act );</span>
+[&lt;e5&gt;-&gt;GF(2^2)[k4]]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsXModAlgebra( XM );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( XM );</span>
+
+Crossed module [&lt;e5&gt;-&gt;GF(2^2)[k4]] :- 
+: Source algebra has generators:
+  [ (Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
+: Range algebra GF(2^2)[k4] has generators:
+  [ (Z(2)^0)*&lt;identity&gt; of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
+: Boundary homomorphism maps source generators to:
+  [ (Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
+
+
+</pre></div>
+
+<p><a id="X78400B837A2C8FB9" name="X78400B837A2C8FB9"></a></p>
+
+<h5>4.1-7 XModAlgebraByModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraByModule</code>( <var class="Arg">M</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">M</span> be a <span class="SimpleMath">R</span>-module. Then <span class="SimpleMath">mathcalX = (0:M→ R)</span> is a crossed module. Conversely, given a crossed module <span class="SimpleMath">mathcalX = (∂ :M→ R)</span>, one can get that <span class="SimpleMath">ker∂</span> is a <span class="SimpleMath">(R/∂ M)</span>-module.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">## example needed </span>
+
+</pre></div>
+
+<p><a id="X83C5D98B828DD1DD" name="X83C5D98B828DD1DD"></a></p>
+
+<h5>4.1-8 Source</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Source</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Range</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Boundary</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraAction</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>These four attributes are used in the construction of a crossed module <span class="SimpleMath">mathcalX</span> where:</p>
+
+
+<ul>
+<li><p><code class="code">Source(X)</code> and <code class="code">Range(X)</code> are the <em>source</em> and the <em>range</em> of the boundary map respectively;</p>
+
+</li>
+<li><p><code class="code">Boundary(X)</code> is the boundary map of the crossed module <span class="SimpleMath">mathcalX</span>;</p>
+
+</li>
+<li><p><code class="code">XModAlgebraAction(X)</code> is the action used in the crossed module. This is an algebra homomorphism from <code class="code">Range(X)</code> to an algebra of endomorphisms of <code class="code">Source(X)</code>.</p>
+
+</li>
+</ul>
+<p>The following standard <strong class="pkg">GAP</strong> operations have special <strong class="pkg">XModAlg</strong> implementations:</p>
+
+
+<ul>
+<li><p><code class="code">Display(X)</code> is used to list the components of <span class="SimpleMath">mathcalX</span>;</p>
+
+</li>
+<li><p><code class="code">Size2d(X)</code> is used for calculating the order of the crossed module <span class="SimpleMath">mathcalX</span>;</p>
+
+</li>
+<li><p><code class="code">Name(X)</code> is used for giving a name to the crossed module <span class="SimpleMath">mathcalX</span> by associating the names of source and range algebras.</p>
+
+</li>
+</ul>
+<p>In the following example, we construct a crossed module by using the algebra <span class="SimpleMath">GF_5D_4</span> and its augmentation ideal. We also show usage of the attributes listed above.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := Boundary( XIAk4 );</span>
+MappingByFunction( I(GF5[k4]), GF5[k4], function( i ) ... end )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( RepresentationsOfObject(XIAk4), "\n" ); </span>
+[ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">props := [ "CanEasilyCompareElements", "CanEasilySortElements", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> "IsDuplicateFree", "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> "IsLDistributive", "IsRDistributive", "IsPreXModDomain", "Is2dAlgebraObject", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> "IsPreXModAlgebra", "IsXModAlgebra" ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">known := KnownPropertiesOfObject( XIAk4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ForAll( props, p -&gt; (p in known) );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( KnownAttributesOfObject(XIAk4), "\n" ); </span>
+[ "Name", "Range", "Source", "Boundary", "Size2d", "XModAlgebraAction" ]
+
+</pre></div>
+
+<p><a id="X7CA213397B334CBC" name="X7CA213397B334CBC"></a></p>
+
+<h5>4.1-9 SubXModAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>A crossed module <span class="SimpleMath">mathcalX^' = (∂ ^' :S^'→ R^' )</span> is a subcrossed module of the crossed module <span class="SimpleMath">mathcalX = (∂ :S→ R)</span> if <span class="SimpleMath">S^' ≤ S</span>, <span class="SimpleMath">R^'≤ R</span>, <span class="SimpleMath">∂^' = ∂|_S^' }</span>, and the action of <span class="SimpleMath">S^'</span> on <span class="SimpleMath">R^'</span> is induced by the action of <span class="SimpleMath">R</span> on <span class="SimpleMath">S</span>. The operation <code class="code">SubXModAlgebra</code> is used to construct a subcrossed module of a given crossed module.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e4 := Elements( IAk4 )[4];</span>
+(Z(5)^0)*&lt;identity&gt; of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Je4 := Ideal( IAk4, [e4] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( Je4 );</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( Je4, "&lt;e4&gt;" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XJe4 := XModAlgebraByIdeal( Ak4, Je4 );</span>
+[ &lt;e4&gt; -&gt; GF5[k4] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( XJe4 );        </span>
+
+Crossed module [&lt;e4&gt;-&gt;GF5[k4]] :- 
+: Source algebra &lt;e4&gt; has generators:
+  [ (Z(5)^0)*&lt;identity&gt; of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
+: Range algebra GF5[k4] has generators:
+  [ (Z(5)^0)*&lt;identity&gt; of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
+: Boundary homomorphism maps source generators to:
+  [ (Z(5)^0)*&lt;identity&gt; of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubXModAlgebra( XIAk4, XJe4 );</span>
+true
+
+</pre></div>
+
+<p><a id="X866610BC7C41E1EC" name="X866610BC7C41E1EC"></a></p>
+
+<h4>4.2 <span class="Heading">(Pre-)Crossed Module Morphisms</span></h4>
+
+<p>Let <span class="SimpleMath">mathcalX = (∂:S→ R)</span>, <span class="SimpleMath">mathcalX^' = (∂^' :S^' → R^' )</span> be (pre)crossed modules and <span class="SimpleMath">θ :S→ S^'</span>, <span class="SimpleMath">φ : R→ R^'</span> be algebra homomorphisms. If</p>
+
+<p class="pcenter">
+\varphi \circ \partial = \partial ^{\prime } \circ \theta, 
+\qquad 
+\theta (r\cdot s)=\varphi(r) \cdot \theta (s), 
+</p>
+
+<p>for all <span class="SimpleMath">r∈ R</span>, <span class="SimpleMath">s∈ S,</span> then the pair <span class="SimpleMath">(θ ,φ )</span> is called a morphism between <span class="SimpleMath">mathcalX</span> and <span class="SimpleMath">mathcalX^'</span></p>
+
+<p>The conditions can be thought as the commutativity of the following diagrams:</p>
+
+<p class="pcenter">
+\xymatrix@R=40pt@C=40pt{
+  S \ar[d]_{\partial} \ar[r]^{\theta}
+                &amp; S^{\prime } \ar[d]^{\partial^{\prime }}  \\
+  R  \ar[r]_{\varphi}
+                &amp; R^{\prime }  
+} \ \ \ \
+\xymatrix@R=40pt@C=40pt{
+  R \times S \ar[d] \ar[r]^{ \varphi \times \theta }
+                &amp;  R^{\prime } \times S^{\prime } \ar[d]  \\
+  S  \ar[r]_{ \theta } &amp; S^{\prime }.       }
+</p>
+
+<p>In <strong class="pkg">GAP</strong> we define the morphisms between algebraic structures such as cat<span class="SimpleMath">^1</span>-algebras and crossed modules and they are investigated by the function <code class="code">Make2dAlgebraMorphism</code>.</p>
+
+<p><a id="X7D575D07810640EB" name="X7D575D07810640EB"></a></p>
+
+<h5>4.2-1 XModAlgebraMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityMapping</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreXModAlgebraMorphismByHoms</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraMorphismByHoms</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPreXModAlgebraMorphism</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsXModAlgebraMorphism</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Source</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Range</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTotal</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSingleValued</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Name</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>These operations construct crossed module homomorphisms, which may have the attributes listed.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c4 := CyclicGroup( 4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Ac4 := GroupRing( GF(2), c4 );</span>
+&lt;algebra-with-one over GF(2), with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( Ac4, "GF2[c4]" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IAc4 := AugmentationIdeal( Ac4 );</span>
+&lt;two-sided ideal in GF2[c4], (dimension 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( IAc4, "I(GF2[c4])" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XIAc4 := XModAlgebra( Ac4, IAc4 );</span>
+[ I(GF2[c4]) -&gt; GF2[c4] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Bk4 := GroupRing( GF(2), SmallGroup( 4, 2 ) );</span>
+&lt;algebra-with-one over GF(2), with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( Bk4, "GF2[k4]" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IBk4 := AugmentationIdeal( Bk4 );</span>
+&lt;two-sided ideal in GF2[k4], (dimension 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( IBk4, "I(GF2[k4])" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XIBk4 := XModAlgebra( Bk4, IBk4 );</span>
+[ I(GF2[k4]) -&gt; GF2[k4] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IAc4 = IBk4;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homIAIB := AllHomsOfAlgebras( IAc4, IBk4 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">theta := homIAIB[3];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homAB := AllHomsOfAlgebras( Ac4, Bk4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := homAB[7];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mor := XModAlgebraMorphism( XIAc4, XIBk4, theta, phi );</span>
+[[I(GF2[c4])-&gt;GF2[c4]] =&gt; [I(GF2[k4])-&gt;GF2[k4]]]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( mor );</span>
+
+Morphism of crossed modules :- 
+: Source = [I(GF2[c4])-&gt;GF2[c4]]
+:  Range = [I(GF2[k4])-&gt;GF2[k4]]
+: Source Homomorphism maps source generators to:
+  [ &lt;zero&gt; of ..., (Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
+    0)*f1*f2, (Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^
+    0)*f1*f2 ]
+: Range Homomorphism maps range generators to:
+  [ (Z(2)^0)*&lt;identity&gt; of ..., (Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2, 
+  (Z(2)^0)*&lt;identity&gt; of ... ]
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsTotal( mor );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSingleValued( mor );</span>
+true
+
+</pre></div>
+
+<p><a id="X83F45A3E8554ABE9" name="X83F45A3E8554ABE9"></a></p>
+
+<h5>4.2-2 Kernel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Kernel</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">(θ,φ) : mathcalX = (∂ : S → R) → mathcalX^' = (∂^' : S^' → R^')</span> be a crossed module homomorphism. Then the crossed module</p>
+
+<p class="pcenter">
+\ker(\theta,\varphi) = (\partial| : \ker\theta \rightarrow \ker\varphi )
+</p>
+
+<p>is called the <em>kernel</em> of <span class="SimpleMath">(θ,φ)</span>. Also, <span class="SimpleMath">ker(θ ,φ )</span> is an ideal of <span class="SimpleMath">mathcalX</span>. An example is given below.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Xmor := Kernel( mor );</span>
+[ &lt;algebra of dimension 2 over GF(2)&gt; -&gt; &lt;algebra of dimension 2 over GF(2)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsXModAlgebra( Xmor );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size2d( Xmor );</span>
+[ 4, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubXModAlgebra( XIAc4, Xmor );</span>
+true
+
+</pre></div>
+
+<p><a id="X87F4D35A826599C6" name="X87F4D35A826599C6"></a></p>
+
+<h5>4.2-3 Image</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Image</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">(θ,φ) : mathcalX = (∂ : S → R) → mathcalX^' = (∂^' : S^' → R^')</span> be a crossed module homomorphism. Then the crossed module</p>
+
+<p class="pcenter"> 
+\Im(\theta,\varphi) = (\partial^{\prime}| : 
+\Im\theta \rightarrow \Im\varphi)
+</p>
+
+<p>is called the image of <span class="SimpleMath">(θ,φ)</span>. Further, <span class="SimpleMath">ℑ(θ,φ)</span> is a subcrossed module of <span class="SimpleMath">(S^',R^',∂^')</span>.</p>
+
+<p>In this package, the image of a crossed module homomorphism can be obtained by the command <code class="code">ImagesSource</code>. The operation <code class="code">Sub2dAlgObject</code> is effectively used for finding the kernel and image crossed modules induced from a given crossed module homomorphism.</p>
+
+<p><a id="X7B7975DA7E870690" name="X7B7975DA7E870690"></a></p>
+
+<h5>4.2-4 SourceHom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SourceHom</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RangeHom</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInjective</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSurjective</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBijjective</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">(θ,φ)</span> be a homomorphism of crossed modules. If the homomorphisms <span class="SimpleMath">θ</span> and <span class="SimpleMath">φ</span> are injective (surjective) then <span class="SimpleMath">(θ,φ)</span> is injective (surjective).</p>
+
+<p>The attributes <code class="code">SourceHom</code> and <code class="code">RangeHom</code> store the two algebra homomorphisms <span class="SimpleMath">θ</span> and <span class="SimpleMath">φ</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ic4 := One( Ac4 );;                                      </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e1 := ic4*c4.1 + ic4*c4.2;</span>
+(Z(2)^0)*f1+(Z(2)^0)*f2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( theta, e1 );  </span>
+(Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e2 := ic4*c4.1;</span>
+(Z(2)^0)*f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( phi, e2 );</span>
+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsInjective( mor );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSurjective( mor );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">immor := ImagesSource2DimensionalMapping( mor );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( immor );</span>
+
+Crossed module [..-&gt;..] :- 
+: Source algebra has generators:
+  [ (Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
+: Range algebra has generators:
+  [ (Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2, (Z(2)^0)*&lt;identity&gt; of ... ]
+: Boundary homomorphism maps source generators to:
+  [ (Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
+
 
 </pre></div>
 
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

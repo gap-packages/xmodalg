@@ -1,391 +1,436 @@
   
-  [1X3 [33X[0;0YCrossed modules[133X[101X
-  
-  [33X[0;0YIn this chapter we will present the notion of crossed modules of commutative
-  algebras and their implementation in this package.[133X
+  [1X3 [33X[0;0YCat1-algebras[133X[101X
   
   
-  [1X3.1 [33X[0;0YDefinition and Examples[133X[101X
+  [1X3.1 [33X[0;0YDefinitions and examples[133X[101X
   
-  [33X[0;0YLet  [12Xk[112X  be  a fixed commutative ring with [22X1 ≠ 0[122X. From now on, all [12Xk[112X-algebras
-  will be associative and commutative.[133X
+  [33X[0;0YAlgebraic  structures  which  are  equivalent to crossed modules of algebras
+  include :[133X
   
-  [33X[0;0YA  [13Xcrossed  module[113X is a [12Xk[112X-algebra morphism [22XmathcalX:=(∂:S→ R)[122X with an action
-  of [22XR[122X on [22XS[122X satisfying[133X
+  [30X    [33X[0;6Ycat[22X^1[122X-algebras, (Ellis, [Ell88]);[133X
+  
+  [30X    [33X[0;6Ysimplicial  algebras  with  Moore  complex of length 1, (Z. Arvasi and
+        T.Porter, [AP96]);[133X
+  
+  [30X    [33X[0;6Yalgebra-algebroids, (Gaffar Musa's Ph.D. thesis, [Mos86]).[133X
+  
+  [33X[0;0YIn  this  section  we describe an implementation of cat[22X^1[122X-algebras and their
+  morphisms.[133X
+  
+  [33X[0;0YThe  notion  of cat[22X^1[122X-groups was defined as an algebraic model of [22X2[122X-types by
+  Loday in [Lod82]. Then Ellis defined the cat[22X^1[122X-algebras in [Ell88].[133X
+  
+  [33X[0;0YLet [22XA[122X and [22XR[122X be [22Xk[122X-algebras, let [22Xt,h:A→ R[122X be surjections, and let [22Xe:R→ A[122X be an
+  inclusion.[133X
   
   
-  [24X[33X[0;6Y{\bf  XModAlg\  1}  ~:~  \partial(r  \cdot  s)  = r(\partial s), \qquad {\bf
-  XModAlg\ 2} ~:~ (\partial s) \cdot s^{\prime} = ss^{\prime},[133X
+  [24X[33X[0;6Y\xymatrix@R=50pt@C=50pt{  A \ar@{->}@<-1.5pt>[d]_{t} \ar@{->}@<1.5pt>[d]^{h}
+  \\ R \ar@/^1.5pc/[u]^{e} }[133X
   
   [124X
   
-  [33X[0;0Yfor  all  [22Xs,s^'  ∈  S,  r∈  R[122X.  The morphism [22X∂[122X is called the [13Xboundary map[113X of
-  [22XmathcalX[122X[133X
+  [33X[0;0YIf the conditions,[133X
   
-  [33X[0;0YIn  this  definition  we  used  the left action notation. In the category of
-  commutative algebras the right and the left actions coincide.[133X
   
-  [33X[0;0YWe can produce crossed modules by using the following methods.[133X
+  [24X[33X[0;6Y\mathbf{Cat1Alg1:}  \quad  te = id_{R} = he, \qquad \mathbf{Cat1Alg2:} \quad
+  (\ker t)(\ker h) = \{0_{A}\}[133X
   
-  [1X3.1-1 XModAlgebra[101X
+  [124X
   
-  [33X[1;0Y[29X[2XXModAlgebra[102X( [3Xargs[103X ) [32X function[133X
-  [33X[1;0Y[29X[2XXModAlgebraByBoundaryAndAction[102X( [3Xbdy[103X, [3Xact[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XXModAlgebraByIdeal[102X( [3XA[103X, [3XI[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XXModAlgebraByModule[102X( [3XM[103X, [3XR[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XXModAlgebraByCentralExtension[102X( [3Xf[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XXModAlgebraByMultipleAlgebra[102X( [3XA[103X ) [32X operation[133X
+  [33X[0;0Yare  satisfied,  then  the  algebraic  system [22XmathcalC := (e;t,h : A → R)[122X is
+  called   a   [13Xcat[22X^1[122X-algebra[113X.   A   system   which   satisfies  the  condition
+  [22XmathbfCat1Alg1[122X is called a [13Xprecat[22X^1[122X-algebra[113X. The homomorphisms [22Xt,h[122X and [22Xe[122X are
+  called   the   [13Xtail   map[113X,  [13Xhead  map[113X  and  [13Xrange  embedding[113X  homomorphisms,
+  respectively.[133X
   
-  [33X[0;0YHere are the standard constructions which these operations implement:[133X
+  [1X3.1-1 Cat1Algebra[101X
   
-  [30X    [33X[0;6YLet [22XA[122X be an algebra and [22XI[122X an ideal of [22XA[122X. Then [22XmathcalX = (inc:I→ A)[122X is
-        a crossed module with the multiplication action of [22XA[122X on [22XI[122X. Conversely,
-        given  a  crossed  module  [22XmathcalX = (∂ : S → R)[122X, it is the case that
-        [22X∂(S)[122X is an ideal of [22XR[122X.[133X
+  [33X[1;0Y[29X[2XCat1Algebra[102X( [3Xargs[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XPreCat1AlgebraByEndomorphisms[102X( [3Xt[103X, [3Xh[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XPreCat1AlgebraByTailHeadEmbedding[102X( [3Xt[103X, [3Xh[103X, [3Xe[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XPreCat1Algebra[102X( [3Xargs[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIsIdentityCat1Algebra[102X( [3XC[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsCat1Algebra[102X( [3XC[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsPreCat1Algebra[102X( [3XC[103X ) [32X property[133X
   
-  [30X    [33X[0;6YLet  [22XM[122X  be  a  [22XR[122X-module. Then [22XmathcalX = (0:M→ R)[122X is a crossed module.
-        Conversely,  given  a crossed module [22XmathcalX = (∂ :M→ R)[122X, one can get
-        that [22Xker∂[122X is a [22X(R/∂ M)[122X-module.[133X
-  
-  [30X    [33X[0;6YLet  [22X∂  : S→ R[122X be a surjective algebra homomorphism. Define the action
-        of  [22XR[122X  on  [22XS[122X  by  [22Xr⋅  s = widetilders[122X where [22Xwidetilder ∈ ∂^-1(r)[122X. Then
-        [22XmathcalX=(∂ : S→ R)[122X is a crossed module with the defined action.[133X
-  
-  [30X    [33X[0;6YLet  [22XS[122X  be a [12Xk[112X-algebra such that [22XAnn(S)=0[122X or [22XS^2 = S[122X. Then [22X∂ : S→ M(S)[122X
-        is a crossed module, where [22XM(S)[122X is the algebra of multipliers of [22XS[122X and
-        [22X∂[122X is the canonical homomorphism, [AE03].[133X
+  [33X[0;0YThe  operations  listed  above  are  used  for construction of precat[22X^1[122X- and
+  cat[22X^1[122X-algebra  structures.  The  function  [10XCat1Algebra[110X selects the operation
+  from   the   above  implementations  up  to  user's  input.  The  operations
+  [10XPreCat1AlgebraByEndomorphisms[110X and [10XPreCat1AlgebraByTailHeadEmbedding[110X are used
+  with particular choices of algebra homomorphisms.[133X
   
   [1X3.1-2 Source[101X
   
-  [33X[1;0Y[29X[2XSource[102X( [3XX0[103X ) [32X attribute[133X
-  [33X[1;0Y[29X[2XRange[102X( [3XX0[103X ) [32X attribute[133X
-  [33X[1;0Y[29X[2XBoundary[102X( [3XX0[103X ) [32X attribute[133X
-  [33X[1;0Y[29X[2XXModAlgebraAction[102X( [3XX0[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XSource[102X( [3XC[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XRange[102X( [3XC[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XTailMap[102X( [3XC[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XHeadMap[102X( [3XC[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XRangeEmbedding[102X( [3XC[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XKernel[102X( [3XC[103X ) [32X method[133X
+  [33X[1;0Y[29X[2XBoundary[102X( [3XC[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XSize2d[102X( [3XC[103X ) [32X attribute[133X
   
-  [33X[0;0YThese  four  attributes  are  used  in  the construction of a crossed module
-  [22XmathcalX[122X where:[133X
+  [33X[0;0YThese are the eight main attributes of a pre-cat[22X^1[122X-algebra.[133X
   
-  [30X    [33X[0;6Y[10XSource(X)[110X  and  [10XRange(X)[110X  are the [13Xsource[113X and the [13Xrange[113X of the boundary
-        map respectively;[133X
-  
-  [30X    [33X[0;6Y[10XBoundary(X)[110X is the boundary map of the crossed module [22XmathcalX[122X;[133X
-  
-  [30X    [33X[0;6Y[10XXModAlgebraAction(X)[110X is the action used in the crossed module.[133X
-  
-  [33X[0;0YThe following standard [5XGAP[105X operations have special [5XXModAlg[105X implementations:[133X
-  
-  [30X    [33X[0;6Y[10XDisplay(X)[110X is used to list the components of [22XmathcalX[122X;[133X
-  
-  [30X    [33X[0;6Y[10XSize(X)[110X  is  used  for  calculating  the  order  of the crossed module
-        [22XmathcalX[122X;[133X
-  
-  [30X    [33X[0;6Y[10XName(X)[110X  is  used  for giving a name to the crossed module [22XmathcalX[122X by
-        associating the names of source and range algebras.[133X
-  
-  [33X[0;0YIn the following example, we construct a crossed module by using the algebra
-  [22XGF_5D_4[122X  and  its  augmentation  ideal. We also show usage of the attributes
-  listed above.[133X
+  [33X[0;0YIn  the  example  we  use homomorphisms between [10XA2c6[110X and [10XI2c6[110X constructed in
+  section [14X2.3[114X.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XAk4 := GroupRing( GF(5), DihedralGroup(4) );[127X[104X
-    [4X[28X<algebra-with-one over GF(5), with 2 generators>[128X[104X
-    [4X[25Xgap>[125X [27XSize( Ak4 );[127X[104X
-    [4X[28X625[128X[104X
-    [4X[25Xgap>[125X [27XSetName( Ak4, "GF5[k4]" );[127X[104X
-    [4X[25Xgap>[125X [27XIAk4 := AugmentationIdeal( Ak4 );[127X[104X
-    [4X[28X<two-sided ideal in GF5[k4], (2 generators)>[128X[104X
-    [4X[25Xgap>[125X [27XSize( IAk4 );[127X[104X
-    [4X[28X125[128X[104X
-    [4X[25Xgap>[125X [27XSetName( IAk4, "I(GF5[k4])" );[127X[104X
-    [4X[25Xgap>[125X [27XXIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );[127X[104X
-    [4X[28X[ I(GF5[k4]) -> GF5[k4] ][128X[104X
-    [4X[25Xgap>[125X [27XDisplay( XIAk4 );[127X[104X
-    [4X[28X[128X[104X
-    [4X[28XCrossed module [I(GF5[k4])->GF5[k4]] :- [128X[104X
-    [4X[28X: Source algebra I(GF5[k4]) has generators:[128X[104X
-    [4X[28X  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^[128X[104X
-    [4X[28X    0)*f2 ][128X[104X
-    [4X[28X: Range algebra GF5[k4] has generators:[128X[104X
-    [4X[28X  [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ][128X[104X
-    [4X[28X: Boundary homomorphism maps source generators to:[128X[104X
-    [4X[28X  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^[128X[104X
-    [4X[28X    0)*f2 ][128X[104X
-    [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XSize( XIAk4 );[127X[104X
-    [4X[28X[ 125, 625 ][128X[104X
-    [4X[25Xgap>[125X [27Xf := Boundary( XIAk4 );[127X[104X
-    [4X[28XMappingByFunction( I(GF5[k4]), GF5[k4], function( i ) ... end )[128X[104X
-    [4X[25Xgap>[125X [27XPrint( RepresentationsOfObject(XIAk4), "\n" ); [127X[104X
-    [4X[28X[ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ][128X[104X
-    [4X[25Xgap>[125X [27Xprops := [ "CanEasilyCompareElements", "CanEasilySortElements", [127X[104X
-    [4X[25X>[125X [27X "IsDuplicateFree", "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", [127X[104X
-    [4X[25X>[125X [27X "IsLDistributive", "IsRDistributive", "IsPreXModDomain", "Is2dAlgebraObject", [127X[104X
-    [4X[25X>[125X [27X "IsPreXModAlgebra", "IsXModAlgebra" ];;[127X[104X
-    [4X[25Xgap>[125X [27Xknown := KnownPropertiesOfObject( XIAk4 );;[127X[104X
-    [4X[25Xgap>[125X [27XForAll( props, p -> (p in known) );[127X[104X
+    [4X[25Xgap>[125X [27Xt4 := homAR[8]; [127X[104X
+    [4X[28X[ (Z(2)^0)*(1,6,5,4,3,2) ] -> [ (Z(2)^0)*(7,9,8) ][128X[104X
+    [4X[25Xgap>[125X [27Xe4 := homRA[8];[127X[104X
+    [4X[28X[ (Z(2)^0)*(7,8,9) ] -> [ (Z(2)^0)*(1,5,3)(2,6,4) ][128X[104X
+    [4X[25Xgap>[125X [27XC4 := PreCat1AlgebraByTailHeadEmbedding( t4, t4, e4 );[127X[104X
+    [4X[28X[AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3,4,5,6) [128X[104X
+    [4X[28X ] ) -> AlgebraWithOne( GF(2), [ (Z(2)^0)*(7,8,9) ] )][128X[104X
+    [4X[25Xgap>[125X [27XIsCat1Algebra( C4 );[127X[104X
     [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XPrint( KnownAttributesOfObject(XIAk4), "\n" ); [127X[104X
-    [4X[28X[ "Name", "Size", "Range", "Source", "Boundary", "XModAlgebraAction" ][128X[104X
+    [4X[25Xgap>[125X [27XSize2d( C4 );[127X[104X
+    [4X[28X[ 64, 8 ][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( C4 );[127X[104X
+    [4X[28X[128X[104X
+    [4X[28XCat1-algebra [..=>..] :- [128X[104X
+    [4X[28X: source algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ][128X[104X
+    [4X[28X:  range algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(7,8,9) ][128X[104X
+    [4X[28X: tail homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(7,8,9) ][128X[104X
+    [4X[28X: head homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(7,8,9) ][128X[104X
+    [4X[28X: range embedding maps range generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(1,5,3)(2,6,4) ][128X[104X
+    [4X[28X: kernel has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*()+(Z(2)^0)*(1,4)(2,5)(3,6), (Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*[128X[104X
+    [4X[28X    (1,5,3)(2,6,4), (Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,6,5,4,3,2) ][128X[104X
+    [4X[28X: boundary homomorphism maps generators of kernel to:[128X[104X
+    [4X[28X  [ <zero> of ..., <zero> of ..., <zero> of ... ][128X[104X
+    [4X[28X: kernel embedding maps generators of kernel to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*()+(Z(2)^0)*(1,4)(2,5)(3,6), (Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*[128X[104X
+    [4X[28X    (1,5,3)(2,6,4), (Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,6,5,4,3,2) ][128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   
-  [1X3.1-3 SubXModAlgebra[101X
+  [1X3.1-3 Cat1AlgebraSelect[101X
   
-  [33X[1;0Y[29X[2XSubXModAlgebra[102X( [3XX0[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XIsSubXModAlgebra[102X( [3XX0[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XCat1AlgebraSelect[102X( [3Xn[103X, [3Xgpsize[103X, [3Xgpnum[103X, [3Xnum[103X ) [32X operation[133X
   
-  [33X[0;0YA  crossed  module  [22XmathcalX^' = (∂ ^' :S^'→ R^' )[122X is a subcrossed module of
-  the  crossed module [22XmathcalX = (∂ :S→ R)[122X if [22XS^' ≤ S[122X, [22XR^'≤ R[122X, [22X∂^' = ∂|_S^' }[122X,
-  and  the  action  of  [22XS^'[122X  on  [22XR^'[122X  is  induced by the action of [22XR[122X on [22XS[122X. The
-  operation [10XSubXModAlgebra[110X is used to construct a subcrossed module of a given
-  crossed module.[133X
+  [33X[0;0YThe  [2XCat1Algebra[102X ([14X3.1-1[114X) function may also be used to select a cat[22X^1[122X-algebra
+  from a data file. All cat[22X^1[122X-structures on commutative algebras are stored in
+  a  list  in  file [11Xcat1algdata.g[111X. The data is read into the list [10XCAT1ALG_LIST[110X
+  only when this function is called.[133X
+  
+  [33X[0;0YThe function [10XCat1AlgebraSelect[110X may be used in four ways:[133X
+  
+  [30X    [33X[0;6Y[10XCat1AlgebraSelect(  n  )[110X  returns the list of possible sizes of groups
+        for group algebras with Galois field [22XGF(n)[122X.[133X
+  
+  [30X    [33X[0;6Y[10XCat1AlgebraSelect(  n, m )[110X returns the list of allowable group numbers
+        with given Galois field [22XGF(n)[122X and groups of size [22Xm[122X.[133X
+  
+  [30X    [33X[0;6Y[10XCat1AlgebraSelect(   n,   m,   k   )[110X  returns  the  list  of  possible
+        cat[22X^1[122X-algebra  structures  with  given  Galois  field  [22XGF(n)[122X and group
+        number [22Xk[122X of size [22Xm[122X.[133X
+  
+  [30X    [33X[0;6Y[10XCat1AlgebraSelect(  n, m, k, j )[110X (or simply [10XCat1Algebra( n, m, k, j )[110X)
+        returns the [22Xj[122X-th cat[22X^1[122X-algebra structure with these other parameters.[133X
+  
+  [33X[0;0YNow, we give examples of the use of this function.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27Xe4 := Elements( IAk4 )[4];[127X[104X
-    [4X[28X(Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2[128X[104X
-    [4X[25Xgap>[125X [27XJe4 := Ideal( IAk4, [e4] );;[127X[104X
-    [4X[25Xgap>[125X [27XSize( Je4 );[127X[104X
-    [4X[28X5[128X[104X
-    [4X[25Xgap>[125X [27XSetName( Je4, "<e4>" ); [127X[104X
-    [4X[25Xgap>[125X [27XXJe4 := XModAlgebraByIdeal( Ak4, Je4 );[127X[104X
-    [4X[28X[ <e4> -> GF5[k4] ][128X[104X
-    [4X[25Xgap>[125X [27XDisplay( XJe4 );        [127X[104X
+    [4X[25Xgap>[125X [27XC := Cat1AlgebraSelect( 11 );[127X[104X
+    [4X[28X|--------------------------------------------------------|[128X[104X
+    [4X[28X| 11 is invalid number for Galois Field (GFnum)             |[128X[104X
+    [4X[28X| Possible numbers for GFnum in the Data :              |[128X[104X
+    [4X[28X|--------------------------------------------------------|[128X[104X
+    [4X[28X [ 2, 3, 4, 5, 7 ][128X[104X
+    [4X[28XUsage: Cat1Algebra( GFnum, gpsize, gpnum, num );[128X[104X
+    [4X[28Xfail[128X[104X
+    [4X[25Xgap>[125X [27XC := Cat1AlgebraSelect( 4, 12 );[127X[104X
+    [4X[28X|--------------------------------------------------------|[128X[104X
+    [4X[28X| 12 is invalid number for size of group (gpsize)        |[128X[104X
+    [4X[28X| Possible numbers for the gpsize for GF(4) in the Data: |[128X[104X
+    [4X[28X|--------------------------------------------------------|[128X[104X
+    [4X[28X [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ][128X[104X
+    [4X[28XUsage: Cat1Algebra( GFnum, gpsize, gpnum, num );[128X[104X
+    [4X[28Xfail[128X[104X
+    [4X[25Xgap>[125X [27XC := Cat1AlgebraSelect( 2, 6, 3 );[127X[104X
+    [4X[28X|--------------------------------------------------------|[128X[104X
+    [4X[28X| 3 is invalid number for group of order 6               |[128X[104X
+    [4X[28X| Possible numbers for the gpnum in the Data :           |[128X[104X
+    [4X[28X|--------------------------------------------------------|[128X[104X
+    [4X[28X [ 1, 2 ][128X[104X
+    [4X[28XUsage: Cat1Algebra( GFnum, gpsize, gpnum, num );[128X[104X
+    [4X[28Xfail[128X[104X
+    [4X[25Xgap>[125X [27XC := Cat1AlgebraSelect( 2, 6, 2 );[127X[104X
+    [4X[28XThere are 4 cat1-structures for the algebra GF(2)_c6.[128X[104X
+    [4X[28X Range Alg      Tail                    Head[128X[104X
+    [4X[28X|--------------------------------------------------------|[128X[104X
+    [4X[28X| GF(2)_c6      identity map            identity map     |[128X[104X
+    [4X[28X| -----         [ 2, 10 ]               [ 2, 10 ]        |[128X[104X
+    [4X[28X| -----         [ 2, 14 ]               [ 2, 14 ]        |[128X[104X
+    [4X[28X| -----         [ 2, 50 ]               [ 2, 50 ]        |[128X[104X
+    [4X[28X|--------------------------------------------------------|[128X[104X
+    [4X[28XUsage: Cat1Algebra( GFnum, gpsize, gpnum, num );[128X[104X
+    [4X[28XAlgebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ][128X[104X
+    [4X[28X4[128X[104X
+    [4X[25Xgap>[125X [27XC0 := Cat1AlgebraSelect( 4, 6, 2, 2 );[127X[104X
+    [4X[28X[GF(2^2)_c6 -> Algebra( GF(2^2), [128X[104X
+    [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+([128X[104X
+    [4X[28X    Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ] )][128X[104X
+    [4X[25Xgap>[125X [27XSize2d( C0 ); [127X[104X
+    [4X[28X[ 4096, 1024 ][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( C0 ); [127X[104X
     [4X[28X[128X[104X
-    [4X[28XCrossed module [<e4>->GF5[k4]] :- [128X[104X
-    [4X[28X: Source algebra <e4> has generators:[128X[104X
-    [4X[28X  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ][128X[104X
-    [4X[28X: Range algebra GF5[k4] has generators:[128X[104X
-    [4X[28X  [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ][128X[104X
-    [4X[28X: Boundary homomorphism maps source generators to:[128X[104X
-    [4X[28X  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ][128X[104X
-    [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XIsSubXModAlgebra( XIAk4, XJe4 );[127X[104X
-    [4X[28Xtrue[128X[104X
-    [4X[28X[128X[104X
-  [4X[32X[104X
-  
-  [1X3.1-4 PreXModAlgebraByBoundaryAndAction[101X
-  
-  [33X[1;0Y[29X[2XPreXModAlgebraByBoundaryAndAction[102X( [3Xbdy[103X, [3Xact[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XIsPreXModAlgebra[102X( [3XX0[103X ) [32X property[133X
-  
-  [33X[0;0YAn  [22XR[122X-algebra  homomorphism  [22XmathcalX  :=  (∂  :  S → R)[122X which satisfies the
-  condition  [22XXModAlg  1[122X  is  called  a [13Xprecrossed module[113X. The details of these
-  implementations can be found in [Oda09].[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XG := SmallGroup( 4, 2 );[127X[104X
-    [4X[28X<pc group of size 4 with 2 generators>[128X[104X
-    [4X[25Xgap>[125X [27XF := GaloisField( 4 );[127X[104X
-    [4X[28XGF(2^2)[128X[104X
-    [4X[25Xgap>[125X [27XR := GroupRing( F, G );[127X[104X
-    [4X[28X<algebra-with-one over GF(2^2), with 2 generators>[128X[104X
-    [4X[25Xgap>[125X [27XSize( R );[127X[104X
-    [4X[28X256[128X[104X
-    [4X[25Xgap>[125X [27XSetName( R, "GF(2^2)[k4]" ); [127X[104X
-    [4X[25Xgap>[125X [27Xe5 := Elements( R )[5]; [127X[104X
-    [4X[28X(Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2[128X[104X
-    [4X[25Xgap>[125X [27XS := Subalgebra( R, [e5] );;[127X[104X
-    [4X[25Xgap>[125X [27XSetName( S, "<e5>" );[127X[104X
-    [4X[25Xgap>[125X [27XRS := Cartesian( R, S );; [127X[104X
-    [4X[25Xgap>[125X [27XSetName( RS, "GF(2^2)[k4] x <e5>" ); [127X[104X
-    [4X[25Xgap>[125X [27Xact := AlgebraAction( R, RS, S );;[127X[104X
-    [4X[25Xgap>[125X [27Xbdy := AlgebraHomomorphismByFunction( S, R, r->r );[127X[104X
-    [4X[28XMappingByFunction( <e5>, GF(2^2)[k4], function( r ) ... end )[128X[104X
-    [4X[25Xgap>[125X [27XIsAlgebraAction( act ); [127X[104X
-    [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XIsAlgebraHomomorphism( bdy );[127X[104X
-    [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XXM := PreXModAlgebraByBoundaryAndAction( bdy, act );[127X[104X
-    [4X[28X[<e5>->GF(2^2)[k4]][128X[104X
-    [4X[25Xgap>[125X [27XIsXModAlgebra( XM );[127X[104X
-    [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XDisplay( XM );[127X[104X
-    [4X[28X[128X[104X
-    [4X[28XCrossed module [<e5>->GF(2^2)[k4]] :- [128X[104X
-    [4X[28X: Source algebra has generators:[128X[104X
-    [4X[28X  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ][128X[104X
-    [4X[28X: Range algebra GF(2^2)[k4] has generators:[128X[104X
-    [4X[28X  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ][128X[104X
-    [4X[28X: Boundary homomorphism maps source generators to:[128X[104X
-    [4X[28X  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ][128X[104X
-    [4X[28X[128X[104X
+    [4X[28XCat1-algebra [GF(2^2)_c6=>..] :- [128X[104X
+    [4X[28X: source algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ][128X[104X
+    [4X[28X:  range algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)[128X[104X
+    [4X[28X    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ][128X[104X
+    [4X[28X: tail homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)[128X[104X
+    [4X[28X    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ][128X[104X
+    [4X[28X: head homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)[128X[104X
+    [4X[28X    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ][128X[104X
+    [4X[28X: range embedding maps range generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)[128X[104X
+    [4X[28X    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ][128X[104X
+    [4X[28X: kernel has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)[128X[104X
+    [4X[28X    (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ][128X[104X
+    [4X[28X: boundary homomorphism maps generators of kernel to:[128X[104X
+    [4X[28X  [ <zero> of ... ][128X[104X
+    [4X[28X: kernel embedding maps generators of kernel to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)[128X[104X
+    [4X[28X    (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ][128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   
+  [1X3.1-4 SubCat1Algebra[101X
   
-  [1X3.2 [33X[0;0Y(Pre-)Crossed Module Morphisms[133X[101X
+  [33X[1;0Y[29X[2XSubCat1Algebra[102X( [3Xarg[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XSubPreCat1Algebra[102X( [3Xarg[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIsSubCat1Algebra[102X( [3Xarg[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsSubPreCat1Algebra[102X( [3Xarg[103X ) [32X property[133X
   
-  [33X[0;0YLet  [22XmathcalX  =  (∂:S→  R)[122X,  [22XmathcalX^' = (∂^' :S^' → R^' )[122X be (pre)crossed
-  modules and [22Xθ :S→ S^'[122X, [22Xφ : R→ R^'[122X be algebra homomorphisms. If[133X
+  [33X[0;0YLet  [22XmathcalC  =  (e;t,h:A→  R)[122X  be  a  cat[22X^1[122X-algebra,  and  let [22XA^'[122X, [22XR^'[122X be
+  subalgebras of [22XA[122X and [22XR[122X respectively. If the restriction morphisms[133X
   
   
-  [24X[33X[0;6Y\varphi  \circ  \partial  =  \partial ^{\prime } \circ \theta, \qquad \theta
-  (r\cdot s)=\varphi(r) \cdot \theta (s),[133X
+  [24X[33X[0;6Yt^{\prime}  =  t|_{A^{\prime}}  :  A^{\prime}\rightarrow  R^{\prime}, \qquad
+  h^{\prime}  =  h|_{A^{\prime}}  :  A^{\prime}\rightarrow  R^{\prime}, \qquad
+  e^{\prime} = e|_{R^{\prime}} : R^{\prime}\rightarrow A^{\prime}[133X
   
   [124X
   
-  [33X[0;0Yfor  all  [22Xr∈  R[122X,  [22Xs∈  S,[122X  then the pair [22X(θ ,φ )[122X is called a morphism between
-  [22XmathcalX[122X and [22XmathcalX^'[122X[133X
+  [33X[0;0Ysatisfy  the  [22XmathbfCat1Alg1[122X  and [22XmathbfCat1Alg2[122X conditions, then the system
+  [22XmathcalC^'  =  (e^';t^',h^'  :  A^'  →  R^')[122X is called a [13Xsubcat[22X^1[122X-algebra[113X of
+  [22XmathcalC = (e;t,h:A→ R)[122X.[133X
   
-  [33X[0;0YThe  conditions  can  be  thought  as  the  commutativity  of  the following
-  diagrams:[133X
+  [33X[0;0YIf  the  morphisms satisfy only the [22XmathbfCat1Alg1[122X condition then [22XmathcalC^'[122X
+  is called a [13Xsub-precat[22X^1[122X-algebra[113X of [22XmathcalC[122X.[133X
+  
+  [33X[0;0YThe    operations   in   this   subsection   are   used   for   constructing
+  subcat[22X^1[122X-algebras of a given cat[22X^1[122X-algebra.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XC3 := Cat1AlgebraSelect( 2, 6, 2, 4 );; [127X[104X
+    [4X[25Xgap>[125X [27XA3 := Source( C3 );[127X[104X
+    [4X[28XGF(2)_c6[128X[104X
+    [4X[25Xgap>[125X [27XB3 := Range( C3 ); [127X[104X
+    [4X[28XGF(2)_c3[128X[104X
+    [4X[25Xgap>[125X [27XeA3 := Elements( A3 );;[127X[104X
+    [4X[25Xgap>[125X [27XeB3 := Elements( B3 );;[127X[104X
+    [4X[25Xgap>[125X [27XAA3 := Subalgebra( A3, [ eA3[1], eA3[2], eA3[3] ] );[127X[104X
+    [4X[28X<algebra over GF(2), with 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27X[ Size(A3), Size(AA3) ]; [127X[104X
+    [4X[28X[ 64, 4 ][128X[104X
+    [4X[25Xgap>[125X [27XBB3 := Subalgebra( B3, [ eB3[1], eB3[2] ] ); [127X[104X
+    [4X[28X<algebra over GF(2), with 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27X[ Size(B3), Size(BB3) ]; [127X[104X
+    [4X[28X[ 8, 2 ][128X[104X
+    [4X[25Xgap>[125X [27XCC3 := SubCat1Algebra( C3, AA3, BB3 );[127X[104X
+    [4X[28X[Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) [128X[104X
+    [4X[28X ] ) -> Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*() ] )][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( CC3 );[127X[104X
+    [4X[28X[128X[104X
+    [4X[28XCat1-algebra [..=>..] :-[128X[104X
+    [4X[28X: source algebra has generators:[128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) ][128X[104X
+    [4X[28X:  range algebra has generators:[128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2)^0)*() ][128X[104X
+    [4X[28X: tail homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2)^0)*(), <zero> of ... ][128X[104X
+    [4X[28X: head homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2)^0)*(), <zero> of ... ][128X[104X
+    [4X[28X: range embedding maps range generators to:[128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2)^0)*() ][128X[104X
+    [4X[28X: kernel has generators:[128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ][128X[104X
+    [4X[28X: boundary homomorphism maps generators of kernel to:[128X[104X
+    [4X[28X  [ <zero> of ..., <zero> of ... ][128X[104X
+    [4X[28X: kernel embedding maps generators of kernel to:[128X[104X
+    [4X[28X  [ <zero> of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ][128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
   
   
-  [24X[33X[0;6Y\xymatrix@R=40pt@C=40pt{  S  \ar[d]_{\partial} \ar[r]^{\theta} & S^{\prime }
-  \ar[d]^{\partial^{\prime  }}  \\  R \ar[r]_{\varphi} & R^{\prime } } \ \ \ \
-  \xymatrix@R=40pt@C=40pt{  R \times S \ar[d] \ar[r]^{ \varphi \times \theta }
-  &  R^{\prime  } \times S^{\prime } \ar[d] \\ S \ar[r]_{ \theta } & S^{\prime
-  }. }[133X
+  [1X3.2 [33X[0;0YCat[22X^1-[122X[101X[1Xalgebra morphisms[133X[101X
+  
+  [33X[0;0YLet  [22XmathcalC  =  (e;t,h:A→ R)[122X, [22XmathcalC^' = (e^'; t^' , h^' : A^' → R^')[122X be
+  cat[22X^1[122X-algebras, and let [22Xϕ : A→ A^'[122X and [22Xφ : R → R^'[122X be algebra homomorphisms.
+  If the diagram[133X
+  
+  
+  [24X[33X[0;6Y\xymatrix@R=50pt@C=50pt{  A \ar@{->}@<-1.5pt>[d]_{t} \ar@{->}@<1.5pt>[d]^{h}
+  \ar@{->}[r]^{\phi}  &  A' \ar@{->}@<-1.5pt>[d]_{t'} \ar@{->}@<1.5pt>[d]^{h'}
+  \\ R \ar@/^1.5pc/[u]^{e} \ar@{->}[r]_{\varphi} & R' \ar@/_1.5pc/[u]_{e'} }[133X
   
   [124X
   
-  [33X[0;0YIn  [5XGAP[105X  we  define  the  morphisms  between  algebraic  structures  such as
-  cat[22X^1[122X-algebras and crossed modules and they are investigated by the function
-  [10XMake2dAlgebraMorphism[110X.[133X
+  [33X[0;0Ycommutes,  (i.e. [22Xt^' ∘ ϕ = φ ∘ t[122X, [22Xh^' ∘ ϕ = φ ∘ h[122X and [22Xe^' ∘ φ = ϕ ∘ e[122X), then
+  the pair [22X(ϕ ,φ )[122X is called a cat[22X^1[122X-algebra morphism.[133X
   
-  [1X3.2-1 XModAlgebraMorphism[101X
+  [1X3.2-1 Cat1AlgebraMorphism[101X
   
-  [33X[1;0Y[29X[2XXModAlgebraMorphism[102X( [3Xarg[103X ) [32X function[133X
-  [33X[1;0Y[29X[2XIdentityMapping[102X( [3XX0[103X ) [32X method[133X
-  [33X[1;0Y[29X[2XPreXModAlgebraMorphismByHoms[102X( [3Xf[103X, [3Xg[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XXModAlgebraMorphismByHoms[102X( [3Xf[103X, [3Xg[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XIsPreXModAlgebraMorphism[102X( [3Xf[103X ) [32X property[133X
-  [33X[1;0Y[29X[2XIsXModAlgebraMorphism[102X( [3Xf[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XCat1AlgebraMorphism[102X( [3Xarg[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIdentityMapping[102X( [3XC[103X ) [32X method[133X
+  [33X[1;0Y[29X[2XPreCat1AlgebraMorphismByHoms[102X( [3Xf[103X, [3Xg[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XCat1AlgebraMorphismByHoms[102X( [3Xf[103X, [3Xg[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIsPreCat1AlgebraMorphism[102X( [3XC[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsCat1AlgebraMorphism[102X( [3Xarg[103X ) [32X property[133X
+  
+  [33X[0;0YThese  operations are used for constructing cat[22X^1[122X-algebra morphisms. Details
+  of the implementations can be found in [Oda09].[133X
+  
+  [1X3.2-2 Source[101X
+  
   [33X[1;0Y[29X[2XSource[102X( [3Xm[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XRange[102X( [3Xm[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XIsTotal[102X( [3Xm[103X ) [32X method[133X
   [33X[1;0Y[29X[2XIsSingleValued[102X( [3Xm[103X ) [32X method[133X
   [33X[1;0Y[29X[2XName[102X( [3Xm[103X ) [32X method[133X
+  [33X[1;0Y[29X[2XBoundary[102X( [3Xm[103X ) [32X attribute[133X
   
-  [33X[0;0YThese  operations construct crossed module homomorphisms, which may have the
-  attributes listed.[133X
+  [33X[0;0YThese are the six main attributes of a cat[22X^1[122X-algebra morphism.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XAc4 := GroupRing( GF(2), CyclicGroup(4) );[127X[104X
-    [4X[28X<algebra-with-one over GF(2), with 2 generators>[128X[104X
-    [4X[25Xgap>[125X [27XSetName( Ac4, "GF2[c4]" );[127X[104X
-    [4X[25Xgap>[125X [27XIAc4 := AugmentationIdeal( Ac4 );[127X[104X
-    [4X[28X<two-sided ideal in GF2[c4], (dimension 3)>[128X[104X
-    [4X[25Xgap>[125X [27XSetName( IAc4, "I(GF2[c4])" );[127X[104X
-    [4X[25Xgap>[125X [27XXIAc4 := XModAlgebra( Ac4, IAc4 );[127X[104X
-    [4X[28X[ I(GF2[c4]) -> GF2[c4] ][128X[104X
-    [4X[25Xgap>[125X [27XBk4 := GroupRing( GF(2), SmallGroup( 4, 2 ) );[127X[104X
-    [4X[28X<algebra-with-one over GF(2), with 2 generators>[128X[104X
-    [4X[25Xgap>[125X [27XSetName( Bk4, "GF2[k4]" );[127X[104X
-    [4X[25Xgap>[125X [27XIBk4 := AugmentationIdeal( Bk4 );[127X[104X
-    [4X[28X<two-sided ideal in GF2[k4], (dimension 3)>[128X[104X
-    [4X[25Xgap>[125X [27XSetName( IBk4, "I(GF2[k4])" );[127X[104X
-    [4X[25Xgap>[125X [27XXIBk4 := XModAlgebra( Bk4, IBk4 );[127X[104X
-    [4X[28X[ I(GF2[k4]) -> GF2[k4] ][128X[104X
-    [4X[25Xgap>[125X [27XIAc4 = IBk4;[127X[104X
-    [4X[28Xfalse[128X[104X
-    [4X[25Xgap>[125X [27XhomAB := AllHomsOfAlgebras( Ac4, Bk4 );;[127X[104X
-    [4X[25Xgap>[125X [27XhomIAIB := AllHomsOfAlgebras( IAc4, IBk4 );;[127X[104X
-    [4X[25Xgap>[125X [27Xmor := XModAlgebraMorphism( XIAc4, XIBk4, homIAIB[1], homAB[2] );[127X[104X
-    [4X[28X[[I(GF2[c4])->GF2[c4]] => [I(GF2[k4])->GF2[k4]]][128X[104X
-    [4X[25Xgap>[125X [27XDisplay( mor );[127X[104X
+    [4X[25Xgap>[125X [27XC1 := Cat1Algebra( 2, 1, 1, 1 );[127X[104X
+    [4X[28X[GF(2)_triv -> GF(2)_triv][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( C1 );[127X[104X
     [4X[28X[128X[104X
-    [4X[28XMorphism of crossed modules :- [128X[104X
-    [4X[28X: Source = [I(GF2[c4])->GF2[c4]][128X[104X
-    [4X[28X:  Range = [I(GF2[k4])->GF2[k4]][128X[104X
+    [4X[28XCat1-algebra [GF(2)_triv=>GF(2)_triv] :-[128X[104X
+    [4X[28X: source algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X:  range algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: tail homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: head homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: range embedding maps range generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: the kernel is trivial.[128X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XC2 := Cat1Algebra( 2, 2, 1, 2 );[127X[104X
+    [4X[28X[GF(2)_c2 -> GF(2)_triv][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( C2 );[127X[104X
+    [4X[28X[128X[104X
+    [4X[28XCat1-algebra [GF(2)_c2=>GF(2)_triv] :-[128X[104X
+    [4X[28X: source algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ][128X[104X
+    [4X[28X:  range algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: tail homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: head homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: range embedding maps range generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: kernel has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ][128X[104X
+    [4X[28X: boundary homomorphism maps generators of kernel to:[128X[104X
+    [4X[28X  [ <zero> of ... ][128X[104X
+    [4X[28X: kernel embedding maps generators of kernel to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ][128X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XC1 = C2;[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XR1 := Source( C1 );;[127X[104X
+    [4X[25Xgap>[125X [27XR2 := Source( C2 );;[127X[104X
+    [4X[25Xgap>[125X [27XS1 := Range( C1 );;[127X[104X
+    [4X[25Xgap>[125X [27XS2 := Range( C2 );;[127X[104X
+    [4X[25Xgap>[125X [27XgR1 := GeneratorsOfAlgebra( R1 );[127X[104X
+    [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[25Xgap>[125X [27XgR2 := GeneratorsOfAlgebra( R2 );[127X[104X
+    [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*(1,2) ][128X[104X
+    [4X[25Xgap>[125X [27XgS1 := GeneratorsOfAlgebra( S1 );[127X[104X
+    [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[25Xgap>[125X [27XgS2 := GeneratorsOfAlgebra( S2 );[127X[104X
+    [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[25Xgap>[125X [27Xim1 := [ gR2[1], gR2[1] ];[127X[104X
+    [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[25Xgap>[125X [27Xf1 := AlgebraHomomorphismByImages( R1, R2, gR1, im1 );[127X[104X
+    [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*() ] -> [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[25Xgap>[125X [27Xim2 := [ gS2[1], gS2[1] ];[127X[104X
+    [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[25Xgap>[125X [27Xf2 := AlgebraHomomorphismByImages( S1, S2, gS1, im2 );[127X[104X
+    [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*() ] -> [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[25Xgap>[125X [27Xm := Cat1AlgebraMorphism( C1, C2, f1, f2 );[127X[104X
+    [4X[28X[[GF(2)_triv=>GF(2)_triv] => [GF(2)_c2=>GF(2)_triv]][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28XMorphism of cat1-algebras :-[128X[104X
+    [4X[28X: Source = [GF(2)_triv=>GF(2)_triv] with generating sets:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X:  Range = [GF(2)_c2=>GF(2)_triv] with generating sets:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ][128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
     [4X[28X: Source Homomorphism maps source generators to:[128X[104X
-    [4X[28X  [ <zero> of ..., <zero> of ..., <zero> of ... ][128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
     [4X[28X: Range Homomorphism maps range generators to:[128X[104X
-    [4X[28X  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*<identity> of ..., [128X[104X
-    [4X[28X  (Z(2)^0)*<identity> of ... ][128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[25Xgap>[125X [27XIsSurjective( m );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XIsInjective( m );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsBijective( m );[127X[104X
+    [4X[28Xfalse[128X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XIsTotal( mor );[127X[104X
-    [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XIsSingleValued( mor );[127X[104X
-    [4X[28Xtrue[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   
-  [1X3.2-2 Kernel[101X
+  [1X3.2-3 ImagesSource2DimensionalMapping[101X
   
-  [33X[1;0Y[29X[2XKernel[102X( [3XX0[103X ) [32X method[133X
+  [33X[1;0Y[29X[2XImagesSource2DimensionalMapping[102X( [3Xm[103X ) [32X operation[133X
   
-  [33X[0;0YLet  [22X(θ,φ)  :  mathcalX  = (∂ : S → R) → mathcalX^' = (∂^' : S^' → R^')[122X be a
-  crossed module homomorphism. Then the crossed module[133X
-  
-  
-  [24X[33X[0;6Y\ker(\theta,\varphi) = (\partial| : \ker\theta \rightarrow \ker\varphi )[133X
-  
-  [124X
-  
-  [33X[0;0Yis  called the [13Xkernel[113X of [22X(θ,φ)[122X. Also, [22Xker(θ ,φ )[122X is an ideal of [22XmathcalX[122X. An
-  example is given below.[133X
+  [33X[0;0YWhen  [22X(θ,φ)[122X  is  a  homomorphism  of cat1-algebras (or crossed modules) this
+  operation returns the image crossed module.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XXmor := Kernel( mor );[127X[104X
-    [4X[28X[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ][128X[104X
-    [4X[25Xgap>[125X [27XIsXModAlgebra( Xmor );[127X[104X
-    [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XSize( Xmor );[127X[104X
-    [4X[28X[ 8, 8 ][128X[104X
-    [4X[25Xgap>[125X [27XIsSubXModAlgebra( XIAc4, Xmor );[127X[104X
-    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Ximm := ImagesSource2DimensionalMapping( m );;[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( imm ); [127X[104X
     [4X[28X[128X[104X
-  [4X[32X[104X
-  
-  [1X3.2-3 Image[101X
-  
-  [33X[1;0Y[29X[2XImage[102X( [3XX0[103X ) [32X operation[133X
-  
-  [33X[0;0YLet  [22X(θ,φ)  :  mathcalX  = (∂ : S → R) → mathcalX^' = (∂^' : S^' → R^')[122X be a
-  crossed module homomorphism. Then the crossed module[133X
-  
-  
-  [24X[33X[0;6Y\Im(\theta,\varphi)    =   (\partial^{\prime}|   :   \Im\theta   \rightarrow
-  \Im\varphi)[133X
-  
-  [124X
-  
-  [33X[0;0Yis  called  the  image  of  [22X(θ,φ)[122X. Further, [22Xℑ(θ,φ)[122X is a subcrossed module of
-  [22X(S^',R^',∂^')[122X.[133X
-  
-  [33X[0;0YIn  this package, the image of a crossed module homomorphism can be obtained
-  by  the  command  [10XImagesSource[110X.  The operation [10XSub2dAlgObject[110X is effectively
-  used  for  finding the kernel and image crossed modules induced from a given
-  crossed module homomorphism.[133X
-  
-  [1X3.2-4 SourceHom[101X
-  
-  [33X[1;0Y[29X[2XSourceHom[102X( [3Xm[103X ) [32X attribute[133X
-  [33X[1;0Y[29X[2XRangeHom[102X( [3Xm[103X ) [32X attribute[133X
-  [33X[1;0Y[29X[2XIsInjective[102X( [3Xm[103X ) [32X property[133X
-  [33X[1;0Y[29X[2XIsSurjective[102X( [3Xm[103X ) [32X property[133X
-  [33X[1;0Y[29X[2XIsBijjective[102X( [3Xm[103X ) [32X property[133X
-  
-  [33X[0;0YLet [22X(θ,φ)[122X be a homomorphism of crossed modules. If the homomorphisms [22Xθ[122X and [22Xφ[122X
-  are injective (surjective) then [22X(θ,φ)[122X is injective (surjective).[133X
-  
-  [33X[0;0YThe  attributes [10XSourceHom[110X and [10XRangeHom[110X store the two algebra homomorphisms [22Xθ[122X
-  and [22Xφ[122X.[133X
-  
-  [4X[32X  Example  [32X[104X
+    [4X[28XCat1-algebra [..=>..] :- [128X[104X
+    [4X[28X: source algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X:  range algebra has generators:[128X[104X
+    [4X[28X  [ (Z(2)^0)*() ][128X[104X
+    [4X[28X: tail homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: head homomorphism maps source generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
+    [4X[28X: range embedding maps range generators to:[128X[104X
+    [4X[28X  [ (Z(2)^0)*() ][128X[104X
+    [4X[28X: the kernel is trivial.[128X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27Xic4 := One( Ac4 );;                                      [127X[104X
-    [4X[25Xgap>[125X [27Xtheta := SourceHom( mor );;[127X[104X
-    [4X[25Xgap>[125X [27Xe1 := ic4*c4.1 + ic4*c4.2;[127X[104X
-    [4X[28X(Z(2)^0)*f1+(Z(2)^0)*f2[128X[104X
-    [4X[25Xgap>[125X [27XImageElm( theta, e1 );  [127X[104X
-    [4X[28X<zero> of ...[128X[104X
-    [4X[25Xgap>[125X [27Xphi := RangeHom( mor );;[127X[104X
-    [4X[25Xgap>[125X [27Xe2 := ic4*c4.1;[127X[104X
-    [4X[28X(Z(2)^0)*f1[128X[104X
-    [4X[25Xgap>[125X [27XImageElm( phi, e2 );[127X[104X
-    [4X[28X(Z(2)^0)*<identity> of ...[128X[104X
-    [4X[25Xgap>[125X [27XIsInjective( mor );[127X[104X
-    [4X[28Xfalse[128X[104X
-    [4X[25Xgap>[125X [27XIsSurjective( mor );[127X[104X
-    [4X[28Xfalse[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   

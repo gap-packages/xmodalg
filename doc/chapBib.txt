@@ -43,7 +43,7 @@
   
   [[20XLN17[120X]  [16XLübeck,  F.  and  Neunhöffer,  M.[116X, [17XGAPDoc (version 1.6)[117X, RWTH Aachen
   (2017),                   ((                   GAP                  package,
-  http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc/index.html )).
+  https://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc/index.html )).
   
   [[20XLod82[120X] [16XLoday, J.-L.[116X, [17XSpaces with finitely many non-trivial homotopy groups[117X,
   [18XJ. App. Algebra[118X, [19X24[119X (1982), 179--202.
