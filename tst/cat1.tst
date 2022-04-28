@@ -49,7 +49,7 @@ gap> C4 := PreCat1AlgebraByTailHeadEmbedding( t4, t4, e4 );
  ] ) -> AlgebraWithOne( GF(2), [ (Z(2)^0)*(7,8,9) ] )]
 gap> IsCat1Algebra( C4 );
 true
-gap> Size( C4 );
+gap> Size2d( C4 );
 [ 64, 8 ]
 gap> Display( C4 );
 
@@ -115,7 +115,7 @@ gap> C0 := Cat1AlgebraSelect( 4, 6, 2, 2 );
 [GF(2^2)_c6 -> Algebra( GF(2^2), 
 [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+(
     Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ] )]
-gap> Size( C0 ); 
+gap> Size2d( C0 ); 
 [ 4096, 1024 ]
 gap> Display( C0 ); 
 

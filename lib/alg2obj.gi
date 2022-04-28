@@ -2,7 +2,7 @@
 ##
 #W  alg2obj.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2022, Zekeriya Arvasi & Alper Odabas,  
 ##
     
 CAT1ALG_LIST_MAX_SIZE := 7;
@@ -28,16 +28,6 @@ CAT1ALG_LIST := [ ];
 ##  function( obj )
 ##      return ( HasSource( obj ) and HasRange( obj ) );
 ##  end );
-
-##############################################################################
-##
-#M  Size( <P> )  . . . . . . . . . . . . . . . . . . . . size for a 2d-algebra
-##
-InstallOtherMethod( Size, "generic method for a 2d-algebra",
-    [ Is2dAlgebraObject ], 0,
-function ( obj )
-    return [ Size( Source(obj) ), Size( Range(obj) ) ];
-end );
 
 ##############################################################################
 ##

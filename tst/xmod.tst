@@ -57,7 +57,7 @@ Crossed module [I(GF5[k4])->GF5[k4]] :-
   [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^
     0)*f2 ]
 
-gap> Size( XIAk4 );
+gap> Size2d( XIAk4 );
 [ 125, 625 ]
 
 gap> ############################
@@ -130,7 +130,7 @@ gap> known := KnownPropertiesOfObject( XIAk4 );;
 gap> ForAll( props, p -> (p in known) );
 true
 gap> Print( KnownAttributesOfObject(XIAk4), "\n" ); 
-[ "Name", "Size", "Range", "Source", "Boundary", "XModAlgebraAction" ]
+[ "Name", "Range", "Source", "Boundary", "Size2d", "XModAlgebraAction" ]
 
 gap> ############################
 gap> ## Section 4.1.9
@@ -206,7 +206,7 @@ gap> Xmor := Kernel( mor );
 [ <algebra of dimension 2 over GF(2)> -> <algebra of dimension 2 over GF(2)> ]
 gap> IsXModAlgebra( Xmor );
 true
-gap> Size( Xmor );
+gap> Size2d( Xmor );
 [ 4, 4 ]
 gap> IsSubXModAlgebra( XIAc4, Xmor );
 true

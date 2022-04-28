@@ -8,8 +8,8 @@ SetPackageInfo( rec(
 
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
-Version := "1.18dev",
-Date := "11/04/2022", # dd/mm/yyyy format
+Version := "1.19",
+Date := "27/04/2022", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -82,7 +82,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.11.0",
-  NeededOtherPackages := [ ["XMod", ">=2.86"], 
+  NeededOtherPackages := [ ["XMod", ">=2.87"], 
                            ["LAGUNA", ">=3.9.3"] ],
   SuggestedOtherPackages := [ ],   ## ["GAPDoc", ">= 1.6.1" ] ],   
   ExternalConditions := [ ]
