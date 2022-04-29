@@ -120,17 +120,18 @@ gap> ############################
 gap> ## Section 4.1.8
 gap> f := Boundary( XIAk4 );
 MappingByFunction( I(GF5[k4]), GF5[k4], function( i ) ... end )
-gap> Print( RepresentationsOfObject(XIAk4), "\n" ); 
-[ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
-gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements", 
->  "IsDuplicateFree", "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", 
->  "IsLDistributive", "IsRDistributive", "IsPreXModDomain", "Is2dAlgebraObject", 
->  "IsPreXModAlgebra", "IsXModAlgebra" ];;
-gap> known := KnownPropertiesOfObject( XIAk4 );;
-gap> ForAll( props, p -> (p in known) );
-true
-gap> Print( KnownAttributesOfObject(XIAk4), "\n" ); 
-[ "Name", "Range", "Source", "Boundary", "Size2d", "XModAlgebraAction" ]
+gap> reps := RepresentationsOfObject( XIAk4 );; 
+gap> Set( reps );
+[ "IsAttributeStoringRep", "IsComponentObjectRep", "IsPreXModAlgebraObj" ]
+gap> kpo := KnownPropertiesOfObject( XIAk4 );;
+gap> Set( kpo ); 
+[ "CanEasilyCompareElements", "CanEasilySortElements", "Is2dAlgebraObject", 
+  "IsAdditivelyCommutative", "IsDuplicateFree", "IsLDistributive", 
+  "IsLeftActedOnByDivisionRing", "IsPreXModAlgebra", "IsPreXModDomain", 
+  "IsRDistributive", "IsXModAlgebra" ]
+gap> kao := KnownAttributesOfObject( XIAk4 );;
+gap> Set( kao ); 
+[ "Boundary", "Name", "Range", "Size2d", "Source", "XModAlgebraAction" ]
 
 gap> ############################
 gap> ## Section 4.1.9
