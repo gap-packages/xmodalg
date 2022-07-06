@@ -8,8 +8,8 @@ SetPackageInfo( rec(
 
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
-Version := "1.22",
-Date := "29/04/2022", # dd/mm/yyyy format
+Version := "1.22dev",
+Date := "06/07/2022", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -73,7 +73,7 @@ and morphisms of these structures.",
 PackageDoc := rec(
   BookName  := "XModAlg",
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0.html",
+  HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Crossed Modules and Cat1-Algebras in GAP",
