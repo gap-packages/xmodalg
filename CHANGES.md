@@ -1,5 +1,8 @@
 # CHANGES to the 'XModAlg' package
 
+## 1.22 -> 1.22dev (06/07/22) 
+
+
 ## 1.18 -> 1.22 (29/04/22) 
  * (27/04/22) required version 2.87 of XMod which uses Size2d in place of Size, 
               and so replaced Size by Size2d for 2d-algebras 
