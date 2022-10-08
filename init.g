@@ -2,10 +2,12 @@
 ##
 #W  init.g                 The XMODALG package               Zekeriya Arvasi
 #W                                                             & Alper Odabas
-##  version 1.19, 16/05/2021 
+#Y  Copyright (C) 2014-2022, Zekeriya Arvasi & Alper Odabas,  
 ##
-#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
-##
+
+if not IsBound( PreImagesRepresentativeNC ) then 
+    BindGlobal( "PreImagesRepresentativeNC", PreImagesRepresentative ); 
+fi; 
 
 ##  read the function declarations
 ReadPackage( "xmodalg", "lib/algebra.gd" );

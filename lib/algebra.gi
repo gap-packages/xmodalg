@@ -2,7 +2,7 @@
 ##
 #W  algebra.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2022, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ############################  algebra operations  ########################### 
@@ -668,7 +668,7 @@ function ( hom )
     maps := ListWithIdenticalEntries( dimB, 0 );
     for j in [1..dimB] do 
         b := vecB[j]; 
-        p := PreImagesRepresentative( hom, b ); 
+        p := PreImagesRepresentativeNC( hom, b ); 
         im := List( vecA, a -> p*a );
         maps[j] := LeftModuleHomomorphismByImages( A, A, vecA, im );
     od;
