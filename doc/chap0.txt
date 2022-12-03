@@ -6,10 +6,10 @@
                       [1X Crossed Modules and Cat1-Algebras [101X
   
   
-                                      1.22
+                                      1.23
   
   
-                                 29 April 2022
+                                3 December 2022
   
   
                                 Zekeriya Arvasi
