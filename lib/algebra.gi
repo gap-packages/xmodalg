@@ -471,23 +471,16 @@ end);
 
 #############################################################################
 ##
-#F  AlgebraHomomorphismByFunction( <D>, <E>, <fun> )
+#O  AlgebraHomomorphismByFunction( <D>, <E>, <fun> )
 ##
-InstallMethod( AlgebraHomomorphismByFunction, "for 2 algebras and a function", 
-    true, [ IsAlgebra, IsAlgebra, IsFunction ], 0,
-function ( A,B,C )
-    local act,arg,narg,usage,error,fun;        # mapping <map>, result
-    act := rec( fun := C );
-    ObjectifyWithAttributes( act, 
-        NewType(GeneralMappingsFamily( ElementsFamily(FamilyObj(A)),
-            ElementsFamily(FamilyObj(B)) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsAlgebraHomomorphism ),
-        Source, A,
-        Range, B );
-    # return the mapping
-    return act;
-end );
+InstallMethod( AlgebraHomomorphismByFunction, 
+    "(XModAlg) for two algebras and a function",
+    [ IsAlgebra, IsAlgebra, IsFunction ],
+function( S, R, f )
+    return Objectify( TypeOfDefaultGeneralMapping( S, R, 
+	IsSPMappingByFunctionRep and IsAlgebraHomomorphism), 
+        rec( fun := f ) );
+end);
 
 #############################################################################
 ##

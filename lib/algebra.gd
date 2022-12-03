@@ -2,7 +2,7 @@
 ##
 #W  algebra.gd                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2022, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 DeclareInfoClass( "InfoXModAlg" );
@@ -28,8 +28,12 @@ DeclareOperation( "InclusionMappingAlgebra", [ IsAlgebra, IsAlgebra ] );
 DeclareOperation( "RestrictionMappingAlgebra", 
    [ IsAlgebraHomomorphism, IsAlgebra, IsAlgebra ] );
 
-DeclareOperation( "AlgebraHomomorphismByFunction",
-    [ IsAlgebra, IsAlgebra, IsFunction ] );
+## remove this "not IsBound(...)" hack as soon as the declarations 
+## have been moved to the main GAP library
+if not IsBound( AlgebraHomomorphismByFunction ) then
+    DeclareOperation( "AlgebraHomomorphismByFunction", 
+        [ IsAlgebra, IsAlgebra, IsFunction ] );
+fi;
     
 DeclareOperation( "ModuleHomomorphism",
     [ IsAlgebra, IsRing ] ); 

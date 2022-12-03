@@ -1,7 +1,8 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.22 -> 1.22dev (06/07/22) 
-
+## 1.22 -> 1.23 (03/12/22) 
+ * (03/12/22) changed AlgebraHomomorphismByFunction to agree with FR version 
+              and prior to the function being moved to the main GAP library 
 
 ## 1.18 -> 1.22 (29/04/22) 
  * (27/04/22) required version 2.87 of XMod which uses Size2d in place of Size, 
