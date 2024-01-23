@@ -26,6 +26,7 @@ jobs:
         gap-branch:
           - master
           - stable-4.12
+          - stable-4.11
 
     steps:
       - uses: actions/checkout@v3
@@ -56,3 +57,4 @@ jobs:
         with:
           name: manual
           path: ./doc/manual.pdf
+          if-no-files-found: error
