@@ -28,13 +28,6 @@ DeclareOperation( "InclusionMappingAlgebra", [ IsAlgebra, IsAlgebra ] );
 DeclareOperation( "RestrictionMappingAlgebra", 
    [ IsAlgebraHomomorphism, IsAlgebra, IsAlgebra ] );
 
-## remove this "not IsBound(...)" hack as soon as the declarations 
-## have been moved to the main GAP library
-if not IsBound( AlgebraHomomorphismByFunction ) then
-    DeclareOperation( "AlgebraHomomorphismByFunction", 
-        [ IsAlgebra, IsAlgebra, IsFunction ] );
-fi;
-    
 DeclareOperation( "ModuleHomomorphism",
     [ IsAlgebra, IsRing ] ); 
 
@@ -46,8 +39,6 @@ DeclareOperation( "AllIdempotentAlgebraHomomorphisms",
     [ IsAlgebra, IsAlgebra ] );
 
 ##############################  algebra actions  #################### 
-
-DeclareGlobalFunction( "ElementsLeftActing" );
 
 DeclareProperty( "IsAlgebraAction", IsMapping );
 

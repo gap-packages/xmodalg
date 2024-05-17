@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  algebra.xml           XModAlg documentation             Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2021, Z. Arvasi & A. Odabas,              	 --> 
+<!--  Copyright (C) 2014-2024, Z. Arvasi & A. Odabas,              	 --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -19,7 +19,8 @@ All the algebras considered in this package will be associative
 and commutative. 
 Scalars belong to a commutative ring <B>k</B> with <M>1 \neq 0</M>. 
 <P/>
-<E>Why not a field?  A group ring over the integers is not an algebra.</E>
+<E>(Why not a field?  
+A group ring over the integers is not an algebra. [CDW])</E>
 <P/>
 
 

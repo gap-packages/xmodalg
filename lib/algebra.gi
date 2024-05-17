@@ -519,28 +519,6 @@ end );
 
 #############################################################################
 ##
-#F  ElementsLeftActing( <fun> )
-##
-InstallGlobalFunction( ElementsLeftActing, 
-function (ac)
-    local AB,B,list,uzAB,uzA,uzB,k,i,elB;       
-    AB := Source(ac);
-    B := Range(ac);
-    elB := Elements(B);
-    list := [];
-    uzAB := Length(AB);
-    uzB := Length(elB);
-    uzA := uzAB/uzB;
-    k := 1;
-    for i in [1..uzA] do
-        Add(list,AB[k][1]);
-        k := k+uzB;
-    od;
-    return Set(list);
-end );
-
-#############################################################################
-##
 #F  IsAlgebraAction( <fun> )
 ##
 InstallMethod( IsAlgebraAction, "for,for,for", true, [ IsMapping ], 0,
@@ -569,7 +547,7 @@ end );
 
 #############################################################################
 ##
-#F  AlgebraAction( <bdy>, <act> ) crossed module from given boundary & action
+#F  AlgebraAction( <args> ) crossed module from given boundary & action
 ##
 InstallGlobalFunction( AlgebraAction, 
 function( arg )
@@ -593,7 +571,7 @@ function( arg )
         return AlgebraActionByModule( arg[1],arg[2] );   
     fi;
     # alternatives not allowed
-    Error( "usage: AlgebraAcrion( A, I, B );  or various options" );
+    Error( "usage: AlgebraAction( A, I, B );  or various options" );
 end );
 
 #############################################################################
