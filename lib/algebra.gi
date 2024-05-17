@@ -2,7 +2,7 @@
 ##
 #W  algebra.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2022, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ############################  algebra operations  ########################### 
@@ -134,7 +134,7 @@ InstallMethod( MultiplierAlgebraByGenerators,
     [ IsAlgebra, IsList ], 0,
 function ( A, L )
     local I, ok, domA, M;
-    ok := ForAll( L, m -> IsAlgebraMultiplier( m ) ); 
+    ok := ForAll( L, IsAlgebraMultiplier ); 
     if not ok then 
         Info( InfoXModAlg, 1, "L is not a list of multipliers" ); 
         return fail; 
@@ -164,7 +164,7 @@ function( G, H )
     if ( "IsGroupAlgebra" in KnownPropertiesOfObject(G) ) then
         H_G := UnderlyingGroup(G);
         L := MinimalGeneratingSet(H_G);
-        genG := List( L , g -> g^Embedding(H_G,G) );
+        genG := List( L, g -> g^Embedding(H_G,G) );
     else
         genG := GeneratorsOfAlgebra(G);
     fi;
@@ -244,7 +244,7 @@ function( G, H )
     if ( "IsGroupAlgebra" in KnownPropertiesOfObject(G) ) then
         H_G := UnderlyingGroup(G);
         L := MinimalGeneratingSet(H_G);
-        genG := List( L , g -> g^Embedding(H_G,G) );
+        genG := List( L, g -> g^Embedding(H_G,G) );
     else
         genG := GeneratorsOfAlgebra(G);
     fi;
@@ -325,7 +325,7 @@ local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
     eH := Elements(H);
     H_G := UnderlyingGroup(G);
     L := MinimalGeneratingSet(H_G);
-    genG := List( L , g -> g^Embedding(H_G,G) );
+    genG := List( L, g -> g^Embedding(H_G,G) );
     if ( Length(genG) = 0 ) then
             genG := GeneratorsOfAlgebra(G);
     fi;
@@ -451,7 +451,7 @@ function( hom, U )
   fi;
 
   gens:=GeneratorsOfAlgebra(U);
-  imgs:=List(gens,i->ImageElm(hom,i));
+  imgs:=List( gens, i->ImageElm(hom,i) );
 
   if HasImagesSource(hom) then
     imgp:=ImagesSource(hom);
@@ -578,7 +578,7 @@ function( arg )
 
     nargs := Length( arg );
     # Algebra, Ideal, and Subalgebra
-    if ( ( nargs = 3 ) and ForAll( arg, a -> IsAlgebra(a) ) ) then
+    if ( ( nargs = 3 ) and ForAll( arg, IsAlgebra ) ) then
         return AlgebraActionByMultipliers( arg[1], arg[2], arg[3] );
     # Multiplier Action
     elif ( ( nargs = 1 ) and IsAlgebra( arg[1] ) ) then
