@@ -1,7 +1,7 @@
 name: XModAlg
-version: "1.22"
+version: "1.25"
 license: "GPL-2.0-or-later"
-date: 2022-04-29
+date: 2024-05-17
 description: |
     Crossed Modules and Cat1-Algebras
 
@@ -31,39 +31,40 @@ packageinfo: https://gap-packages.github.io/xmodalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/xmodalg/releases/download/v1.22/XModAlg-1.22.tar.gz
+      url: https://github.com/gap-packages/xmodalg/releases/download/v1.25/XModAlg-1.25.tar.gz
 
 abstract: |
     The <span class="pkgname">XModAlg</span> package provides a collection of functions for computing with crossed modules and cat1-algebras and morphisms of these structures.
 
 status: deposited
-doc-html: doc/chap0.html
+doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
 keywords: |
     crossed module of algebras, cat1-algebra.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>AO22</span>]   <b class='BibAuthor'>Arvasi, Z. and Odabas, A.</b>,
+    [<span class='BibKey'>AO24</span>]   <b class='BibAuthor'>Arvasi, Z. and Odabas, A.</b>,
      <i class='BibTitle'>XModAlg, Crossed Modules and Cat1-Algebras,
-             Version 1.22</i>
-     (<span class='BibYear'>2022</span>)<br />
+             Version 1.25</i>
+     (<span class='BibYear'>2024</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/xmodalg/">https://gap-packages.github.io/xmodalg/</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ XModAlg1.22,
+    @misc{ XModAlg,
       author =           {Arvasi, Z. and Odabas, A.},
-      title =            {{XModAlg},    Crossed   Modules   and   Cat1-Algebras,
-                          {V}ersion 1.22},
-      month =            {Apr},
-      year =             {2022},
+      title =            {{XModAlg},         Crossed         Modules         and
+                          Cat1\texttt{\symbol{45}}Algebras, {V}ersion 1.25},
+      month =            {May},
+      year =             {2024},
       note =             {GAP package},
       howpublished =     {\href        {https://gap-packages.github.io/xmodalg/}
-                          {\texttt{https://gap-packages.github.io/}\discretionary
+                          {\texttt{https://gap\texttt{\symbol{45}}packages.github.io/}\discretionary
                           {}{}{}\texttt{xmodalg/}}},
-      keywords =         {crossed module of algebras; cat1-algebra},
-      printedkey =       {AO22}
+      keywords =         {crossed          module          of          algebras;
+                          cat1\texttt{\symbol{45}}algebra},
+      printedkey =       {AO24}
     }
 
