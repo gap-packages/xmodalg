@@ -11,8 +11,9 @@
 ##
 #M  HasZeroAnnihilator
 ##
-InstallMethod( HasZeroAnnihilator, "generic method for a commutative algebra",
-    true, [ IsAlgebra and IsCommutative ], 0,
+InstallMethod( HasZeroAnnihilator, 
+    "generic method for a commutative algebra", true, 
+    [ IsAlgebra and IsCommutative ], 0,
 function( A )
     ## this method assumes that Ann(A)=0 is equivalent to A^2=A 
     local genA, num, a, b, i, j, L, B; 
@@ -104,7 +105,7 @@ function ( A, I, B )
     fi; 
     domA := LeftActingDomain( A ); 
     imhom := List( vecB, b -> RegularAlgebraMultiplier( A, I, b ) ); 
-    M := FLMLORByGenerators( domA, imhom ); 
+    M := AlgebraByGenerators( domA, imhom ); 
     SetIsMultiplierAlgebra( M, true ); 
     if ( Dimension( M ) = 0 ) then 
         hom := ZeroMapping( B, M ); 
@@ -150,11 +151,11 @@ function ( A, L )
     return M;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  AllAlgebraHomomorphisms
 ##
-InstallMethod( AllAlgebraHomomorphisms, "generic method for algebras",
+InstallMethod( AllAlgebraHomomorphisms, "generic method for two algebras",
     true, [ IsAlgebra, IsAlgebra ], 0,
 function( G, H )
 
@@ -230,12 +231,12 @@ function( G, H )
     return mler;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  AllBijectiveAlgebraHomomorphisms
 ##
-InstallMethod( AllBijectiveAlgebraHomomorphisms, "generic method for algebras",
-    true, [ IsAlgebra, IsAlgebra ], 0,
+InstallMethod( AllBijectiveAlgebraHomomorphisms, 
+    "generic method for two algebras", true, [ IsAlgebra, IsAlgebra ], 0,
 function( G, H )
 
     local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
@@ -312,15 +313,15 @@ function( G, H )
     return mler;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  AllIdempotentAlgebraHomomorphisms
 ##
-InstallMethod( AllIdempotentAlgebraHomomorphisms, "generic method for algebras",
-    true, [ IsAlgebra, IsAlgebra ], 0,
+InstallMethod( AllIdempotentAlgebraHomomorphisms, 
+    "generic method for algebras", true, [ IsAlgebra, IsAlgebra ], 0,
 function( G, H )
 
-local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
+    local A,B,a,b,h,f,i,sonuc,mler,j,k,eH,l,L,g,H_G,genG;
 
     eH := Elements(H);
     H_G := UnderlyingGroup(G);
@@ -482,32 +483,39 @@ function( S, R, f )
         rec( fun := f ) );
 end);
 
+
+##  no implementation of MultiplierHomomorphism is required 
+##  because this attribute is set by MultiplierAlgebra constructions
 #############################################################################
 ##
-#F  MultiplierHomomorphism( <D>, <E>, <fun> )
+#F  MultiplierHomomorphism( <A> )
 ##
-InstallMethod( MultiplierHomomorphism, "for,for,for", true, [ IsAlgebra ], 0,
-function ( A )
-
-    local mu, B; # mapping <map>, result
-    B := MultiplierAlgebra(A);
-    mu := AlgebraHomomorphismByFunction( A, B, 
-              r -> AlgebraHomomorphismByFunction(A,A,x->r*x) );
-    SetSource(mu,A);
-    SetRange(mu,B);
-    # return the mapping
-    return mu;
-end );
+##InstallMethod( MultiplierHomomorphism, "generic method for an algebra",
+##    true, [ IsAlgebra ], 0,
+##function ( A )
+##
+##    local mu, bvA, imgs, B;
+##    bvA := BasisVectors( Basis( A ) );
+##    imgs := List( bvA, a -> RegularAlgebraMultiplier( A, A, a ) );
+##    B := MultiplierAlgebra(A);
+##    mu := AlgebraHomomorphismByImages( A, B, bvA, imgs );
+##              r -> AlgebraHomomorphismByFunction(A,A,x->r*x) );
+##    SetSource(mu,A);
+##    SetRange(mu,B);
+####    SetMultiplierHomomorphism(A,mu);
+##    # return the mapping
+##    return mu;
+##end );
 
 #############################################################################
 ##
-#F  ModuleHomomorphism( <D>, <E>, <fun> )
+#F  ModuleHomomorphism( <A>, <M> )
 ##
-InstallMethod( ModuleHomomorphism, "for,for,for", true, [IsAlgebra,IsRing], 0,
-function ( M,R )
+InstallMethod( ModuleHomomorphism, "for an algebra and a module",
+     true, [IsAlgebra, IsRing], 0,
+function ( M, R )
 
-    local   mu,B;        # mapping <map>, result
-     
+    local mu, B;        # mapping <map>, result
     mu := AlgebraHomomorphismByFunction(M,R,r->Zero(R));  
     SetSource(mu,M);
     SetRange(mu,R);
@@ -521,7 +529,7 @@ end );
 ##
 #F  IsAlgebraAction( <fun> )
 ##
-InstallMethod( IsAlgebraAction, "for,for,for", true, [ IsMapping ], 0,
+InstallMethod( IsAlgebraAction, "for a mapping", true, [ IsMapping ], 0,
 function ( ac )
     local AB,A,B,uzB,uzA,j,i,k; 
     # mapping <map>, result
@@ -547,7 +555,7 @@ end );
 
 #############################################################################
 ##
-#F  AlgebraAction( <args> ) crossed module from given boundary & action
+#F  AlgebraAction( <args> ) 
 ##
 InstallGlobalFunction( AlgebraAction, 
 function( arg )
@@ -576,13 +584,31 @@ end );
 
 #############################################################################
 ##
-#F  AlgebraAction2( <D>, <E>, <fun> )
+#F  AlgebraActionByMultipliers( <A>, <I>, <B> )
 ##
-InstallMethod( AlgebraAction2, "for,for,for", true, [ IsAlgebra ], 0,
+InstallMethod( AlgebraActionByMultipliers, 
+    "for an algebra, an ideal, and a subalgebra", true,  
+    [ IsAlgebra, IsAlgebra, IsAlgebra ], 0,
+function ( A, I, B )
+    local M, act;
+    M := MultiplierAlgebraOfIdealBySubalgebra( A, I, B ); 
+    act := MultiplierHomomorphism( M );
+    SetIsAlgebraAction( act, true );
+    SetAlgebraActionType( act, "multiplier" );
+    SetHasZeroModuleProduct( act, false );
+    return act;
+end );
+
+#############################################################################
+##
+#F  AlgebraAction2( <A> )
+##
+InstallMethod( AlgebraAction2, "for an algebra", true, [ IsAlgebra ], 0,
 function ( A )
     local act,MA,MAA;        # mapping <map>, result
     MA := MultiplierAlgebra(A);
-    MAA := Cartesian(MA,A);
+    MAA := DirectSumOfAlgebras( MA, A );
+##    MAA :=  := Cartesian(MA,A);
     act := rec( fun:= x->Image(x[1],x[2]) );
     ObjectifyWithAttributes( act, 
         NewType( GeneralMappingsFamily( ElementsFamily(FamilyObj(MAA) ), 
@@ -621,7 +647,8 @@ function ( hom )
     vecB := BasisVectors( basB ); 
     dimB := Dimension( B ); 
     if not ( dom = LeftActingDomain( B ) ) then 
-        Error( "A and B have different LeftActingDomains" ); 
+        Print( "A and B have different LeftActingDomains\n" );
+        return fail; 
     fi; 
     ## check that the kernel is contained in the annihilator 
     zA := Zero( A ); 
@@ -643,7 +670,7 @@ function ( hom )
         im := List( vecA, a -> p*a );
         maps[j] := LeftModuleHomomorphismByImages( A, A, vecA, im );
     od;
-    M := FLMLORByGenerators( dom, maps );
+    M := AlgebraByGenerators( dom, maps );
     act := LeftModuleGeneralMappingByImages( B, M, vecB, maps );
     SetIsAlgebraAction( act, true );
     SetAlgebraActionType( act, "surjection" );
@@ -655,7 +682,7 @@ end );
 ##
 #F  AlgebraActionByModule( <D>, <E>, <fun> )
 ##
-InstallMethod( AlgebraActionByModule, "for,for,for", true, 
+InstallMethod( AlgebraActionByModule, "for an algebra and a module", true, 
     [ IsAlgebra, IsRing ], 0,
 function( M, R )
     local   act,RM;        # mapping <map>, result
@@ -673,23 +700,6 @@ function( M, R )
         HasZeroModuleProduct, true,
         IsAlgebraAction, true );
     # return the mapping
-    return act;
-end );
-
-#############################################################################
-##
-#F  AlgebraActionByMultipliers( <A>, <I>, <B> )
-##
-InstallMethod( AlgebraActionByMultipliers, 
-    "for an algebra, an ideal, and a subalgebra", true,  
-    [ IsAlgebra, IsAlgebra, IsAlgebra ], 0,
-function ( A, I, B )
-    local M, act;
-    M := MultiplierAlgebraOfIdealBySubalgebra( A, I, B ); 
-    act := MultiplierHomomorphism( M );
-    SetIsAlgebraAction( act, true );
-    SetAlgebraActionType( act, "multiplier" );
-    SetHasZeroModuleProduct( act, false );
     return act;
 end );
 
@@ -716,8 +726,8 @@ InstallMethod( SemidirectProductOfAlgebras,
           imr,imu,     # images of r,u under act 
           ru,rv,su,sv, # 4 terms in a typical product 
           L,           # the non-zero entries in these positions 
-          sym,         # if both products are (anti)symmetric, then the result
-                       # will have the same property.
+          sym,         # if both products are (anti)symmetric, then the 
+                       # result will have the same property.
           P;           # the answer is the semidirect product algebra 
 
     F := LeftActingDomain( A1 ); 

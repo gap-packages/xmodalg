@@ -119,10 +119,12 @@ function( bdy, act )
         fi;
     else
         if not ( B = BB ) then
-            return false;
+            return fail;
         fi;
     fi;
     
+    ## ????  should there be any tests for condition XModAlg1 here ????
+
     PM := rec();
     ObjectifyWithAttributes( PM, NewType( fam, filter ),
         Source, B,
@@ -426,7 +428,7 @@ InstallMethod( XModAlgebraByMultiplierAlgebra,
 function( A )
     local MA, PM, act, bdy; 
     MA := MultiplierAlgebra( A ); 
-    bdy := MultiplierHomomorphism( A );
+    bdy := MultiplierHomomorphism( MA );
     act := IdentityMapping( MA ); 
     SetIsAlgebraAction( act, true ); 
     SetAlgebraActionType( act, "multiplier" ); 

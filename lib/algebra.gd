@@ -41,17 +41,16 @@ DeclareOperation( "AllIdempotentAlgebraHomomorphisms",
 ##############################  algebra actions  #################### 
 
 DeclareProperty( "IsAlgebraAction", IsMapping );
-
 DeclareGlobalFunction( "AlgebraAction" );
 DeclareAttribute( "LeftElementOfCartesianProduct", IsAlgebraAction );
 DeclareAttribute( "AlgebraActionType", IsAlgebraAction );
 DeclareAttribute( "HasZeroModuleProduct", IsAlgebraAction );
 
+DeclareOperation( "AlgebraActionByMultipliers", 
+    [ IsAlgebra, IsAlgebra, IsAlgebra ] );
 DeclareOperation( "AlgebraAction2", [ IsAlgebra ] );
 DeclareOperation( "AlgebraActionBySurjection", [ IsAlgebraHomomorphism ] );
 DeclareOperation( "AlgebraActionByModule", [ IsAlgebra, IsRing ] );
-DeclareOperation( "AlgebraActionByMultipliers", 
-    [ IsAlgebra, IsAlgebra, IsAlgebra ] );
 
 DeclareOperation ( "SemidirectProductOfAlgebras", 
     [ IsAlgebra, IsAlgebraAction, IsAlgebra ] ); 
