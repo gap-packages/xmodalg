@@ -9,8 +9,11 @@ gap> SetInfoLevel( InfoXModAlg, 0 );
 ## make this test independent of algebra.tst
 gap> m := [ [0,1,2,3], [0,0,1,2], [0,0,0,1], [0,0,0,0] ];; 
 gap> A1 := Algebra( Rationals, [m] );;
+gap> SetName( A1, "A1" );
 gap> A3 := Subalgebra( A1, [m^3] );; 
 gap> nat3 := NaturalHomomorphismByIdeal( A1, A3 );; 
+gap> Q13 := Image( nat3 );;
+gap> SetName( Q13, "Q13" );
 
 ## Chapter 4, Section 4.1.2 
 gap> F := GF(5);;
@@ -72,10 +75,10 @@ gap> ## Section 4.1.5
 gap> X3 := XModAlgebraBySurjection( nat3 );; 
 gap> Display( X3 ); 
 
-Crossed module [..->..] :- 
-: Source algebra has generators:
+Crossed module [A1->Q13] :- 
+: Source algebra A1 has generators:
   [ [ [ 0, 1, 2, 3 ], [ 0, 0, 1, 2 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ] ] ]
-: Range algebra has generators:
+: Range algebra Q13 has generators:
   [ v.1, v.2 ]
 : Boundary homomorphism maps source generators to:
   [ v.1 ]

@@ -78,7 +78,7 @@ gap> B := Subalgebra( A, [m] );;
 gap> SetName( B, "A(m)" ); 
 gap> IsIdeal( A, B ); 
 true
-gap> act := AlgebraActionByMultipliers( A, B );; 
+gap> act := AlgebraActionByMultipliers( A, B, A );; 
 gap> XAB := XModAlgebraByIdeal( A, B ); 
 [ A(m) -> A(l,m) ]
 gap> SetName( XAB, "XAB" ); 
@@ -153,10 +153,10 @@ IdentityMapping( <algebra of dimension 3 over GF(5)> )
          Arg="f" />
 <Description> 
 Let <M>\partial : S\rightarrow R</M> be a surjective algebra homomorphism 
-whose kernel lise in the annihilator of <M>S</M>. 
+whose kernel lies in the annihilator of <M>S</M>. 
 Define the action of <M>R</M> on <M>S</M> by <M>r\cdot s = \widetilde{r}s</M>
 where <M>\widetilde{r} \in \partial^{-1}(r)</M>, 
-as described in section <Ref Oper="AlgebraActionBySurjection"/>
+as described in section <Ref Oper="AlgebraActionBySurjection"/>.
 Then <M>\mathcal{X}=(\partial : S\rightarrow R)</M> 
 is a crossed module with the defined action.
 <P/> 
@@ -170,10 +170,10 @@ Continuing with the example in that section,
 gap> X3 := XModAlgebraBySurjection( nat3 );; 
 gap> Display( X3 ); 
 
-Crossed module [..->..] :- 
-: Source algebra has generators:
+Crossed module [A1->Q13] :- 
+: Source algebra A1 has generators:
   [ [ [ 0, 1, 2, 3 ], [ 0, 0, 1, 2 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ] ] ]
-: Range algebra has generators:
+: Range algebra Q13 has generators:
   [ v.1, v.2 ]
 : Boundary homomorphism maps source generators to:
   [ v.1 ]
@@ -374,19 +374,19 @@ true
 
 <Section><Heading>(Pre-)Crossed Module Morphisms</Heading>
 
-Let <M>\mathcal{X} = (\partial:S\rightarrow R)</M>, 
+Let <M>\mathcal{X} = (\partial:S\rightarrow R)</M> and 
 <M>\mathcal{X}^{\prime} = 
 (\partial^{\prime }:S^{\prime }\rightarrow R^{\prime })</M> 
-be (pre)crossed modules and <M>\theta :S\rightarrow S^{\prime }</M>, 
+be (pre)crossed modules and let <M>\theta :S\rightarrow S^{\prime }</M>, 
 <M>\varphi : R\rightarrow R^{\prime }</M> be algebra homomorphisms. 
-If
+Then if
 <Display>
 \varphi \circ \partial = \partial ^{\prime } \circ \theta, 
 \qquad 
 \theta (r\cdot s)=\varphi(r) \cdot \theta (s), 
 </Display>
 for all <M>r\in R</M>, <M>s\in S,</M> 
-then the pair <M>(\theta ,\varphi )</M> is called a morphism between 
+the pair <M>(\theta ,\varphi )</M> is called a morphism between 
 <M>\mathcal{X}</M> and <M>\mathcal{X}^{\prime } </M>
 <P/>
 The conditions can be thought as the commutativity of the following diagrams: 

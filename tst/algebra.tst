@@ -59,7 +59,7 @@ gap> vecM[3];
 6 over GF(5)> -> <algebra-with-one of dimension 6 over GF(5)>>
 
 ## Section 2.1.5
-gap> hom := MultiplierHomomorphism( MA5c6 );; 
+gap> hom := MultiplierHomomorphism( MA5c6 );;
 gap> ImageElm( hom, vecA[2] ); 
 Basis( <algebra-with-one of dimension 6 over GF(5)>, 
 [ (Z(5)^0)*(), (Z(5)^0)*(1,2,3,4,5,6), (Z(5)^0)*(1,3,5)(2,4,6), 
@@ -95,14 +95,27 @@ gap> m^2;
 gap> m^3;
 [ [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
 gap> A1 := Algebra( Rationals, [m] );;
+gap> SetName( A1, "A1" );
 gap> A3 := Subalgebra( A1, [m^3] );; 
 gap> nat3 := NaturalHomomorphismByIdeal( A1, A3 ); 
-<linear mapping by matrix, <algebra of dimension 
-3 over Rationals> -> <algebra of dimension 2 over Rationals>>
+<linear mapping by matrix, A1 -> <algebra of dimension 2 over Ration\
+als>>
+gap> Q13 := Image( nat3 );;
+gap> SetName( Q13, "Q13" );
+gap> Display(nat3);
+LeftModuleHomomorphismByMatrix( Basis( A1, 
+[ [ [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ], 
+  [ [ 0, 1, 2, 3 ], [ 0, 0, 1, 2 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ] ], 
+  [ [ 0, 0, 1, 4 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ] ] ), 
+[ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ] ], CanonicalBasis( Q13 ) )
 gap> act3 := AlgebraActionBySurjection( nat3 );; 
-gap> a3 := Image( act3, BasisVectors( Basis( Image( nat3 ) ) )[1] );;  
-gap> [ Image( a3, m ) = m^2, Image( a3, m^2 ) = m^3 ];
-[ true, true ]
+gap> B3 := Image( act3 );;
+gap> bvB3 := BasisVectors( Basis( B3 ) );;
+gap> b1 := bvB3[1];;  b2 := bvB3[2];;
+gap> [ Image(b1,m)=m^2, Image(b1,m^2)=m^3, Image(b1,m^3)=Zero(A1) ];
+[ true, true, true ]
+gap> [ Image(b2,m)=m^3, b2=b1^2 ];
+[true, true ]
 
 ## Section 2.2.3
 gap> P := SemidirectProductOfAlgebras( A5c6, actm, I5c6 ); 
@@ -120,6 +133,15 @@ gap> Projection( P, 1 );
 [ (Z(5)^0)*(), (Z(5)^0)*(1,2,3,4,5,6), (Z(5)^0)*(1,3,5)(2,4,6), 
   (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2), 
   <zero> of ..., <zero> of ... ]
+gap> P3 := SemidirectProductOfAlgebras( Q13, act3, A1 );
+<algebra of dimension 5 over Rationals>
+gap> Embedding( P3, 1 );
+[ v.1, v.2 ] -> [ v.1, v.2 ]
+gap> Embedding( P3, 2 );
+[ [ [ 0, 1, 2, 3 ], [ 0, 0, 1, 2 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ] ], 
+  [ [ 0, 0, 1, 4 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ], 
+  [ [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ] ] -> 
+[ v.3, v.4, v.5 ]
 
 ## Section 2.3.1
 gap> A2c6 := GroupRing( GF(2), Group( (1,2,3,4,5,6) ) );;

@@ -28,13 +28,6 @@ DeclareOperation( "InclusionMappingAlgebra", [ IsAlgebra, IsAlgebra ] );
 DeclareOperation( "RestrictionMappingAlgebra", 
    [ IsAlgebraHomomorphism, IsAlgebra, IsAlgebra ] );
 
-## remove this "not IsBound(...)" hack as soon as the declarations 
-## have been moved to the main GAP library
-if not IsBound( AlgebraHomomorphismByFunction ) then
-    DeclareOperation( "AlgebraHomomorphismByFunction", 
-        [ IsAlgebra, IsAlgebra, IsFunction ] );
-fi;
-    
 DeclareOperation( "ModuleHomomorphism",
     [ IsAlgebra, IsRing ] ); 
 
@@ -47,20 +40,17 @@ DeclareOperation( "AllIdempotentAlgebraHomomorphisms",
 
 ##############################  algebra actions  #################### 
 
-DeclareGlobalFunction( "ElementsLeftActing" );
-
 DeclareProperty( "IsAlgebraAction", IsMapping );
-
 DeclareGlobalFunction( "AlgebraAction" );
 DeclareAttribute( "LeftElementOfCartesianProduct", IsAlgebraAction );
 DeclareAttribute( "AlgebraActionType", IsAlgebraAction );
 DeclareAttribute( "HasZeroModuleProduct", IsAlgebraAction );
 
+DeclareOperation( "AlgebraActionByMultipliers", 
+    [ IsAlgebra, IsAlgebra, IsAlgebra ] );
 DeclareOperation( "AlgebraAction2", [ IsAlgebra ] );
 DeclareOperation( "AlgebraActionBySurjection", [ IsAlgebraHomomorphism ] );
 DeclareOperation( "AlgebraActionByModule", [ IsAlgebra, IsRing ] );
-DeclareOperation( "AlgebraActionByMultipliers", 
-    [ IsAlgebra, IsAlgebra, IsAlgebra ] );
 
 DeclareOperation ( "SemidirectProductOfAlgebras", 
     [ IsAlgebra, IsAlgebraAction, IsAlgebra ] ); 
