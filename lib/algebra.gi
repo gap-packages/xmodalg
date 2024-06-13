@@ -575,7 +575,7 @@ function( arg )
         return AlgebraActionBySurjection( arg[1] );
     # module and zero map
     elif ( ( nargs = 2 ) and IsAlgebra( arg[1] ) 
-                         and IsRing( arg[2] ) ) then
+                         and IsLeftModule( arg[2] ) ) then
         return AlgebraActionByModule( arg[1],arg[2] );   
     fi;
     # alternatives not allowed
@@ -675,31 +675,6 @@ function ( hom )
     SetIsAlgebraAction( act, true );
     SetAlgebraActionType( act, "surjection" );
     SetHasZeroModuleProduct( act, false );
-    return act;
-end );
-
-#############################################################################
-##
-#F  AlgebraActionByModule( <D>, <E>, <fun> )
-##
-InstallMethod( AlgebraActionByModule, "for an algebra and a module", true, 
-    [ IsAlgebra, IsRing ], 0,
-function( M, R )
-    local   act,RM;        # mapping <map>, result
-    RM := Cartesian(R,M);
-    act := rec( fun:= x->x[1]*x[2]);
-    ObjectifyWithAttributes( act, 
-        NewType( GeneralMappingsFamily( ElementsFamily(FamilyObj(RM) ),
-            ElementsFamily( FamilyObj(M) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        LeftElementOfCartesianProduct, R,
-        AlgebraActionType, "module",
-        Source, RM,
-        Range, M,
-        HasZeroModuleProduct, true,
-        IsAlgebraAction, true );
-    # return the mapping
     return act;
 end );
 

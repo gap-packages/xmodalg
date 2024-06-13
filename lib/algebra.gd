@@ -50,7 +50,6 @@ DeclareOperation( "AlgebraActionByMultipliers",
     [ IsAlgebra, IsAlgebra, IsAlgebra ] );
 DeclareOperation( "AlgebraAction2", [ IsAlgebra ] );
 DeclareOperation( "AlgebraActionBySurjection", [ IsAlgebraHomomorphism ] );
-DeclareOperation( "AlgebraActionByModule", [ IsAlgebra, IsRing ] );
 
 DeclareOperation ( "SemidirectProductOfAlgebras", 
     [ IsAlgebra, IsAlgebraAction, IsAlgebra ] ); 

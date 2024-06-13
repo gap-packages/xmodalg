@@ -117,7 +117,7 @@ gap> [ Image(b1,m)=m^2, Image(b1,m^2)=m^3, Image(b1,m^3)=Zero(A1) ];
 gap> [ Image(b2,m)=m^3, b2=b1^2 ];
 [true, true ]
 
-## Section 2.2.3
+## Section 2.2.8
 gap> P := SemidirectProductOfAlgebras( A5c6, actm, I5c6 ); 
 <algebra of dimension 8 over GF(5)>
 gap> Embedding( P, 1 );
