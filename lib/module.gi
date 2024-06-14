@@ -92,6 +92,30 @@ function( A, M )
         SetName( C, Concatenation( "Act(", Name(B), ")" ) );
     fi;
     act := AlgebraGeneralMappingByImages( A, C, genA, imact );
+    SetIsAlgebraAction( act, true );
+    SetAlgebraActionType( act, "module" );
     return act;
 end );
 
+#############################################################################
+##
+#M  XModAlgebraByModule
+##
+InstallMethod( XModAlgebraByModule, "crossed module from module", true,
+    [ IsAlgebra, IsLeftModule ], 0,
+function( A, M )
+    local  genM, zA, B, genB, dimB, imbdy, bdy, PM, act;
+    genM := GeneratorsOfLeftModule( M );
+    zA := Zero( A );
+    B := ModuleAsAlgebra( M ); 
+    genB := GeneratorsOfAlgebra( B );
+    dimB := Length( genB );
+    imbdy := ListWithIdenticalEntries( dimB, zA );
+    bdy := AlgebraHomomorphismByImages( B, A, genB, imbdy );
+    act := AlgebraActionByModule( A, M );
+    PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
+    if not IsXModAlgebra( PM ) then
+        Error( "this boundary and action only defines a pre-crossed module" );
+    fi;
+    return PM;
+end );

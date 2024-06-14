@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  xmod.xml            XModAlg documentation               Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2022, Z. Arvasi & A. Odabas,                    --> 
+<!--  Copyright (C) 2014-2024, Z. Arvasi & A. Odabas,                    --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -238,24 +238,7 @@ Crossed module [<e5>->GF(2^2)[k4]] :-
 ]]>
 </Example>
 
-<ManSection>
-   <Oper Name="XModAlgebraByModule"
-         Arg="M R" />
-<Description> 
-Let <M>M</M> be a <M>R</M>-module.  
-Then <M>\mathcal{X} = (0:M\rightarrow R)</M> is a crossed module. 
-Conversely, given a crossed module 
-<M>\mathcal{X} = (\partial :M\rightarrow R)</M>,
-one can get that <M>\ker\partial</M> is a <M>(R/\partial M)</M>-module.
-<P/>
-</Description>
-</ManSection>
-
-<Example>
-<![CDATA[
-gap> ## example needed 
-]]>
-</Example>
+<#Include Label="XModAlgebraByModule">
 
 <ManSection>
    <Attr Name="Source" Label="for crossed modules of commutative algebras"

@@ -705,6 +705,11 @@ InstallMethod( SemidirectProductOfAlgebras,
                        # result will have the same property.
           P;           # the answer is the semidirect product algebra 
 
+    ## we are assuming commutative algebras so T will be symmetric
+    ## and we only need to calculate the upper triangle
+    if not IsCommutative( A1 ) and IsCommutative( A2 ) then
+        Error( "commutative algebras required" ); 
+    fi;
     F := LeftActingDomain( A1 ); 
     z := Zero( F ); 
     if ( F <> LeftActingDomain( A2 ) ) then
@@ -733,9 +738,8 @@ InstallMethod( SemidirectProductOfAlgebras,
     # Initialize the s.c. table.
     T := EmptySCTable( n, Zero(F), "symmetric" );
     for i in [1..n1] do 
-        r := vec1[i]; 
-        imr := ImageElm( act, r ); 
-        for j in [1..n1] do 
+        r := vec1[i];
+        for j in [i..n1] do 
             u := vec1[j]; 
             ru := Coefficients( bas1, r*u ); 
             L := [ ]; 
@@ -743,9 +747,13 @@ InstallMethod( SemidirectProductOfAlgebras,
                 if ( ru[k] <> z ) then 
                     Append( L, [ ru[k], k ] ); 
                 fi; 
-            od; 
+            od;
             SetEntrySCTable( T, i, j, L ); 
-        od; 
+        od;
+    od;
+    for i in [1..n1] do
+        r := vec1[i]; 
+        imr := ImageElm( act, r ); 
         for j in [1..n2] do 
             v := vec2[j]; 
             rv := Coefficients( bas2, ImageElm( imr, v ) ); 
@@ -760,19 +768,7 @@ InstallMethod( SemidirectProductOfAlgebras,
     od; 
     for i in [1..n2] do 
         s := vec2[i]; 
-        for j in [1..n1] do 
-            u := vec1[j]; 
-            imu := ImageElm( act, u ); 
-            su := Coefficients( bas2, ImageElm( imu, s ) ); 
-            L := [ ]; 
-            for k in [1..n2] do 
-                if ( su[k] <> z ) then 
-                    Append( L, [ su[k], k+n1 ] ); 
-                fi; 
-            od; 
-            SetEntrySCTable( T, i+n1, j, L ); 
-        od; 
-        for j in [1..n2] do 
+        for j in [i..n2] do 
             v := vec2[j]; 
             sv := Coefficients( bas2, s*v ); 
             L := [ ]; 
@@ -783,7 +779,7 @@ InstallMethod( SemidirectProductOfAlgebras,
             od; 
             SetEntrySCTable( T, i+n1, j+n1, L ); 
         od; 
-    od; 
+    od;
     P := AlgebraByStructureConstants( F, T ); 
     SetSemidirectProductOfAlgebrasInfo( P, rec( algebras := [ A1, A2 ], 
                                                 action := act, 
@@ -835,38 +831,30 @@ end );
 InstallMethod( Projection, "semidirect product of algebras and integer",
     [ IsAlgebra and HasSemidirectProductOfAlgebrasInfo, IsPosInt ], 
 function( P, i )
-    local info, vecP, dimP, A1, dim1, z1, A2, dim2, z2, vec1, vec2, 
-          imgs, j, hom;
+    local info, vecP, dimP, A1, dim1, z1, vec1, imgs, j, hom;
+    if ( i <> 1 ) then 
+        Error( "only the first projection is available" ); 
+    fi; 
     # check
     info := SemidirectProductOfAlgebrasInfo( P );
-    if IsBound( info.projections[i] ) then 
-        return info.projections[i];
+    if IsBound( info.projections[1] ) then 
+        return info.projections[1];
     fi;
     vecP := BasisVectors( Basis( P ) ); 
     dimP := Length( vecP ); 
     A1 := info.algebras[1]; 
     dim1 := Dimension( A1 ); 
     z1 := Zero( A1 ); 
-    A2 := info.algebras[2]; 
-    dim2 := Dimension( A2 ); 
-    z2 := Zero( A2 ); 
-    vec1 := BasisVectors( Basis( A1 ) ); 
-    vec2 := BasisVectors( Basis( A2 ) ); 
-    imgs := ListWithIdenticalEntries( dimP, 0 ); 
-    if ( i = 1 ) then 
-        for j in [1..dim1] do 
-            imgs[j] := vec1[j]; 
-        od; 
-        for j in [dim1+1..dimP] do 
-            imgs[j] := z1; 
-        od; 
-        hom := AlgebraHomomorphismByImages( P, A1, vecP, imgs ); 
-    elif ( i = 2 ) then 
-        return fail; 
-    else 
-        Error( "only the first projection is available" ); 
-    fi; 
+    vec1 := BasisVectors( Basis( A1 ) );  
+    imgs := ListWithIdenticalEntries( dimP, 0 );
+    for j in [1..dim1] do 
+        imgs[j] := vec1[j]; 
+    od; 
+    for j in [dim1+1..dimP] do 
+        imgs[j] := z1; 
+    od;
+    hom := AlgebraHomomorphismByImages( P, A1, vecP, imgs );  
     ## SetIsSurjective( hom, true ); 
-    info.projections[i] := hom;
+    info.projections[1] := hom;
     return hom;
 end );

@@ -44,8 +44,6 @@ DeclareOperation( "XModAlgebraByBoundaryAndAction",
 DeclareOperation( "XModAlgebraBySurjection", [ IsAlgebraHomomorphism ] );
 DeclareOperation( "XModAlgebraByMultiplierAlgebra", 
     [ IsAlgebra ] );
-DeclareOperation( "XModAlgebraByModule", 
-    [ IsAlgebra, IsRing ] );
 DeclareOperation( "XModAlgebraByIdeal", 
     [ IsAlgebra, IsAlgebra ] ); 
 DeclareAttribute( "AugmentationXMod", IsGroupAlgebra ); 

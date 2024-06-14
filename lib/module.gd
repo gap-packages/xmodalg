@@ -26,23 +26,23 @@
 ##
 ## <Example>
 ## <![CDATA[
-## gap> A := Rationals^[3,3];;
-## gap> SetName( A, "Q[3,3]" );;
-## gap> V := Rationals^3;;
-## gap> M := LeftAlgebraModule( A, \*, V );
-## <left-module over Q[3,3]>
-## gap> SetName( M, "M" );
-## gap> famM := ElementsFamily( FamilyObj( M ) );;
-## gap> v := [3,4,5];;
-## gap> v2 := ObjByExtRep( famM, v );                                                                                                                                                                   
 ## gap> m := [ [0,1,0], [0,0,1], [1,0,0] ];;
+## gap> A3 := Rationals^[3,3];;
+## gap> SetName( A3, "A3" );;
+## gap> V3 := Rationals^3;;
+## gap> M3 := LeftAlgebraModule( A3, \*, V3 );;
+## gap> SetName( M3, "M3" );
+## gap> famM3 := ElementsFamily( FamilyObj( M3 ) );;
+## gap> v := [3,4,5];;
+## gap> v2 := ObjByExtRep( famM3, v );
+## [ 3, 4, 5 ]
 ## gap> m*v2;
 ## [ 4, 5, 3 ]
-## gap> genM := GeneratorsOfLeftModule( M );;
-## gap> u2 := 6*genM[1] + 7*genM[2] + 8*genM[3];
-## [ 6, 7, 8 ]
-## gap> u := ExtRepOfObj( u2 );
-## [ 6, 7, 8 ]
+gap> genM3 := GeneratorsOfLeftModule( M3 );;
+gap> u2 := 6*genM3[1] + 7*genM3[2] + 8*genM3[3];
+[ 6, 7, 8 ]
+gap> u := ExtRepOfObj( u2 );
+[ 6, 7, 8 ]
 ## ]]>
 ## </Example>
 ## </Subsection>
@@ -77,15 +77,15 @@
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> D := LeftActingDomain( M );;
-## gap> T := EmptySCTable( Dimension(M), Zero(D), "symmetric" );;
-## gap> B := AlgebraByStructureConstants( D, T );
+## gap> D3 := LeftActingDomain( M3 );;
+## gap> T3 := EmptySCTable( Dimension(M3), Zero(D3), "symmetric" );;
+## gap> B3a := AlgebraByStructureConstants( D3, T3 );
 ## <algebra of dimension 3 over Rationals>
-## gap> GeneratorsOfAlgebra( B );
+## gap> GeneratorsOfAlgebra( B3a );
 ## [ v.1, v.2, v.3 ]
-## gap> B := ModuleAsAlgebra( M );               
-## A(M)
-## gap> GeneratorsOfAlgebra( B );
+## gap> B3 := ModuleAsAlgebra( M3 );               
+## A(M3)
+## gap> GeneratorsOfAlgebra( B3 );
 ## [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ]
 ## ]]>
 ## </Example>
@@ -108,9 +108,9 @@ DeclareAttribute( "ModuleAsAlgebra", IsLeftModule );
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> IsModuleAsAlgebra( B );
+## gap> IsModuleAsAlgebra( B3 );
 ## true
-## gap> IsModuleAsAlgebra(A);   
+## gap> IsModuleAsAlgebra( A3 );   
 ## false
 ## ]]>
 ## </Example>
@@ -138,23 +138,24 @@ DeclareProperty( "IsModuleAsAlgebra", IsAlgebra );
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> KnownAttributesOfObject(B);    
+## gap> KnownAttributesOfObject( B3 );    
 ## [ "Name", "ZeroImmutable", "LeftActingDomain", "Dimension", 
 ##   "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing", 
 ##   "ModuleToAlgebraIsomorphism", "AlgebraToModuleIsomorphism" ]
-## gap> M2B := ModuleToAlgebraIsomorphism( B );
-## [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] -> [ [[ 1, 0, 0 ]], [[ 0, 1, ## 0 ]], 
+## gap> M2B3 := ModuleToAlgebraIsomorphism( B3 );
+## [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] -> [ [[ 1, 0, 0 ]], [[ 0, \
+## 1, 0 ]], 
 ##   [[ 0, 0, 1 ]] ]
-## gap> Source( M2B ) = M;
+## gap> Source( M2B3 ) = M3;
 ## false
-## gap> Source( M2B ) = V;
+## gap> Source( M2B3 ) = V3;
 ## true
-## gap> B2M := AlgebraToModuleIsomorphism( B );
-## [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] -> 
+## gap> B2M3 := AlgebraToModuleIsomorphism( B3 );
+## [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ->
 ## [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ]
-## gap> Range( B2M ) = M;
+## gap> Range( B2M3 ) = M3;
 ## false
-## gap> Range( B2M ) = V;
+## gap> Range( B2M3 ) = V3;
 ## true
 ## ]]>
 ## </Example>
@@ -179,7 +180,7 @@ DeclareAttribute( "AlgebraToModuleIsomorphism", IsAlgebra );
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> act := AlgebraActionByModule( A, M );
+## gap> act3 := AlgebraActionByModule( A3, M3 );
 ## [ [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
 ##   [ [ 1, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
 ##   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ] ] -> 
@@ -189,17 +190,62 @@ DeclareAttribute( "AlgebraToModuleIsomorphism", IsAlgebra );
 ##     [ [[ 1, 0, 0 ]], 0*[[ 1, 0, 0 ]], 0*[[ 1, 0, 0 ]] ], 
 ##   [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] -> 
 ##     [ [[ 0, 1, 0 ]], [[ 0, 0, 1 ]], [[ 1, 0, 0 ]] ] ]
-## gap> genA := GeneratorsOfAlgebra(A);;
-## gap> m := 5*genA[1] -4*genA[2]+3*genA[3];
-## [ [ 1, 0, 3 ], [ 3, 5, 0 ], [ 0, 3, 5 ] ]
-## gap> Image( act, m );
-## Basis( A(M), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -> 
-## [ [[ 1, 0, 0 ]]+(3)*[[ 0, 1, 0 ]], (5)*[[ 0, 1, 0 ]]+(3)*[[ 0, 0, 1 ]], 
-##   (3)*[[ 1, 0, 0 ]]+(5)*[[ 0, 0, 1 ]] ]
-## gap> Image( act ); 
+## gap> genA3 := GeneratorsOfAlgebra( A3 );;
+## gap> a := 2*m + 3*m^2;
+## [ [ 0, 2, 3 ], [ 3, 0, 2 ], [ 2, 3, 0 ] ]
+## gap> Image( act3, a );
+## Basis( A(M3), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -> 
+## [ (3)*[[ 0, 1, 0 ]]+(2)*[[ 0, 0, 1 ]], (2)*[[ 1, 0, 0 ]]+(3)*[[ 0, 0, 1 ]], 
+##   (3)*[[ 1, 0, 0 ]]+(2)*[[ 0, 1, 0 ]] ]
+## gap> Image( act3 );
 ## <algebra over Rationals, with 3 generators>
 ## ]]>
 ## </Example>
 ## <#/GAPDoc>
 ##
 DeclareOperation( "AlgebraActionByModule", [ IsAlgebra, IsLeftModule ] );
+
+
+############################################################################
+##
+## XModAlgebraByModule( <alg> <leftmod> )
+##
+## <#GAPDoc Label="XModAlgebraByModule"> 
+## <ManSection>
+## <Oper Name="XModAlgebraByModule" Arg="alg leftmod" />
+##
+## <Description>
+## Let <M>M</M> be an <M>A</M>-module.  
+## Then <M>\mathcal{X} = (0 : A(M) \rightarrow A)</M> is a crossed module,
+## where <M>A(M)</M> is <M>M</M> considered as an algebra with zero products
+## (see section <Ref Sect="ModuleAsAlgebra" />).
+## The example uses the action <C>act3</C> constructed in section
+## <Ref Sect="AlgebraActionByModule" />.
+## <P/>
+## Conversely, given a crossed module 
+## <M>\mathcal{X} = (\partial :M\rightarrow R)</M>,
+## one can get that <M>\ker\partial</M> is a <M>(R/\partial M)</M>-module.
+## <P/>
+## </Description>
+## </ManSection>
+## <Example>
+## <![CDATA[
+## gap> X0 := XModAlgebraByModule( A, M );
+## [ A(M) -> Q[3,3] ]
+## gap> Display( X3 );
+## Crossed module [A(M3)->A3] :- 
+## : Source algebra A(M3) has generators:
+##   [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ]
+## : Range algebra A3 has generators:
+##   [ [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+##   [ [ 1, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+##   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ] ]
+## : Boundary homomorphism maps source generators to:
+##   [ [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+##   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+##   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
+## ]]>
+## </Example>
+## <#/GAPDoc>
+##
+DeclareOperation( "XModAlgebraByModule", [ IsAlgebra, IsLeftModule ] );
