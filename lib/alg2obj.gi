@@ -466,12 +466,13 @@ InstallMethod( XModAlgebraByIdeal,
     "crossed module from module", true,
     [ IsAlgebra, IsAlgebra ], 0,
 function( A, I )
-    local PM, act, bdy, AI;
+    local PM, act, genI, bdy, AI;
     if not IsIdeal( A,I ) then
         Error( "I not a ideal" );
     fi;
+    genI := GeneratorsOfAlgebra( I );
     act := AlgebraActionByMultipliers( A, I, A );
-    bdy := AlgebraHomomorphismByFunction( I, A, i->i );
+    bdy := AlgebraHomomorphismByImages( I, A, genI, genI );
     IsAlgebraAction( act );
     IsAlgebraHomomorphism( bdy );
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );

@@ -470,59 +470,6 @@ function( hom, U )
   return rest;
 end);
 
-#############################################################################
-##
-#O  AlgebraHomomorphismByFunction( <D>, <E>, <fun> )
-##
-InstallMethod( AlgebraHomomorphismByFunction, 
-    "(XModAlg) for two algebras and a function",
-    [ IsAlgebra, IsAlgebra, IsFunction ],
-function( S, R, f )
-    return Objectify( TypeOfDefaultGeneralMapping( S, R, 
-	IsSPMappingByFunctionRep and IsAlgebraHomomorphism), 
-        rec( fun := f ) );
-end);
-
-
-##  no implementation of MultiplierHomomorphism is required 
-##  because this attribute is set by MultiplierAlgebra constructions
-#############################################################################
-##
-#F  MultiplierHomomorphism( <A> )
-##
-##InstallMethod( MultiplierHomomorphism, "generic method for an algebra",
-##    true, [ IsAlgebra ], 0,
-##function ( A )
-##
-##    local mu, bvA, imgs, B;
-##    bvA := BasisVectors( Basis( A ) );
-##    imgs := List( bvA, a -> RegularAlgebraMultiplier( A, A, a ) );
-##    B := MultiplierAlgebra(A);
-##    mu := AlgebraHomomorphismByImages( A, B, bvA, imgs );
-##              r -> AlgebraHomomorphismByFunction(A,A,x->r*x) );
-##    SetSource(mu,A);
-##    SetRange(mu,B);
-####    SetMultiplierHomomorphism(A,mu);
-##    # return the mapping
-##    return mu;
-##end );
-
-#############################################################################
-##
-#F  ModuleHomomorphism( <A>, <M> )
-##
-InstallMethod( ModuleHomomorphism, "for an algebra and a module",
-     true, [IsAlgebra, IsRing], 0,
-function ( M, R )
-
-    local mu, B;        # mapping <map>, result
-    mu := AlgebraHomomorphismByFunction(M,R,r->Zero(R));  
-    SetSource(mu,M);
-    SetRange(mu,R);
-    # return the mapping
-    return mu;
-end );
-
 ##############################  algebra actions  ############################ 
 
 #############################################################################

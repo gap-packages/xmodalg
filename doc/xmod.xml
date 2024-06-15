@@ -292,7 +292,10 @@ We also show usage of the attributes listed above.
 <Example>
 <![CDATA[
 gap> f := Boundary( XIAk4 );
-MappingByFunction( I(GF5[k4]), GF5[k4], function( i ) ... end )
+[ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...\
++(Z(5)^
+    0)*f2 ] -> [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, 
+  (Z(5)^2)*<identity> of ...+(Z(5)^0)*f2 ]
 gap> Print( RepresentationsOfObject(XIAk4), "\n" ); 
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
 gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements", 

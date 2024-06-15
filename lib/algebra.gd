@@ -2,7 +2,7 @@
 ##
 #W  algebra.gd                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2022, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 DeclareInfoClass( "InfoXModAlg" );
@@ -27,9 +27,6 @@ DeclareProperty( "IsMultiplierAlgebra", IsList );
 DeclareOperation( "InclusionMappingAlgebra", [ IsAlgebra, IsAlgebra ] );
 DeclareOperation( "RestrictionMappingAlgebra", 
    [ IsAlgebraHomomorphism, IsAlgebra, IsAlgebra ] );
-
-DeclareOperation( "ModuleHomomorphism",
-    [ IsAlgebra, IsRing ] ); 
 
 DeclareOperation( "AllAlgebraHomomorphisms", 
     [ IsAlgebra, IsAlgebra ] );
