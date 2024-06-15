@@ -1,16 +1,16 @@
 ############################################################################
 ##
-#W  module3.tst             XModAlg test files                 Chris Wensley 
-## 
+#W  module3.tst             XModAlg test files                 Chris Wensley
 ##
-#@local level,m,A3,V3,M3,famM3,v,v2,genM3,u2,u,D3,T3,B3a,B3,M2B3,B2M3,act3,genA3,a
-gap> START_TEST( "XModAlg package: module.tst" );
+#@local level,m,A3,V3,M3,famM3,v,v2,genM3,u2,u,D3,T3,B3a,B3,M2B3,B2M3,act3,a,X3,C3
+
+gap> START_TEST( "XModAlg package: module3.tst" );
 gap> level := InfoLevel( InfoXModAlg );; 
 gap> SetInfoLevel( InfoXModAlg, 0 );
 
 ## Chapter 2, Section 2.2.3
 gap> m := [ [0,1,0], [0,0,1], [1,0,0] ];;
-gap> A3 := Rationals^[3,3];;
+gap> A3 := Algebra( Rationals, [m] );;
 gap> SetName( A3, "A3" );;
 gap> V3 := Rationals^3;;
 gap> M3 := LeftAlgebraModule( A3, \*, V3 );;
@@ -68,16 +68,9 @@ true
 
 ## Chapter 2, Section 2.2.7
 gap> act3 := AlgebraActionByModule( A3, M3 );
-[ [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ],
-  [ [ 1, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ],
-  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ] ] ->
-[ [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ->
-    [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ],
-  [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ->
-    [ [[ 1, 0, 0 ]], 0*[[ 1, 0, 0 ]], 0*[[ 1, 0, 0 ]] ],
-  [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ->
-    [ [[ 0, 1, 0 ]], [[ 0, 0, 1 ]], [[ 1, 0, 0 ]] ] ]
-gap> genA3 := GeneratorsOfAlgebra( A3 );;
+[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> 
+[ [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] -> 
+    [ [[ 0, 0, 1 ]], [[ 1, 0, 0 ]], [[ 0, 1, 0 ]] ] ]
 gap> a := 2*m + 3*m^2;
 [ [ 0, 2, 3 ], [ 3, 0, 2 ], [ 2, 3, 0 ] ]
 gap> Image( act3, a );
@@ -85,7 +78,7 @@ Basis( A(M3), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) ->
 [ (3)*[[ 0, 1, 0 ]]+(2)*[[ 0, 0, 1 ]], (2)*[[ 1, 0, 0 ]]+(3)*[[ 0, 0, 1 ]], 
   (3)*[[ 1, 0, 0 ]]+(2)*[[ 0, 1, 0 ]] ]
 gap> Image( act3 );
-<algebra over Rationals, with 3 generators>
+<algebra over Rationals, with 1 generator>
 
 ## Chapter 4, Section 4.1.7
 gap> X3 := XModAlgebraByModule( A3, M3 );
@@ -96,9 +89,7 @@ Crossed module [A(M3)->A3] :-
 : Source algebra A(M3) has generators:
   [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ]
 : Range algebra A3 has generators:
-  [ [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
-  [ [ 1, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
-  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ] ]
+  [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
 : Boundary homomorphism maps source generators to:
   [ [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
@@ -106,7 +97,7 @@ Crossed module [A(M3)->A3] :-
 
 ## Chapter 5, Section 5.1.1
 gap> C3 := Cat1AlgebraOfXModAlgebra( X3 );
-[A3 |X A(M3)=>A3]
+[A3 |X A(M3) -> A3]
 gap> Display( C3 );           
 Cat1-algebra [A3 |X A(M3)=>A3] :- 
 :  range algebra has generators:
@@ -125,7 +116,7 @@ Cat1-algebra [A3 |X A(M3)=>A3] :-
   [ v.4, v.5, v.6 ]
 
 gap> SetInfoLevel( InfoXModAlg, level );; 
-gap> STOP_TEST( "module.tst", 10000 );
+gap> STOP_TEST( "module3.tst", 10000 );
 
 ############################################################################
 ##

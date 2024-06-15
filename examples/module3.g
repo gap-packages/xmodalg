@@ -52,7 +52,6 @@ Print( "Range( B2M3 ) = V3? ", Range( B2M3 ) = V3, "\n" );
 ## Chapter 2, Section 2.2.7
 act3 := AlgebraActionByModule( A3, M3 );
 Print( "the action act3 of A3 on B3 is:\n", act3, "\n" );
-genA3 := GeneratorsOfAlgebra( A3 );;
 a := 2*m + 3*m^2;
 Print( "a = ", a, ":\n" );
 Print( "the image of a under act3 is:\n", Image( act3, a ), "\n" );
@@ -64,6 +63,10 @@ X3 := XModAlgebraByModule( A3, M3 );
 Print( "Name( X3 ) = ", Name( X3 ), "\n" );
 Display( X3 );
 
+## Chapter 5, Section 5.1.1
+C3 := Cat1AlgebraOfXModAlgebra( X3 );
+Print( "Name( C3 ) = ", Name( C3 ), "\n" );
+Display( C3 );
 
 ############################################################################
 ##

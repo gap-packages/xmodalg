@@ -203,7 +203,7 @@ InstallMethod( ViewObj, "method for a pre-crossed module of algebras", true,
         Pact := XModAlgebraAction( PM );
         if IsLeftModuleGeneralMapping( Pact ) then
 ## temporary fix (20/03/18) 
-##          Print( "[", Source( PM ), "->", Range( PM ), "]" ); 
+##          Print( "[", Source( PM ), " -> ", Range( PM ), "]" ); 
             Print( "[ " ); 
             ViewObj( Source( PM ) ); 
             Print( " -> " ); 
@@ -213,20 +213,20 @@ InstallMethod( ViewObj, "method for a pre-crossed module of algebras", true,
             type := AlgebraActionType( Pact ); 
             #  Type 1
             if (type = "multiplier") then
-                Print( "[", Source( PM ), "->", Range( PM ), "]" );
+                Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
             fi;  
             #  Type 2
             if (type = "Type2") then
                 Print( "[", Source( PM ), 
-                       "-> MultiplierAlgebra(", Source( PM ), ")]" );
+                       " -> MultiplierAlgebra(", Source( PM ), ")]" );
             fi;
             #  Type 3
             if (type = "surjection") then
-                Print( "[", Source( PM ), "->", Range( PM ), "]" );
+                Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
             fi;
             #  Type 4
             if (type = "module") then
-                Print( "[", Source( PM ), "->", Range( PM ), "]" );
+                Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
             fi;
         fi;
     fi;
@@ -324,7 +324,7 @@ function( PM )
     else
         nrng := "..";
     fi;
-    name := Concatenation( "[", nsrc, "->", nrng, "]" );
+    name := Concatenation( "[", nsrc, " -> ", nrng, "]" );
     SetName( PM, name );
     return name;
 end );
@@ -993,7 +993,7 @@ function( C1A )
     if HasName( C1A ) then
         Print( Name( C1A ), "\n" );
     else
-        Print( "[", Source( C1A ), "=>", Range( C1A ), "]" );
+        Print( "[", Source( C1A ), " => ", Range( C1A ), "]" );
     fi;
 end );
 
@@ -1106,7 +1106,7 @@ function( C1A )
     else
         nrng := "..";
     fi;
-    name := Concatenation( "[", nsrc, "=>", nrng, "]" );
+    name := Concatenation( "[", nsrc, " => ", nrng, "]" );
     SetName( C1A, name );
     return name;
 end );
