@@ -780,7 +780,10 @@ InstallMethod( SemidirectProductOfAlgebras,
             SetEntrySCTable( T, i+n1, j+n1, L ); 
         od; 
     od;
-    P := AlgebraByStructureConstants( F, T ); 
+    P := AlgebraByStructureConstants( F, T );
+    if HasName( A1 ) and HasName( A2 ) then
+        SetName( P, Concatenation( Name( A1 ), " |X ", Name( A2 ) ) ); 
+    fi;
     SetSemidirectProductOfAlgebrasInfo( P, rec( algebras := [ A1, A2 ], 
                                                 action := act, 
                                                 embeddings := [ ], 

@@ -505,10 +505,6 @@ InstallGlobalFunction( XModAlgebra, function( arg )
     if ( ( nargs = 2 ) and IsAlgebraHomomorphism( arg[1] )
                        and IsAlgebraAction( arg[2] ) ) then
         return XModAlgebraByBoundaryAndAction( arg[1], arg[2] );
-    # module
-    elif ( ( nargs = 2 ) and IsAlgebra( arg[1] )
-                         and IsLeftModule( arg[2] ) ) then 
-        return XModAlgebraByModule( arg[1], arg[2] );
     # ideal
     elif ( ( nargs = 2 ) and IsAlgebra( arg[1] )
             and IsAlgebra( arg[2] ) and IsIdeal(arg[1],arg[2]) ) then 
@@ -523,9 +519,14 @@ InstallGlobalFunction( XModAlgebra, function( arg )
     # Multiplier algebra
     elif ( ( nargs = 1 ) and IsAlgebra( arg[1] )) then
         return XModAlgebraByMultiplierAlgebra( arg[1] );
+    # module
+    elif ( ( nargs = 2 ) and IsAlgebra( arg[1] )
+                         and IsLeftModule( arg[2] ) ) then 
+        return XModAlgebraByModule( arg[1], arg[2] );
+    else
+        # alternatives not allowed
+        Error( "usage: XModAlgebra( bdy, act ); " );
     fi;
-    # alternatives not allowed
-    Error( "usage: XModAlgebra( bdy, act ); " );
 end );
 
 ############################################################################
@@ -1005,29 +1006,40 @@ InstallOtherMethod( Display, "display a pre-cat1-algebra",
 function( C1A )
 
     local  Csrc, Crng, Cker, gensrc, genrng, genker, name,
-           t, h, e, b, k, imt, imh, ime, imb, imk;
+           t, h, e, b, k, imt, imh, ime, imb, imk, eqth;
 
     name := Name( C1A );
     Csrc := Source( C1A );
+    gensrc := GeneratorsOfAlgebra( Csrc );
     Crng := Range( C1A );
-    Cker := Kernel( C1A );
     genrng := GeneratorsOfAlgebra( Crng );
+    Cker := Kernel( C1A );
+    genker := GeneratorsOfAlgebra( Cker );    
     t := TailMap( C1A );
     h := HeadMap( C1A );
-    e := RangeEmbedding( C1A );    
+    e := RangeEmbedding( C1A );
+    imt := List( gensrc, x -> Image( t, x ) );
+    imh := List( gensrc, x -> Image( h, x ) );
+    eqth := imt = imh;
+    ime := List( genrng, x -> Image( e, x ) );
     if HasXModAlgebraOfCat1Algebra(C1A) then
-        gensrc := Csrc;
-        genker := Cker;    
         if IsCat1Algebra( C1A ) then
-            Print( "\nCat1-algebra ", name, " :- \n" );
+            Print( "Cat1-algebra ", name, " :- \n" );
         else
-            Print( "\nPre-cat1-algebra ", name, " :- \n" );
+            Print( "Pre-cat1-algebra ", name, " :- \n" );
         fi;
-        ime := List( genrng, x -> Image( e, x ) );
-
         Print( ":  range algebra has generators:\n" );
         Print( "  ", genrng, "\n" );
-        Print( ": tail homomorphism maps source generators to:\n" );
+        if eqth then 
+            Print( ": tail homomorphism = head homomorphism\n" );
+            Print( "  they map the source generators to:\n" );
+            Print( "  ", imt, "\n" );
+        else
+            Print( ": tail homomorphism maps source generators to:\n" );
+            Print( "  ", imt, "\n" );
+            Print( ": head homomorphism maps source generators to:\n" );
+            Print( "  ", imh, "\n" );
+        fi;
         Print( ": range embedding maps range generators to:\n" );
         Print( "  ", ime, "\n" );
         if ( Size( Cker ) = 1 ) then
@@ -1038,19 +1050,14 @@ function( C1A )
         fi;    
     else
         b := Boundary( C1A );
-        gensrc := GeneratorsOfAlgebra( Csrc );
-        genker := GeneratorsOfAlgebra( Cker );
         k := KernelEmbedding( C1A );
-        imt := List( gensrc, x -> Image( t, x ) );
-        imh := List( gensrc, x -> Image( h, x ) );
-        ime := List( genrng, x -> Image( e, x ) );
         imb := List( genker, x -> Image( b, x ) );
         imk := List( genker, x -> Image( k, x ) );
 
         if IsCat1Algebra( C1A ) then
-            Print( "\nCat1-algebra ", name, " :- \n" );
+            Print( "Cat1-algebra ", name, " :- \n" );
         else
-            Print( "\nPre-cat1-algebra ", name, " :- \n" );
+            Print( "Pre-cat1-algebra ", name, " :- \n" );
         fi;
         Print( ": source algebra has generators:\n" );
         Print( "  ", gensrc, "\n" );
@@ -1077,7 +1084,6 @@ function( C1A )
     #     Print( ": associated crossed module is ", 
     #            XModAlgebraOfCat1Algebra( C1A ), "\n" );
     # fi;
-    Print( "\n" );
 end );
 
 ############################################################################
@@ -1757,7 +1763,7 @@ function( XM )
     h := AlgebraHomomorphismByImages( P, R, vecP, imgs ); 
     t := Projection( P, 1 ); 
     e := Embedding( P, 1 );
-    C := PreCat1AlgebraObj( t, h, e ); 
+    C := PreCat1AlgebraObj( t, h, e );
     return C; 
 end ); 
 

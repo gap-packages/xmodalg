@@ -38,11 +38,11 @@
 ## [ 3, 4, 5 ]
 ## gap> m*v2;
 ## [ 4, 5, 3 ]
-gap> genM3 := GeneratorsOfLeftModule( M3 );;
-gap> u2 := 6*genM3[1] + 7*genM3[2] + 8*genM3[3];
-[ 6, 7, 8 ]
-gap> u := ExtRepOfObj( u2 );
-[ 6, 7, 8 ]
+## gap> genM3 := GeneratorsOfLeftModule( M3 );;
+## gap> u2 := 6*genM3[1] + 7*genM3[2] + 8*genM3[3];
+## [ 6, 7, 8 ]
+## gap> u := ExtRepOfObj( u2 );
+## [ 6, 7, 8 ]
 ## ]]>
 ## </Example>
 ## </Subsection>
@@ -230,8 +230,8 @@ DeclareOperation( "AlgebraActionByModule", [ IsAlgebra, IsLeftModule ] );
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> X0 := XModAlgebraByModule( A, M );
-## [ A(M) -> Q[3,3] ]
+## gap> X3 := XModAlgebraByModule( A3, M3 );
+## [ A(M3) -> A3 ]
 ## gap> Display( X3 );
 ## Crossed module [A(M3)->A3] :- 
 ## : Source algebra A(M3) has generators:
@@ -249,3 +249,38 @@ DeclareOperation( "AlgebraActionByModule", [ IsAlgebra, IsLeftModule ] );
 ## <#/GAPDoc>
 ##
 DeclareOperation( "XModAlgebraByModule", [ IsAlgebra, IsLeftModule ] );
+
+############################################################################
+##
+## addition to Cat1AlgebraOfXModAlgebra
+##
+## <#GAPDoc Label="Cat1AlgebraOfXModAlgebra"> 
+## <P/>
+## As a second example, we convert the crossed module <M>X3</M>
+## constructed in <Ref Sect="XModAlgebraByModule"/>
+
+
+## <Example>
+## <![CDATA[
+## gap> C3 := Cat1AlgebraOfXModAlgebra( X3 );
+## [A3 |X A(M3)=>A3]
+## gap> Display( C3 );           
+## Cat1-algebra [A3 |X A(M3)=>A3] :- 
+## :  range algebra has generators:
+##   [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
+## : tail homomorphism = head homomorphism
+##   they map the source generators to:
+##   [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+##   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+##   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+##   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+##   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+##   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
+## : range embedding maps range generators to:
+##   [ v.1 ]
+## : kernel has generators:
+##   [ v.4, v.5, v.6 ]
+## ]]>
+## </Example>
+## <#/GAPDoc>
+##

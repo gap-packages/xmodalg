@@ -134,7 +134,7 @@ gap> Projection( P, 1 );
   (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2), 
   <zero> of ..., <zero> of ... ]
 gap> P3 := SemidirectProductOfAlgebras( Q13, act3, A1 );
-<algebra of dimension 5 over Rationals>
+Q13 |X A1
 gap> Embedding( P3, 1 );
 [ v.1, v.2 ] -> [ v.1, v.2 ]
 gap> Embedding( P3, 2 );

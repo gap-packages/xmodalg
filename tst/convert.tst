@@ -48,10 +48,9 @@ gap> C3 := Cat1AlgebraSelect( 2, 6, 2, 4 );;
 gap> ############################ 
 gap> ## Chapter 5,  Section 5.1.1
 gap> CAB := Cat1AlgebraOfXModAlgebra( XAB );
-[Algebra( GF(5), [ v.1, v.2, v.3, v.4, v.5 ] ) -> A(l,m)]
+[A(l,m) |X A(m) -> A(l,m)]
 gap> Display( CAB );
-
-Cat1-algebra [..=>A(l,m)] :- 
+Cat1-algebra [A(l,m) |X A(m)=>A(l,m)] :- 
 :  range algebra has generators:
   
 [ 
@@ -60,11 +59,35 @@ Cat1-algebra [..=>A(l,m)] :-
   [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
 : tail homomorphism maps source generators to:
+  
+[ 
+  [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
+  [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
+: head homomorphism maps source generators to:
+  
+[ 
+  [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
+  [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
 : range embedding maps range generators to:
   [ v.1, v.2 ]
 : kernel has generators:
-  Algebra( GF(5), [ v.4, v.5 ] )
-
+  [ v.4, v.5 ]
 gap> X3 := XModAlgebraOfCat1Algebra( C3 );
 [ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> Display( X3 ); 
