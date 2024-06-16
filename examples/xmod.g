@@ -47,7 +47,7 @@ SetName( S, "<e5>" );
 RS := Cartesian( R, S );; 
 SetName( RS, "GF(2^2)[k4] x <e5>" ); 
 act := AlgebraAction( R, RS, S );;
-bdy := AlgebraHomomorphismByFunction( S, R, r->r );
+bdy := AlgebraHomomorphismByImages( S, R, [e5], [e5] );
 IsAlgebraAction( act ); 
 IsAlgebraHomomorphism( bdy );
 XM := PreXModAlgebraByBoundaryAndAction( bdy, act );

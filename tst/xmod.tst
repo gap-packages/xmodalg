@@ -99,8 +99,9 @@ gap> e5 := Elements( R )[5];
 gap> S := Subalgebra( R, [e5] );;
 gap> SetName( S, "<e5>" );
 gap> act := AlgebraActionByMultipliers( R, S, R );;
-gap> bdy := AlgebraHomomorphismByFunction( S, R, s->s );
-MappingByFunction( <e5>, GF(2^2)[k4], function( s ) ... end )
+gap> bdy := AlgebraHomomorphismByImages( S, R, [e5], [e5] );
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] -> 
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 gap> IsAlgebraAction( act ); 
 true
 gap> IsAlgebraHomomorphism( bdy );

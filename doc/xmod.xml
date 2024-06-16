@@ -215,8 +215,9 @@ gap> SetName( S, "<e5>" );
 gap> RS := Cartesian( R, S );; 
 gap> SetName( RS, "GF(2^2)[k4] x <e5>" ); 
 gap> act := AlgebraAction( R, RS, S );;
-gap> bdy := AlgebraHomomorphismByFunction( S, R, r->r );
-MappingByFunction( <e5>, GF(2^2)[k4], function( r ) ... end )
+gap> bdy := AlgebraHomomorphismByImages( S, R, [e5], [e5] );
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] -> 
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 gap> IsAlgebraAction( act ); 
 true
 gap> IsAlgebraHomomorphism( bdy );
