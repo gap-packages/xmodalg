@@ -51,6 +51,8 @@ gap> IsCat1Algebra( C4 );
 true
 gap> Size2d( C4 );
 [ 64, 8 ]
+gap> Dimension( C4 );
+[ 6, 3 ]
 gap> Display( C4 );
 
 Cat1-algebra [..=>..] :- 

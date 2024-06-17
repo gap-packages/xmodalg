@@ -415,8 +415,9 @@ end );
 ##
 #M  RestrictionMappingAlgebra( <hom>, <src>, <rng> )
 ##
-InstallMethod( RestrictionMappingAlgebra, "generic method for group hom",
-    true, [ IsAlgebraHomomorphism, IsAlgebra, IsAlgebra ], 0,
+InstallMethod( RestrictionMappingAlgebra, 
+    "generic method for an algebra homomorphism", true,
+    [ IsAlgebraHomomorphism, IsAlgebra, IsAlgebra ], 0,
 function( hom, src, rng )
 
     local  res, gens, ims, r;
@@ -431,7 +432,7 @@ function( hom, src, rng )
     gens := GeneratorsOfAlgebra( src );
     ims := List( gens, g -> Image( res, g ) );
     for r in ims do
-        if not (r in rng ) then
+        if not ( r in rng ) then
             return fail;
         fi;
     od;

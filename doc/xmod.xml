@@ -274,9 +274,13 @@ The following standard &GAP; operations have special &XModAlg; implementations:
 <C>Display(X)</C> is used to list the components of <M>\mathcal{X}</M>; 
 </Item> 
 <Item>
-<C>Size2d(X)</C> is used for calculating the order of the
-crossed module <M>\mathcal{X}</M>; 
-</Item> 
+<C>Size2d(X)</C> for a crossed module <M>\mathcal{X}</M> 
+returns a <M>2</M>-element list, the sizes of the source and range, 
+</Item>
+<Item>
+<C>Dimension(X)</C> for a crossed module <M>\mathcal{X}</M> 
+returns a <M>2</M>-element list, the dimensions of the source and range,
+</Item>
 <Item>
 <C>Name(X)</C> is used for giving a name to the crossed module 
 <M>\mathcal{X}</M> by associating the names of source and range algebras. 

@@ -9,7 +9,7 @@ SetPackageInfo( rec(
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 Version := "1.25dev",
-Date := "14/06/2024", # dd/mm/yyyy format
+Date := "17/06/2024", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -81,7 +81,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">=4.11.0",
+  GAP := ">=4.12.0",
   NeededOtherPackages := [ ["XMod", ">=2.87"], 
                            ["LAGUNA", ">=3.9.3"] ],
   SuggestedOtherPackages := [ ],    
@@ -107,7 +107,7 @@ Keywords := ["crossed module of algebras", "cat1-algebra"],
 AutoDoc := rec(
     TitlePage := rec(
         Copyright := Concatenation(
-            "&copyright; 2014-2022, Zekeriya Arvasi and Alper Odabas. <P/>\n", 
+            "&copyright; 2014-2024, Zekeriya Arvasi and Alper Odabas. <P/>\n", 
             "The &XModAlg; package is free software; you can redistribute it ", 
             "and/or modify it under the terms of the GNU General ", 
             "Public License as published by the Free Software Foundation; ", 

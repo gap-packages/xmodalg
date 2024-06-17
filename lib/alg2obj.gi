@@ -331,12 +331,12 @@ end );
 
 ############################################################################
 ##
-#M  Dimension( <PM> )  . . . . . . . . . dimension of a (pre-)crossed module
+#M  Dimension( <PM> ) . . . . . . . . . dimension of a 2-dimensional algebra
 ##
-InstallMethod( Dimension, "method for a pre-crossed algebra module", true,
-    [ IsPreXModAlgebra ], 0,
-    function( PM )
-    return [ Dimension( Source( PM ) ), Dimension( Range( PM ) ) ]; 
+InstallOtherMethod( Dimension, "method for a 2-dimensional algebra", true,
+    [ Is2dAlgebraObject ], 20,
+    function( obj )
+    return [ Dimension( Source( obj ) ), Dimension( Range( obj ) ) ]; 
 end );
 
 ############################################################################
@@ -910,6 +910,12 @@ InstallMethod( PreCat1AlgebraObj, "for tail, head, embedding", true,
     
     fam := Family2dAlgebra;
     filter := IsPreCat1AlgebraObj;
+    if not ( ( Source(h) = Source(t) ) and ( Range(h) = Range(t) ) ) then
+        Error( "tail & head must have same source and range" );
+    fi;
+    if not ( ( Source(e) = Range(t) ) and ( Range(e) = Source(t) ) ) then
+        Error( "tail, embedding must have opposite source and range" );
+    fi;
     C1A := rec();
     ObjectifyWithAttributes( C1A, NewType( fam, filter ),
         Source, Source( t ),
@@ -918,13 +924,7 @@ InstallMethod( PreCat1AlgebraObj, "for tail, head, embedding", true,
         HeadMap, h, 
         RangeEmbedding, e,
         IsPreCat1Domain, true );
-    if not ( ( Source(h) = Source(t) ) and ( Range(h) = Range(t) ) ) then
-        Error( "tail & head must have same source and range" );
-    fi;
     SetHeadMap( C1A, h );
-    if not ( ( Source(e) = Range(t) ) and ( Range(e) = Source(t) ) ) then
-        Error( "tail, embedding must have opposite source and range" );
-    fi;
     SetRangeEmbedding( C1A, e );
     SetIs2dAlgebraObject( C1A, true );    
     ok := IsPreCat1Algebra( C1A );
@@ -1528,7 +1528,13 @@ InstallOtherMethod( Kernel, "method for a pre-cat1-algebra", true,
 ##
 InstallOtherMethod( Boundary, "method for a pre-cat1-algebra", true, 
     [ IsPreCat1Algebra ], 0,
-    C1A -> RestrictionMappingAlgebra( HeadMap( C1A ), Kernel( C1A ) ) );
+function( PC1A )
+    local t, K, R;
+    t := HeadMap( PC1A );
+    K := Kernel( PC1A );
+    R := Range( PC1A );
+    return RestrictionMappingAlgebra( t, K, R );
+end );
 
 ############################################################################
 ##
