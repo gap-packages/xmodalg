@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  xmod.xml            XModAlg documentation               Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2022, Z. Arvasi & A. Odabas,                    --> 
+<!--  Copyright (C) 2014-2024, Z. Arvasi & A. Odabas,                    --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -215,8 +215,9 @@ gap> SetName( S, "<e5>" );
 gap> RS := Cartesian( R, S );; 
 gap> SetName( RS, "GF(2^2)[k4] x <e5>" ); 
 gap> act := AlgebraAction( R, RS, S );;
-gap> bdy := AlgebraHomomorphismByFunction( S, R, r->r );
-MappingByFunction( <e5>, GF(2^2)[k4], function( r ) ... end )
+gap> bdy := AlgebraHomomorphismByImages( S, R, [e5], [e5] );
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] -> 
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 gap> IsAlgebraAction( act ); 
 true
 gap> IsAlgebraHomomorphism( bdy );
@@ -238,24 +239,7 @@ Crossed module [<e5>->GF(2^2)[k4]] :-
 ]]>
 </Example>
 
-<ManSection>
-   <Oper Name="XModAlgebraByModule"
-         Arg="M R" />
-<Description> 
-Let <M>M</M> be a <M>R</M>-module.  
-Then <M>\mathcal{X} = (0:M\rightarrow R)</M> is a crossed module. 
-Conversely, given a crossed module 
-<M>\mathcal{X} = (\partial :M\rightarrow R)</M>,
-one can get that <M>\ker\partial</M> is a <M>(R/\partial M)</M>-module.
-<P/>
-</Description>
-</ManSection>
-
-<Example>
-<![CDATA[
-gap> ## example needed 
-]]>
-</Example>
+<#Include Label="XModAlgebraByModule">
 
 <ManSection>
    <Attr Name="Source" Label="for crossed modules of commutative algebras"
@@ -290,9 +274,13 @@ The following standard &GAP; operations have special &XModAlg; implementations:
 <C>Display(X)</C> is used to list the components of <M>\mathcal{X}</M>; 
 </Item> 
 <Item>
-<C>Size2d(X)</C> is used for calculating the order of the
-crossed module <M>\mathcal{X}</M>; 
-</Item> 
+<C>Size2d(X)</C> for a crossed module <M>\mathcal{X}</M> 
+returns a <M>2</M>-element list, the sizes of the source and range, 
+</Item>
+<Item>
+<C>Dimension(X)</C> for a crossed module <M>\mathcal{X}</M> 
+returns a <M>2</M>-element list, the dimensions of the source and range,
+</Item>
 <Item>
 <C>Name(X)</C> is used for giving a name to the crossed module 
 <M>\mathcal{X}</M> by associating the names of source and range algebras. 
@@ -309,7 +297,10 @@ We also show usage of the attributes listed above.
 <Example>
 <![CDATA[
 gap> f := Boundary( XIAk4 );
-MappingByFunction( I(GF5[k4]), GF5[k4], function( i ) ... end )
+[ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...\
++(Z(5)^
+    0)*f2 ] -> [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, 
+  (Z(5)^2)*<identity> of ...+(Z(5)^0)*f2 ]
 gap> Print( RepresentationsOfObject(XIAk4), "\n" ); 
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
 gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements", 

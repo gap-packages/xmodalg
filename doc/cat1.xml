@@ -108,10 +108,12 @@ are used with particular choices of algebra homomorphisms.
          Arg="C" />
    <Attr Name="Boundary" Label="for cat1-algebras"
          Arg="C" />
-   <Attr Name="Size2d" Label="for cat1-algebras"
+   <Attr Name="Size2d" Label="for 2d-algebras"
+         Arg="C" />
+   <Attr Name="Dimension" Label="for 2d-algebras"
          Arg="C" />
 <Description> 
-These are the eight main attributes of a pre-cat<M>^{1}</M>-algebra. 
+These are the nine main attributes of a pre-cat<M>^{1}</M>-algebra. 
 <P/> 
 In the example we use homomorphisms between <C>A2c6</C> and <C>I2c6</C> 
 constructed in section <Ref Sect="algebra-homomorphism-lists"/>. 
@@ -131,6 +133,8 @@ gap> IsCat1Algebra( C4 );
 true
 gap> Size2d( C4 );
 [ 64, 8 ]
+gap> Dimension( C4 );
+[ 6, 3 ]
 gap> Display( C4 );
 
 Cat1-algebra [..=>..] :- 

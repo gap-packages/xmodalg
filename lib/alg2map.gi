@@ -1,13 +1,13 @@
-#############################################################################
+############################################################################
 ##
-#W  alg2map.gi                 The XMODALG package            Zekeriya Arvasi
-#W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
+#W  alg2map.gi                 The XMODALG package           Zekeriya Arvasi
+#W                                                            & Alper Odabas
+#Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
 ##
 
-##############################################################################
+############################################################################
 ##
-#M  Make2dAlgebraMorphism( <src>, <rng>, <shom>, <rhom> ) . . . 2d-object map 
+#M  Make2dAlgebraMorphism( <src>, <rng>, <shom>, <rhom> )  . . 2d-object map 
 ##
 InstallMethod( Make2dAlgebraMorphism,
     "for 2d-object, 2d-object, homomorphism, homomorphism", true,
@@ -37,9 +37,9 @@ function( src, rng, shom, rhom )
     return mor;
 end );
 
-#############################################################################
+############################################################################
 ##
-#M  IsPreXModAlgebraMorphism           check diagram of algebra homs commutes
+#M  IsPreXModAlgebraMorphism          check diagram of algebra homs commutes
 ##
 InstallMethod( IsPreXModAlgebraMorphism,
     "generic method for pre-crossed module homomorphisms",
@@ -140,9 +140,9 @@ function( mor )
     return true;
 end );
 
-#############################################################################
+############################################################################
 ##
-#F  Display( <mor> ) . . . . print details of a (pre-)crossed module morphism
+#F  Display( <mor> ) . . .  print details of a (pre-)crossed module morphism
 ##
 InstallMethod( Display, "display a morphism of pre-crossed modules", true,
     [ IsPreXModAlgebraMorphism ], 0,
@@ -187,7 +187,7 @@ InstallMethod( Display, "display a morphism of pre-crossed modules", true,
     Print( "\n" );
 end ); 
 
-#############################################################################
+############################################################################
 ##
 #M  IsXModAlgebraMorphism
 ##
@@ -210,7 +210,7 @@ function( mor )
     fi;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  IdentityMapping( <obj> )
 ##
@@ -233,7 +233,7 @@ function( obj )
     fi;
 end );
 
-##############################################################################
+############################################################################
 ##
 #F  PreXModAlgebraMorphism( <src>,<rng>,<srchom>,<rnghom> ) pre-crossed mod morphism
 ##
@@ -255,7 +255,7 @@ InstallGlobalFunction( PreXModAlgebraMorphism, function( arg )
     return fail;
 end );
 
-###############################################################################
+##############################################################################
 ##
 #F  XModAlgebraMorphism( <src>, <rng>, <srchom>, <rnghom> )    crossed module morphism
 ##
@@ -277,9 +277,9 @@ InstallGlobalFunction( XModAlgebraMorphism, function( arg )
     return fail;
 end );
 
-##############################################################################
+############################################################################
 ##
-#M  XModMorphismByHoms( <Xs>, <Xr>, <hsrc>, <hrng> )  . . . make xmod morphism
+#M  XModMorphismByHoms( <Xs>, <Xr>, <hsrc>, <hrng> )  . . make xmod morphism
 ##
 InstallMethod( XModAlgebraMorphismByHoms, "for 2 xmods and 2 homomorphisms", true,
     [ IsXModAlgebra, IsXModAlgebra, IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
@@ -290,14 +290,14 @@ function( src, rng, srchom, rnghom )
     if ( mor = fail ) then
         return fail;
     fi;
-    ok := IsXModAlgebraMorphism( mor );
+    ok := IsXModAlgebraMorphism( mor ) and Is2DimensionalMapping( mor );
     if not ok then
         return fail;
     fi;
     return mor;
 end );
 
-###############################################################################
+############################################################################
 ##
 #M  PreXModAlgebraMorphismByHoms( <P>, <Q>, <hsrc>, <hrng> ) . . make prexmod morphism
 ##
@@ -335,7 +335,7 @@ function( src, rng, srchom, rnghom )
     return mor;
 end );
 
-###############################################################################
+############################################################################
 ##
 #F  PreCat1AlgebraMorphism( <src>,<rng>,<srchom>,<rnghom> )    pre-cat1-algebra morphism
 ##
@@ -357,7 +357,7 @@ InstallGlobalFunction( PreCat1AlgebraMorphism, function( arg )
     return fail;
 end );
 
-###############################################################################
+############################################################################
 ##
 #F  Cat1AlgebraMorphism( <src>, <rng>, <srchom>, <rnghom> )        cat1-algebra morphism
 ##
@@ -379,7 +379,7 @@ InstallGlobalFunction( Cat1AlgebraMorphism, function( arg )
     return fail;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  IsPreCat1AlgebraMorphism . . check that the diagram of group homs commutes
 ##
@@ -441,7 +441,7 @@ function( mor )
     return true;
 end );
 
-#############################################################################
+############################################################################
 ##
 #F  Display( <mor> ) . . . . . . print details of a (pre-)cat1-algebra morphism
 ##
@@ -483,9 +483,9 @@ function( mor )
 	Print( "\n" );
 end ); 
 
-#############################################################################
+############################################################################
 ##
-#M  Name                                                       for a pre-xmod
+#M  Name                                                      for a pre-xmod
 ##
 InstallMethod( Name, "method for a 2d-mapping", true, [ Is2dAlgebraMorphism ], 0,
 function( mor )
@@ -507,7 +507,7 @@ function( mor )
     return name;
 end );
 
-#############################################################################
+############################################################# ###############
 ##
 #M  IsCat1AlgebraMorphism
 ##
@@ -529,7 +529,7 @@ function( mor )
     fi;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  PreCat1AlgebraMorphismByHoms( <P>, <Q>, <hsrc>, <hrng> ) . make pre-cat1-alg morphism
 ##
@@ -566,7 +566,7 @@ function( src, rng, srchom, rnghom )
     return mor;
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  Cat1AlgebraMorphismByHoms( <Cs>, <Cr>, <hsrc>, <hrng> ) . . . make xmod morphism
 ##
@@ -583,7 +583,7 @@ function( src, rng, srchom, rnghom )
     return mor;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  ViewObj( <mor> ) . . . . . . . . . .  view a (pre-)crossed module morphism
 ##
@@ -597,7 +597,7 @@ function( mor )
     fi;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  PrintObj( <mor> ) . . . . . . . . .  print a (pre-)crossed module morphism
 ##
@@ -611,9 +611,9 @@ function( mor )
     fi;
 end );
 
-#############################################################################
+############################################################################
 ##
-#M  ViewObj( <PCG> ) . . . . . . . . . . . . . . . . view a (pre-)cat1-algebras
+#M  ViewObj( <PCG> ) . . . . . . . . . . . . . . . view a (pre-)cat1-algebra
 ##
 InstallMethod( ViewObj, "method for a morphism of pre-cat1 algebras", true,
     [ IsPreCat1AlgebraMorphism ], 0,
@@ -625,9 +625,9 @@ function( mor )
     fi;
 end );
 
-##############################################################################
+############################################################################
 ##
-#M  PrintObj( <PCG> ) . . . . . . . . . . . . . . . . print a (pre-)cat1-algebras
+#M  PrintObj( <PCG> ) . . . . . . . . . . . . .  print a (pre-)cat1-algebra
 ##
 InstallMethod( PrintObj, "method for a morphism of pre-cat1 algebras", true,
     [ IsPreCat1AlgebraMorphism ], 0,
@@ -639,7 +639,7 @@ function( mor )
     fi;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  Kernel . . . . . . of morphisms of pre-crossed modules of algebras 
 #M         . . . . . . and pre-cat1-groups of algebras
@@ -659,54 +659,54 @@ function( map )
     return K;
 end );
 
-##############################################################################
+############################################################################
 ##
-#M  IsInjective( map ) . . . . . . . . . . . . . . . . . . .  for a 2dAlg-mapping
+#M  IsInjective( map ) . . . . . . . . . . . . .  . . .  for a 2dAlg-mapping
 ##
 InstallOtherMethod( IsInjective,
     "method for a 2dAlg-mapping", true, [ Is2dAlgebraMorphism ], 0,
     map -> (     IsInjective( SourceHom( map ) )
              and IsInjective( RangeHom( map ) ) )  );
 
-##############################################################################
+############################################################################
 ##
-#M  IsSurjective( map ) . . . . . . . . . . . . . . . . . . . for a 2dAlg-mapping
+#M  IsSurjective( map ) . . . . . . . . . . . . . . . . for a 2dAlg-mapping
 ##
 InstallOtherMethod( IsSurjective,
     "method for a 2dAlg-mapping", true, [ Is2dAlgebraMorphism ], 0,
     map -> (     IsSurjective( SourceHom( map ) )
              and IsSurjective( RangeHom( map ) ) )  );
 
-##############################################################################
+############################################################################
 ##
-#M  IsSingleValued( map ) . . . . . . . . . . . . . . . . . . for a 2dAlg-mapping
+#M  IsSingleValued( map ) . . . . . . . . . . . . . . . for a 2dAlg-mapping
 ##
 InstallOtherMethod( IsSingleValued,
     "method for a 2dAlg-mapping", true, [ Is2dAlgebraMorphism ], 0,
     map -> (     IsSingleValued( SourceHom( map ) )
              and IsSingleValued( RangeHom( map ) ) )  );
 
-##############################################################################
+############################################################################
 ##
-#M  IsTotal( map ) . . . . . . . . . . . . . . . . . . . . .  for a 2dAlg-mapping
+#M  IsTotal( map ) . . . . . . . . . . . . . . . . . .  for a 2dAlg-mapping
 ##
 InstallOtherMethod( IsTotal,
     "method for a 2dAlg-mapping", true, [ Is2dAlgebraMorphism ], 0,
     map -> (     IsTotal( SourceHom( map ) )
              and IsTotal( RangeHom( map ) ) )  );
 
-##############################################################################
+############################################################################
 ##
-#M  IsBijective( map ) . . . . . . . . . . . . . . . . . . .  for a 2dAlg-mapping
+#M  IsBijective( map ) . . . . . . . . . . . . . . . .  for a 2dAlg-mapping
 ##
 InstallOtherMethod( IsBijective,
     "method for a 2d-mapping", true, [ Is2dAlgebraMorphism ], 0,
     map -> (     IsBijective( SourceHom( map ) )
              and IsBijective( RangeHom( map ) ) )  );
 
-#############################################################################
+############################################################################
 ##
-#M  ImagesSource2DimensionalMapping( <mor> ) . . for pre-xmod/cat1 alg morphs
+#M  ImagesSource2DimensionalMapping( <mor> ) .  for pre-xmod/cat1 alg morphs
 ##
 InstallOtherMethod( ImagesSource2DimensionalMapping, 
     "image of pre-xmod/cat1 algebra morphism", true, 

@@ -415,8 +415,9 @@ end );
 ##
 #M  RestrictionMappingAlgebra( <hom>, <src>, <rng> )
 ##
-InstallMethod( RestrictionMappingAlgebra, "generic method for group hom",
-    true, [ IsAlgebraHomomorphism, IsAlgebra, IsAlgebra ], 0,
+InstallMethod( RestrictionMappingAlgebra, 
+    "generic method for an algebra homomorphism", true,
+    [ IsAlgebraHomomorphism, IsAlgebra, IsAlgebra ], 0,
 function( hom, src, rng )
 
     local  res, gens, ims, r;
@@ -431,7 +432,7 @@ function( hom, src, rng )
     gens := GeneratorsOfAlgebra( src );
     ims := List( gens, g -> Image( res, g ) );
     for r in ims do
-        if not (r in rng ) then
+        if not ( r in rng ) then
             return fail;
         fi;
     od;
@@ -469,59 +470,6 @@ function( hom, U )
 
   return rest;
 end);
-
-#############################################################################
-##
-#O  AlgebraHomomorphismByFunction( <D>, <E>, <fun> )
-##
-InstallMethod( AlgebraHomomorphismByFunction, 
-    "(XModAlg) for two algebras and a function",
-    [ IsAlgebra, IsAlgebra, IsFunction ],
-function( S, R, f )
-    return Objectify( TypeOfDefaultGeneralMapping( S, R, 
-	IsSPMappingByFunctionRep and IsAlgebraHomomorphism), 
-        rec( fun := f ) );
-end);
-
-
-##  no implementation of MultiplierHomomorphism is required 
-##  because this attribute is set by MultiplierAlgebra constructions
-#############################################################################
-##
-#F  MultiplierHomomorphism( <A> )
-##
-##InstallMethod( MultiplierHomomorphism, "generic method for an algebra",
-##    true, [ IsAlgebra ], 0,
-##function ( A )
-##
-##    local mu, bvA, imgs, B;
-##    bvA := BasisVectors( Basis( A ) );
-##    imgs := List( bvA, a -> RegularAlgebraMultiplier( A, A, a ) );
-##    B := MultiplierAlgebra(A);
-##    mu := AlgebraHomomorphismByImages( A, B, bvA, imgs );
-##              r -> AlgebraHomomorphismByFunction(A,A,x->r*x) );
-##    SetSource(mu,A);
-##    SetRange(mu,B);
-####    SetMultiplierHomomorphism(A,mu);
-##    # return the mapping
-##    return mu;
-##end );
-
-#############################################################################
-##
-#F  ModuleHomomorphism( <A>, <M> )
-##
-InstallMethod( ModuleHomomorphism, "for an algebra and a module",
-     true, [IsAlgebra, IsRing], 0,
-function ( M, R )
-
-    local mu, B;        # mapping <map>, result
-    mu := AlgebraHomomorphismByFunction(M,R,r->Zero(R));  
-    SetSource(mu,M);
-    SetRange(mu,R);
-    # return the mapping
-    return mu;
-end );
 
 ##############################  algebra actions  ############################ 
 
@@ -575,7 +523,7 @@ function( arg )
         return AlgebraActionBySurjection( arg[1] );
     # module and zero map
     elif ( ( nargs = 2 ) and IsAlgebra( arg[1] ) 
-                         and IsRing( arg[2] ) ) then
+                         and IsLeftModule( arg[2] ) ) then
         return AlgebraActionByModule( arg[1],arg[2] );   
     fi;
     # alternatives not allowed
@@ -680,31 +628,6 @@ end );
 
 #############################################################################
 ##
-#F  AlgebraActionByModule( <D>, <E>, <fun> )
-##
-InstallMethod( AlgebraActionByModule, "for an algebra and a module", true, 
-    [ IsAlgebra, IsRing ], 0,
-function( M, R )
-    local   act,RM;        # mapping <map>, result
-    RM := Cartesian(R,M);
-    act := rec( fun:= x->x[1]*x[2]);
-    ObjectifyWithAttributes( act, 
-        NewType( GeneralMappingsFamily( ElementsFamily(FamilyObj(RM) ),
-            ElementsFamily( FamilyObj(M) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        LeftElementOfCartesianProduct, R,
-        AlgebraActionType, "module",
-        Source, RM,
-        Range, M,
-        HasZeroModuleProduct, true,
-        IsAlgebraAction, true );
-    # return the mapping
-    return act;
-end );
-
-#############################################################################
-##
 #M  SemidirectProductOfAlgebras( <A1>, <act>, <A2> )
 ##
 InstallMethod( SemidirectProductOfAlgebras,
@@ -730,6 +653,11 @@ InstallMethod( SemidirectProductOfAlgebras,
                        # result will have the same property.
           P;           # the answer is the semidirect product algebra 
 
+    ## we are assuming commutative algebras so T will be symmetric
+    ## and we only need to calculate the upper triangle
+    if not IsCommutative( A1 ) and IsCommutative( A2 ) then
+        Error( "commutative algebras required" ); 
+    fi;
     F := LeftActingDomain( A1 ); 
     z := Zero( F ); 
     if ( F <> LeftActingDomain( A2 ) ) then
@@ -758,9 +686,8 @@ InstallMethod( SemidirectProductOfAlgebras,
     # Initialize the s.c. table.
     T := EmptySCTable( n, Zero(F), "symmetric" );
     for i in [1..n1] do 
-        r := vec1[i]; 
-        imr := ImageElm( act, r ); 
-        for j in [1..n1] do 
+        r := vec1[i];
+        for j in [i..n1] do 
             u := vec1[j]; 
             ru := Coefficients( bas1, r*u ); 
             L := [ ]; 
@@ -768,9 +695,13 @@ InstallMethod( SemidirectProductOfAlgebras,
                 if ( ru[k] <> z ) then 
                     Append( L, [ ru[k], k ] ); 
                 fi; 
-            od; 
+            od;
             SetEntrySCTable( T, i, j, L ); 
-        od; 
+        od;
+    od;
+    for i in [1..n1] do
+        r := vec1[i]; 
+        imr := ImageElm( act, r ); 
         for j in [1..n2] do 
             v := vec2[j]; 
             rv := Coefficients( bas2, ImageElm( imr, v ) ); 
@@ -785,19 +716,7 @@ InstallMethod( SemidirectProductOfAlgebras,
     od; 
     for i in [1..n2] do 
         s := vec2[i]; 
-        for j in [1..n1] do 
-            u := vec1[j]; 
-            imu := ImageElm( act, u ); 
-            su := Coefficients( bas2, ImageElm( imu, s ) ); 
-            L := [ ]; 
-            for k in [1..n2] do 
-                if ( su[k] <> z ) then 
-                    Append( L, [ su[k], k+n1 ] ); 
-                fi; 
-            od; 
-            SetEntrySCTable( T, i+n1, j, L ); 
-        od; 
-        for j in [1..n2] do 
+        for j in [i..n2] do 
             v := vec2[j]; 
             sv := Coefficients( bas2, s*v ); 
             L := [ ]; 
@@ -808,8 +727,11 @@ InstallMethod( SemidirectProductOfAlgebras,
             od; 
             SetEntrySCTable( T, i+n1, j+n1, L ); 
         od; 
-    od; 
-    P := AlgebraByStructureConstants( F, T ); 
+    od;
+    P := AlgebraByStructureConstants( F, T );
+    if HasName( A1 ) and HasName( A2 ) then
+        SetName( P, Concatenation( Name( A1 ), " |X ", Name( A2 ) ) ); 
+    fi;
     SetSemidirectProductOfAlgebrasInfo( P, rec( algebras := [ A1, A2 ], 
                                                 action := act, 
                                                 embeddings := [ ], 
@@ -860,38 +782,30 @@ end );
 InstallMethod( Projection, "semidirect product of algebras and integer",
     [ IsAlgebra and HasSemidirectProductOfAlgebrasInfo, IsPosInt ], 
 function( P, i )
-    local info, vecP, dimP, A1, dim1, z1, A2, dim2, z2, vec1, vec2, 
-          imgs, j, hom;
+    local info, vecP, dimP, A1, dim1, z1, vec1, imgs, j, hom;
+    if ( i <> 1 ) then 
+        Error( "only the first projection is available" ); 
+    fi; 
     # check
     info := SemidirectProductOfAlgebrasInfo( P );
-    if IsBound( info.projections[i] ) then 
-        return info.projections[i];
+    if IsBound( info.projections[1] ) then 
+        return info.projections[1];
     fi;
     vecP := BasisVectors( Basis( P ) ); 
     dimP := Length( vecP ); 
     A1 := info.algebras[1]; 
     dim1 := Dimension( A1 ); 
     z1 := Zero( A1 ); 
-    A2 := info.algebras[2]; 
-    dim2 := Dimension( A2 ); 
-    z2 := Zero( A2 ); 
-    vec1 := BasisVectors( Basis( A1 ) ); 
-    vec2 := BasisVectors( Basis( A2 ) ); 
-    imgs := ListWithIdenticalEntries( dimP, 0 ); 
-    if ( i = 1 ) then 
-        for j in [1..dim1] do 
-            imgs[j] := vec1[j]; 
-        od; 
-        for j in [dim1+1..dimP] do 
-            imgs[j] := z1; 
-        od; 
-        hom := AlgebraHomomorphismByImages( P, A1, vecP, imgs ); 
-    elif ( i = 2 ) then 
-        return fail; 
-    else 
-        Error( "only the first projection is available" ); 
-    fi; 
+    vec1 := BasisVectors( Basis( A1 ) );  
+    imgs := ListWithIdenticalEntries( dimP, 0 );
+    for j in [1..dim1] do 
+        imgs[j] := vec1[j]; 
+    od; 
+    for j in [dim1+1..dimP] do 
+        imgs[j] := z1; 
+    od;
+    hom := AlgebraHomomorphismByImages( P, A1, vecP, imgs );  
     ## SetIsSurjective( hom, true ); 
-    info.projections[i] := hom;
+    info.projections[1] := hom;
     return hom;
 end );

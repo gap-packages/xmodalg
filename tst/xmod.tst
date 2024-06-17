@@ -99,8 +99,9 @@ gap> e5 := Elements( R )[5];
 gap> S := Subalgebra( R, [e5] );;
 gap> SetName( S, "<e5>" );
 gap> act := AlgebraActionByMultipliers( R, S, R );;
-gap> bdy := AlgebraHomomorphismByFunction( S, R, s->s );
-MappingByFunction( <e5>, GF(2^2)[k4], function( s ) ... end )
+gap> bdy := AlgebraHomomorphismByImages( S, R, [e5], [e5] );
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] -> 
+[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 gap> IsAlgebraAction( act ); 
 true
 gap> IsAlgebraHomomorphism( bdy );
@@ -122,7 +123,10 @@ Crossed module [<e5>->GF(2^2)[k4]] :-
 gap> ############################
 gap> ## Section 4.1.8
 gap> f := Boundary( XIAk4 );
-MappingByFunction( I(GF5[k4]), GF5[k4], function( i ) ... end )
+[ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...\
++(Z(5)^
+    0)*f2 ] -> [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, 
+  (Z(5)^2)*<identity> of ...+(Z(5)^0)*f2 ]
 gap> reps := RepresentationsOfObject( XIAk4 );; 
 gap> Set( reps );
 [ "IsAttributeStoringRep", "IsComponentObjectRep", "IsPreXModAlgebraObj" ]

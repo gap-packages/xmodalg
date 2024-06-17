@@ -1,7 +1,7 @@
-#############################################################################
+############################################################################
 ##
-#W  alg2obj.gi                 The XMODALG package            Zekeriya Arvasi
-#W                                                             & Alper Odabas
+#W  alg2obj.gi                 The XMODALG package           Zekeriya Arvasi
+#W                                                            & Alper Odabas
 #Y  Copyright (C) 2014-2022, Zekeriya Arvasi & Alper Odabas,  
 ##
     
@@ -16,9 +16,9 @@ CAT1ALG_LIST_CLASS_SIZES :=
 CAT1ALG_LIST_LOADED := false;
 CAT1ALG_LIST := [ ];
 
-##############################  2d-algebras  ################################ 
+##############################  2d-algebras  ############################### 
 
-#############################################################################
+############################################################################
 ##
 #M  Is2dAlgebraObject
 ##
@@ -29,7 +29,7 @@ CAT1ALG_LIST := [ ];
 ##      return ( HasSource( obj ) and HasRange( obj ) );
 ##  end );
 
-##############################################################################
+############################################################################
 ##
 #M  Sub2dAlgebra               
 ##
@@ -50,11 +50,11 @@ function( obj, src, rng )
 end );
 
 
-#########################  (pre-)crossed modules  ########################### 
+#########################  (pre-)crossed modules  ######################### 
 
-#############################################################################
+###########################################################################
 ##
-#M  IsPreXModAlgebra          check that the first crossed module axiom holds
+#M  IsPreXModAlgebra        check that the first crossed module axiom holds
 ##
 InstallMethod( IsPreXModAlgebra, "generic method for pre-crossed modules",
     true, [ Is2dAlgebra ], 0,
@@ -98,9 +98,9 @@ function( P )
     return true;
 end );
 
-##############################################################################
+###########################################################################
 ##
-#M  XModAlgebraObj( <bdy>, <act> ) . . . . . . . . . . make pre-crossed module
+#M  XModAlgebraObj( <bdy>, <act> )  . . . . . . . make a pre-crossed module
 ##
 InstallMethod( XModAlgebraObj, "for homomorphism and action", true,
     [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
@@ -140,9 +140,9 @@ function( bdy, act )
     return PM;
 end );
 
-##############################################################################
+############################################################################
 ##
-#M  \=( <P>, <Q> )  . . . . . . . .  test if two pre-crossed modules are equal
+#M  \=( <P>, <Q> )  . . . . . . .  test if two pre-crossed modules are equal
 ##
 InstallMethod( \=, "generic method for two pre-crossed modules of algebras",
     IsIdenticalObj, [ IsPreXModAlgebra, IsPreXModAlgebra ], 0,
@@ -187,9 +187,9 @@ function ( P, Q )
     return true;
 end );
 
-#############################################################################
+############################################################################
 ##
-#M  ViewObj( <PM> ) . . . . . . . . . . . . . . . view a (pre-)crossed module
+#M  ViewObj( <PM> ) . . . . . . . . . . . . . .  view a (pre-)crossed module
 ##
 InstallMethod( ViewObj, "method for a pre-crossed module of algebras", true,
     [ IsPreXModAlgebra ], 0,
@@ -203,7 +203,7 @@ InstallMethod( ViewObj, "method for a pre-crossed module of algebras", true,
         Pact := XModAlgebraAction( PM );
         if IsLeftModuleGeneralMapping( Pact ) then
 ## temporary fix (20/03/18) 
-##          Print( "[", Source( PM ), "->", Range( PM ), "]" ); 
+##          Print( "[", Source( PM ), " -> ", Range( PM ), "]" ); 
             Print( "[ " ); 
             ViewObj( Source( PM ) ); 
             Print( " -> " ); 
@@ -213,28 +213,28 @@ InstallMethod( ViewObj, "method for a pre-crossed module of algebras", true,
             type := AlgebraActionType( Pact ); 
             #  Type 1
             if (type = "multiplier") then
-                Print( "[", Source( PM ), "->", Range( PM ), "]" );
+                Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
             fi;  
             #  Type 2
             if (type = "Type2") then
                 Print( "[", Source( PM ), 
-                       "-> MultiplierAlgebra(", Source( PM ), ")]" );
+                       " -> MultiplierAlgebra(", Source( PM ), ")]" );
             fi;
             #  Type 3
             if (type = "surjection") then
-                Print( "[", Source( PM ), "->", Range( PM ), "]" );
+                Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
             fi;
             #  Type 4
             if (type = "module") then
-                Print( "[", Source( PM ), "->", Range( PM ), "]" );
+                Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
             fi;
         fi;
     fi;
 end );
 
-#############################################################################
+############################################################################
 ##
-#M  PrintObj( <PM> )  . . . . . . . . . . . . . . view a (pre-)crossed module
+#M  PrintObj( <PM> ) . . . . . . . . . . . . . . view a (pre-)crossed module
 ##
 InstallMethod( PrintObj, "method for a pre-crossed algebra module", true,
     [ IsPreXModAlgebra ], 0,
@@ -246,9 +246,9 @@ InstallMethod( PrintObj, "method for a pre-crossed algebra module", true,
     fi;
 end );
 
-#############################################################################
+############################################################################
 ##
-#F  Display( <PM> ) . . . . . . . . . print details of a (pre-)crossed module
+#F  Display( <PM> ) . . . . . . . .  print details of a (pre-)crossed module
 ##
 InstallOtherMethod( Display, "display a pre-crossed module of algebras", 
     true, [IsPreXModAlgebra], 0,
@@ -304,9 +304,9 @@ function( PM )
     fi;
 end ); 
 
-#############################################################################
+############################################################################
 ##
-#M  Name                                                for a pre-XModAlgebra
+#M  Name                                               for a pre-XModAlgebra
 ##
 InstallMethod( Name, "method for a pre-crossed module", true, 
     [ IsPreXModAlgebra ], 0,
@@ -324,24 +324,24 @@ function( PM )
     else
         nrng := "..";
     fi;
-    name := Concatenation( "[", nsrc, "->", nrng, "]" );
+    name := Concatenation( "[", nsrc, " -> ", nrng, "]" );
     SetName( PM, name );
     return name;
 end );
 
-#############################################################################
+############################################################################
 ##
-#M  Dimension( <PM> )  . . . . . . . . . dimension of a (pre-)crossed module
+#M  Dimension( <PM> ) . . . . . . . . . dimension of a 2-dimensional algebra
 ##
-InstallMethod( Dimension, "method for a pre-crossed algebra module", true,
-    [ IsPreXModAlgebra ], 0,
-    function( PM )
-    return [ Dimension( Source( PM ) ), Dimension( Range( PM ) ) ]; 
+InstallOtherMethod( Dimension, "method for a 2-dimensional algebra", true,
+    [ Is2dAlgebraObject ], 20,
+    function( obj )
+    return [ Dimension( Source( obj ) ), Dimension( Range( obj ) ) ]; 
 end );
 
-#############################################################################
+############################################################################
 ##
-#M  IsXModAlgebra            check that the second crossed module axiom holds
+#M  IsXModAlgebra           check that the second crossed module axiom holds
 ##
 InstallMethod( IsXModAlgebra, "generic method for pre-crossed modules",
     true, [ Is2dAlgebra ], 0,
@@ -371,7 +371,7 @@ InstallMethod( IsXModAlgebra, "generic method for pre-crossed modules",
     return true;
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  PreXModAlgebraByBoundaryAndAction
 ##
@@ -400,7 +400,7 @@ function( bdy, act )
     return obj;
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  XModAlgebraByBoundaryAndAction
 ##
@@ -418,7 +418,7 @@ function( bdy, act )
     return PM;
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  XModAlgebraByMultiplierAlgebra
 ##
@@ -439,7 +439,7 @@ function( A )
     return PM;
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  XModAlgebraBySurjection
 ##
@@ -458,27 +458,7 @@ function( hom )
     return PM;
 end );
 
-#############################################################################
-##
-#M  XModAlgebraByModule
-##
-InstallMethod( XModAlgebraByModule, "crossed module from module", true,
-    [ IsAlgebra, IsRing ], 0,
-function( M,R )
-    local  PM,act,bdy;
-    #M := GroupRing(R,G);
-    act := AlgebraAction(M,R);
-    bdy := ModuleHomomorphism(M,R);
-    SetIsAlgebraAction( act, true );
-    IsAlgebraHomomorphism(bdy);
-    PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
-    if not IsXModAlgebra( PM ) then
-        Error( "this boundary and action only defines a pre-crossed module" );
-    fi;
-    return PM;
-end );
-
-#############################################################################
+############################################################################
 ##
 #M  XModAlgebraByIdeal
 ##
@@ -486,12 +466,13 @@ InstallMethod( XModAlgebraByIdeal,
     "crossed module from module", true,
     [ IsAlgebra, IsAlgebra ], 0,
 function( A, I )
-    local PM, act, bdy, AI;
+    local PM, act, genI, bdy, AI;
     if not IsIdeal( A,I ) then
         Error( "I not a ideal" );
     fi;
+    genI := GeneratorsOfAlgebra( I );
     act := AlgebraActionByMultipliers( A, I, A );
-    bdy := AlgebraHomomorphismByFunction( I, A, i->i );
+    bdy := AlgebraHomomorphismByImages( I, A, genI, genI );
     IsAlgebraAction( act );
     IsAlgebraHomomorphism( bdy );
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
@@ -501,7 +482,7 @@ function( A, I )
     return PM;
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  AugmentationXMod
 ##
@@ -513,7 +494,7 @@ function( A )
     return XModAlgebraByIdeal( A, AI ); 
 end );
 
-#############################################################################
+############################################################################
 ##
 #F  XModAlgebra( <bdy>, <act> )   crossed module from given boundary & action
 ##
@@ -525,10 +506,6 @@ InstallGlobalFunction( XModAlgebra, function( arg )
     if ( ( nargs = 2 ) and IsAlgebraHomomorphism( arg[1] )
                        and IsAlgebraAction( arg[2] ) ) then
         return XModAlgebraByBoundaryAndAction( arg[1], arg[2] );
-    # module
-    elif ( ( nargs = 2 ) and IsRing( arg[1] )
-                       and IsGroup( arg[2] ) ) then 
-        return XModAlgebraByModule( GroupRing( arg[1],arg[2] ),arg[1] );
     # ideal
     elif ( ( nargs = 2 ) and IsAlgebra( arg[1] )
             and IsAlgebra( arg[2] ) and IsIdeal(arg[1],arg[2]) ) then 
@@ -543,12 +520,17 @@ InstallGlobalFunction( XModAlgebra, function( arg )
     # Multiplier algebra
     elif ( ( nargs = 1 ) and IsAlgebra( arg[1] )) then
         return XModAlgebraByMultiplierAlgebra( arg[1] );
+    # module
+    elif ( ( nargs = 2 ) and IsAlgebra( arg[1] )
+                         and IsLeftModule( arg[2] ) ) then 
+        return XModAlgebraByModule( arg[1], arg[2] );
+    else
+        # alternatives not allowed
+        Error( "usage: XModAlgebra( bdy, act ); " );
     fi;
-    # alternatives not allowed
-    Error( "usage: XModAlgebra( bdy, act ); " );
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  IsSubPreXModAlgebra
 ##
@@ -658,7 +640,7 @@ function( PM, SM )
     return true;
 end );
 
-##############################################################################
+###########################################################################
 ##
 #M  IsSubXModAlgebra( <XM>, <SM> )
 ##
@@ -672,7 +654,7 @@ function( XM, SM )
     return IsSubPreXModAlgebra( XM, SM );
 end );
 
-##############################################################################
+###########################################################################
 ##
 #M  SubPreXModAlgebra            creates SubPreXMod Of Algebra from Ssrc<=Psrc 
 ##
@@ -733,7 +715,7 @@ function( PM, Ssrc, Srng )
     return SM;
 end );
 
-##############################################################################
+###########################################################################
 ##
 #M  SubXModAlgebra . . . . creates SubXModAlgebra from Ssrc<=Psrc & Srng<=Prng
 ##
@@ -754,11 +736,11 @@ end );
 
 
 
-#############################  cat1-algebras  ############################### 
+#############################  cat1-algebras  ############################## 
 
-#############################################################################
+############################################################################
 ##
-#M  IsPreCat1Algebra        check that the first pre-cat1-algebra axiom holds
+#M  IsPreCat1Algebra       check that the first pre-cat1-algebra axiom holds
 ##
 InstallMethod( IsPreCat1Algebra, "generic method for pre-cat1-algebra",
     true, [ Is2dAlgebra ], 0,
@@ -788,7 +770,7 @@ function( C1A )
     return true;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  IsSubPreCat1Algebra
 ##
@@ -843,7 +825,7 @@ function( C0, S0 )
     return true;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  IsSubCat1Algebra( <C1>, <S1> )
 ##
@@ -857,9 +839,9 @@ function( C1, S1 )
     return IsSubPreCat1Algebra( C1, S1 );
 end );
 
-###############################################################################
+############################################################################
 ##
-#M  SubPreCat1 . . creates SubPreCat1 from PreCat1 and a subgroup of the source
+#M  SubPreCat1  creates SubPreCat1 from PreCat1 and a subgroup of the source
 ##
 InstallMethod( SubPreCat1Algebra, "generic method for (pre-)cat1-algebras", 
     true, [ IsPreCat1Algebra, IsAlgebra, IsAlgebra ], 0,
@@ -888,7 +870,7 @@ function( C, R, S )
     return CC;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  SubCat1Algebra . . . . . . creates SubCat1Algebra from Cat1Algebra 
 ##                             and a subalgebra of the source
@@ -904,9 +886,9 @@ function( C, R, S )
     return CC;
 end );
 
-##############################################################################
+############################################################################
 ##
-#M  \=( <C1>, <C2> ) . . . . . . . . . test if two pre-cat1-algebras are equal
+#M  \=( <C1>, <C2> ) . . . . . . . . . . . test if two pre-cat1-algebras are equal
 ##
 InstallMethod( \=, "generic method for pre-cat1-algebras",
     IsIdenticalObj, [ IsPreCat1Algebra, IsPreCat1Algebra ], 0,
@@ -916,9 +898,9 @@ InstallMethod( \=, "generic method for pre-cat1-algebras",
              and ( RangeEmbedding( C1 ) = RangeEmbedding( C2 ) ) );
 end );
 
-##############################################################################
+############################################################################
 ##
-#M  PreCat1AlgebraObj . . . . . . . . . . . . . . . . make a pre-cat1-algebra
+#M  PreCat1AlgebraObj . . . . . . . . . . . . . . .  make a pre-cat1-algebra
 ##
 InstallMethod( PreCat1AlgebraObj, "for tail, head, embedding", true,
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
@@ -928,6 +910,12 @@ InstallMethod( PreCat1AlgebraObj, "for tail, head, embedding", true,
     
     fam := Family2dAlgebra;
     filter := IsPreCat1AlgebraObj;
+    if not ( ( Source(h) = Source(t) ) and ( Range(h) = Range(t) ) ) then
+        Error( "tail & head must have same source and range" );
+    fi;
+    if not ( ( Source(e) = Range(t) ) and ( Range(e) = Source(t) ) ) then
+        Error( "tail, embedding must have opposite source and range" );
+    fi;
     C1A := rec();
     ObjectifyWithAttributes( C1A, NewType( fam, filter ),
         Source, Source( t ),
@@ -936,13 +924,7 @@ InstallMethod( PreCat1AlgebraObj, "for tail, head, embedding", true,
         HeadMap, h, 
         RangeEmbedding, e,
         IsPreCat1Domain, true );
-    if not ( ( Source(h) = Source(t) ) and ( Range(h) = Range(t) ) ) then
-        Error( "tail & head must have same source and range" );
-    fi;
     SetHeadMap( C1A, h );
-    if not ( ( Source(e) = Range(t) ) and ( Range(e) = Source(t) ) ) then
-        Error( "tail, embedding must have opposite source and range" );
-    fi;
     SetRangeEmbedding( C1A, e );
     SetIs2dAlgebraObject( C1A, true );    
     ok := IsPreCat1Algebra( C1A );
@@ -954,9 +936,9 @@ InstallMethod( PreCat1AlgebraObj, "for tail, head, embedding", true,
     return C1A;
 end );
 
-##############################################################################
+############################################################################
 ##
-#M  ViewObj( <C1A> ) . . . . . . . . . . . . . . . . . view a pre-cat1-algebra
+#M  ViewObj( <C1A> ) . . . . . . . . . . . . . . . . view a pre-cat1-algebra
 ##
 InstallMethod( ViewObj, "method for a pre-cat1-algebra", true, 
     [ IsPreCat1Algebra ], 0,
@@ -1002,9 +984,9 @@ function( C1A )
     fi;
 end );
 
-##############################################################################
+############################################################################
 ##
-#M  PrintObj( <C1A> )  . . . . . . . . . . . . . . view a (pre-)crossed module
+#M  PrintObj( <C1A> )  . . . . . . . . . . . . . view a (pre-)crossed module
 ##
 InstallMethod( PrintObj, "method for a pre-cat1-algebra", true,
     [ IsPreCat1Algebra ], 0,
@@ -1012,11 +994,11 @@ function( C1A )
     if HasName( C1A ) then
         Print( Name( C1A ), "\n" );
     else
-        Print( "[", Source( C1A ), "=>", Range( C1A ), "]" );
+        Print( "[", Source( C1A ), " => ", Range( C1A ), "]" );
     fi;
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  Display( <C1A> ) . . . . . . . . . . print details of a pre-cat1-algebra
 ##
@@ -1025,29 +1007,40 @@ InstallOtherMethod( Display, "display a pre-cat1-algebra",
 function( C1A )
 
     local  Csrc, Crng, Cker, gensrc, genrng, genker, name,
-           t, h, e, b, k, imt, imh, ime, imb, imk;
+           t, h, e, b, k, imt, imh, ime, imb, imk, eqth;
 
     name := Name( C1A );
     Csrc := Source( C1A );
+    gensrc := GeneratorsOfAlgebra( Csrc );
     Crng := Range( C1A );
-    Cker := Kernel( C1A );
     genrng := GeneratorsOfAlgebra( Crng );
+    Cker := Kernel( C1A );
+    genker := GeneratorsOfAlgebra( Cker );    
     t := TailMap( C1A );
     h := HeadMap( C1A );
-    e := RangeEmbedding( C1A );    
+    e := RangeEmbedding( C1A );
+    imt := List( gensrc, x -> Image( t, x ) );
+    imh := List( gensrc, x -> Image( h, x ) );
+    eqth := imt = imh;
+    ime := List( genrng, x -> Image( e, x ) );
     if HasXModAlgebraOfCat1Algebra(C1A) then
-        gensrc := Csrc;
-        genker := Cker;    
         if IsCat1Algebra( C1A ) then
-            Print( "\nCat1-algebra ", name, " :- \n" );
+            Print( "Cat1-algebra ", name, " :- \n" );
         else
-            Print( "\nPre-cat1-algebra ", name, " :- \n" );
+            Print( "Pre-cat1-algebra ", name, " :- \n" );
         fi;
-        ime := List( genrng, x -> Image( e, x ) );
-
         Print( ":  range algebra has generators:\n" );
         Print( "  ", genrng, "\n" );
-        Print( ": tail homomorphism maps source generators to:\n" );
+        if eqth then 
+            Print( ": tail homomorphism = head homomorphism\n" );
+            Print( "  they map the source generators to:\n" );
+            Print( "  ", imt, "\n" );
+        else
+            Print( ": tail homomorphism maps source generators to:\n" );
+            Print( "  ", imt, "\n" );
+            Print( ": head homomorphism maps source generators to:\n" );
+            Print( "  ", imh, "\n" );
+        fi;
         Print( ": range embedding maps range generators to:\n" );
         Print( "  ", ime, "\n" );
         if ( Size( Cker ) = 1 ) then
@@ -1058,19 +1051,14 @@ function( C1A )
         fi;    
     else
         b := Boundary( C1A );
-        gensrc := GeneratorsOfAlgebra( Csrc );
-        genker := GeneratorsOfAlgebra( Cker );
         k := KernelEmbedding( C1A );
-        imt := List( gensrc, x -> Image( t, x ) );
-        imh := List( gensrc, x -> Image( h, x ) );
-        ime := List( genrng, x -> Image( e, x ) );
         imb := List( genker, x -> Image( b, x ) );
         imk := List( genker, x -> Image( k, x ) );
 
         if IsCat1Algebra( C1A ) then
-            Print( "\nCat1-algebra ", name, " :- \n" );
+            Print( "Cat1-algebra ", name, " :- \n" );
         else
-            Print( "\nPre-cat1-algebra ", name, " :- \n" );
+            Print( "Pre-cat1-algebra ", name, " :- \n" );
         fi;
         Print( ": source algebra has generators:\n" );
         Print( "  ", gensrc, "\n" );
@@ -1097,12 +1085,11 @@ function( C1A )
     #     Print( ": associated crossed module is ", 
     #            XModAlgebraOfCat1Algebra( C1A ), "\n" );
     # fi;
-    Print( "\n" );
 end );
 
-#############################################################################
+############################################################################
 ##
-#M  Name                                               for a pre-cat1-alegbra
+#M  Name                                              for a pre-cat1-alegbra
 ##
 InstallMethod( Name, "method for a pre-cat1-algebra", true, 
     [ IsPreCat1Algebra ], 0,
@@ -1120,15 +1107,15 @@ function( C1A )
     else
         nrng := "..";
     fi;
-    name := Concatenation( "[", nsrc, "=>", nrng, "]" );
+    name := Concatenation( "[", nsrc, " => ", nrng, "]" );
     SetName( C1A, name );
     return name;
 end );
 
-#############################################################################
+############################################################################
 ##
-#F  PreCat1Algebra( <t>, <h>, <e> )   pre-cat1-algebra from tail, head, embed
-#F  PreCat1Algebra( <t>, <h> )        pre-cat1-algebra from tail, head endos
+#F  PreCat1Algebra( <t>, <h>, <e> )  pre-cat1-algebra from tail, head, embed
+#F  PreCat1Algebra( <t>, <h> )       pre-cat1-algebra from tail, head, endos
 ##
 InstallGlobalFunction( PreCat1Algebra, function( arg )
 
@@ -1148,9 +1135,9 @@ InstallGlobalFunction( PreCat1Algebra, function( arg )
     Error( "standard usage: PreCat1Algebra( tail, head [,embedding] );" );
 end );
 
-#############################################################################
+############################################################################
 ##
-#M  IsCat1Algebra              check that the second cat1-algebra axiom holds
+#M  IsCat1Algebra             check that the second cat1-algebra axiom holds
 ##
 InstallMethod( IsCat1Algebra, "generic method for crossed modules",
     true, [ Is2dAlgebra ], 0,
@@ -1199,7 +1186,7 @@ function( C1A )
     return true;
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  IsIdentityCat1Algebra
 ##
@@ -1210,12 +1197,12 @@ function( C1A )
              ( TailMap( C1A ) = IdentityMapping( Source( C1A ) ) ) );
 end );
 
-#############################################################################
+############################################################################
 ##
 #F  Cat1Algebra( <GF(n)>,<size>, <gpnum>, <num> )   
-##                                    cat1-algebra from data in CAT1_ALG_LIST
-#F  Cat1Algebra( <t>, <h>, <e> )      cat1-algebra from tail, head, embed
-#F  Cat1Algebra( <t>, <h> )           cat1-algebra from tail, head endos
+##                                   cat1-algebra from data in CAT1_ALG_LIST
+#F  Cat1Algebra( <t>, <h>, <e> )     cat1-algebra from tail, head, embed
+#F  Cat1Algebra( <t>, <h> )          cat1-algebra from tail, head endos
 ##
 InstallGlobalFunction( Cat1Algebra, 
 function( arg )
@@ -1254,10 +1241,10 @@ function( arg )
     fi;
 end );
 
-#############################################################################
+############################################################################
 ##
 #F  Cat1AlgebraSelect( <size>, <gpnum>, <num> )   
-##                                        cat1-algebra from data in CAT1_LIST
+##                                       cat1-algebra from data in CAT1_LIST
 ##
 InstallOtherMethod( Cat1AlgebraSelect, 
     "construct a cat1-algebra using data in file", true, [ IsInt ], 0,
@@ -1429,13 +1416,14 @@ function( gf, size, gpnum, num )
     return PreCat1AlgebraByEndomorphisms( t, h );
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  PreCat1AlgebraByTailHeadEmbedding
 ##
 InstallMethod( PreCat1AlgebraByTailHeadEmbedding,
     "cat1-algebra from tail, head and embedding", true, 
-    [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
+    [ IsAlgebraHomomorphism, IsAlgebraHomomorphism, IsAlgebraHomomorphism ],
+    0,
 function( t, h, e )
 
     local  genG, R, genR, imh, imt, ime, eR, hres, tres, eres,
@@ -1472,7 +1460,7 @@ function( t, h, e )
     return PC;
 end );
 
-#############################################################################
+############################################################################
 ##
 #M  PreCat1AlgebraByEndomorphisms( <et>, <eh> )
 ##
@@ -1510,47 +1498,53 @@ function( et, eh )
     return A; 
 end );
 
-#############################################################################
+############################################################################
 ##
-#M  Source( C1A ) . . . . . . . . . . . . . . . . . . . .  for a cat1-algebra
+#M  Source( C1A ) . . . . . . . . . . . . . . . . . . . . for a cat1-algebra
 ##
 InstallOtherMethod( Source, "method for a pre-cat1-algebra", true,
     [ IsPreCat1Algebra ], 0,
     C1A -> Source( TailMap( C1A ) ) );
 
-##############################################################################
+############################################################################
 ##
-#M  Range( C1A ) . . . . . . . . . . . . . . . . . . . . . for a cat1-algebra
+#M  Range( C1A ) . . . . . . . . . . . . . . . . . . . .  for a cat1-algebra
 ##
 InstallOtherMethod( Range, "method for a pre-cat1-algebra", true,
     [ IsPreCat1Algebra ], 0,
     C1A -> Range( TailMap( C1A ) ) );
 
-##############################################################################
+############################################################################
 ##
-#M  Kernel( C1A ) . . . . . . . . . . . . . . . . . . . for a pre-cat1-algebra
+#M  Kernel( C1A ) . . . . . . . . . . . . . . . . . . for a pre-cat1-algebra
 ##
 InstallOtherMethod( Kernel, "method for a pre-cat1-algebra", true, 
     [ IsPreCat1Algebra ], 0,
     C1A -> Kernel( TailMap( C1A ) ) );
 
-#############################################################################
+############################################################################
 ##
-#M  Boundary( C1A ) . . . . . . . . . . . . . . . . . . .  for a cat1-algebra
+#M  Boundary( C1A ) . . . . . . . . . . . . . . . . . . . for a cat1-algebra
 ##
 InstallOtherMethod( Boundary, "method for a pre-cat1-algebra", true, 
     [ IsPreCat1Algebra ], 0,
-    C1A -> RestrictionMappingAlgebra( HeadMap( C1A ), Kernel( C1A ) ) );
+function( PC1A )
+    local t, K, R;
+    t := HeadMap( PC1A );
+    K := Kernel( PC1A );
+    R := Range( PC1A );
+    return RestrictionMappingAlgebra( t, K, R );
+end );
 
-#############################################################################
+############################################################################
 ##
-#M  KernelEmbedding( C1A ) . . .  . . . . . . . . . . . . .  for a cat1-algebra
+#M  KernelEmbedding( C1A ) . . .  . . . . . . . . . . . . for a cat1-algebra
 ##
 InstallMethod( KernelEmbedding, "method for a pre-cat1-algebra", true, 
     [ IsPreCat1Algebra ], 0,
     C1A -> InclusionMappingAlgebra( Source( C1A ), Kernel( C1A ) ) );
 
-##############################################################################
+############################################################################
 ##
 #M  AllCat1Algebras
 ##
@@ -1578,7 +1572,7 @@ function( F, G )
     return Cat1_ler;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  IsIsomorphicCat1Algebra
 ##
@@ -1637,7 +1631,7 @@ function( C1A1, C1A2 )
     return sonuc;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  IsomorphicCat1AlgebraFamily
 ##
@@ -1660,7 +1654,7 @@ function( C1A1, C1A1_ler )
     return sonuc;
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  AllCat1AlgebrasUpToIsomorphism
 ##
@@ -1688,7 +1682,7 @@ end );
 
 ##########################  conversion functions  ##########################  
 
-#############################################################################
+############################################################################
 ##
 #M  PreXModAlgebraOfPreCat1Algebra
 ##
@@ -1721,7 +1715,7 @@ function( C1A )
     return PM; 
 end );
 
-##############################################################################
+############################################################################
 ##
 #M  XModAlgebraOfCat1Algebra
 ##
@@ -1740,17 +1734,17 @@ function( C1 )
     return X1;
 end );
 
-##############################################################################
+############################################################################
 ##
-#M  PreCat1AlgebraOfPreXModAlgebra . . . pre-xmod-algebra -> pre-cat1-algebra
+#M  PreCat1AlgebraOfPreXModAlgebra . .  pre-xmod-algebra -> pre-cat1-algebra
 ##
 InstallMethod( PreCat1AlgebraOfPreXModAlgebra,
     "convert a pre-xmod-algebra to a pre-cat1-algebra record", true, 
     [ IsPreXModAlgebra ], 0,
 function( XM )
 
-    local  S, R, act, bdy, P, info, vecP, dimP, dimR, vecR, zR, dimS, vecS, zS, 
-           j, imgs, t, h, e, C;
+    local  S, R, act, bdy, P, info, vecP, dimP, dimR, vecR, zR, dimS, vecS,
+           zS, j, imgs, t, h, e, C;
 
     S := Source( XM );
     R := Range( XM );
@@ -1776,16 +1770,16 @@ function( XM )
     h := AlgebraHomomorphismByImages( P, R, vecP, imgs ); 
     t := Projection( P, 1 ); 
     e := Embedding( P, 1 );
-    C := PreCat1AlgebraObj( t, h, e ); 
+    C := PreCat1AlgebraObj( t, h, e );
     return C; 
 end ); 
 
-##############################################################################
+############################################################################
 ##
 #M  Cat1AlgebraOfXModAlgebra
 ##
-InstallMethod( Cat1AlgebraOfXModAlgebra, "generic method for crossed modules",
-    true, [ IsXModAlgebra ], 0,
+InstallMethod( Cat1AlgebraOfXModAlgebra, 
+    "generic method for crossed modules", true, [ IsXModAlgebra ], 0,
 function( X1 )
 
     local C1; 

@@ -27,7 +27,7 @@ gap> e5 := Elements(R)[5];;
 gap> S := Subalgebra( R, [e5] );; 
 gap> SetName( S, "<e5>" );
 gap> act := AlgebraActionByMultipliers( R, S, R );;
-gap> bdy := AlgebraHomomorphismByFunction( S, R, s->s );;
+gap> bdy := AlgebraHomomorphismByImages( S, R, [e5], [e5] );;
 gap> IsAlgebraAction( act );; 
 gap> IsAlgebraHomomorphism( bdy );; 
 gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
@@ -51,6 +51,8 @@ gap> IsCat1Algebra( C4 );
 true
 gap> Size2d( C4 );
 [ 64, 8 ]
+gap> Dimension( C4 );
+[ 6, 3 ]
 gap> Display( C4 );
 
 Cat1-algebra [..=>..] :- 

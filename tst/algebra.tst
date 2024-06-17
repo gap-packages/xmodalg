@@ -117,7 +117,7 @@ gap> [ Image(b1,m)=m^2, Image(b1,m^2)=m^3, Image(b1,m^3)=Zero(A1) ];
 gap> [ Image(b2,m)=m^3, b2=b1^2 ];
 [true, true ]
 
-## Section 2.2.3
+## Section 2.2.8
 gap> P := SemidirectProductOfAlgebras( A5c6, actm, I5c6 ); 
 <algebra of dimension 8 over GF(5)>
 gap> Embedding( P, 1 );
@@ -134,7 +134,7 @@ gap> Projection( P, 1 );
   (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2), 
   <zero> of ..., <zero> of ... ]
 gap> P3 := SemidirectProductOfAlgebras( Q13, act3, A1 );
-<algebra of dimension 5 over Rationals>
+Q13 |X A1
 gap> Embedding( P3, 1 );
 [ v.1, v.2 ] -> [ v.1, v.2 ]
 gap> Embedding( P3, 2 );
