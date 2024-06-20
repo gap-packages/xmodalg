@@ -317,9 +317,9 @@ gap> Print( KnownAttributesOfObject(XIAk4), "\n" );
 
 <ManSection>
    <Oper Name="SubXModAlgebra"
-         Arg="X0" />
+         Arg="alg src rng" />
    <Oper Name="IsSubXModAlgebra"
-         Arg="X0" />
+         Arg="alg sub" />
 <Description>
 A crossed module <M>\mathcal{X}^{\prime } 
 = (\partial ^{\prime }:S^{\prime}\rightarrow R^{\prime })</M> 
@@ -407,26 +407,26 @@ by the function <C>Make2dAlgebraMorphism</C>.
    <Func Name="XModAlgebraMorphism"
          Arg="arg" />
    <Meth Name="IdentityMapping" Label="for crossed modules of algebras"
-         Arg="X0" />
+         Arg="Xalg" />
    <Oper Name="PreXModAlgebraMorphismByHoms"
-         Arg="f,g" />
+         Arg="src rng srchom rnghom" />
    <Oper Name="XModAlgebraMorphismByHoms"
-         Arg="f,g" />
+         Arg="src rng srchom rnghom" />
    <Prop Name="IsPreXModAlgebraMorphism"
-         Arg="f" />
+         Arg="mor" />
    <Prop Name="IsXModAlgebraMorphism"
-         Arg="f" />
+         Arg="mor" />
    <Attr Name="Source" Label="for morphisms of crossed modules of algebras"
-         Arg="m" />
+         Arg="mor" />
    <Attr Name="Range" Label="for morphisms of crossed modules of algebras"
-         Arg="m" />
+         Arg="mor" />
    <Meth Name="IsTotal" Label="for morphisms of crossed modules of algebras"
-         Arg="m" />
+         Arg="mor" />
    <Meth Name="IsSingleValued" 
          Label="for morphisms of crossed modules of algebras"
-         Arg="m" />
+         Arg="m0r" />
    <Meth Name="Name" Label="for morphisms of crossed modules of algebras"
-         Arg="m" />
+         Arg="mor" />
 
 <Description>
 These operations construct crossed module homomorphisms, 
@@ -484,7 +484,7 @@ true
 
 <ManSection>
    <Meth Name="Kernel" Label="for morphisms of crossed modules of algebras" 
-         Arg="X0" />
+         Arg="mor" />
 <Description>
 Let <M>(\theta,\varphi) : \mathcal{X} = (\partial : S \rightarrow R) 
        \rightarrow \mathcal{X}^{\prime} = (\partial^{\prime} 
@@ -515,7 +515,7 @@ true
 
 <ManSection>
    <Oper Name="Image"
-         Arg="X0" />
+         Arg="mor" />
 <Description>
 Let <M>(\theta,\varphi) : \mathcal{X} = (\partial : S \rightarrow R) 
         \rightarrow \mathcal{X}^{\prime} = (\partial^{\prime} : S^{\prime} 
@@ -541,15 +541,15 @@ induced from a given crossed module homomorphism.
 
 <ManSection>
    <Attr Name="SourceHom"
-         Arg="m" />
+         Arg="mor" />
    <Attr Name="RangeHom"
-         Arg="m" />
+         Arg="mor" />
    <Prop Name="IsInjective"
-         Arg="m" />
+         Arg="mor" />
    <Prop Name="IsSurjective"
-         Arg="m" />
+         Arg="mor" />
    <Prop Name="IsBijjective"
-         Arg="m" />
+         Arg="mor" />
 <Description>
 Let <M>(\theta,\varphi)</M> be a homomorphism of crossed modules. 
 If the homomorphisms <M>\theta</M> and <M>\varphi</M> 

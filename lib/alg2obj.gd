@@ -2,7 +2,7 @@
 ##
 #W  alg2obj.gd                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ##############################  2d-algebras  ########################### 

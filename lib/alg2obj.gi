@@ -1247,29 +1247,30 @@ end );
 ##                                       cat1-algebra from data in CAT1_LIST
 ##
 InstallOtherMethod( Cat1AlgebraSelect, 
-    "construct a cat1-algebra using data in file", true, [ IsInt ], 0,
+    "construct a cat1-algebra using data file", true, [ IsInt ], 0,
 function( gf )
     return Cat1AlgebraSelect( gf, 0, 0, 0 );
 end );
 
 InstallOtherMethod( Cat1AlgebraSelect, 
-    "construct a cat1-algebra using data in file", true, [ IsInt, IsInt ], 0,
+    "construct a cat1-algebra using data file", true, [ IsInt, IsInt ], 0,
 function( gf, size )
     return Cat1AlgebraSelect( gf, size, 0, 0 );
 end );
 
 InstallOtherMethod( Cat1AlgebraSelect, 
-    "construct a cat1-algebra using data in file", true, 
+    "construct a cat1-algebra using data file", true, 
     [ IsInt, IsInt, IsInt ], 0,
 function( gf, size, gpnum )
     return Cat1AlgebraSelect( gf, size, gpnum, 0 );
 end );
 
-InstallMethod( Cat1AlgebraSelect, "construct a cat1-algebra using data in file", 
+InstallMethod( Cat1AlgebraSelect, 
+    "construct a cat1-group-algebra using data file", 
     true, [ IsInt, IsInt, IsInt, IsInt ], 0,
 function( gf, size, gpnum, num )
 
-    local  ok, type, norm, usage, usage2, sizes, maxsize, maxgsize,
+    local  ok, type, norm, usage, usage2, sizes, maxsize, maxgsize, len,
            start, iso, count, pos, pos2, names, A, gA, B, H, emb, gB, 
            usage_list1, usage_list2, usage_list3, i, j, k, l, ncat1, 
            G, genG, M, L, genR, R, t, kert, e, h, imt, imh, C1A, XC, elA;
@@ -1283,9 +1284,11 @@ function( gf, size, gpnum, num )
      
     usage_list1 := Set(CAT1ALG_LIST, i -> i[1]);
     if not gf in usage_list1 then
-      Print( "|--------------------------------------------------------| \n" );   
-      Print( "| ",gf," is invalid number for Galois Field (GFnum) \t \t | \n");
-      Print( "| Possible numbers for GFnum in the Data : \t \t | \n");
+      Print( "|--------------------------------------------------------| \n" );
+      if ( gf <> 0 ) then
+        Print( "| ",gf," is invalid value for the Galois Field (GFnum) \t | \n");
+      fi;
+      Print( "| Available values for GFnum in the data : \t \t | \n");
       Print( "|--------------------------------------------------------| \n" ); 
       Print( " ",usage_list1," \n");
       Print( usage, "\n" );
@@ -1293,24 +1296,26 @@ function( gf, size, gpnum, num )
     fi;
     usage_list2 := Set(Filtered(CAT1ALG_LIST, i -> i[1]=gf), i -> i[2]);
     if not size in usage_list2 then
-      Print( "|--------------------------------------------------------| \n" );   
-      Print( "| ",size," is invalid number for size of group (gpsize)  \t | \n") ;
-      Print( "| Possible numbers for the gpsize for GF(",gf,") in the Data: | \n");
+      Print( "|--------------------------------------------------------| \n" );
+      if ( size <> 0 ) then
+        Print( "| ",size," is invalid value for size of group (gpsize)  \t | \n") ;
+      fi;
+      Print( "| Available values for gpsize with GF(",gf,") in the data: \t | \n");
       Print( "|--------------------------------------------------------| \n" ); 
-      Print( " ",usage_list2," \n");
       Print( usage, "\n" );
-      return fail;
+      return usage_list2;
     fi;
     usage_list3 := Set( Filtered( Filtered( CAT1ALG_LIST, i -> i[1] = gf), 
                         i -> i[2] = size ), i -> i[3] );
     if not gpnum in usage_list3 then
-      Print( "|--------------------------------------------------------| \n" );   
-      Print( "| ",gpnum," is invalid number for group of order ",size, "\t \t | \n");
-      Print( "| Possible numbers for the gpnum in the Data : \t \t | \n");
-      Print( "|--------------------------------------------------------| \n" ); 
-      Print( " ",usage_list3," \n");
+      Print( "|--------------------------------------------------------| \n" );
+      if ( gpnum <> 0 ) then
+        Print( "| ",gpnum," is invalid value for groups of order ",size, "\t \t | \n");
+      fi;
+      Print( "| Available values for gpnum for groups of size ",size," : \t | \n");
+      Print( "|--------------------------------------------------------| \n" );
       Print( usage, "\n" );
-      return fail;
+      return usage_list3;
     fi;
     maxgsize := CAT1ALG_LIST_GROUP_SIZES[gf+1]-CAT1ALG_LIST_GROUP_SIZES[gf];
     iso := CAT1ALG_LIST_CLASS_SIZES;
@@ -1353,13 +1358,16 @@ function( gf, size, gpnum, num )
     gA := GeneratorsOfAlgebra(A); 
     SetName( A, M[5] );   
     if not ( ( num >= 1 ) and ( num <= ncat1 ) ) then
-      Print( "There are ", ncat1, " cat1-structures for the algebra ");
+      Print( "There are ", ncat1, " cat1-structures for the group algebra ");
       Print( A, ".\n" ); 
       Print( " Range Alg     \tTail       \t\tHead      \n" ); 
       Print( "|--------------------------------------------------------| \n" );      
       Print( "| ", A, "  \tidentity map \t\tidentity map   \t |\n" ); 
       for i in [2..ncat1] do
-          Print( "| ",M[6][i-1][3]," \t",M[6][i-1][4]," \t\t",M[6][i-1][5], "\t | \n" );
+          len := Length( M[6][i-1][4] );
+          Print( "| ",M[6][i-1][3]," \t",M[6][i-1][4] );
+          if ( len<14 ) then Print( "\t" ); fi;
+          Print( " \t",M[6][i-1][5], "\t | \n" );
       od;              
       Print( "|--------------------------------------------------------| \n" ); 
       Print( usage, "\n" ); 
@@ -1373,7 +1381,7 @@ function( gf, size, gpnum, num )
         imt := L[4];
         imh := L[5];
     else
-        L := M[6][num-1]; 
+        L := M[6][num-1];
         if ( L[3] = "-----" ) then
             elA := Elements(A);;
             imt := [];
