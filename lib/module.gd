@@ -4,8 +4,99 @@
 #W                                                             
 #Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
 ##
+############################  algebra actions  ############################# 
 
-############################  module operations  ################### 
+############################################################################
+##
+## AlgebraActionByHomomorphism( <hom> <alg> )
+##
+## <#GAPDoc Label="AlgebraActionByHomomorphism"> 
+## <ManSection>
+## <Oper Name="AlgebraActionByHomomorphism" Arg="hom alg" />
+##
+## <Description>
+## If <M>\alpha : B \to C</M> is an algebra homomorphism
+## where <M>C</M> is an algebra of left module isomorphisms
+## of an algebra <M>A</M>, then
+## <C>AlgebraActionByHomomorphism( alpha, A )</C>
+## attempts to return an action of <M>B</M> on <M>A</M>.
+## <P/>
+## In the example the matrix algebra <C>Am</C>
+## and the group algebra <C>AG</C> are isomorphic algebras,
+## so the resulting action is equivalent to the multiplier
+## action of <C>AG</C> on itself.
+## </Description>
+## </ManSection>
+## <Example>
+## <![CDATA[
+## gap> m := [ [0,1,0], [0,0,1], [1,0,0,] ];;
+## gap> Am := Algebra( Rationals, [m] );;
+## gap> SetName( Am, "Am" );;
+## gap> G := Group( (1,2,3) );;
+## gap> AG := GroupRing( Rationals, G );;
+## gap> SetName( AG, "GR(G)" );
+## gap> g := GeneratorsOfAlgebra( AG )[2];;
+## gap> mug := RegularAlgebraMultiplier( AG, AG, g );;
+## gap> MAG := AlgebraByGenerators( Rationals, [ mug ] );;
+## gap> hom := AlgebraHomomorphismByImages( Am, MAG, [ m ], [ mug ] );;
+## gap> act := AlgebraActionByHomomorphism( hom, AG );
+## [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> 
+## [ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
+##     ] ]
+## ]]>
+## </Example>
+## <#/GAPDoc>
+##
+DeclareOperation( "AlgebraActionByHomomorphism", 
+    [ IsAlgebraHomomorphism, IsAlgebra ] );
+
+############################################################################
+##
+## XModAlgebraByBoundaryAndAction( <hom> <alg> )
+##
+## <#GAPDoc Label="XModAlgebraByBoundaryAndAction"> 
+## <ManSection>
+##    <Oper Name="XModAlgebraByBoundaryAndAction"
+##          Arg="bdy act" />
+##    <Oper Name="PreXModAlgebraByBoundaryAndAction"
+##          Arg="bdy,act" />
+## <Description>
+## When a suitable pair of algebra homomorphisms are available,
+## these operations may be used.
+## The example uses the algebra action created in section
+## <Ref Sect="AlgebraActionByModule" />.
+## </Description>
+## </ManSection>
+## <Example>
+## <![CDATA[
+## gap> hom := AlgebraHomomorphismByImages( Am, MAG, [ m ], [ mug ] );
+## [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> 
+## [ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
+##      ] ]
+## gap> bdy := AlgebraHomomorphismByImages( AG, Am, [ g ], [ m ] );
+## [ (1)*(1,2,3) ] -> [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
+## gap> Xm := XModAlgebraByBoundaryAndAction( bdy, act );
+## [ GR(G) -> Am ]
+## gap> Display( Xm );
+## Crossed module [GR(G) -> Am] :- 
+## : Source algebra GR(G) has generators:
+##   [ (1)*(), (1)*(1,2,3) ]
+## : Range algebra Am has generators:
+##   [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
+## : Boundary homomorphism maps source generators to:
+##   [ [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+##   [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
+## ]]>
+## </Example>
+## <#/GAPDoc>
+##
+DeclareOperation( "XModAlgebraByBoundaryAndAction", 
+    [ IsAlgebraHomomorphism, IsAlgebra ] );
+DeclareOperation( "PreXModAlgebraByBoundaryAndAction", 
+    [ IsAlgebraHomomorphism, IsAlgebra ] );
+
+
+############################  module operations  ########################### 
 
 ############################################################################
 ##
@@ -284,3 +375,7 @@ DeclareOperation( "XModAlgebraByModule", [ IsAlgebra, IsLeftModule ] );
 ## </Example>
 ## <#/GAPDoc>
 ##
+
+############################  direct sum operations  ####################### 
+
+

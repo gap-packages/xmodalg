@@ -209,6 +209,11 @@ is a commutative action if and only if the following five axioms hold:
 for all <M>k \in </M><B>k</B>, <M>r,r' \in R</M>, and <M>s,s' \in S</M>. 
 <P/> 
 
+Notice in particular that, for fixed <M>r \in R</M>,
+the map <M>s \mapsto r \cdot s</M> is a vector space homomorphism,
+but not in general an algebra homomorphism.
+<P/>
+
 <ManSection>
    <Oper Name="AlgebraActionByMultipliers"
          Arg="A I B" />
@@ -304,6 +309,8 @@ gap> [ Image(b2,m)=m^3, b2=b1^2 ];
 ]]>
 </Example>
 
+
+<#Include Label="AlgebraActionByHomomorphism">
 
 <#Include Label="AlgebraModules">
 

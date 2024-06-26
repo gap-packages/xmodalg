@@ -236,6 +236,17 @@ There are 4 cat1-structures for the group algebra GF(2)_c6.
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
 4
+]]>
+</Example>
+
+The algebra <C>GF(n)_gp</C> has a list of <M>n^{|gp|}</M> elements. 
+The <C>[2, 10]</C> in the second structure above
+indicates that the tail map, and also the head map, 
+of the cat<M>^1</M>-algebra maps the two generators of <C>c6</C>
+to the second and tenth elements of this algebra respectively.
+
+<Example>
+<![CDATA[
 gap> C0 := Cat1AlgebraSelect( 4, 6, 2, 2 );
 [GF(2^2)_c6 -> Algebra( GF(2^2), 
 [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+(

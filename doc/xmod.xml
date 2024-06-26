@@ -17,10 +17,10 @@ In this chapter we will present the notion of crossed modules of commutative
 algebras and their implementation in this package.
 
 <Section>
-
 <Heading>Definition and Examples</Heading>
 
 <Index>crossed module</Index>
+<Index>precrossed module</Index>
 <Index>2d-algebra</Index>
 
 A <E>crossed module</E> is a <B>k</B>-algebra morphism 
@@ -39,13 +39,26 @@ of <M>\mathcal{X}</M>
 Note that, although in this definition we have used a left action, 
 in the category of commutative algebras left and right actions coincide.
 <P/>
+When only the first axiom is satisfied, it is a <E>precrossed module</E>
+which is constructed.
+<P/>
+The details of these implementations can be found in <Cite Key="aodabas1"/>.
+<P/>
 
 <ManSection>
    <Func Name="XModAlgebra"
          Arg="args" />
+   <Func Name="PreXModAlgebra"
+         Arg="args" />
+   <Prop Name="IsXModAlgebra"
+         Arg="X0" />
+   <Prop Name="IsPreXModAlgebra"
+         Arg="X0" />
 <Description> 
-This global function calls one of the following six operations, 
-depending on the arguments supplied. 
+These two global function call one of the following six operations, 
+depending on the arguments supplied.
+The two properties listed are assigned as appropriate to the resulting
+structures.
 </Description>
 </ManSection>
 
@@ -180,64 +193,7 @@ Crossed module [A1->Q13] :-
 ]]>
 </Example>
 
-<Index>precrossed module</Index>
-<ManSection>
-   <Oper Name="XModAlgebraByBoundaryAndAction"
-         Arg="bdy act" />
-   <Oper Name="PreXModAlgebraByBoundaryAndAction"
-         Arg="bdy,act" />
-   <Prop Name="IsPreXModAlgebra"
-         Arg="X0" />
-
-<Description>
-An <M>R</M>-algebra homomorphism 
-<M>\mathcal{X} := (\partial : S \rightarrow R)</M> which satisfies 
-the condition <M>{\bf XModAlg\ 1}</M> is called a <E>precrossed module</E>.
-The details of these implementations can be found in <Cite Key="aodabas1"/>.
-</Description>
-</ManSection>
-
-<Example>
-<![CDATA[
-gap> G := SmallGroup( 4, 2 );
-<pc group of size 4 with 2 generators>
-gap> F := GaloisField( 4 );
-GF(2^2)
-gap> R := GroupRing( F, G );
-<algebra-with-one over GF(2^2), with 2 generators>
-gap> Size( R );
-256
-gap> SetName( R, "GF(2^2)[k4]" ); 
-gap> e5 := Elements( R )[5]; 
-(Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
-gap> S := Subalgebra( R, [e5] );;
-gap> SetName( S, "<e5>" );
-gap> RS := Cartesian( R, S );; 
-gap> SetName( RS, "GF(2^2)[k4] x <e5>" ); 
-gap> act := AlgebraAction( R, RS, S );;
-gap> bdy := AlgebraHomomorphismByImages( S, R, [e5], [e5] );
-[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ] -> 
-[ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
-gap> IsAlgebraAction( act ); 
-true
-gap> IsAlgebraHomomorphism( bdy );
-true
-gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );
-[<e5>->GF(2^2)[k4]]
-gap> IsXModAlgebra( XM );
-true
-gap> Display( XM );
-
-Crossed module [<e5>->GF(2^2)[k4]] :- 
-: Source algebra has generators:
-  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
-: Range algebra GF(2^2)[k4] has generators:
-  [ (Z(2)^0)*<identity> of ..., (Z(2)^0)*f1, (Z(2)^0)*f2 ]
-: Boundary homomorphism maps source generators to:
-  [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
-
-]]>
-</Example>
+<#Include Label="XModAlgebraByBoundaryAndAction">
 
 <#Include Label="XModAlgebraByModule">
 
@@ -301,17 +257,16 @@ gap> f := Boundary( XIAk4 );
 +(Z(5)^
     0)*f2 ] -> [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, 
   (Z(5)^2)*<identity> of ...+(Z(5)^0)*f2 ]
-gap> Print( RepresentationsOfObject(XIAk4), "\n" ); 
+gap> RepresentationsOfObject( XIAk4 );
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
-gap> props := [ "CanEasilyCompareElements", "CanEasilySortElements", 
->  "IsDuplicateFree", "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", 
->  "IsLDistributive", "IsRDistributive", "IsPreXModDomain", "Is2dAlgebraObject", 
->  "IsPreXModAlgebra", "IsXModAlgebra" ];;
-gap> known := KnownPropertiesOfObject( XIAk4 );;
-gap> ForAll( props, p -> (p in known) );
-true
-gap> Print( KnownAttributesOfObject(XIAk4), "\n" ); 
-[ "Name", "Range", "Source", "Boundary", "Size2d", "XModAlgebraAction" ]
+gap> KnownPropertiesOfObject( XIAk4 );
+[ "CanEasilyCompareElements", "CanEasilySortElements", "IsDuplicateFree", 
+  "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", "IsLDistributive",
+  "IsRDistributive", "IsPreXModDomain", "Is2dAlgebraObject", 
+  "IsPreXModAlgebra", "IsXModAlgebra" ]
+gap> KnownAttributesOfObject( XIAk4 );
+[ "Name", "LeftActingDomain", "Range", "Source", "Boundary", "Size2d", 
+  "XModAlgebraAction" ]
 ]]>
 </Example>
 

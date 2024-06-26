@@ -18,7 +18,6 @@ function( M )
     D := LeftActingDomain( M );
     z := Zero( D );
     genM := List( GeneratorsOfLeftModule( M ), g -> ExtRepOfObj(g) );
-## Print( "genM = ", genM, "\n" );
     num := Length( genM );
     if HasIsAlgebraModule( M ) and IsAlgebraModule( M ) then 
         V := UnderlyingLeftModule( M );
@@ -27,17 +26,14 @@ function( M )
     else
         L := List( genM, v -> Concatenation( "[", String(v), "]" ) );
     fi;
-## Print( "L = ", L, "\n" );
     T := EmptySCTable( num, z, "symmetric" ); 
     B := AlgebraByStructureConstants( D, T, L );
     SetIsModuleAsAlgebra( B, true );
     genB := GeneratorsOfAlgebra( B );
     if HasIsAlgebraModule( M ) and IsAlgebraModule( M ) then
-## Print( "first option - IsAlgebraModule\n" );
         MtoB := LeftModuleHomomorphismByImages( V, B, genV, genB );
         BtoM := LeftModuleHomomorphismByImages( B, V, genB, genV );
     else
-## Print( "second option - IsLeftModule\n" );
         MtoB := LeftModuleHomomorphismByImages( M, B, genM, genB );
         BtoM := LeftModuleHomomorphismByImages( B, M, genB, genM );
     fi;
@@ -66,8 +62,9 @@ InstallMethod( AlgebraActionByModule,
     "for an algebra and an algebra module", true, 
     [ IsAlgebra, IsLeftModule ], 0,
 function( A, M )
-    local genA, dimA, famM, B, genB, dimB, M2B, B2M, imact, i, a, imi, 
+    local DA, genA, dimA, famM, B, genB, dimB, M2B, B2M, imact, i, a, imi, 
           j, v, m, C, act;
+    DA := LeftActingDomain( A );
     genA := GeneratorsOfAlgebra( A );
     dimA := Length( genA );
     famM := ElementsFamily( FamilyObj( M ) );
@@ -87,7 +84,7 @@ function( A, M )
         od;
         imact[i] := AlgebraGeneralMappingByImages( B, B, genB, imi );
     od;
-    C := AlgebraByGenerators( Rationals, imact );
+    C := AlgebraByGenerators( DA, imact );
     if HasName( B ) then
         SetName( C, Concatenation( "Act(", Name(B), ")" ) );
     fi;
@@ -119,3 +116,34 @@ function( A, M )
     fi;
     return PM;
 end );
+
+
+############################  direct sum operations  ####################### 
+
+#############################################################################
+##
+#F  AlgebraActionByHomomorphism( <hom> <alg> )
+##
+InstallMethod( AlgebraActionByHomomorphism, 
+    "for an algebra homomorphism and an algebra", true,
+    [ IsAlgebraHomomorphism, IsAlgebra ], 0,
+function ( hom, A )
+    local C, genC;
+    if not IsAlgebraAction( hom ) then
+        Info( InfoXModAlg, 1, "hom is not an algebra action" );
+        return fail;
+    fi;
+    C := Range( hom );
+    genC := GeneratorsOfAlgebra( C );
+    if not ( A = Source( genC[1] ) ) then
+        Info( InfoXModAlg, 1, "Range(hom) not isomorphisms of A" );
+        return fail;
+    fi;
+    SetAlgebraActionType( hom, "homomorphism" );
+    SetAlgebraActedOn( hom, A );
+    return hom;
+end );
+
+############################  direct sum operations  ####################### 
+
+

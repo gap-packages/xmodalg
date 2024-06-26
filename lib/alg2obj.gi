@@ -50,7 +50,7 @@ function( obj, src, rng )
 end );
 
 
-#########################  (pre-)crossed modules  ######################### 
+#########################  (pre-)crossed algebras  ######################## 
 
 ###########################################################################
 ##
@@ -71,26 +71,29 @@ function( P )
     act := XModAlgebraAction( P );
     # Check  P.boundary: P.source -> P.range
     if not ( ( Source( bdy ) = S ) and ( Range( bdy ) = R ) ) then
+        Info( InfoXModAlg, 1, "source/range error" );
         return false;
     fi;
     # checking
     if not IsAlgebraHomomorphism( bdy ) then
+        Info( InfoXModAlg, 1, "bdy is not a homomorphism" );
         return false;
     fi;
     if not ( ( Source( act ) = R ) ) then
+        Info( InfoXModAlg, 1, "Source( act ) <> R" );
         return false;
     fi; 
     genR := GeneratorsOfAlgebra( R );
     genS := GeneratorsOfAlgebra( S ); 
     for r in genR do 
-        m := ImageElm( act, r ); 
+        m := ImageElm( act, r );
         for s in genS do 
             ims := Image( bdy, s ); 
-            acts := Image( m, s ); 
+            acts := Image( m, s );
             z1 := ImageElm( bdy, acts ); 
             z2 := r * ims; 
-            if not ( z1 = z2 ) then 
-                Info( InfoXModAlg, 1, z1, " <> ", z2 ); 
+            if not ( z1 = z2 ) then
+                Info( InfoXModAlg, 1, "XModAlg 1: ", z1, " <> ", z2 ); 
                 return false; 
             fi; 
         od; 
@@ -106,11 +109,15 @@ InstallMethod( XModAlgebraObj, "for homomorphism and action", true,
     [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
 function( bdy, act )
 
-    local A, B, filter, fam, PM, AB, BB;
-    fam := Family2dAlgebra;
-    filter := IsPreXModAlgebraObj;
+    local A, B, DA, DB, type, PM, AB, BB;
+    type := PreXModAlgebraObjType;
     B := Source( bdy );
     A := Range( bdy );
+    DA := LeftActingDomain( A );
+    DB := LeftActingDomain( B );
+    if not ( DA = DB ) then 
+        Error( "conflicting domains" );
+    fi;
     AB := Source( act );
     BB := Range( act );
     if ( IsLeftModuleGeneralMapping( act ) = true ) then
@@ -122,21 +129,22 @@ function( bdy, act )
             return fail;
         fi;
     fi;
-    
-    ## ????  should there be any tests for condition XModAlg1 here ????
 
+    ## create the object
     PM := rec();
-    ObjectifyWithAttributes( PM, NewType( fam, filter ),
+    ObjectifyWithAttributes( PM, type,
         Source, B,
         Range, A,
         Boundary, bdy,
         XModAlgebraAction, act,
+        LeftActingDomain, DA,
         IsPreXModDomain, true,
         Is2dAlgebraObject, true );
+
+    ## check axiom XModAlg1
     if not IsPreXModAlgebra( PM ) then
-        return false;
+        return fail;
     fi;
-    #   name := Name( PM );
     return PM;
 end );
 
@@ -174,7 +182,7 @@ function ( P, Q )
     else
         gS := S;        
     fi; 
-    #####£ 
+    ######
     for r in gR do
         for s in gS do
         im1 := Image( aP, [r,s] );
@@ -380,24 +388,11 @@ InstallMethod( PreXModAlgebraByBoundaryAndAction,
     true, [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
     
 function( bdy, act )
-
-    local  B, BB, A, obj;
-    
-    if ( IsLeftModuleGeneralMapping(act) = true ) then
-        ### yeni_yontem
-    else
-        ### eski_yontem
-        B := Source( bdy );
-        A := Range( bdy );
-        BB := Range( act );
-        if not ( BB = B ) then
-            Info( InfoXModAlg, 2,
-              "The range group is not the source of the action." );
-            return fail;
-        fi;
+    if not ( Source( act ) = Range( bdy ) ) then 
+        Info( InfoXModAlg, 1, "Source(act) <> Range(bdy)" );
+        return fail;
     fi;
-    obj := XModAlgebraObj( bdy, act );
-    return obj;
+    return XModAlgebraObj( bdy, act );
 end );
 
 ############################################################################
@@ -413,7 +408,7 @@ function( bdy, act )
 
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     if not IsXModAlgebra( PM ) then
-        Error( "this boundary and action only defines a pre-crossed module" );
+        Error( "boundary and action only define a pre-crossed module" );
     fi;
     return PM;
 end );

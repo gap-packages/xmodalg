@@ -30,6 +30,11 @@ DeclareProperty( "IsPreXModAlgebra", Is2dAlgebra );
 DeclareProperty( "IsXModAlgebra", Is2dAlgebra );
 InstallTrueMethod( IsPreXModAlgebra, IsXModAlgebra );
 
+BindGlobal( "PreXModAlgebraObjType",
+    NewType( Family2dAlgebra, IsPreXModAlgebraObj ) );
+BindGlobal( "PreCat1AlgebraObjType",
+    NewType( Family2dAlgebra, IsPreCat1AlgebraObj ) );
+
 DeclareAttribute( "XModAlgebraAction", IsPreXModAlgebra );
 
 DeclareOperation( "XModAlgebraObj",

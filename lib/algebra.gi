@@ -88,7 +88,7 @@ end );
 
 #############################################################################
 ##
-#F  MultiplierAlgebraOfIdealBySubalgebra( <A I B> )
+#M  MultiplierAlgebraOfIdealBySubalgebra( <A I B> )
 ## 
 InstallMethod( MultiplierAlgebraOfIdealBySubalgebra, 
     "for an algebra, an ideal, and a subalgebra", true,  
@@ -118,7 +118,7 @@ end );
 
 #############################################################################
 ##
-#F  MultiplierAlgebra( <A> )
+#M  MultiplierAlgebra( <A> )
 ## 
 InstallMethod( MultiplierAlgebra, "generic method for an algebra", 
     true, [ IsAlgebra  ], 0,
@@ -128,7 +128,7 @@ end );
 
 #############################################################################
 ##
-#F  MultiplierAlgebraByGenerators 
+#M  MultiplierAlgebraByGenerators 
 ## 
 InstallMethod( MultiplierAlgebraByGenerators, 
     "generic method for an algebra and a list of multipliers", true, 
@@ -475,28 +475,30 @@ end);
 
 #############################################################################
 ##
-#F  IsAlgebraAction( <fun> )
+#M  IsAlgebraAction( <hom> )
 ##
-InstallMethod( IsAlgebraAction, "for a mapping", true, [ IsMapping ], 0,
-function ( ac )
-    local AB,A,B,uzB,uzA,j,i,k; 
-    # mapping <map>, result
-    AB := Source(ac);
-    B := Elements(Range(ac));
-    A := Elements(LeftElementOfCartesianProduct(ac));
-    uzB := Length(B);
-    uzA := Length(A);
-    for j in [1..uzB] do
-        if One(LeftElementOfCartesianProduct(ac))*B[j]<>B[j] then
+InstallMethod( IsAlgebraAction, "for an algebra homomorphism", true,
+    [ IsAlgebraHomomorphism ], 0,
+function ( hom )
+    local A, C, genC, g1, g;
+    C := Range( hom );
+    ## check that C is an algebra of isomorphism of A
+    genC := GeneratorsOfAlgebra( C );
+    g1 := genC[1];
+    if not IsLeftModuleHomomorphism( g1 ) then
+        Info( InfoXModAlg, 1, "g1 is not a left module homomorphism" );
+        return false;
+    fi;
+    A := Source( g1 );
+    for g in genC do
+        if not ( Source( g ) = A ) and ( Range( g ) = A ) then
+            Info( InfoXModAlg, 1, "source and/or range <> A" );
             return false;
         fi;
-        for k in [1..uzA] do
-            for i in [1..uzA] do 
-                if (((A[k]*A[i])*B[j])<>(A[k]*(A[i]*B[j]))) then
-                    return false;
-                fi;
-            od;
-       od;
+        if not IsBijective( g ) then
+            Info( InfoXModAlg, 1, "a generator of C is not bijective" );
+            return false;
+        fi;
     od;
     return true;
 end );
@@ -514,17 +516,18 @@ function( arg )
     # Algebra, Ideal, and Subalgebra
     if ( ( nargs = 3 ) and ForAll( arg, IsAlgebra ) ) then
         return AlgebraActionByMultipliers( arg[1], arg[2], arg[3] );
-    # Multiplier Action
-    elif ( ( nargs = 1 ) and IsAlgebra( arg[1] ) ) then
-        return AlgebraAction2( arg[1] );
+    # module and zero map
+    elif ( ( nargs = 2 ) and IsAlgebra( arg[1] ) 
+                         and IsLeftModule( arg[2] ) ) then
+        return AlgebraActionByModule( arg[1],arg[2] );
+    # action homomorphism and algebra acted on
+    elif ( nargs = 2 ) and IsAlgebraHomomorphism( arg[1] )
+                       and IsAlgebra( arg[2] ) then
+        return AlgebraActionByHomomorphism( arg[1], arg[2] );
     # surjective homomorphism
     elif ( ( nargs = 1 ) and IsAlgebraHomomorphism( arg[1] )
                          and IsSurjective( arg[1] ) ) then
         return AlgebraActionBySurjection( arg[1] );
-    # module and zero map
-    elif ( ( nargs = 2 ) and IsAlgebra( arg[1] ) 
-                         and IsLeftModule( arg[2] ) ) then
-        return AlgebraActionByModule( arg[1],arg[2] );   
     fi;
     # alternatives not allowed
     Error( "usage: AlgebraAction( A, I, B );  or various options" );
@@ -543,33 +546,8 @@ function ( A, I, B )
     act := MultiplierHomomorphism( M );
     SetIsAlgebraAction( act, true );
     SetAlgebraActionType( act, "multiplier" );
+    SetAlgebraActedOn( act, M );
     SetHasZeroModuleProduct( act, false );
-    return act;
-end );
-
-#############################################################################
-##
-#F  AlgebraAction2( <A> )
-##
-InstallMethod( AlgebraAction2, "for an algebra", true, [ IsAlgebra ], 0,
-function ( A )
-    local act,MA,MAA;        # mapping <map>, result
-    MA := MultiplierAlgebra(A);
-    MAA := DirectSumOfAlgebras( MA, A );
-##    MAA :=  := Cartesian(MA,A);
-    act := rec( fun:= x->Image(x[1],x[2]) );
-    ObjectifyWithAttributes( act, 
-        NewType( GeneralMappingsFamily( ElementsFamily(FamilyObj(MAA) ), 
-            ElementsFamily( FamilyObj(A) ) ),
-        IsSPMappingByFunctionRep and IsSingleValued
-            and IsTotal and IsGroupHomomorphism ),
-        LeftElementOfCartesianProduct, MA,
-        AlgebraActionType, "Type2",
-        Source, MAA,
-        Range, A,
-        HasZeroModuleProduct, false,
-        IsAlgebraAction, true );
-    # return the mapping
     return act;
 end );
 
@@ -622,6 +600,7 @@ function ( hom )
     act := LeftModuleGeneralMappingByImages( B, M, vecB, maps );
     SetIsAlgebraAction( act, true );
     SetAlgebraActionType( act, "surjection" );
+    SetAlgebraActedOn( act, A );
     SetHasZeroModuleProduct( act, false );
     return act;
 end );

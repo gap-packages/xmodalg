@@ -138,7 +138,9 @@ gap> Set( kpo );
   "IsRDistributive", "IsXModAlgebra" ]
 gap> kao := KnownAttributesOfObject( XIAk4 );;
 gap> Set( kao ); 
-[ "Boundary", "Name", "Range", "Size2d", "Source", "XModAlgebraAction" ]
+[ "Boundary", "LeftActingDomain", "Name", "Range", "Size2d", "Source\
+", 
+  "XModAlgebraAction" ]
 
 gap> ############################
 gap> ## Section 4.1.9

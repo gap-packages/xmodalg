@@ -1,5 +1,11 @@
 # CHANGES to the 'XModAlg' package
 
+## 1.25 -> 1.25dev (26/06/24) 
+ * (17/05/24) added operations for a module as an algebra,
+              revised XModAlgebraByModule
+ * (26/06/24) added AlgebraActionByHomomorphism,
+              changed the example of XModAlgebraByBoundaryAndAction
+
 ## 1.23 -> 1.25 (17/05/24) 
  * (17/05/24) just 5 PRs since 1.23 came out - mostly CI changes
 
