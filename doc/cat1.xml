@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  cat1.xml            XModAlg documentation               Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2022, Z. Arvasi & A. Odabas,                    --> 
+<!--  Copyright (C) 2014-2024, Z. Arvasi & A. Odabas,                    --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -37,9 +37,9 @@ algebra-algebroids, (Gaffar Musa's Ph.D. thesis, <Cite Key="mosa"/>).
 In this section we describe an implementation of cat<M>^{1}</M>-algebras 
 and their morphisms. 
 <P/>
-The notion of cat<M>^{1}</M>-groups was defined as an algebraic model 
+The notion of a cat<M>^{1}</M>-group was defined as an algebraic model 
 of <M>2</M>-types by Loday in <Cite Key="loday"/>. 
-Then Ellis defined the cat<M>^{1}</M>-algebras in <Cite Key="ellis1"/>.
+Then Ellis defined cat<M>^{1}</M>-algebras in <Cite Key="ellis1"/>.
 <P/>
 Let <M>A</M> and <M>R</M> be <M>k</M>-algebras, 
 let <M>t,h:A\rightarrow R</M> be surjections, 
@@ -72,7 +72,7 @@ The homomorphisms <M>t,h</M> and <M>e</M> are called the <E>tail map</E>,
          Arg="t h" />
    <Oper Name="PreCat1AlgebraByTailHeadEmbedding"
          Arg="t h e" />
-   <Oper Name="PreCat1Algebra"
+   <Func Name="PreCat1Algebra"
          Arg="args" />
    <Prop Name="IsIdentityCat1Algebra"
          Arg="C" />
@@ -81,14 +81,13 @@ The homomorphisms <M>t,h</M> and <M>e</M> are called the <E>tail map</E>,
    <Prop Name="IsPreCat1Algebra"
          Arg="C" />
 <Description>
-The operations listed above are used for construction of precat<M>^{1}</M>- 
-and cat<M>^{1}</M>-algebra structures. 
-The function <C>Cat1Algebra</C> selects the operation from the
-above implementations up to user's input. 
 The operations <C>PreCat1AlgebraByEndomorphisms</C> 
 and <C>PreCat1AlgebraByTailHeadEmbedding</C> 
 are used with particular choices of algebra homomorphisms. 
-
+The operations listed above are used for the construction of 
+precat<M>^{1}</M>- and cat<M>^{1}</M>-algebras. 
+The functions <C>PreCat1Algebra</C> and <C>Cat1Algebra</C>
+select the appropriate operation to suit the user's input. 
 </Description> 
 </ManSection> 
 
@@ -98,13 +97,15 @@ are used with particular choices of algebra homomorphisms.
          Arg="C" />
    <Attr Name="Range" Label="for cat1-algebras" 
          Arg="C" />
-   <Attr Name="TailMap"
+   <Attr Name="TailMap" Label="for cat1-algebras"
          Arg="C" />
-   <Attr Name="HeadMap"
+   <Attr Name="HeadMap" Label="for cat1-algebras"
          Arg="C" />
-   <Attr Name="RangeEmbedding"
+   <Attr Name="RangeEmbedding" Label="for cat1-algebras"
          Arg="C" />
    <Meth Name="Kernel" Label="for cat1-algebras"
+         Arg="C" />
+   <Attr Name="KernelEmbedding" Label="for cat1-algebras"
          Arg="C" />
    <Attr Name="Boundary" Label="for cat1-algebras"
          Arg="C" />
@@ -161,35 +162,37 @@ Cat1-algebra [..=>..] :-
 
 <ManSection>
    <Oper Name="Cat1AlgebraSelect"
-         Arg="n gpsize gpnum num" />
+         Arg="GFnum gpsize gpnum num" />
 <Description> 
-The <Ref Oper="Cat1Algebra"/> function may also be used to select a 
-cat<M>^{1}</M>-algebra from a data file. 
-All cat<M>^{1}</M>-structures on commutative algebras are stored in a list 
-in file <File>cat1algdata.g</File>. 
-The data is read into the list <C>CAT1ALG_LIST</C> 
+The <Ref Oper="Cat1Algebra"/> function may also be used to select certain 
+cat<M>^{1}</M>-group-algebras from the data file included with this package. 
+Data for these cat<M>^{1}</M>-structures on commutative group algebras is
+stored in a list in file <File>cat1algdata.g</File>. 
+This data is read into the list <C>CAT1ALG_LIST</C> 
 only when this function is called.
 <P/>
 The function <C>Cat1AlgebraSelect</C> may be used in four ways:
 <List>
 <Item> 
-<C>Cat1AlgebraSelect( n )</C> returns the list of possible sizes of groups 
-for group algebras with Galois field <M>GF(n)</M>. 
+<C>Cat1AlgebraSelect( n )</C> returns the list of possible group orders when
+Galois field <M>GF(n)</M>, with <M>n \in [2,3,4,5,7]</M>,
+is used to form cat<M>^1</M>-group-algebra structures. 
 </Item>
 <Item> 
-<C>Cat1AlgebraSelect( n, m )</C> returns the list of allowable 
-group numbers with given Galois field <M>GF(n)</M> 
-and groups of size <M>m</M>.
+<C>Cat1AlgebraSelect( n, m )</C> returns the list of available
+group numbers of size <M>m</M> with which to form
+cat<M>^1</M>-group-algebra structures with given Galois field <M>GF(n)</M>. 
 </Item>
 <Item> 
-<C>Cat1AlgebraSelect( n, m, k )</C> returns the list of possible 
-cat<M>^{1}</M>-algebra structures with given Galois field <M>GF(n)</M> 
+<C>Cat1AlgebraSelect( n, m, k )</C> prints the list of possible 
+cat<M>^{1}</M>-group-algebra structures with given Galois field <M>GF(n)</M> 
 and group number <M>k</M> of size <M>m</M>.
+The number of these structures is returned.
 </Item>
 <Item> 
 <C>Cat1AlgebraSelect( n, m, k, j )</C> 
 (or simply <C>Cat1Algebra( n, m, k, j )</C>) returns the 
-<M>j</M>-th cat<M>^{1}</M>-algebra structure with these other parameters.
+<M>j</M>-th cat<M>^{1}</M>-group-algebra structure with these other parameters.
 </Item>
 </List>
 Now, we give examples of the use of this function.
@@ -200,31 +203,29 @@ Now, we give examples of the use of this function.
 <Example>
 <![CDATA[
 gap> C := Cat1AlgebraSelect( 11 );
-|--------------------------------------------------------|
-| 11 is invalid number for Galois Field (GFnum)             |
-| Possible numbers for GFnum in the Data :              |
-|--------------------------------------------------------|
- [ 2, 3, 4, 5, 7 ]
+|--------------------------------------------------------| 
+| 11 is invalid value for the Galois Field (GFnum)       | 
+| Available values for GFnum in the data :               | 
+|--------------------------------------------------------| 
+ [ 2, 3, 4, 5, 7 ] 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 fail
 gap> C := Cat1AlgebraSelect( 4, 12 );
-|--------------------------------------------------------|
-| 12 is invalid number for size of group (gpsize)        |
-| Possible numbers for the gpsize for GF(4) in the Data: |
-|--------------------------------------------------------|
- [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+|--------------------------------------------------------| 
+| 12 is invalid value for size of group (gpsize)         | 
+| Available values for gpsize with GF(4) in the data:    | 
+|--------------------------------------------------------| 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
-fail
+[ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 gap> C := Cat1AlgebraSelect( 2, 6, 3 );
-|--------------------------------------------------------|
-| 3 is invalid number for group of order 6               |
-| Possible numbers for the gpnum in the Data :           |
-|--------------------------------------------------------|
- [ 1, 2 ]
+|--------------------------------------------------------| 
+| 3 is invalid value for groups of order 6               | 
+| Available values for gpnum for groups of size 6 :      | 
+|--------------------------------------------------------| 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
-fail
+[ 1, 2 ]
 gap> C := Cat1AlgebraSelect( 2, 6, 2 );
-There are 4 cat1-structures for the algebra GF(2)_c6.
+There are 4 cat1-structures for the group algebra GF(2)_c6.
  Range Alg      Tail                    Head
 |--------------------------------------------------------|
 | GF(2)_c6      identity map            identity map     |
@@ -235,14 +236,26 @@ There are 4 cat1-structures for the algebra GF(2)_c6.
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
 4
+]]>
+</Example>
+
+The algebra <C>GF(n)_gp</C> has a list of <M>n^{|gp|}</M> elements. 
+The <C>[2, 10]</C> in the second structure above
+indicates that the tail map, and also the head map, 
+of the cat<M>^1</M>-algebra maps the two generators of <C>c6</C>
+to the second and tenth elements of this algebra respectively.
+
+<Example>
+<![CDATA[
 gap> C0 := Cat1AlgebraSelect( 4, 6, 2, 2 );
 [GF(2^2)_c6 -> Algebra( GF(2^2), 
 [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+(
     Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ] )]
 gap> Size2d( C0 ); 
 [ 4096, 1024 ]
+gap> Dimension( C0 );
+[ 6, 5 ]
 gap> Display( C0 ); 
-
 Cat1-algebra [GF(2^2)_c6=>..] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ]
@@ -271,13 +284,13 @@ Cat1-algebra [GF(2^2)_c6=>..] :-
 
 <ManSection> 
    <Oper Name="SubCat1Algebra"
-         Arg="arg" />
+         Arg="alg src rng" />
    <Oper Name="SubPreCat1Algebra"
-         Arg="arg" />
-   <Prop Name="IsSubCat1Algebra"
-         Arg="arg" />
-   <Prop Name="IsSubPreCat1Algebra"
-         Arg="arg" />
+         Arg="alg src rng" />
+   <Oper Name="IsSubCat1Algebra"
+         Arg="alg sub" />
+   <Oper Name="IsSubPreCat1Algebra"
+         Arg="alg sub" />
 <Description> 
 Let <M>\mathcal{C} = (e;t,h:A\rightarrow R)</M> 
 be a cat<M>^{1}</M>-algebra, and let <M>A^{\prime}</M>, 
@@ -328,7 +341,6 @@ gap> CC3 := SubCat1Algebra( C3, AA3, BB3 );
 [Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) 
  ] ) -> Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*() ] )]
 gap> Display( CC3 );
-
 Cat1-algebra [..=>..] :-
 : source algebra has generators:
   [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
@@ -377,18 +389,20 @@ a cat<M>^{1}</M>-algebra morphism.
 
 
 <ManSection>
-   <Oper Name="Cat1AlgebraMorphism"
+   <Func Name="Cat1AlgebraMorphism"
+         Arg="arg" />
+   <Func Name="PreCat1AlgebraMorphism"
          Arg="arg" />
    <Meth Name="IdentityMapping" Label="for cat1-algebras" 
          Arg="C" />
    <Oper Name="PreCat1AlgebraMorphismByHoms"
-         Arg="f g" />
+         Arg="src rng srchom rnghom" />
    <Oper Name="Cat1AlgebraMorphismByHoms"
-         Arg="f g" />
+         Arg="src rng srchom rnghom" />
    <Prop Name="IsPreCat1AlgebraMorphism"
-         Arg="C" />
+         Arg="mor" />
    <Prop Name="IsCat1AlgebraMorphism"
-         Arg="arg" />
+         Arg="mor" />
 <Description> 
 These operations are used for constructing cat<M>^{1}</M>-algebra morphisms. 
 Details of the implementations can be found in <Cite Key="aodabas1"/>.
@@ -418,7 +432,6 @@ These are the six main attributes of a cat<M>^{1}</M>-algebra morphism.
 gap> C1 := Cat1Algebra( 2, 1, 1, 1 );
 [GF(2)_triv -> GF(2)_triv]
 gap> Display( C1 );
-
 Cat1-algebra [GF(2)_triv=>GF(2)_triv] :-
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
@@ -435,7 +448,6 @@ Cat1-algebra [GF(2)_triv=>GF(2)_triv] :-
 gap> C2 := Cat1Algebra( 2, 2, 1, 2 );
 [GF(2)_c2 -> GF(2)_triv]
 gap> Display( C2 );
-
 Cat1-algebra [GF(2)_c2=>GF(2)_triv] :-
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
@@ -453,7 +465,6 @@ Cat1-algebra [GF(2)_c2=>GF(2)_triv] :-
   [ <zero> of ... ]
 : kernel embedding maps generators of kernel to:
   [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
-
 gap> C1 = C2;
 false
 gap> R1 := Source( C1 );;
@@ -514,7 +525,6 @@ this operation returns the image crossed module.
 <![CDATA[
 gap> imm := ImagesSource2DimensionalMapping( m );;
 gap> Display( imm ); 
-
 Cat1-algebra [..=>..] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
@@ -527,7 +537,6 @@ Cat1-algebra [..=>..] :-
 : range embedding maps range generators to:
   [ (Z(2)^0)*() ]
 : the kernel is trivial.
-
 ]]>
 </Example>
 

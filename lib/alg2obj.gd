@@ -2,7 +2,7 @@
 ##
 #W  alg2obj.gd                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2021, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ##############################  2d-algebras  ########################### 
@@ -29,6 +29,11 @@ DeclareRepresentation( "IsPreCat1AlgebraObj",
 DeclareProperty( "IsPreXModAlgebra", Is2dAlgebra );
 DeclareProperty( "IsXModAlgebra", Is2dAlgebra );
 InstallTrueMethod( IsPreXModAlgebra, IsXModAlgebra );
+
+BindGlobal( "PreXModAlgebraObjType",
+    NewType( Family2dAlgebra, IsPreXModAlgebraObj ) );
+BindGlobal( "PreCat1AlgebraObjType",
+    NewType( Family2dAlgebra, IsPreCat1AlgebraObj ) );
 
 DeclareAttribute( "XModAlgebraAction", IsPreXModAlgebra );
 
