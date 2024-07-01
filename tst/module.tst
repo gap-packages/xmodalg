@@ -1,141 +1,141 @@
 ############################################################################
 ##
-#W  module3.tst             XModAlg test files                 Chris Wensley
+#W  module.tst              XModAlg test files                 Chris Wensley
 ##
-#@local level,m,Am,G,AG,g,mug,MAG,hom,act,bdy,Xm,A3,V3,M3,famM3,v,v2,genM3,u2,u,D3,T3,B3a,B3,M2B3,B2M3,act3,a,X3,C3
+#@local level,m3,A3,G,B3,g3,mg3,MB3,homB3,actB3,bdyB3,XB3,A4,V4,M4,famM4,v4,genM4,u4,D4,T4,B4a,B4,M2B4,B2M4,act4,a4,X4,C4,A3B3,actA3,actAB
 
-gap> START_TEST( "XModAlg package: module3.tst" );
+gap> START_TEST( "XModAlg package: module.tst" );
 gap> level := InfoLevel( InfoXModAlg );; 
 gap> SetInfoLevel( InfoXModAlg, 0 );
 
-## Chapter 2, Section 2.2.3
-gap> m := [ [0,1,0], [0,0,1], [1,0,0,] ];;
-gap> Am := Algebra( Rationals, [m] );;
-gap> SetName( Am, "Am" );;
+## Section 2.2.4
+gap> m3 := [ [0,1,0], [0,0,1], [1,0,0,] ];;
+gap> A3 := Algebra( Rationals, [m3] );;
+gap> SetName( A3, "A3" );;
 gap> G := Group( (1,2,3) );;
-gap> AG := GroupRing( Rationals, G );;
-gap> SetName( AG, "GR(G)" );
-gap> g := GeneratorsOfAlgebra( AG )[2];;
-gap> mug := RegularAlgebraMultiplier( AG, AG, g );;
-gap> MAG := AlgebraByGenerators( Rationals, [ mug ] );;
-gap> hom := AlgebraHomomorphismByImages( Am, MAG, [ m ], [ mug ] );;
-gap> act := AlgebraActionByHomomorphism( hom, AG );
+gap> B3 := GroupRing( Rationals, G );;
+gap> SetName( B3, "GR(G)" );
+gap> g3 := GeneratorsOfAlgebra( B3 )[2];;
+gap> mg3 := RegularAlgebraMultiplier( B3, B3, g3 );;
+gap> MB3 := AlgebraByGenerators( Rationals, [ mg3 ] );;
+gap> homB3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );;
+gap> actB3 := AlgebraActionByHomomorphism( homB3, B3 );
 [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> 
 [ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
     ] ]
 
-## Chapter 4, Section 4.1.6
-gap> hom := AlgebraHomomorphismByImages( Am, MAG, [ m ], [ mug ] );
+## Section 4.1.6
+gap> homB3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );
 [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> 
 [ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
      ] ]
-gap> bdy := AlgebraHomomorphismByImages( AG, Am, [ g ], [ m ] );
+gap> bdyB3 := AlgebraHomomorphismByImages( B3, A3, [ g3 ], [ m3 ] );
 [ (1)*(1,2,3) ] -> [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
-gap> Xm := XModAlgebraByBoundaryAndAction( bdy, act );
-[ GR(G) -> Am ]
-gap> Display( Xm );
+gap> XB3 := XModAlgebraByBoundaryAndAction( bdyB3, actB3 );
+[ GR(G) -> A3 ]
+gap> Display( XB3 );
 
-Crossed module [GR(G) -> Am] :- 
+Crossed module [GR(G) -> A3] :- 
 : Source algebra GR(G) has generators:
   [ (1)*(), (1)*(1,2,3) ]
-: Range algebra Am has generators:
+: Range algebra A3 has generators:
   [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
 : Boundary homomorphism maps source generators to:
   [ [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
   [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
 
-## Chapter 2, Section 2.2.4
-gap> m := [ [0,1,0], [0,0,1], [1,0,0] ];;
-gap> A3 := Algebra( Rationals, [m] );;
-gap> SetName( A3, "A3" );;
-gap> V3 := Rationals^3;;
-gap> M3 := LeftAlgebraModule( A3, \*, V3 );;
-gap> SetName( M3, "M3" );
-gap> famM3 := ElementsFamily( FamilyObj( M3 ) );;
-gap> v := [3,4,5];;
-gap> v2 := ObjByExtRep( famM3, v );
+## Section 2.3
+gap> m3 := [ [0,1,0], [0,0,1], [1,0,0] ];;
+gap> A4 := Algebra( Rationals, [m3] );;
+gap> SetName( A4, "A4" );;
+gap> V4 := Rationals^3;;
+gap> M4 := LeftAlgebraModule( A4, \*, V4 );;
+gap> SetName( M4, "M4" );
+gap> famM4 := ElementsFamily( FamilyObj( M4 ) );;
+gap> v4 := [3,4,5];;
+gap> v4 := ObjByExtRep( famM4, v4 );
 [ 3, 4, 5 ]
-gap> m*v2;
+gap> m3*v4;
 [ 4, 5, 3 ]
-gap> genM3 := GeneratorsOfLeftModule( M3 );;
-gap> u2 := 6*genM3[1] + 7*genM3[2] + 8*genM3[3];
+gap> genM4 := GeneratorsOfLeftModule( M4 );;
+gap> u4 := 6*genM4[1] + 7*genM4[2] + 8*genM4[3];
 [ 6, 7, 8 ]
-gap> u := ExtRepOfObj( u2 );
+gap> u4 := ExtRepOfObj( u4 );
 [ 6, 7, 8 ]
 
-## Chapter 2, Section 2.2.5
-gap> D3 := LeftActingDomain( M3 );;
-gap> T3 := EmptySCTable( Dimension(M3), Zero(D3), "symmetric" );;
-gap> B3a := AlgebraByStructureConstants( D3, T3 );
+## Section 2.3.1
+gap> D4 := LeftActingDomain( M4 );;
+gap> T4 := EmptySCTable( Dimension(M4), Zero(D4), "symmetric" );;
+gap> B4a := AlgebraByStructureConstants( D4, T4 );
 <algebra of dimension 3 over Rationals>
-gap> GeneratorsOfAlgebra( B3a );
+gap> GeneratorsOfAlgebra( B4a );
 [ v.1, v.2, v.3 ]
-gap> B3 := ModuleAsAlgebra( M3 );               
-A(M3)
-gap> GeneratorsOfAlgebra( B3 );
+gap> B4 := ModuleAsAlgebra( M4 );               
+A(M4)
+gap> GeneratorsOfAlgebra( B4 );
 [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ]
 
-## Chapter 2, Section 2.2.6
-gap> IsModuleAsAlgebra( B3 );
+## Section 2.3.2
+gap> IsModuleAsAlgebra( B4 );
 true
-gap> IsModuleAsAlgebra( A3 );
+gap> IsModuleAsAlgebra( A4 );
 false
 
-## Chapter 2, Section 2.2.7
-gap> KnownAttributesOfObject( B3 );
+## Section 2.3.3
+gap> KnownAttributesOfObject( B4 );
 [ "Name", "ZeroImmutable", "LeftActingDomain", "Dimension",
   "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing",
   "ModuleToAlgebraIsomorphism", "AlgebraToModuleIsomorphism" ]
-gap> M2B3 := ModuleToAlgebraIsomorphism( B3 );
+gap> M2B4 := ModuleToAlgebraIsomorphism( B4 );
 [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] -> [ [[ 1, 0, 0 ]], [[ 0, \
 1, 0 ]], 
   [[ 0, 0, 1 ]] ]
-gap> Source( M2B3 ) = M3;
+gap> Source( M2B4 ) = M4;
 false
-gap> Source( M2B3 ) = V3;
+gap> Source( M2B4 ) = V4;
 true
-gap> B2M3 := AlgebraToModuleIsomorphism( B3 );
+gap> B2M4 := AlgebraToModuleIsomorphism( B4 );
 [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ->
 [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ]
-gap> Range( B2M3 ) = M3;
+gap> Range( B2M4 ) = M4;
 false
-gap> Range( B2M3 ) = V3;
+gap> Range( B2M4 ) = V4;
 true
 
-## Chapter 2, Section 2.2.8
-gap> act3 := AlgebraActionByModule( A3, M3 );
+## Section 2.3.4
+gap> act4 := AlgebraActionByModule( A4, M4 );
 [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> 
 [ [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] -> 
     [ [[ 0, 0, 1 ]], [[ 1, 0, 0 ]], [[ 0, 1, 0 ]] ] ]
-gap> a := 2*m + 3*m^2;
+gap> a4 := 2*m3 + 3*m3^2;
 [ [ 0, 2, 3 ], [ 3, 0, 2 ], [ 2, 3, 0 ] ]
-gap> Image( act3, a );
-Basis( A(M3), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -> 
+gap> Image( act4, a4 );
+Basis( A(M4), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -> 
 [ (3)*[[ 0, 1, 0 ]]+(2)*[[ 0, 0, 1 ]], (2)*[[ 1, 0, 0 ]]+(3)*[[ 0, 0, 1 ]], 
   (3)*[[ 1, 0, 0 ]]+(2)*[[ 0, 1, 0 ]] ]
-gap> Image( act3 );
+gap> Image( act4 );
 <algebra over Rationals, with 1 generator>
 
-## Chapter 4, Section 4.1.7
-gap> X3 := XModAlgebraByModule( A3, M3 );
-[A(M3)->A3]
-gap> Display( X3 );
+## Section 4.1.7
+gap> X4 := XModAlgebraByModule( A4, M4 );
+[A(M4)->A4]
+gap> Display( X4 );
 
-Crossed module [A(M3)->A3] :- 
-: Source algebra A(M3) has generators:
+Crossed module [A(M4)->A4] :- 
+: Source algebra A(M4) has generators:
   [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ]
-: Range algebra A3 has generators:
+: Range algebra A4 has generators:
   [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
 : Boundary homomorphism maps source generators to:
   [ [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
 
-## Chapter 5, Section 5.1.1
-gap> C3 := Cat1AlgebraOfXModAlgebra( X3 );
-[A3 |X A(M3) -> A3]
-gap> Display( C3 );           
-Cat1-algebra [A3 |X A(M3)=>A3] :- 
+## Section 5.1.1
+gap> C4 := Cat1AlgebraOfXModAlgebra( X4 );
+[A4 |X A(M4) -> A4]
+gap> Display( C4 );           
+Cat1-algebra [A4 |X A(M4)=>A4] :- 
 :  range algebra has generators:
   [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
 : tail homomorphism = head homomorphism
@@ -151,9 +151,33 @@ Cat1-algebra [A3 |X A(M3)=>A3] :-
 : kernel has generators:
   [ v.4, v.5, v.6 ]
 
+## Section 2.4.1
+gap> A3B3 := DirectSumOfAlgebras( A3, B3 );;
+gap> SetDirectSumOfAlgebrasInfo( A3B3, 
+> rec( algebras := [A3,B3], first := [1,Dimension(A3)+1],
+>      embeddings := [ ], projections := [ ] ) );;
+
+## Section 2.4.2
+gap> Embedding( A3B3, 1 );
+Basis( A3, [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] ) -> [ v.1, v.2, v.3 ]
+gap> Embedding( A3B3, 2 );
+CanonicalBasis( GR(G) ) -> [ v.4, v.5, v.6 ]
+
+## Section 2.4.3
+gap> actA3 := AlgebraActionByMultipliers( A3, A3, A3 );;
+gap> actAB := AlgebraActionOnDirectSum( actA3, actB3 );
+[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] -> 
+[ [ v.1, v.2, v.3, v.4, v.5, v.6 ] -> [ v.2, v.3, v.1, v.5, v.6, v.4 ], 
+  [ v.1, v.2, v.3, v.4, v.5, v.6 ] -> [ v.3, v.1, v.2, v.6, v.4, v.5 ], 
+  [ v.1, v.2, v.3, v.4, v.5, v.6 ] -> [ v.1, v.2, v.3, v.4, v.5, v.6 ] ]
+
 gap> SetInfoLevel( InfoXModAlg, level );; 
-gap> STOP_TEST( "module3.tst", 10000 );
+gap> STOP_TEST( "module.tst", 10000 );
 
 ############################################################################
 ##
-#E  module3.tst . . . . . . . . . . . . . . . . . . . . . . . . . ends here
+#E  module.tst . . . . . . . . . . . . . . . . . . . . . . . . . . ends here

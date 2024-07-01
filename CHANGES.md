@@ -1,6 +1,8 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.25 -> 1.25dev (26/06/24) 
+## 1.25 -> 1.25dev (01/07/24) 
+ * (01/07/24) renamed the actions and algebras in the tests/examples as 
+              act1, act, ,,,  and added AlgebraActionOnDirectSum
  * (17/05/24) added operations for a module as an algebra,
               revised XModAlgebraByModule
  * (26/06/24) added AlgebraActionByHomomorphism,

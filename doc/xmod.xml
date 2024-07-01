@@ -180,13 +180,12 @@ Continuing with the example in that section,
 
 <Example>
 <![CDATA[
-gap> X3 := XModAlgebraBySurjection( nat3 );; 
-gap> Display( X3 ); 
-
-Crossed module [A1->Q13] :- 
-: Source algebra A1 has generators:
+gap> X2 := XModAlgebraBySurjection( nat2 );; 
+gap> Display( X2 ); 
+Crossed module [A2->Q2] :- 
+: Source algebra A2 has generators:
   [ [ [ 0, 1, 2, 3 ], [ 0, 0, 1, 2 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ] ] ]
-: Range algebra Q13 has generators:
+: Range algebra Q2 has generators:
   [ v.1, v.2 ]
 : Boundary homomorphism maps source generators to:
   [ v.1 ]

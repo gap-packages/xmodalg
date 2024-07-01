@@ -546,7 +546,7 @@ function ( A, I, B )
     act := MultiplierHomomorphism( M );
     SetIsAlgebraAction( act, true );
     SetAlgebraActionType( act, "multiplier" );
-    SetAlgebraActedOn( act, M );
+    SetAlgebraActedOn( act, B );
     SetHasZeroModuleProduct( act, false );
     return act;
 end );
