@@ -78,38 +78,36 @@ Cat1-algebra [..=>..] :-
 ############################
 ## Chapter 3,  Section 3.1.3
 gap> C := Cat1AlgebraSelect( 11 );
-|--------------------------------------------------------|
-| 11 is invalid number for Galois Field (GFnum)             |
-| Possible numbers for GFnum in the Data :              |
-|--------------------------------------------------------|
- [ 2, 3, 4, 5, 7 ]
+|--------------------------------------------------------| 
+| 11 is invalid value for the Galois Field (GFnum) 	 | 
+| Available values for GFnum in the data : 	 	 | 
+|--------------------------------------------------------| 
+ [ 2, 3, 4, 5, 7 ] 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 fail
 gap> C := Cat1AlgebraSelect( 4, 12 );
-|--------------------------------------------------------|
-| 12 is invalid number for size of group (gpsize)        |
-| Possible numbers for the gpsize for GF(4) in the Data: |
-|--------------------------------------------------------|
- [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+|--------------------------------------------------------| 
+| 12 is invalid value for size of group (gpsize)  	 | 
+| Available values for gpsize with GF(4) in the data: 	 | 
+|--------------------------------------------------------| 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
-fail
+[ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 gap> C := Cat1AlgebraSelect( 2, 6, 3 );
-|--------------------------------------------------------|
-| 3 is invalid number for group of order 6               |
-| Possible numbers for the gpnum in the Data :           |
-|--------------------------------------------------------|
- [ 1, 2 ]
+|--------------------------------------------------------| 
+| 3 is invalid value for groups of order 6	 	 | 
+| Available values for gpnum for groups of size 6 : 	 | 
+|--------------------------------------------------------| 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
-fail
+[ 1, 2 ]
 gap> C := Cat1AlgebraSelect( 2, 6, 2 );
-There are 4 cat1-structures for the algebra GF(2)_c6.
- Range Alg      Tail                    Head
-|--------------------------------------------------------|
-| GF(2)_c6      identity map            identity map     |
-| -----         [ 2, 10 ]               [ 2, 10 ]        |
-| -----         [ 2, 14 ]               [ 2, 14 ]        |
-| -----         [ 2, 50 ]               [ 2, 50 ]        |
-|--------------------------------------------------------|
+There are 4 cat1-structures for the group algebra GF(2)_c6.
+ Range Alg     	Tail       		Head      
+|--------------------------------------------------------| 
+| GF(2)_c6  	identity map 		identity map   	 |
+| ----- 	[ 2, 10 ]	 	[ 2, 10 ]	 | 
+| ----- 	[ 2, 14 ]	 	[ 2, 14 ]	 | 
+| ----- 	[ 2, 50 ]	 	[ 2, 50 ]	 | 
+|--------------------------------------------------------| 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
 4
@@ -120,7 +118,6 @@ gap> C0 := Cat1AlgebraSelect( 4, 6, 2, 2 );
 gap> Size2d( C0 ); 
 [ 4096, 1024 ]
 gap> Display( C0 ); 
-
 Cat1-algebra [GF(2^2)_c6=>..] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ]
@@ -167,7 +164,6 @@ gap> CC3 := SubCat1Algebra( C3, AA3, BB3 );
 [Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) 
  ] ) -> Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*() ] )]
 gap> Display( CC3 );
-
 Cat1-algebra [..=>..] :- 
 : source algebra has generators:
   [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
@@ -185,13 +181,14 @@ Cat1-algebra [..=>..] :-
   [ <zero> of ..., <zero> of ... ]
 : kernel embedding maps generators of kernel to:
   [ <zero> of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
+gap> IsSubCat1Algebra( C3, CC3 );
+true
 
 ############################ 
 ## Chapter 3,  Section 3.2.2
 gap> C1 := Cat1AlgebraSelect( 2, 1, 1, 1 );
 [GF(2)_triv -> GF(2)_triv]
 gap> Display( C1 );
-
 Cat1-algebra [GF(2)_triv=>GF(2)_triv] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
@@ -204,11 +201,9 @@ Cat1-algebra [GF(2)_triv=>GF(2)_triv] :-
 : range embedding maps range generators to:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
 : the kernel is trivial.
-
 gap> C2 := Cat1AlgebraSelect( 2, 2, 1, 2 );
 [GF(2)_c2 -> GF(2)_triv]
 gap> Display( C2 );                        
-
 Cat1-algebra [GF(2)_c2=>GF(2)_triv] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
@@ -226,7 +221,6 @@ Cat1-algebra [GF(2)_c2=>GF(2)_triv] :-
   [ <zero> of ... ]
 : kernel embedding maps generators of kernel to:
   [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
-
 gap> C1 = C2;
 false
 gap> R1 := Source( C1 );;
@@ -252,7 +246,7 @@ gap> f2 := AlgebraHomomorphismByImages( S1, S2, gS1, im2 );
 [ (Z(2)^0)*(), (Z(2)^0)*() ] -> [ (Z(2)^0)*(), (Z(2)^0)*() ]
 gap> m := Cat1AlgebraMorphism( C1, C2, f1, f2 );
 [[GF(2)_triv=>GF(2)_triv] => [GF(2)_c2=>GF(2)_triv]]
-gap> Display( m );          
+gap> Display( m );
 
 Morphism of cat1-algebras :- 
 : Source = [GF(2)_triv=>GF(2)_triv] with generating sets:
@@ -279,7 +273,6 @@ false
 ## Chapter 3, Section 3.2.3 
 gap> imm := ImagesSource2DimensionalMapping( m );;
 gap> Display( imm ); 
-
 Cat1-algebra [..=>..] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
@@ -292,7 +285,6 @@ Cat1-algebra [..=>..] :-
 : range embedding maps range generators to:
   [ (Z(2)^0)*() ]
 : the kernel is trivial.
-
 gap> SetInfoLevel( InfoXModAlg, saved_infolevel_xmodalg );; 
 gap> STOP_TEST( "cat1.tst", 10000 );
 

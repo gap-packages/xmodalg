@@ -1,4 +1,4 @@
-#############################################################################
+ #############################################################################
 ##
 #W  algebra.gd                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
@@ -37,15 +37,15 @@ DeclareOperation( "AllIdempotentAlgebraHomomorphisms",
 
 ##############################  algebra actions  #################### 
 
-DeclareProperty( "IsAlgebraAction", IsMapping );
+DeclareProperty( "IsAlgebraAction", IsAlgebraHomomorphism );
 DeclareGlobalFunction( "AlgebraAction" );
 DeclareAttribute( "LeftElementOfCartesianProduct", IsAlgebraAction );
 DeclareAttribute( "AlgebraActionType", IsAlgebraAction );
+DeclareAttribute( "AlgebraActedOn", IsAlgebraAction );
 DeclareAttribute( "HasZeroModuleProduct", IsAlgebraAction );
 
 DeclareOperation( "AlgebraActionByMultipliers", 
     [ IsAlgebra, IsAlgebra, IsAlgebra ] );
-DeclareOperation( "AlgebraAction2", [ IsAlgebra ] );
 DeclareOperation( "AlgebraActionBySurjection", [ IsAlgebraHomomorphism ] );
 
 DeclareOperation ( "SemidirectProductOfAlgebras", 

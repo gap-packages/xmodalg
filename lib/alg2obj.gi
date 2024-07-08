@@ -50,7 +50,7 @@ function( obj, src, rng )
 end );
 
 
-#########################  (pre-)crossed modules  ######################### 
+#########################  (pre-)crossed algebras  ######################## 
 
 ###########################################################################
 ##
@@ -71,26 +71,29 @@ function( P )
     act := XModAlgebraAction( P );
     # Check  P.boundary: P.source -> P.range
     if not ( ( Source( bdy ) = S ) and ( Range( bdy ) = R ) ) then
+        Info( InfoXModAlg, 1, "source/range error" );
         return false;
     fi;
     # checking
     if not IsAlgebraHomomorphism( bdy ) then
+        Info( InfoXModAlg, 1, "bdy is not a homomorphism" );
         return false;
     fi;
     if not ( ( Source( act ) = R ) ) then
+        Info( InfoXModAlg, 1, "Source( act ) <> R" );
         return false;
     fi; 
     genR := GeneratorsOfAlgebra( R );
     genS := GeneratorsOfAlgebra( S ); 
     for r in genR do 
-        m := ImageElm( act, r ); 
+        m := ImageElm( act, r );
         for s in genS do 
             ims := Image( bdy, s ); 
-            acts := Image( m, s ); 
+            acts := Image( m, s );
             z1 := ImageElm( bdy, acts ); 
             z2 := r * ims; 
-            if not ( z1 = z2 ) then 
-                Info( InfoXModAlg, 1, z1, " <> ", z2 ); 
+            if not ( z1 = z2 ) then
+                Info( InfoXModAlg, 1, "XModAlg 1: ", z1, " <> ", z2 ); 
                 return false; 
             fi; 
         od; 
@@ -101,16 +104,21 @@ end );
 ###########################################################################
 ##
 #M  XModAlgebraObj( <bdy>, <act> )  . . . . . . . make a pre-crossed module
+#M  XModAlgebraObjNC( <bdy>, <act> )  . . . . . . make a pre-crossed module
 ##
-InstallMethod( XModAlgebraObj, "for homomorphism and action", true,
+InstallMethod( XModAlgebraObjNC, "for homomorphism and action", true,
     [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
 function( bdy, act )
 
-    local A, B, filter, fam, PM, AB, BB;
-    fam := Family2dAlgebra;
-    filter := IsPreXModAlgebraObj;
+    local A, B, DA, DB, type, PM, AB, BB;
+    type := PreXModAlgebraObjType;
     B := Source( bdy );
     A := Range( bdy );
+    DA := LeftActingDomain( A );
+    DB := LeftActingDomain( B );
+    if not ( DA = DB ) then 
+        Error( "conflicting domains" );
+    fi;
     AB := Source( act );
     BB := Range( act );
     if ( IsLeftModuleGeneralMapping( act ) = true ) then
@@ -122,21 +130,28 @@ function( bdy, act )
             return fail;
         fi;
     fi;
-    
-    ## ????  should there be any tests for condition XModAlg1 here ????
-
+    ## create the object
     PM := rec();
-    ObjectifyWithAttributes( PM, NewType( fam, filter ),
+    ObjectifyWithAttributes( PM, type,
         Source, B,
         Range, A,
         Boundary, bdy,
         XModAlgebraAction, act,
+        LeftActingDomain, DA,
         IsPreXModDomain, true,
         Is2dAlgebraObject, true );
+    return PM;
+end );
+
+InstallMethod( XModAlgebraObj, "for homomorphism and action", true,
+    [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
+function( bdy, act )
+    local PM;
+    PM := XModAlgebraObjNC( bdy, act );
+    ## check axiom XModAlg1
     if not IsPreXModAlgebra( PM ) then
-        return false;
+        return fail;
     fi;
-    #   name := Name( PM );
     return PM;
 end );
 
@@ -174,7 +189,7 @@ function ( P, Q )
     else
         gS := S;        
     fi; 
-    #####£ 
+    ######
     for r in gR do
         for s in gS do
         im1 := Image( aP, [r,s] );
@@ -374,47 +389,50 @@ end );
 ############################################################################
 ##
 #M  PreXModAlgebraByBoundaryAndAction
+#M  PreXModAlgebraByBoundaryAndActionNC
 ##
 InstallMethod( PreXModAlgebraByBoundaryAndAction,
     "pre-crossed module from boundary and action maps",
     true, [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
-    
 function( bdy, act )
-
-    local  B, BB, A, obj;
-    
-    if ( IsLeftModuleGeneralMapping(act) = true ) then
-        ### yeni_yontem
-    else
-        ### eski_yontem
-        B := Source( bdy );
-        A := Range( bdy );
-        BB := Range( act );
-        if not ( BB = B ) then
-            Info( InfoXModAlg, 2,
-              "The range group is not the source of the action." );
-            return fail;
-        fi;
+    if not ( Source( act ) = Range( bdy ) ) then 
+        Info( InfoXModAlg, 1, "Source(act) <> Range(bdy)" );
+        return fail;
     fi;
-    obj := XModAlgebraObj( bdy, act );
-    return obj;
+    return XModAlgebraObj( bdy, act );
+end );
+
+InstallMethod( PreXModAlgebraByBoundaryAndActionNC,
+    "pre-crossed module from boundary and action maps",
+    true, [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
+function( bdy, act )
+    return XModAlgebraObjNC( bdy, act );
 end );
 
 ############################################################################
 ##
 #M  XModAlgebraByBoundaryAndAction
+#M  XModAlgebraByBoundaryAndActionNC
 ##
 InstallMethod( XModAlgebraByBoundaryAndAction,
     "crossed module from boundary and action maps", true,
     [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
 function( bdy, act )
-
     local  PM;
-
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     if not IsXModAlgebra( PM ) then
-        Error( "this boundary and action only defines a pre-crossed module" );
+        Error( "boundary and action only define a pre-crossed module" );
     fi;
+    return PM;
+end );
+
+InstallMethod( XModAlgebraByBoundaryAndActionNC,
+    "crossed module from boundary and action maps", true,
+    [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
+function( bdy, act )
+    local  PM;
+    PM := PreXModAlgebraByBoundaryAndActionNC( bdy, act );
+    SetIsXModAlgebra( PM, true );
     return PM;
 end );
 
@@ -1247,29 +1265,30 @@ end );
 ##                                       cat1-algebra from data in CAT1_LIST
 ##
 InstallOtherMethod( Cat1AlgebraSelect, 
-    "construct a cat1-algebra using data in file", true, [ IsInt ], 0,
+    "construct a cat1-algebra using data file", true, [ IsInt ], 0,
 function( gf )
     return Cat1AlgebraSelect( gf, 0, 0, 0 );
 end );
 
 InstallOtherMethod( Cat1AlgebraSelect, 
-    "construct a cat1-algebra using data in file", true, [ IsInt, IsInt ], 0,
+    "construct a cat1-algebra using data file", true, [ IsInt, IsInt ], 0,
 function( gf, size )
     return Cat1AlgebraSelect( gf, size, 0, 0 );
 end );
 
 InstallOtherMethod( Cat1AlgebraSelect, 
-    "construct a cat1-algebra using data in file", true, 
+    "construct a cat1-algebra using data file", true, 
     [ IsInt, IsInt, IsInt ], 0,
 function( gf, size, gpnum )
     return Cat1AlgebraSelect( gf, size, gpnum, 0 );
 end );
 
-InstallMethod( Cat1AlgebraSelect, "construct a cat1-algebra using data in file", 
+InstallMethod( Cat1AlgebraSelect, 
+    "construct a cat1-group-algebra using data file", 
     true, [ IsInt, IsInt, IsInt, IsInt ], 0,
 function( gf, size, gpnum, num )
 
-    local  ok, type, norm, usage, usage2, sizes, maxsize, maxgsize,
+    local  ok, type, norm, usage, usage2, sizes, maxsize, maxgsize, len,
            start, iso, count, pos, pos2, names, A, gA, B, H, emb, gB, 
            usage_list1, usage_list2, usage_list3, i, j, k, l, ncat1, 
            G, genG, M, L, genR, R, t, kert, e, h, imt, imh, C1A, XC, elA;
@@ -1283,9 +1302,11 @@ function( gf, size, gpnum, num )
      
     usage_list1 := Set(CAT1ALG_LIST, i -> i[1]);
     if not gf in usage_list1 then
-      Print( "|--------------------------------------------------------| \n" );   
-      Print( "| ",gf," is invalid number for Galois Field (GFnum) \t \t | \n");
-      Print( "| Possible numbers for GFnum in the Data : \t \t | \n");
+      Print( "|--------------------------------------------------------| \n" );
+      if ( gf <> 0 ) then
+        Print( "| ",gf," is invalid value for the Galois Field (GFnum) \t | \n");
+      fi;
+      Print( "| Available values for GFnum in the data : \t \t | \n");
       Print( "|--------------------------------------------------------| \n" ); 
       Print( " ",usage_list1," \n");
       Print( usage, "\n" );
@@ -1293,24 +1314,26 @@ function( gf, size, gpnum, num )
     fi;
     usage_list2 := Set(Filtered(CAT1ALG_LIST, i -> i[1]=gf), i -> i[2]);
     if not size in usage_list2 then
-      Print( "|--------------------------------------------------------| \n" );   
-      Print( "| ",size," is invalid number for size of group (gpsize)  \t | \n") ;
-      Print( "| Possible numbers for the gpsize for GF(",gf,") in the Data: | \n");
+      Print( "|--------------------------------------------------------| \n" );
+      if ( size <> 0 ) then
+        Print( "| ",size," is invalid value for size of group (gpsize)  \t | \n") ;
+      fi;
+      Print( "| Available values for gpsize with GF(",gf,") in the data: \t | \n");
       Print( "|--------------------------------------------------------| \n" ); 
-      Print( " ",usage_list2," \n");
       Print( usage, "\n" );
-      return fail;
+      return usage_list2;
     fi;
     usage_list3 := Set( Filtered( Filtered( CAT1ALG_LIST, i -> i[1] = gf), 
                         i -> i[2] = size ), i -> i[3] );
     if not gpnum in usage_list3 then
-      Print( "|--------------------------------------------------------| \n" );   
-      Print( "| ",gpnum," is invalid number for group of order ",size, "\t \t | \n");
-      Print( "| Possible numbers for the gpnum in the Data : \t \t | \n");
-      Print( "|--------------------------------------------------------| \n" ); 
-      Print( " ",usage_list3," \n");
+      Print( "|--------------------------------------------------------| \n" );
+      if ( gpnum <> 0 ) then
+        Print( "| ",gpnum," is invalid value for groups of order ",size, "\t \t | \n");
+      fi;
+      Print( "| Available values for gpnum for groups of size ",size," : \t | \n");
+      Print( "|--------------------------------------------------------| \n" );
       Print( usage, "\n" );
-      return fail;
+      return usage_list3;
     fi;
     maxgsize := CAT1ALG_LIST_GROUP_SIZES[gf+1]-CAT1ALG_LIST_GROUP_SIZES[gf];
     iso := CAT1ALG_LIST_CLASS_SIZES;
@@ -1353,13 +1376,16 @@ function( gf, size, gpnum, num )
     gA := GeneratorsOfAlgebra(A); 
     SetName( A, M[5] );   
     if not ( ( num >= 1 ) and ( num <= ncat1 ) ) then
-      Print( "There are ", ncat1, " cat1-structures for the algebra ");
+      Print( "There are ", ncat1, " cat1-structures for the group algebra ");
       Print( A, ".\n" ); 
       Print( " Range Alg     \tTail       \t\tHead      \n" ); 
       Print( "|--------------------------------------------------------| \n" );      
       Print( "| ", A, "  \tidentity map \t\tidentity map   \t |\n" ); 
       for i in [2..ncat1] do
-          Print( "| ",M[6][i-1][3]," \t",M[6][i-1][4]," \t\t",M[6][i-1][5], "\t | \n" );
+          len := Length( M[6][i-1][4] );
+          Print( "| ",M[6][i-1][3]," \t",M[6][i-1][4] );
+          if ( len<14 ) then Print( "\t" ); fi;
+          Print( " \t",M[6][i-1][5], "\t | \n" );
       od;              
       Print( "|--------------------------------------------------------| \n" ); 
       Print( usage, "\n" ); 
@@ -1373,7 +1399,7 @@ function( gf, size, gpnum, num )
         imt := L[4];
         imh := L[5];
     else
-        L := M[6][num-1]; 
+        L := M[6][num-1];
         if ( L[3] = "-----" ) then
             elA := Elements(A);;
             imt := [];

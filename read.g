@@ -7,8 +7,8 @@
 
 ## read the actual code 
 ReadPackage( "xmodalg", "lib/algebra.gi" );
-ReadPackage( "xmodalg", "lib/module.gi" );
 ReadPackage( "xmodalg", "lib/alg2obj.gi" );  
+ReadPackage( "xmodalg", "lib/module.gi" );
 ReadPackage( "xmodalg", "lib/alg2map.gi" );  
 
 ## temporary fix 

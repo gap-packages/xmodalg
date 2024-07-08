@@ -7,13 +7,13 @@ gap> saved_infolevel_xmodalg := InfoLevel( InfoXModAlg );;
 gap> SetInfoLevel( InfoXModAlg, 0 );
 
 ## make this test independent of algebra.tst
-gap> m := [ [0,1,2,3], [0,0,1,2], [0,0,0,1], [0,0,0,0] ];; 
-gap> A1 := Algebra( Rationals, [m] );;
-gap> SetName( A1, "A1" );
-gap> A3 := Subalgebra( A1, [m^3] );; 
-gap> nat3 := NaturalHomomorphismByIdeal( A1, A3 );; 
-gap> Q13 := Image( nat3 );;
-gap> SetName( Q13, "Q13" );
+gap> m2 := [ [0,1,2,3], [0,0,1,2], [0,0,0,1], [0,0,0,0] ];; 
+gap> A2 := Algebra( Rationals, [m2] );;
+gap> SetName( A2, "A2" );
+gap> S2 := Subalgebra( A2, [m2^3] );; 
+gap> nat2 := NaturalHomomorphismByIdeal( A2, S2 );; 
+gap> Q2 := Image( nat2 );;
+gap> SetName( Q2, "Q2" );
 
 ## Chapter 4, Section 4.1.2 
 gap> F := GF(5);;
@@ -64,27 +64,27 @@ gap> Size2d( XIAk4 );
 [ 125, 625 ]
 
 gap> ############################
-gap> ## Section 4.1.4
+gap> ## Section 4.1.5
 gap> XA := XModAlgebraByMultiplierAlgebra( A );
 [ A(l,m) -> <algebra of dimension 3 over GF(5)> ]
 gap> XModAlgebraAction( XA );
 IdentityMapping( <algebra of dimension 3 over GF(5)> )
 
 gap> ############################
-gap> ## Section 4.1.5
-gap> X3 := XModAlgebraBySurjection( nat3 );; 
-gap> Display( X3 ); 
+gap> ## Section 4.1.6
+gap> X2 := XModAlgebraBySurjection( nat2 );; 
+gap> Display( X2 ); 
 
-Crossed module [A1->Q13] :- 
-: Source algebra A1 has generators:
+Crossed module [A2->Q2] :- 
+: Source algebra A2 has generators:
   [ [ [ 0, 1, 2, 3 ], [ 0, 0, 1, 2 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ] ] ]
-: Range algebra Q13 has generators:
+: Range algebra Q2 has generators:
   [ v.1, v.2 ]
 : Boundary homomorphism maps source generators to:
   [ v.1 ]
 
 gap> ############################
-gap> ## Section 4.1.6
+gap> ## Section ???
 gap> G := SmallGroup( 4, 2 );
 <pc group of size 4 with 2 generators>
 gap> F := GaloisField( 4 );
@@ -138,10 +138,12 @@ gap> Set( kpo );
   "IsRDistributive", "IsXModAlgebra" ]
 gap> kao := KnownAttributesOfObject( XIAk4 );;
 gap> Set( kao ); 
-[ "Boundary", "Name", "Range", "Size2d", "Source", "XModAlgebraAction" ]
+[ "Boundary", "LeftActingDomain", "Name", "Range", "Size2d", "Source\
+", 
+  "XModAlgebraAction" ]
 
 gap> ############################
-gap> ## Section 4.1.9
+gap> ## Section 4.1.10
 gap> e4 := Elements( IAk4 )[4];
 (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
 gap> Je4 := Ideal( IAk4, [e4] );;
