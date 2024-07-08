@@ -14,7 +14,7 @@
 InstallMethod( AlgebraActionByHomomorphism, 
     "for an algebra homomorphism and an algebra", true,
     [ IsAlgebraHomomorphism, IsAlgebra ], 0,
-function ( hom, A )
+function ( hom, B )
     local C, genC;
     if not IsAlgebraAction( hom ) then
         Info( InfoXModAlg, 1, "hom is not an algebra action" );
@@ -22,12 +22,12 @@ function ( hom, A )
     fi;
     C := Range( hom );
     genC := GeneratorsOfAlgebra( C );
-    if not ( A = Source( genC[1] ) ) then
-        Info( InfoXModAlg, 1, "Range(hom) not isomorphisms of A" );
+    if not ( B = Source( genC[1] ) ) then
+        Info( InfoXModAlg, 1, "Range(hom) not isomorphisms of B" );
         return fail;
     fi;
     SetAlgebraActionType( hom, "homomorphism" );
-    SetAlgebraActedOn( hom, A );
+    SetAlgebraActedOn( hom, B );
     return hom;
 end );
 
@@ -116,6 +116,7 @@ function( A, M )
     fi;
     act := AlgebraGeneralMappingByImages( A, C, genA, imact );
     SetIsAlgebraAction( act, true );
+    SetAlgebraActedOn( act, B );
     SetAlgebraActionType( act, "module" );
     return act;
 end );
@@ -249,8 +250,107 @@ function( act1, act2 )
     C := AlgebraByGenerators( domA, genC );
     act := AlgebraHomomorphismByImages( A, C, genA, genC );
     SetIsAlgebraAction( act, true );
+    SetAlgebraActedOn( act, B );
+    SetAlgebraActionType( act, "on direct sum 1" );
+    return act;
+end );
+
+#############################################################################
+##
+#M  DirectSumAlgebraActions
+##
+InstallMethod( DirectSumAlgebraActions, "for two algebra actions", true,
+    [ IsAlgebraAction, IsAlgebraAction ], 0,
+function( act1, act2 )
+    local domA, A1, basA1, nA1, A2, basA2, nA2, A, basA, firstA,
+          B1, basB1, nB1, B2, basB2, nB2, B, basB, firstB, zB, zB1, zB2,
+          C1, basC1, nC1, C2, basC2, nC2, C, basC, c, imc, hom,
+          eA1, imA1, eA2, imA2, eB1, imB1, eB2, imB2, i, act;
+    A1 := Source( act1 );
+    domA := LeftActingDomain( A1 );
+    basA1 := BasisVectors( Basis( A1 ) );
+    nA1 := Length( basA1 );
+    B1 := AlgebraActedOn( act1 );
+    basB1 := BasisVectors( Basis( B1 ) );
+    nB1 := Length( basB1 );
+    C1 := Range( act1 );
+    basC1 := BasisVectors( Basis( C1 ) );
+    nC1 := Length( basC1 );
+    A2 := Source( act2 );
+    if not ( domA = LeftActingDomain( A2 ) ) then 
+        Error( "act1 and act2 have different left acting domains" );
+    fi;
+    basA2 := BasisVectors( Basis( A2 ) );
+    nA2 := Length( basA2 );
+    B2 := AlgebraActedOn( act2 );
+    basB2 := BasisVectors( Basis( B2 ) );
+    nB2 := Length( basB2 );
+    C2 := Range( act2 );
+    basC2 := BasisVectors( Basis( C2 ) );
+    nC2 := Length( basC2 );
+    A := DirectSumOfAlgebras( A1, A2 );
+    if HasName( A1 ) and HasName( A2 ) then 
+        SetName( A, Concatenation( Name(A1), "(+)", Name(A2) ) );
+    fi;
+    firstA := [ 1, 1 + Dimension( A1 ) ];
+    SetDirectSumOfAlgebrasInfo( A, 
+        rec( algebras := [ A1, A2 ],
+             first := firstA,
+             embeddings := [ ],
+             projections := [ ] ) );
+    eA1 := Embedding( A, 1 );
+    imA1 := List( [1..nA1], i -> ImageElm( eA1, basA1[i] ) );
+    eA2 := Embedding( A, 2 );
+    imA2 := List( [1..nA2], j -> ImageElm( eA2, basA2[j] ) );
+    basA := Concatenation( imA1, imA2 );
+    B := DirectSumOfAlgebras( B1, B2 );
+    if HasName( B1 ) and HasName( B2 ) then 
+        SetName( B, Concatenation( Name(B1), "(+)", Name(B2) ) );
+    fi;
+    firstB := [ 1, 1 + Dimension( B1 ) ];
+    SetDirectSumOfAlgebrasInfo( B, 
+        rec( algebras := [ B1, B2 ],
+             first := firstB,
+             embeddings := [ ],
+             projections := [ ] ) );
+    eB1 := Embedding( B, 1 );
+    imB1 := List( [1..nB1], i -> ImageElm( eB1, basB1[i] ) );
+    eB2 := Embedding( B, 2 );
+    imB2 := List( [1..nB2], j -> ImageElm( eB2, basB2[j] ) );
+    basB := Concatenation( imB1, imB2 );
+    basC := ListWithIdenticalEntries( nC1+nC2, 0 );
+    zB := Zero( B );
+    zB1 := List( [1..nB1], i -> zB );
+    zB2 := List( [1..nB2], i -> zB );
+    for i in [1..nC1] do
+        ## c := ImageElm( act1, basA1[i] );
+        c := basC1[i];
+        imc := List( basB1, b -> ImageElm( eB1, ImageElm( c, b ) ) );
+        imc := Concatenation( imc, zB2 );
+        hom := LeftModuleHomomorphismByImages( B, B, basB, imc );
+        if ( hom = fail ) then 
+            Print( "!!!  hom = fail  !!!\n" );
+        fi;
+        basC[i] := hom;
+    od;
+    for i in [1..nC2] do
+        ## c := ImageElm( act2, basA2[i] );
+        c := basC2[i];
+        imc := List( basB2, b -> ImageElm( eB2, ImageElm( c, b ) ) );
+        imc := Concatenation( zB1, imc );
+        hom := LeftModuleHomomorphismByImages( B, B, basB, imc );
+        basC[nC1+i] := hom;
+    od;
+
+    C := AlgebraByGenerators( domA, basC );
+    act := AlgebraGeneralMappingByImages( A, C, basA, basC );
+    SetIsAlgebraAction( act, true );
+    SetAlgebraActedOn( act, B );
     SetAlgebraActionType( act, "direct sum" );
     return act;
 end );
+
+
+
 
 

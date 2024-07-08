@@ -1,6 +1,6 @@
 ############################################################################
 ##
-#W  module3.g            XModAlg example files                 Chris Wensley 
+#W  module.g            XModAlg example files                 Chris Wensley 
 ## 
 
 LoadPackage( "xmodalg" );
@@ -16,9 +16,9 @@ SetName( B3, "GR(G)" );
 g3 := GeneratorsOfAlgebra( B3 )[2];;
 mg3 := RegularAlgebraMultiplier( B3, B3, g3 );;
 MB3 := AlgebraByGenerators( Rationals, [ mg3 ] );;
-homB3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );;
-actB3 := AlgebraActionByHomomorphism( homB3, B3 );
-Print ( "action actB3 of A3 on B3:\n", actB3, "\n" );
+hom3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );;
+act3 := AlgebraActionByHomomorphism( hom3, B3 );
+Print ( "action act3 of A3 on B3:\n", act3, "\n" );
 
 ## Section 2.3
 m3 := [ [0,1,0], [0,0,1], [1,0,0] ];;
@@ -86,21 +86,33 @@ Display( C4 );
 
 ## Section 2.4.1
 A3B3 := DirectSumOfAlgebras( A3, B3 );;
+SetName( A3B3, Concatenation( Name(A3), "(+)", Name(B3) ) );
 SetDirectSumOfAlgebrasInfo( A3B3, 
   rec( algebras := [A3,B3], first := [1,Dimension(A3)+1],
        embeddings := [ ], projections := [ ] ) );;
 
 ## Section 2.4.2
 Print( "\n first embedding into A3B3:\n", Embedding( A3B3, 1 ), "\n" );
-Print( "second embedding into A3B3:\n", Embedding( A3B3, 2 ), "\n" );
+Print( "second projection from A3B3:\n", Projection( A3B3, 2 ), "\n" );
 
 ## Section 2.4.3
-actA3 := AlgebraActionByMultipliers( A3, A3, A3 );;
-MA3 := AlgebraActedOn( actA3 );;
-SetName( MA3, "MA3" );
-SetName( Image( actA3 ), "imactA3" );
-SetName( Image( actB3 ), "imactB3" );
+actMA3 := AlgebraActionByMultipliers( A3, A3, A3 );;
+act5 := AlgebraActionOnDirectSum( actMA3, act3 );;
+Print( "\naction of A on the direct sum of A3 and B3\n", act5, "\n" );
 
+## Section 2.4.4
+act6 := DirectSumAlgebraActions( act3, act4 );;
+A6 := Source( act6 );
+B6 := AlgebraActedOn( act6 );
+Print( "\nact6 is the direct sum action of ", A6, " on ", B6, "\n" );
+em3 := ImageElm( Embedding( A6, 1 ), m3 ); 
+Print( "matrix m3 embeds in A6 as: ", em3, "\n" );
+iem3 := ImageElm( act6, em3 );                     
+Print( "the action act6 maps em3 to:\n", iem3, "\n" );
+ea4 := ImageElm( Embedding( A6, 2 ), a4 );
+Print( "matrix m4 embeds in A6 as: ", ea4, "\n" );
+iea4 := ImageElm( act6, ea4 );
+Print( "the action act6 maps ea4 to:\n", iea4, "\n" );
 
 ############################################################################
 ##

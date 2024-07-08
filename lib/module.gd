@@ -15,11 +15,11 @@
 ## <Oper Name="AlgebraActionByHomomorphism" Arg="hom alg" />
 ##
 ## <Description>
-## If <M>\alpha : B \to C</M> is an algebra homomorphism
+## If <M>\alpha : A \to C</M> is an algebra homomorphism
 ## where <M>C</M> is an algebra of left module isomorphisms
-## of an algebra <M>A</M>, then
-## <C>AlgebraActionByHomomorphism( alpha, A )</C>
-## attempts to return an action of <M>B</M> on <M>A</M>.
+## of an algebra <M>B</M>, then
+## <C>AlgebraActionByHomomorphism( alpha, B )</C>
+## attempts to return an action of <M>A</M> on <M>B</M>.
 ## <P/>
 ## In the example the matrix algebra <C>A3</C>
 ## and the group algebra <C>B3</C> are isomorphic algebras,
@@ -38,8 +38,8 @@
 ## gap> g3 := GeneratorsOfAlgebra( B3 )[2];;
 ## gap> mg3 := RegularAlgebraMultiplier( B3, B3, g3 );;
 ## gap> MB3 := AlgebraByGenerators( Rationals, [ mg3 ] );;
-## gap> homB3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );;
-## gap> actB3 := AlgebraActionByHomomorphism( homB3, B3 );
+## gap> hom3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );;
+## gap> act3 := AlgebraActionByHomomorphism( hom3, B3 );
 ## [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> 
 ## [ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
 ##     ] ]
@@ -69,15 +69,15 @@ DeclareOperation( "AlgebraActionByHomomorphism",
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> bdyB3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );
+## gap> bdy3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );
 ## [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> 
 ## [ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
 ##      ] ]
-## gap> bdyB3 := AlgebraHomomorphismByImages( B3, A3, [ g3 ], [ m3 ] );
+## gap> bdy3 := AlgebraHomomorphismByImages( B3, A3, [ g3 ], [ m3 ] );
 ## [ (1)*(1,2,3) ] -> [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
-## gap> XB3 := XModAlgebraByBoundaryAndAction( bdy5, act3 );
+## gap> X3 := XModAlgebraByBoundaryAndAction( bdy3, act3 );
 ## [ GR(G) -> A3 ]
-## gap> Display( XB3 );
+## gap> Display( X3 );
 ## Crossed module [GR(G) -> A3] :- 
 ## : Source algebra GR(G) has generators:
 ##   [ (1)*(), (1)*(1,2,3) ]
@@ -117,7 +117,7 @@ DeclareOperation( "PreXModAlgebraByBoundaryAndAction",
 ## <Example>
 ## <![CDATA[
 ## gap> m3 := [ [0,1,0], [0,0,1], [1,0,0] ];;
-## gap> A4 := Rationals^[3,3];;
+## gap> A4 := Algebra( Rationals, [m3] );;
 ## gap> SetName( A4, "A4" );;
 ## gap> V4 := Rationals^3;;
 ## gap> M4 := LeftAlgebraModule( A4, \*, V4 );;
@@ -386,6 +386,7 @@ DeclareOperation( "XModAlgebraByModule", [ IsAlgebra, IsLeftModule ] );
 ## <Example>
 ## <![CDATA[
 ## gap> A3B3 := DirectSumOfAlgebras( A3, B3 );;
+## gap> SetName( A3B3, Concatenation( Name(A3), "(+)", Name(B3) ) );
 ## gap> SetDirectSumOfAlgebrasInfo( A3B3,                             
 ## > rec( algebras := [A3,B3], first := [1,Dimension(A3)+1],                      
 ## >      embeddings := [ ], projections := [ ] ) );
@@ -419,9 +420,8 @@ DeclareAttribute( "DirectSumOfAlgebrasInfo", IsAlgebra, "mutable" );
 ##   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
 ##   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] ) -> [ v.1, v.2, v.3 ]
 ## gap> Projection( A3B3, 2 );
-## CanonicalBasis( <algebra of dimension 6 over Rationals> ) -> 
-## [ 0*[[ 1, 0, 0 ]], 0*[[ 1, 0, 0 ]], 0*[[ 1, 0, 0 ]], [[ 1, 0, 0 ]], 
-##   [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ]
+## CanonicalBasis( A3(+)GR(G) ) -> [ <zero> of ..., <zero> of ..., 
+##   <zero> of ..., (1)*(), (1)*(1,2,3), (1)*(1,3,2) ]
 ## ]]>
 ## </Example>
 ## <#/GAPDoc>
@@ -451,8 +451,8 @@ DeclareAttribute( "DirectSumOfAlgebrasInfo", IsAlgebra, "mutable" );
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> actA3 := AlgebraActionByMultipliers( A3, A3, A3 );;
-## gap> actAB := AlgebraActionOnDirectSum( actA3, actB3 );
+## gap> actMA3 := AlgebraActionByMultipliers( A3, A3, A3 );;
+## gap> act5 := AlgebraActionOnDirectSum( actMA3, act3 );
 ## [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
 ##   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
 ##   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] -> 
@@ -476,16 +476,35 @@ DeclareOperation( "AlgebraActionOnDirectSum",
 ##
 ## <Description>
 ## Let 
-## If <M>\alpha_1 : A_1 \to C_1</M> is an action on algebra <M>B_1</M>
+## If <M>\alpha_1 : A_1 \to C_1</M> is an action on algebra <M>B_1</M>,
 ## and <M>\alpha_2 : A_2 \to C_2</M> is an action on algebra <M>B_2</M>, 
 ## then <M>A_1 \oplus A_2</M> acts on the direct sum <M>B_1 \oplus B_2</M>
 ## by <M>(a_1,a_2) \cdot (b_1,b_2) = (a_1 \cdot b_1, a_2 \cdot b_2)</M>.
+## The example forms the direct sum of the actions constructed in
+## sections <Ref Sect="AlgebraActionBySurjection" /> 
+## and <Ref Sect="AlgebraActionByHomomorphism" />
 ## <P/>
 ## </Description>
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> 
+## gap> act6 := DirectSumAlgebraActions( act3, act4 );;
+## gap> A6 := Source( act6 );
+## A3(+)A4
+## gap> B6 := AlgebraActedOn( act6 );
+## GR(G)(+)A(M4)
+## gap> em3 := ImageElm( Embedding( A6, 1 ), m3 ); 
+## [ [ 0, 1, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], 
+##   [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ] ]
+## gap> ImageElm( act6, em3 );                     
+## Basis( GR(G)(+)A(M4), [ v.1, v.2, v.3, v.4, v.5, v.6 ] ) -> 
+## [ v.2, v.3, v.1, 0*v.1, 0*v.1, 0*v.1 ]
+## gap> ea4 := ImageElm( Embedding( A6, 2 ), a4 );
+## [ [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], 
+##   [ 0, 0, 0, 0, 2, 3 ], [ 0, 0, 0, 3, 0, 2 ], [ 0, 0, 0, 2, 3, 0 ] ]
+## gap> ImageElm( act6, ea4 );
+## Basis( GR(G)(+)A(M4), [ v.1, v.2, v.3, v.4, v.5, v.6 ] ) -> 
+## [ 0*v.1, 0*v.1, 0*v.1, (3)*v.5+(2)*v.6, (2)*v.4+(3)*v.6, (3)*v.4+(2)*v.5 ]
 ## ]]>
 ## </Example>
 ## <#/GAPDoc>
