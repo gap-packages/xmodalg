@@ -39,13 +39,20 @@ DeclareAttribute( "XModAlgebraAction", IsPreXModAlgebra );
 
 DeclareOperation( "XModAlgebraObj",
     [ IsAlgebraHomomorphism, IsAlgebraAction ] );
+DeclareOperation( "XModAlgebraObjNC",
+    [ IsAlgebraHomomorphism, IsAlgebraAction ] );
 
 DeclareOperation( "PreXModAlgebraByBoundaryAndAction",
+   [ IsAlgebraHomomorphism, IsAlgebraAction ] );
+DeclareOperation( "PreXModAlgebraByBoundaryAndActionNC",
    [ IsAlgebraHomomorphism, IsAlgebraAction ] );
  
 DeclareGlobalFunction( "XModAlgebra" );
 DeclareOperation( "XModAlgebraByBoundaryAndAction",
    [ IsAlgebraHomomorphism, IsAlgebraAction ] );
+DeclareOperation( "XModAlgebraByBoundaryAndActionNC",
+   [ IsAlgebraHomomorphism, IsAlgebraAction ] );
+
 DeclareOperation( "XModAlgebraBySurjection", [ IsAlgebraHomomorphism ] );
 DeclareOperation( "XModAlgebraByMultiplierAlgebra", 
     [ IsAlgebra ] );

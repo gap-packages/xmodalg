@@ -340,8 +340,7 @@ DeclareOperation( "XModAlgebraByModule", [ IsAlgebra, IsLeftModule ] );
 ## <P/>
 ## As a second example, we convert the crossed module <M>X3</M>
 ## constructed in <Ref Sect="XModAlgebraByModule"/>
-
-
+##
 ## <Example>
 ## <![CDATA[
 ## gap> C6 := Cat1AlgebraOfXModAlgebra( X6 );
@@ -429,6 +428,44 @@ DeclareAttribute( "DirectSumOfAlgebrasInfo", IsAlgebra, "mutable" );
 
 ############################################################################
 ##
+## DirectSumOfAlgebraHomomorphisms( <hom> <hom> )
+##
+## <#GAPDoc Label="DirectSumOfAlgebraHomomorphisms"> 
+## <ManSection>
+## <Oper Name="DirectSumOfAlgebraHomomorphisms" Arg="hom1 hom2" />
+##
+## <Description>
+## Let <M>\theta_1 : B_1 \to A_1</M> and <M>\theta_2 : B_2 \to A_2</M>
+## be algebra homomorphisms. 
+## The embeddings into <M>A = A_1 \oplus A_2</M> 
+## and <M>B = B_1 \oplus B_2</M> may be used to construct
+## <M>\theta = \theta_1 \oplus \theta_2 : B \to A</M>
+## where <M>\theta(b_1,b_2) = (\theta_1b_1,\theta_2b_2)</M>.
+## The example uses the homomorphism <C>hom3</C> used in 
+## Section <Ref Sect="AlgebraActionByHomomorphism" />
+## <P/>
+## </Description>
+## </ManSection>
+## <Example>
+## <![CDATA[
+## gap> hom := DirectSumOfAlgebraHomomorphisms( hom3, hom3 );;
+## gap> Print( hom, "\n" );
+## AlgebraHomomorphismByImages( A3(+)A3, Algebra( Rationals, 
+## [ v.1, v.2, v.3, v.4, v.5, v.6 ] ), 
+## [ [ [ 0, 1, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], 
+##       [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ] ], 
+##   [ [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], 
+##       [ 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 1, 0, 0 ] ] ], 
+## [ v.1, v.4 ] )
+## ]]>
+## </Example>
+## <#/GAPDoc>
+##
+DeclareOperation( "DirectSumOfAlgebraHomomorphisms", 
+    [ IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
+
+############################################################################
+##
 ## AlgebraActionOnDirectSum( <act> <act> )
 ##
 ## <#GAPDoc Label="AlgebraActionOnDirectSum"> 
@@ -468,11 +505,11 @@ DeclareOperation( "AlgebraActionOnDirectSum",
 
 ############################################################################
 ##
-## DirectSumAlgebraActions( <act> <act> )
+## DirectSumOfAlgebraActions( <act> <act> )
 ##
-## <#GAPDoc Label="DirectSumAlgebraActions"> 
+## <#GAPDoc Label="DirectSumOfAlgebraActions"> 
 ## <ManSection>
-## <Oper Name="DirectSumAlgebraActions" Arg="act act" />
+## <Oper Name="DirectSumOfAlgebraActions" Arg="act act" />
 ##
 ## <Description>
 ## Let 
@@ -488,7 +525,7 @@ DeclareOperation( "AlgebraActionOnDirectSum",
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> act6 := DirectSumAlgebraActions( act3, act4 );;
+## gap> act6 := DirectSumOfAlgebraActions( act3, act4 );;
 ## gap> A6 := Source( act6 );
 ## A3(+)A4
 ## gap> B6 := AlgebraActedOn( act6 );
@@ -509,6 +546,35 @@ DeclareOperation( "AlgebraActionOnDirectSum",
 ## </Example>
 ## <#/GAPDoc>
 ##
-DeclareOperation( "DirectSumAlgebraActions", 
+DeclareOperation( "DirectSumOfAlgebraActions", 
     [ IsAlgebraAction, IsAlgebraAction ] );
+
+############################################################################
+##
+## DirectSumOfXModAlgebras( <X1> <X2> )
+##
+## <#GAPDoc Label="DirectSumOfXModAlgebras"> 
+## <ManSection>
+## <Oper Name="DirectSumOfXModAlgebras" Arg="X1 X2" />
+##
+## <Description>
+## In Sections <Ref Sect="DirectSumOfAlgebraHomomorphisms" />
+## and <Ref Sect="DirectSumOfAlgebraActions" />
+## we constructed direct sums of algebra homomorphisms and algebra actions.
+## So, given two crossed modules of algebras <M>X_1, X_2</M>,
+## we can form the direct sums of their boundaries and actions
+## to form a direct sum <M>X_1 \oplus X_2</M> of crossed modules.
+## <P/>
+## </Description>
+## </ManSection>
+## <Example>
+## <![CDATA[
+## gap> DirectSumOfXModAlgebras( X3, X4 );
+## [ GR(G)(+)A(M4) -> A3(+)A4 ]
+## ]]>
+## </Example>
+## <#/GAPDoc>
+##
+DeclareOperation( "DirectSumOfXModAlgebras", 
+    [ IsXModAlgebra, IsXModAlgebra ] );
 

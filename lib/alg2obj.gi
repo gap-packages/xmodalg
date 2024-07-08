@@ -104,8 +104,9 @@ end );
 ###########################################################################
 ##
 #M  XModAlgebraObj( <bdy>, <act> )  . . . . . . . make a pre-crossed module
+#M  XModAlgebraObjNC( <bdy>, <act> )  . . . . . . make a pre-crossed module
 ##
-InstallMethod( XModAlgebraObj, "for homomorphism and action", true,
+InstallMethod( XModAlgebraObjNC, "for homomorphism and action", true,
     [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
 function( bdy, act )
 
@@ -129,7 +130,6 @@ function( bdy, act )
             return fail;
         fi;
     fi;
-
     ## create the object
     PM := rec();
     ObjectifyWithAttributes( PM, type,
@@ -140,7 +140,14 @@ function( bdy, act )
         LeftActingDomain, DA,
         IsPreXModDomain, true,
         Is2dAlgebraObject, true );
+    return PM;
+end );
 
+InstallMethod( XModAlgebraObj, "for homomorphism and action", true,
+    [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
+function( bdy, act )
+    local PM;
+    PM := XModAlgebraObjNC( bdy, act );
     ## check axiom XModAlg1
     if not IsPreXModAlgebra( PM ) then
         return fail;
@@ -382,11 +389,11 @@ end );
 ############################################################################
 ##
 #M  PreXModAlgebraByBoundaryAndAction
+#M  PreXModAlgebraByBoundaryAndActionNC
 ##
 InstallMethod( PreXModAlgebraByBoundaryAndAction,
     "pre-crossed module from boundary and action maps",
     true, [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
-    
 function( bdy, act )
     if not ( Source( act ) = Range( bdy ) ) then 
         Info( InfoXModAlg, 1, "Source(act) <> Range(bdy)" );
@@ -395,21 +402,37 @@ function( bdy, act )
     return XModAlgebraObj( bdy, act );
 end );
 
+InstallMethod( PreXModAlgebraByBoundaryAndActionNC,
+    "pre-crossed module from boundary and action maps",
+    true, [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
+function( bdy, act )
+    return XModAlgebraObjNC( bdy, act );
+end );
+
 ############################################################################
 ##
 #M  XModAlgebraByBoundaryAndAction
+#M  XModAlgebraByBoundaryAndActionNC
 ##
 InstallMethod( XModAlgebraByBoundaryAndAction,
     "crossed module from boundary and action maps", true,
     [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
 function( bdy, act )
-
     local  PM;
-
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     if not IsXModAlgebra( PM ) then
         Error( "boundary and action only define a pre-crossed module" );
     fi;
+    return PM;
+end );
+
+InstallMethod( XModAlgebraByBoundaryAndActionNC,
+    "crossed module from boundary and action maps", true,
+    [ IsAlgebraHomomorphism, IsAlgebraAction ], 0,
+function( bdy, act )
+    local  PM;
+    PM := PreXModAlgebraByBoundaryAndActionNC( bdy, act );
+    SetIsXModAlgebra( PM, true );
     return PM;
 end );
 

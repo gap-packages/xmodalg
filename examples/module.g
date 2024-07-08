@@ -20,6 +20,13 @@ hom3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );;
 act3 := AlgebraActionByHomomorphism( hom3, B3 );
 Print ( "action act3 of A3 on B3:\n", act3, "\n" );
 
+## Section 4.1.6
+bdy3 := AlgebraHomomorphismByImages( B3, A3, [ g3 ], [ m3 ] );
+Print( "bdy3 = ", bdy3, "\n" );
+X3 := XModAlgebraByBoundaryAndAction( bdy3, act3 );
+Print( "crossed module X3:\n" );
+Display( X3 );
+
 ## Section 2.3
 m3 := [ [0,1,0], [0,0,1], [1,0,0] ];;
 A4 := Algebra( Rationals, [m3] );;
@@ -96,12 +103,16 @@ Print( "\n first embedding into A3B3:\n", Embedding( A3B3, 1 ), "\n" );
 Print( "second projection from A3B3:\n", Projection( A3B3, 2 ), "\n" );
 
 ## Section 2.4.3
+hom := DirectSumOfAlgebraHomomorphisms( hom3, hom3 );
+Print( "\nthe direct sum of hom3 with itself is:\n", hom, "\n" );
+
+## Section 2.4.4
 actMA3 := AlgebraActionByMultipliers( A3, A3, A3 );;
 act5 := AlgebraActionOnDirectSum( actMA3, act3 );;
 Print( "\naction of A on the direct sum of A3 and B3\n", act5, "\n" );
 
-## Section 2.4.4
-act6 := DirectSumAlgebraActions( act3, act4 );;
+## Section 2.4.5
+act6 := DirectSumOfAlgebraActions( act3, act4 );;
 A6 := Source( act6 );
 B6 := AlgebraActedOn( act6 );
 Print( "\nact6 is the direct sum action of ", A6, " on ", B6, "\n" );

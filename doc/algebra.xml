@@ -353,9 +353,11 @@ gap> [ Image(b2,m2)=m2^3, b2=b1^2 ];
 
 <#Include Label="EmbeddingForDirectSumOfAlgebras">
 
+<#Include Label="DirectSumOfAlgebraHomomorphisms">
+
 <#Include Label="AlgebraActionOnDirectSum">
 
-<#Include Label="DirectSumAlgebraActions">
+<#Include Label="DirectSumOfAlgebraActions">
 
 </Section>
 

@@ -64,14 +64,14 @@ gap> Size2d( XIAk4 );
 [ 125, 625 ]
 
 gap> ############################
-gap> ## Section 4.1.4
+gap> ## Section 4.1.5
 gap> XA := XModAlgebraByMultiplierAlgebra( A );
 [ A(l,m) -> <algebra of dimension 3 over GF(5)> ]
 gap> XModAlgebraAction( XA );
 IdentityMapping( <algebra of dimension 3 over GF(5)> )
 
 gap> ############################
-gap> ## Section 4.1.5
+gap> ## Section 4.1.6
 gap> X2 := XModAlgebraBySurjection( nat2 );; 
 gap> Display( X2 ); 
 
@@ -84,7 +84,7 @@ Crossed module [A2->Q2] :-
   [ v.1 ]
 
 gap> ############################
-gap> ## Section 4.1.6
+gap> ## Section ???
 gap> G := SmallGroup( 4, 2 );
 <pc group of size 4 with 2 generators>
 gap> F := GaloisField( 4 );
@@ -143,7 +143,7 @@ gap> Set( kao );
   "XModAlgebraAction" ]
 
 gap> ############################
-gap> ## Section 4.1.9
+gap> ## Section 4.1.10
 gap> e4 := Elements( IAk4 )[4];
 (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
 gap> Je4 := Ideal( IAk4, [e4] );;

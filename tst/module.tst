@@ -2,7 +2,7 @@
 ##
 #W  module.tst              XModAlg test files                 Chris Wensley
 ##
-#@local level,m3,A3,G,B3,g3,mg3,MB3,hom3,act3,bdy3,X3,A4,V4,M4,famM4,v4,genM4,u4,D4,T4,B4a,B4,M2B4,B2M4,act4,a4,X4,C4,A3B3,actMA3,act5,act6,A6,B6,em3,ea4
+#@local level,m3,A3,G,B3,g3,mg3,MB3,hom3,act3,bdy3,X3,A4,V4,M4,famM4,v4,genM4,u4,D4,T4,B4a,B4,M2B4,B2M4,act4,a4,X4,C4,A3B3,hom,actMA3,act5,act6,A6,B6,em3,ea4
 
 gap> START_TEST( "XModAlg package: module.tst" );
 gap> level := InfoLevel( InfoXModAlg );; 
@@ -24,7 +24,7 @@ gap> act3 := AlgebraActionByHomomorphism( hom3, B3 );
 [ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
     ] ]
 
-## Section 4.1.6
+##  .1.7
 gap> hom3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );
 [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> 
 [ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
@@ -116,7 +116,7 @@ Basis( A(M4), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) ->
 gap> Image( act4 );
 <algebra over Rationals, with 1 generator>
 
-## Section 4.1.7
+## Section 4.1.8
 gap> X4 := XModAlgebraByModule( A4, M4 );
 [A(M4)->A4]
 gap> Display( X4 );
@@ -168,6 +168,17 @@ CanonicalBasis( A3(+)GR(G) ) -> [ <zero> of ..., <zero> of ...,
   <zero> of ..., (1)*(), (1)*(1,2,3), (1)*(1,3,2) ]
 
 ## Section 2.4.3
+gap> hom := DirectSumOfAlgebraHomomorphisms( hom3, hom3 );;
+gap> Print( hom, "\n" );
+AlgebraHomomorphismByImages( A3(+)A3, Algebra( Rationals, 
+[ v.1, v.2, v.3, v.4, v.5, v.6 ] ), 
+[ [ [ 0, 1, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], 
+      [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ] ], 
+  [ [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], 
+      [ 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 1, 0, 0 ] ] ], 
+[ v.1, v.4 ] )
+
+## Section 2.4.4
 gap> actMA3 := AlgebraActionByMultipliers( A3, A3, A3 );;
 gap> act5 := AlgebraActionOnDirectSum( actMA3, act3 );
 [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
@@ -177,8 +188,8 @@ gap> act5 := AlgebraActionOnDirectSum( actMA3, act3 );
   [ v.1, v.2, v.3, v.4, v.5, v.6 ] -> [ v.3, v.1, v.2, v.6, v.4, v.5 ], 
   [ v.1, v.2, v.3, v.4, v.5, v.6 ] -> [ v.1, v.2, v.3, v.4, v.5, v.6 ] ]
 
-## Section 2.4.4
-gap> act6 := DirectSumAlgebraActions( act3, act4 );;
+## Section 2.4.5
+gap> act6 := DirectSumOfAlgebraActions( act3, act4 );;
 gap> A6 := Source( act6 );
 A3(+)A4
 gap> B6 := AlgebraActedOn( act6 );

@@ -139,7 +139,7 @@ function( A, M )
     act := AlgebraActionByModule( A, M );
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     if not IsXModAlgebra( PM ) then
-        Error( "this boundary and action only defines a pre-crossed module" );
+        Error( "this boundary and action only define a pre-crossed module" );
     fi;
     return PM;
 end );
@@ -173,7 +173,6 @@ InstallMethod( Embedding, "algebra direct sum and integer",
     return hom;
 end);
 
-
 #############################################################################
 ##
 #M  Projection
@@ -206,6 +205,58 @@ InstallMethod( Projection, "algebra direct sum and integer",
     SetIsSurjective( hom, true );
     ## store information
     info.projections[i] := hom;
+    return hom;
+end);
+
+#############################################################################
+##
+#M  DirectSumOfAlgebraHomomorphisms
+##
+InstallMethod( DirectSumOfAlgebraHomomorphisms, 
+    "for two algebra homomorphisms",
+    [ IsAlgebraHomomorphism, IsAlgebraHomomorphism ],
+    function( hom1, hom2 )
+    local B1, A1, gen1, im1, B2, A2, gen2, im2,
+          dom, B, eB1, eB2, genB, A, eA1, eA2, imhom, hom;
+    B1 := Source( hom1 );
+    A1 := Range( hom1 );
+    gen1 := GeneratorsOfAlgebra( B1 );
+    im1 := List( gen1, g -> ImageElm( hom1, g ) );
+    B2 := Source( hom2 );
+    A2 := Range( hom2 );
+    gen2 := GeneratorsOfAlgebra( B2 );
+    im2 := List( gen2, g -> ImageElm( hom2, g ) );
+    dom := LeftActingDomain( B1 );
+    if not ( dom = LeftActingDomain( B2 ) ) then
+        Error( "homomorphisms are over different domains" );
+    fi;
+    B := DirectSumOfAlgebras( B1, B2 );
+    if HasName( B1 ) and HasName( B2 ) then 
+        SetName( B, Concatenation( Name(B1), "(+)", Name(B2) ) );
+    fi;
+    SetDirectSumOfAlgebrasInfo( B, 
+        rec( algebras := [ B1, B2 ],
+             first := [ 1, 1 + Dimension( B1 ) ],
+             embeddings := [ ],
+             projections := [ ] ) );
+    eB1 := Embedding( B, 1 );
+    eB2 := Embedding( B, 2 );
+    A := DirectSumOfAlgebras( A1, A2 );
+    if HasName( A1 ) and HasName( A2 ) then 
+        SetName( A, Concatenation( Name(A1), "(+)", Name(A2) ) );
+    fi;
+    SetDirectSumOfAlgebrasInfo( A, 
+        rec( algebras := [ A1, A2 ],
+             first := [ 1, 1 + Dimension( A1 ) ],
+             embeddings := [ ],
+             projections := [ ] ) );
+    eA1 := Embedding( A, 1 );
+    eA2 := Embedding( A, 2 );
+    genB := Concatenation( List( gen1, b -> ImageElm( eB1, b ) ),
+                           List( gen2, b -> ImageElm( eB2, b ) ) );
+    imhom := Concatenation( List( im1, a -> ImageElm( eA1, a ) ),
+                            List( im2, a -> ImageElm( eA2, a ) ) );
+    hom := AlgebraHomomorphismByImages( B, A, genB, imhom );
     return hom;
 end);
 
@@ -257,9 +308,9 @@ end );
 
 #############################################################################
 ##
-#M  DirectSumAlgebraActions
+#M  DirectSumOfAlgebraActions
 ##
-InstallMethod( DirectSumAlgebraActions, "for two algebra actions", true,
+InstallMethod( DirectSumOfAlgebraActions, "for two algebra actions", true,
     [ IsAlgebraAction, IsAlgebraAction ], 0,
 function( act1, act2 )
     local domA, A1, basA1, nA1, A2, basA2, nA2, A, basA, firstA,
@@ -350,7 +401,21 @@ function( act1, act2 )
     return act;
 end );
 
-
-
-
-
+#############################################################################
+##
+#M  DirectSumOfXModAlgebras
+##
+InstallMethod( DirectSumOfXModAlgebras, "for two crossed modules", true,
+    [ IsXModAlgebra, IsXModAlgebra ], 0,
+function( X1, X2 )
+    local  bdy1, act1, bdy2, act2, bdy, act, X12;
+    bdy1 := Boundary( X1 );
+    act1 := XModAlgebraAction( X1 );
+    bdy2 := Boundary( X2 );
+    act2 := XModAlgebraAction( X2 );
+    bdy := DirectSumOfAlgebraHomomorphisms( bdy1, bdy2 );
+    act := DirectSumOfAlgebraActions( act1, act2 );
+    X12 := PreXModAlgebraByBoundaryAndActionNC( bdy, act );
+    SetIsXModAlgebra( X12, true );
+    return X12;
+end );
