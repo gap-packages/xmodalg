@@ -1,6 +1,6 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.25 -> 1.25dev (01/07/24) 
+## 1.25 -> 1.26 (09/07/24) 
  * (08/07/24) renamed the actions and algebras in the tests/examples as 
               act1, act2, ,,, act6  and added direct sum operations
               AlgebraActionOnDirectSum and DirectSumAlgebraActions
