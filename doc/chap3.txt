@@ -17,8 +17,8 @@
   [33X[0;0YIn  this  section  we describe an implementation of cat[22X^1[122X-algebras and their
   morphisms.[133X
   
-  [33X[0;0YThe  notion  of cat[22X^1[122X-groups was defined as an algebraic model of [22X2[122X-types by
-  Loday in [Lod82]. Then Ellis defined the cat[22X^1[122X-algebras in [Ell88].[133X
+  [33X[0;0YThe  notion of a cat[22X^1[122X-group was defined as an algebraic model of [22X2[122X-types by
+  Loday in [Lod82]. Then Ellis defined cat[22X^1[122X-algebras in [Ell88].[133X
   
   [33X[0;0YLet [22XA[122X and [22XR[122X be [22Xk[122X-algebras, let [22Xt,h:A→ R[122X be surjections, and let [22Xe:R→ A[122X be an
   inclusion.[133X
@@ -48,16 +48,16 @@
   [33X[1;0Y[29X[2XCat1Algebra[102X( [3Xargs[103X ) [32X function[133X
   [33X[1;0Y[29X[2XPreCat1AlgebraByEndomorphisms[102X( [3Xt[103X, [3Xh[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XPreCat1AlgebraByTailHeadEmbedding[102X( [3Xt[103X, [3Xh[103X, [3Xe[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XPreCat1Algebra[102X( [3Xargs[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XPreCat1Algebra[102X( [3Xargs[103X ) [32X function[133X
   [33X[1;0Y[29X[2XIsIdentityCat1Algebra[102X( [3XC[103X ) [32X property[133X
   [33X[1;0Y[29X[2XIsCat1Algebra[102X( [3XC[103X ) [32X property[133X
   [33X[1;0Y[29X[2XIsPreCat1Algebra[102X( [3XC[103X ) [32X property[133X
   
-  [33X[0;0YThe  operations  listed  above  are  used  for construction of precat[22X^1[122X- and
-  cat[22X^1[122X-algebra  structures.  The  function  [10XCat1Algebra[110X selects the operation
-  from   the   above  implementations  up  to  user's  input.  The  operations
-  [10XPreCat1AlgebraByEndomorphisms[110X and [10XPreCat1AlgebraByTailHeadEmbedding[110X are used
-  with particular choices of algebra homomorphisms.[133X
+  [33X[0;0YThe           operations          [10XPreCat1AlgebraByEndomorphisms[110X          and
+  [10XPreCat1AlgebraByTailHeadEmbedding[110X   are  used  with  particular  choices  of
+  algebra  homomorphisms.  The  operations  listed  above  are  used  for  the
+  construction  of  precat[22X^1[122X- and cat[22X^1[122X-algebras. The functions [10XPreCat1Algebra[110X
+  and [10XCat1Algebra[110X select the appropriate operation to suit the user's input.[133X
   
   [1X3.1-2 Source[101X
   
@@ -67,13 +67,15 @@
   [33X[1;0Y[29X[2XHeadMap[102X( [3XC[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XRangeEmbedding[102X( [3XC[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XKernel[102X( [3XC[103X ) [32X method[133X
+  [33X[1;0Y[29X[2XKernelEmbedding[102X( [3XC[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XBoundary[102X( [3XC[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XSize2d[102X( [3XC[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XDimension[102X( [3XC[103X ) [32X attribute[133X
   
-  [33X[0;0YThese are the eight main attributes of a pre-cat[22X^1[122X-algebra.[133X
+  [33X[0;0YThese are the nine main attributes of a pre-cat[22X^1[122X-algebra.[133X
   
   [33X[0;0YIn  the  example  we  use homomorphisms between [10XA2c6[110X and [10XI2c6[110X constructed in
-  section [14X2.3[114X.[133X
+  section [14X2.6[114X.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
@@ -88,6 +90,8 @@
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XSize2d( C4 );[127X[104X
     [4X[28X[ 64, 8 ][128X[104X
+    [4X[25Xgap>[125X [27XDimension( C4 );[127X[104X
+    [4X[28X[ 6, 3 ][128X[104X
     [4X[25Xgap>[125X [27XDisplay( C4 );[127X[104X
     [4X[28X[128X[104X
     [4X[28XCat1-algebra [..=>..] :- [128X[104X
@@ -114,58 +118,60 @@
   
   [1X3.1-3 Cat1AlgebraSelect[101X
   
-  [33X[1;0Y[29X[2XCat1AlgebraSelect[102X( [3Xn[103X, [3Xgpsize[103X, [3Xgpnum[103X, [3Xnum[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XCat1AlgebraSelect[102X( [3XGFnum[103X, [3Xgpsize[103X, [3Xgpnum[103X, [3Xnum[103X ) [32X operation[133X
   
-  [33X[0;0YThe  [2XCat1Algebra[102X ([14X3.1-1[114X) function may also be used to select a cat[22X^1[122X-algebra
-  from a data file. All cat[22X^1[122X-structures on commutative algebras are stored in
-  a  list  in  file [11Xcat1algdata.g[111X. The data is read into the list [10XCAT1ALG_LIST[110X
-  only when this function is called.[133X
+  [33X[0;0YThe  [2XCat1Algebra[102X  ([14X3.1-1[114X)  function  may  also  be  used  to  select certain
+  cat[22X^1[122X-group-algebras from the data file included with this package. Data for
+  these  cat[22X^1[122X-structures on commutative group algebras is stored in a list in
+  file  [11Xcat1algdata.g[111X.  This data is read into the list [10XCAT1ALG_LIST[110X only when
+  this function is called.[133X
   
   [33X[0;0YThe function [10XCat1AlgebraSelect[110X may be used in four ways:[133X
   
-  [30X    [33X[0;6Y[10XCat1AlgebraSelect(  n  )[110X  returns the list of possible sizes of groups
-        for group algebras with Galois field [22XGF(n)[122X.[133X
+  [30X    [33X[0;6Y[10XCat1AlgebraSelect(  n )[110X returns the list of possible group orders when
+        Galois   field   [22XGF(n)[122X,   with  [22Xn  ∈  [2,3,4,5,7][122X,  is  used  to  form
+        cat[22X^1[122X-group-algebra structures.[133X
   
-  [30X    [33X[0;6Y[10XCat1AlgebraSelect(  n, m )[110X returns the list of allowable group numbers
-        with given Galois field [22XGF(n)[122X and groups of size [22Xm[122X.[133X
+  [30X    [33X[0;6Y[10XCat1AlgebraSelect(  n, m )[110X returns the list of available group numbers
+        of size [22Xm[122X with which to form cat[22X^1[122X-group-algebra structures with given
+        Galois field [22XGF(n)[122X.[133X
   
-  [30X    [33X[0;6Y[10XCat1AlgebraSelect(   n,   m,   k   )[110X  returns  the  list  of  possible
-        cat[22X^1[122X-algebra  structures  with  given  Galois  field  [22XGF(n)[122X and group
-        number [22Xk[122X of size [22Xm[122X.[133X
+  [30X    [33X[0;6Y[10XCat1AlgebraSelect(   n,   m,   k   )[110X   prints  the  list  of  possible
+        cat[22X^1[122X-group-algebra structures with given Galois field [22XGF(n)[122X and group
+        number [22Xk[122X of size [22Xm[122X. The number of these structures is returned.[133X
   
   [30X    [33X[0;6Y[10XCat1AlgebraSelect(  n, m, k, j )[110X (or simply [10XCat1Algebra( n, m, k, j )[110X)
-        returns the [22Xj[122X-th cat[22X^1[122X-algebra structure with these other parameters.[133X
+        returns  the  [22Xj[122X-th  cat[22X^1[122X-group-algebra  structure  with  these  other
+        parameters.[133X
   
   [33X[0;0YNow, we give examples of the use of this function.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XC := Cat1AlgebraSelect( 11 );[127X[104X
-    [4X[28X|--------------------------------------------------------|[128X[104X
-    [4X[28X| 11 is invalid number for Galois Field (GFnum)             |[128X[104X
-    [4X[28X| Possible numbers for GFnum in the Data :              |[128X[104X
-    [4X[28X|--------------------------------------------------------|[128X[104X
-    [4X[28X [ 2, 3, 4, 5, 7 ][128X[104X
+    [4X[28X|--------------------------------------------------------| [128X[104X
+    [4X[28X| 11 is invalid value for the Galois Field (GFnum)       | [128X[104X
+    [4X[28X| Available values for GFnum in the data :               | [128X[104X
+    [4X[28X|--------------------------------------------------------| [128X[104X
+    [4X[28X [ 2, 3, 4, 5, 7 ] [128X[104X
     [4X[28XUsage: Cat1Algebra( GFnum, gpsize, gpnum, num );[128X[104X
     [4X[28Xfail[128X[104X
     [4X[25Xgap>[125X [27XC := Cat1AlgebraSelect( 4, 12 );[127X[104X
-    [4X[28X|--------------------------------------------------------|[128X[104X
-    [4X[28X| 12 is invalid number for size of group (gpsize)        |[128X[104X
-    [4X[28X| Possible numbers for the gpsize for GF(4) in the Data: |[128X[104X
-    [4X[28X|--------------------------------------------------------|[128X[104X
-    [4X[28X [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ][128X[104X
+    [4X[28X|--------------------------------------------------------| [128X[104X
+    [4X[28X| 12 is invalid value for size of group (gpsize)         | [128X[104X
+    [4X[28X| Available values for gpsize with GF(4) in the data:    | [128X[104X
+    [4X[28X|--------------------------------------------------------| [128X[104X
     [4X[28XUsage: Cat1Algebra( GFnum, gpsize, gpnum, num );[128X[104X
-    [4X[28Xfail[128X[104X
+    [4X[28X[ 1, 2, 3, 4, 5, 6, 7, 8, 9 ][128X[104X
     [4X[25Xgap>[125X [27XC := Cat1AlgebraSelect( 2, 6, 3 );[127X[104X
-    [4X[28X|--------------------------------------------------------|[128X[104X
-    [4X[28X| 3 is invalid number for group of order 6               |[128X[104X
-    [4X[28X| Possible numbers for the gpnum in the Data :           |[128X[104X
-    [4X[28X|--------------------------------------------------------|[128X[104X
-    [4X[28X [ 1, 2 ][128X[104X
+    [4X[28X|--------------------------------------------------------| [128X[104X
+    [4X[28X| 3 is invalid value for groups of order 6               | [128X[104X
+    [4X[28X| Available values for gpnum for groups of size 6 :      | [128X[104X
+    [4X[28X|--------------------------------------------------------| [128X[104X
     [4X[28XUsage: Cat1Algebra( GFnum, gpsize, gpnum, num );[128X[104X
-    [4X[28Xfail[128X[104X
+    [4X[28X[ 1, 2 ][128X[104X
     [4X[25Xgap>[125X [27XC := Cat1AlgebraSelect( 2, 6, 2 );[127X[104X
-    [4X[28XThere are 4 cat1-structures for the algebra GF(2)_c6.[128X[104X
+    [4X[28XThere are 4 cat1-structures for the group algebra GF(2)_c6.[128X[104X
     [4X[28X Range Alg      Tail                    Head[128X[104X
     [4X[28X|--------------------------------------------------------|[128X[104X
     [4X[28X| GF(2)_c6      identity map            identity map     |[128X[104X
@@ -176,14 +182,25 @@
     [4X[28XUsage: Cat1Algebra( GFnum, gpsize, gpnum, num );[128X[104X
     [4X[28XAlgebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ][128X[104X
     [4X[28X4[128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  algebra  [10XGF(n)_gp[110X  has  a  list  of [22Xn^|gp|[122X elements. The [10X[2, 10][110X in the
+  second  structure  above indicates that the tail map, and also the head map,
+  of  the  cat[22X^1[122X-algebra maps the two generators of [10Xc6[110X to the second and tenth
+  elements of this algebra respectively.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XC0 := Cat1AlgebraSelect( 4, 6, 2, 2 );[127X[104X
     [4X[28X[GF(2^2)_c6 -> Algebra( GF(2^2), [128X[104X
     [4X[28X[ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+([128X[104X
     [4X[28X    Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ] )][128X[104X
     [4X[25Xgap>[125X [27XSize2d( C0 ); [127X[104X
     [4X[28X[ 4096, 1024 ][128X[104X
+    [4X[25Xgap>[125X [27XDimension( C0 );[127X[104X
+    [4X[28X[ 6, 5 ][128X[104X
     [4X[25Xgap>[125X [27XDisplay( C0 ); [127X[104X
-    [4X[28X[128X[104X
     [4X[28XCat1-algebra [GF(2^2)_c6=>..] :- [128X[104X
     [4X[28X: source algebra has generators:[128X[104X
     [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ][128X[104X
@@ -212,10 +229,10 @@
   
   [1X3.1-4 SubCat1Algebra[101X
   
-  [33X[1;0Y[29X[2XSubCat1Algebra[102X( [3Xarg[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XSubPreCat1Algebra[102X( [3Xarg[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XIsSubCat1Algebra[102X( [3Xarg[103X ) [32X property[133X
-  [33X[1;0Y[29X[2XIsSubPreCat1Algebra[102X( [3Xarg[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XSubCat1Algebra[102X( [3Xalg[103X, [3Xsrc[103X, [3Xrng[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XSubPreCat1Algebra[102X( [3Xalg[103X, [3Xsrc[103X, [3Xrng[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIsSubCat1Algebra[102X( [3Xalg[103X, [3Xsub[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIsSubPreCat1Algebra[102X( [3Xalg[103X, [3Xsub[103X ) [32X operation[133X
   
   [33X[0;0YLet  [22XmathcalC  =  (e;t,h:A→  R)[122X  be  a  cat[22X^1[122X-algebra,  and  let [22XA^'[122X, [22XR^'[122X be
   subalgebras of [22XA[122X and [22XR[122X respectively. If the restriction morphisms[133X
@@ -258,7 +275,6 @@
     [4X[28X[Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) [128X[104X
     [4X[28X ] ) -> Algebra( GF(2), [ <zero> of ..., (Z(2)^0)*() ] )][128X[104X
     [4X[25Xgap>[125X [27XDisplay( CC3 );[127X[104X
-    [4X[28X[128X[104X
     [4X[28XCat1-algebra [..=>..] :-[128X[104X
     [4X[28X: source algebra has generators:[128X[104X
     [4X[28X  [ <zero> of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) ][128X[104X
@@ -298,12 +314,13 @@
   
   [1X3.2-1 Cat1AlgebraMorphism[101X
   
-  [33X[1;0Y[29X[2XCat1AlgebraMorphism[102X( [3Xarg[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XCat1AlgebraMorphism[102X( [3Xarg[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XPreCat1AlgebraMorphism[102X( [3Xarg[103X ) [32X function[133X
   [33X[1;0Y[29X[2XIdentityMapping[102X( [3XC[103X ) [32X method[133X
-  [33X[1;0Y[29X[2XPreCat1AlgebraMorphismByHoms[102X( [3Xf[103X, [3Xg[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XCat1AlgebraMorphismByHoms[102X( [3Xf[103X, [3Xg[103X ) [32X operation[133X
-  [33X[1;0Y[29X[2XIsPreCat1AlgebraMorphism[102X( [3XC[103X ) [32X property[133X
-  [33X[1;0Y[29X[2XIsCat1AlgebraMorphism[102X( [3Xarg[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XPreCat1AlgebraMorphismByHoms[102X( [3Xsrc[103X, [3Xrng[103X, [3Xsrchom[103X, [3Xrnghom[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XCat1AlgebraMorphismByHoms[102X( [3Xsrc[103X, [3Xrng[103X, [3Xsrchom[103X, [3Xrnghom[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIsPreCat1AlgebraMorphism[102X( [3Xmor[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsCat1AlgebraMorphism[102X( [3Xmor[103X ) [32X property[133X
   
   [33X[0;0YThese  operations are used for constructing cat[22X^1[122X-algebra morphisms. Details
   of the implementations can be found in [Oda09].[133X
@@ -324,7 +341,6 @@
     [4X[25Xgap>[125X [27XC1 := Cat1Algebra( 2, 1, 1, 1 );[127X[104X
     [4X[28X[GF(2)_triv -> GF(2)_triv][128X[104X
     [4X[25Xgap>[125X [27XDisplay( C1 );[127X[104X
-    [4X[28X[128X[104X
     [4X[28XCat1-algebra [GF(2)_triv=>GF(2)_triv] :-[128X[104X
     [4X[28X: source algebra has generators:[128X[104X
     [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
@@ -341,7 +357,6 @@
     [4X[25Xgap>[125X [27XC2 := Cat1Algebra( 2, 2, 1, 2 );[127X[104X
     [4X[28X[GF(2)_c2 -> GF(2)_triv][128X[104X
     [4X[25Xgap>[125X [27XDisplay( C2 );[127X[104X
-    [4X[28X[128X[104X
     [4X[28XCat1-algebra [GF(2)_c2=>GF(2)_triv] :-[128X[104X
     [4X[28X: source algebra has generators:[128X[104X
     [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ][128X[104X
@@ -359,7 +374,6 @@
     [4X[28X  [ <zero> of ... ][128X[104X
     [4X[28X: kernel embedding maps generators of kernel to:[128X[104X
     [4X[28X  [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ][128X[104X
-    [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XC1 = C2;[127X[104X
     [4X[28Xfalse[128X[104X
     [4X[25Xgap>[125X [27XR1 := Source( C1 );;[127X[104X
@@ -417,7 +431,6 @@
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27Ximm := ImagesSource2DimensionalMapping( m );;[127X[104X
     [4X[25Xgap>[125X [27XDisplay( imm ); [127X[104X
-    [4X[28X[128X[104X
     [4X[28XCat1-algebra [..=>..] :- [128X[104X
     [4X[28X: source algebra has generators:[128X[104X
     [4X[28X  [ (Z(2)^0)*(), (Z(2)^0)*() ][128X[104X
@@ -430,7 +443,6 @@
     [4X[28X: range embedding maps range generators to:[128X[104X
     [4X[28X  [ (Z(2)^0)*() ][128X[104X
     [4X[28X: the kernel is trivial.[128X[104X
-    [4X[28X[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   

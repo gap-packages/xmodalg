@@ -69,16 +69,15 @@ r_1r_2 + r_1(\partial s_2) + r_2(\partial s_1) + (\partial s_1)(\partial s_2)
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraOfXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraOfPreXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>These operations are used for constructing a cat<span class="SimpleMath">\(^{1}\)</span>-algebra from a given crossed module of algebras. As an example we use the crossed module <code class="code">XAB</code> constructed in <code class="func">XModAlgebraByIdeal</code> (<a href="chap4_mj.html#X7B31475D7C030075"><span class="RefLink">4.1-2</span></a>) (The output from <code class="code">Display</code> needs to be improved.)</p>
+<p>These operations are used for constructing a cat<span class="SimpleMath">\(^{1}\)</span>-algebra from a given crossed module of algebras. As an example we use the crossed module <code class="code">XAB</code> constructed in <code class="func">XModAlgebraByIdeal</code> (<a href="chap4_mj.html#X7B31475D7C030075"><span class="RefLink">4.1-2</span></a>).</p>
 
 
 <div class="example"><pre>
 
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CAB := Cat1AlgebraOfXModAlgebra( XAB );</span>
-[Algebra( GF(5), [ v.1, v.2, v.3, v.4, v.5 ] ) -&gt; A(l,m)]
+[A(l,m) |X A(m)=&gt;A(l,m)]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( CAB );</span>
-
-Cat1-algebra [..=&gt;A(l,m)] :- 
+Cat1-algebra [A(l,m) |X A(m)=&gt;A(l,m)] :- 
 :  range algebra has generators:
   
 [ 
@@ -87,10 +86,61 @@ Cat1-algebra [..=&gt;A(l,m)] :-
   [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
 : tail homomorphism maps source generators to:
+  
+[ 
+  [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
+  [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
+: head homomorphism maps source generators to:
+  
+[ 
+  [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
+  [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
+  [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
 : range embedding maps range generators to:
   [ v.1, v.2 ]
 : kernel has generators:
-  Algebra( GF(5), [ v.4, v.5 ] )
+  [ v.4, v.5 ]
+
+</pre></div>
+
+<p>As a second example, we convert the crossed module <span class="SimpleMath">\(X3\)</span> constructed in <a href="chap4_mj.html#X78400B837A2C8FB9"><span class="RefLink">4.1-8</span></a></p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C6 := Cat1AlgebraOfXModAlgebra( X6 );</span>
+[A4 |X A(M4)=&gt;A4]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C6 );           </span>
+Cat1-algebra [A4 |X A(M4)=&gt;A4] :- 
+:  range algebra has generators:
+  [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
+: tail homomorphism = head homomorphism
+  they map the source generators to:
+  [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+  [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+  [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+  [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
+: range embedding maps range generators to:
+  [ v.1 ]
+: kernel has generators:
+  [ v.4, v.5, v.6 ]
 
 </pre></div>
 

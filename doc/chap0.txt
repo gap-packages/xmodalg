@@ -6,10 +6,10 @@
                       [1X Crossed Modules and Cat1-Algebras [101X
   
   
-                                      1.25
+                                      1.26
   
   
-                                  17 May 2024
+                                  9 July 2024
   
   
                                 Zekeriya Arvasi
@@ -51,7 +51,7 @@
   
   -------------------------------------------------------
   [1XCopyright[101X
-  [33X[0;0Y© 2014-2022, Zekeriya Arvasi and Alper Odabas.[133X
+  [33X[0;0Y© 2014-2024, Zekeriya Arvasi and Alper Odabas.[133X
   
   [33X[0;0YThe  [5XXModAlg[105X package is free software; you can redistribute it and/or modify
   it  under  the  terms  of the GNU General Public License as published by the
@@ -88,12 +88,26 @@
       2.1-4 MultiplierAlgebra
       2.1-5 MultiplierHomomorphism
     2.2 [33X[0;0YCommutative actions[133X
-      2.2-1 AlgebraActionByMultipliers
-      2.2-2 AlgebraActionBySurjection
-      2.2-3 SemidirectProductOfAlgebras
-      2.2-4 SemidirectProductOfAlgebrasInfo
-    2.3 [33X[0;0YLists of algebra homomorphisms[133X
-      2.3-1 AllAlgebraHomomorphisms
+      2.2-1 AlgebraAction
+      2.2-2 AlgebraActionByMultipliers
+      2.2-3 AlgebraActionBySurjection
+      2.2-4 AlgebraActionByHomomorphism
+    2.3 [33X[0;0YAlgebra modules[133X
+      2.3-1 ModuleAsAlgebra
+      2.3-2 IsModuleAsAlgebra
+      2.3-3 ModuleToAlgebraIsomorphism
+      2.3-4 AlgebraActionByModule
+    2.4 [33X[0;0YActions on direct sums of algebras[133X
+      2.4-1 DirectSumOfAlgebrasInfo
+      2.4-2 Embedding
+      2.4-3 DirectSumOfAlgebraHomomorphisms
+      2.4-4 AlgebraActionOnDirectSum
+      2.4-5 DirectSumOfAlgebraActions
+    2.5 [33X[0;0YOther operations on algebras[133X
+      2.5-1 SemidirectProductOfAlgebras
+      2.5-2 SemidirectProductOfAlgebrasInfo
+    2.6 [33X[0;0YLists of algebra homomorphisms[133X
+      2.6-1 AllAlgebraHomomorphisms
   3 [33X[0;0YCat1-algebras[133X
     3.1 [33X[0;0YDefinitions and examples[133X
       3.1-1 Cat1Algebra
@@ -109,12 +123,13 @@
       4.1-1 XModAlgebra
       4.1-2 XModAlgebraByIdeal
       4.1-3 AugmentationXMod
-      4.1-4 XModAlgebraByMultiplierAlgebra
-      4.1-5 XModAlgebraBySurjection
-      4.1-6 XModAlgebraByBoundaryAndAction
-      4.1-7 XModAlgebraByModule
-      4.1-8 Source
-      4.1-9 SubXModAlgebra
+      4.1-4 Source
+      4.1-5 XModAlgebraByMultiplierAlgebra
+      4.1-6 XModAlgebraBySurjection
+      4.1-7 XModAlgebraByBoundaryAndAction
+      4.1-8 XModAlgebraByModule
+      4.1-9 DirectSumOfXModAlgebras
+      4.1-10 SubXModAlgebra
     4.2 [33X[0;0Y(Pre-)Crossed Module Morphisms[133X
       4.2-1 XModAlgebraMorphism
       4.2-2 Kernel

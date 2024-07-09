@@ -61,7 +61,7 @@
 </ul>
 <p>In this section we describe an implementation of cat<span class="SimpleMath">^1</span>-algebras and their morphisms.</p>
 
-<p>The notion of cat<span class="SimpleMath">^1</span>-groups was defined as an algebraic model of <span class="SimpleMath">2</span>-types by Loday in <a href="chapBib.html#biBloday">[Lod82]</a>. Then Ellis defined the cat<span class="SimpleMath">^1</span>-algebras in <a href="chapBib.html#biBellis1">[Ell88]</a>.</p>
+<p>The notion of a cat<span class="SimpleMath">^1</span>-group was defined as an algebraic model of <span class="SimpleMath">2</span>-types by Loday in <a href="chapBib.html#biBloday">[Lod82]</a>. Then Ellis defined cat<span class="SimpleMath">^1</span>-algebras in <a href="chapBib.html#biBellis1">[Ell88]</a>.</p>
 
 <p>Let <span class="SimpleMath">A</span> and <span class="SimpleMath">R</span> be <span class="SimpleMath">k</span>-algebras, let <span class="SimpleMath">t,h:A→ R</span> be surjections, and let <span class="SimpleMath">e:R→ A</span> be an inclusion.</p>
 
@@ -88,11 +88,11 @@
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1Algebra</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraByEndomorphisms</code>( <var class="Arg">t</var>, <var class="Arg">h</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraByTailHeadEmbedding</code>( <var class="Arg">t</var>, <var class="Arg">h</var>, <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1Algebra</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1Algebra</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIdentityCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPreCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
-<p>The operations listed above are used for construction of precat<span class="SimpleMath">^1</span>- and cat<span class="SimpleMath">^1</span>-algebra structures. The function <code class="code">Cat1Algebra</code> selects the operation from the above implementations up to user's input. The operations <code class="code">PreCat1AlgebraByEndomorphisms</code> and <code class="code">PreCat1AlgebraByTailHeadEmbedding</code> are used with particular choices of algebra homomorphisms.</p>
+<p>The operations <code class="code">PreCat1AlgebraByEndomorphisms</code> and <code class="code">PreCat1AlgebraByTailHeadEmbedding</code> are used with particular choices of algebra homomorphisms. The operations listed above are used for the construction of precat<span class="SimpleMath">^1</span>- and cat<span class="SimpleMath">^1</span>-algebras. The functions <code class="code">PreCat1Algebra</code> and <code class="code">Cat1Algebra</code> select the appropriate operation to suit the user's input.</p>
 
 <p><a id="X7F9561168414C58F" name="X7F9561168414C58F"></a></p>
 
@@ -104,11 +104,13 @@
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HeadMap</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RangeEmbedding</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Kernel</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KernelEmbedding</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Boundary</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Size2d</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
-<p>These are the eight main attributes of a pre-cat<span class="SimpleMath">^1</span>-algebra.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Dimension</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>These are the nine main attributes of a pre-cat<span class="SimpleMath">^1</span>-algebra.</p>
 
-<p>In the example we use homomorphisms between <code class="code">A2c6</code> and <code class="code">I2c6</code> constructed in section <a href="chap2.html#X7960904E7A0536A8"><span class="RefLink">2.3</span></a>.</p>
+<p>In the example we use homomorphisms between <code class="code">A2c6</code> and <code class="code">I2c6</code> constructed in section <a href="chap2.html#X7960904E7A0536A8"><span class="RefLink">2.6</span></a>.</p>
 
 
 <div class="example"><pre>
@@ -124,6 +126,8 @@
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size2d( C4 );</span>
 [ 64, 8 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( C4 );</span>
+[ 6, 3 ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C4 );</span>
 
 Cat1-algebra [..=&gt;..] :- 
@@ -152,23 +156,23 @@ Cat1-algebra [..=&gt;..] :-
 
 <h5>3.1-3 Cat1AlgebraSelect</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraSelect</code>( <var class="Arg">n</var>, <var class="Arg">gpsize</var>, <var class="Arg">gpnum</var>, <var class="Arg">num</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>The <code class="func">Cat1Algebra</code> (<a href="chap3.html#X7B761CD9812972F6"><span class="RefLink">3.1-1</span></a>) function may also be used to select a cat<span class="SimpleMath">^1</span>-algebra from a data file. All cat<span class="SimpleMath">^1</span>-structures on commutative algebras are stored in a list in file <code class="file">cat1algdata.g</code>. The data is read into the list <code class="code">CAT1ALG_LIST</code> only when this function is called.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraSelect</code>( <var class="Arg">GFnum</var>, <var class="Arg">gpsize</var>, <var class="Arg">gpnum</var>, <var class="Arg">num</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The <code class="func">Cat1Algebra</code> (<a href="chap3.html#X7B761CD9812972F6"><span class="RefLink">3.1-1</span></a>) function may also be used to select certain cat<span class="SimpleMath">^1</span>-group-algebras from the data file included with this package. Data for these cat<span class="SimpleMath">^1</span>-structures on commutative group algebras is stored in a list in file <code class="file">cat1algdata.g</code>. This data is read into the list <code class="code">CAT1ALG_LIST</code> only when this function is called.</p>
 
 <p>The function <code class="code">Cat1AlgebraSelect</code> may be used in four ways:</p>
 
 
 <ul>
-<li><p><code class="code">Cat1AlgebraSelect( n )</code> returns the list of possible sizes of groups for group algebras with Galois field <span class="SimpleMath">GF(n)</span>.</p>
+<li><p><code class="code">Cat1AlgebraSelect( n )</code> returns the list of possible group orders when Galois field <span class="SimpleMath">GF(n)</span>, with <span class="SimpleMath">n ∈ [2,3,4,5,7]</span>, is used to form cat<span class="SimpleMath">^1</span>-group-algebra structures.</p>
 
 </li>
-<li><p><code class="code">Cat1AlgebraSelect( n, m )</code> returns the list of allowable group numbers with given Galois field <span class="SimpleMath">GF(n)</span> and groups of size <span class="SimpleMath">m</span>.</p>
+<li><p><code class="code">Cat1AlgebraSelect( n, m )</code> returns the list of available group numbers of size <span class="SimpleMath">m</span> with which to form cat<span class="SimpleMath">^1</span>-group-algebra structures with given Galois field <span class="SimpleMath">GF(n)</span>.</p>
 
 </li>
-<li><p><code class="code">Cat1AlgebraSelect( n, m, k )</code> returns the list of possible cat<span class="SimpleMath">^1</span>-algebra structures with given Galois field <span class="SimpleMath">GF(n)</span> and group number <span class="SimpleMath">k</span> of size <span class="SimpleMath">m</span>.</p>
+<li><p><code class="code">Cat1AlgebraSelect( n, m, k )</code> prints the list of possible cat<span class="SimpleMath">^1</span>-group-algebra structures with given Galois field <span class="SimpleMath">GF(n)</span> and group number <span class="SimpleMath">k</span> of size <span class="SimpleMath">m</span>. The number of these structures is returned.</p>
 
 </li>
-<li><p><code class="code">Cat1AlgebraSelect( n, m, k, j )</code> (or simply <code class="code">Cat1Algebra( n, m, k, j )</code>) returns the <span class="SimpleMath">j</span>-th cat<span class="SimpleMath">^1</span>-algebra structure with these other parameters.</p>
+<li><p><code class="code">Cat1AlgebraSelect( n, m, k, j )</code> (or simply <code class="code">Cat1Algebra( n, m, k, j )</code>) returns the <span class="SimpleMath">j</span>-th cat<span class="SimpleMath">^1</span>-group-algebra structure with these other parameters.</p>
 
 </li>
 </ul>
@@ -178,31 +182,29 @@ Cat1-algebra [..=&gt;..] :-
 <div class="example"><pre>
 
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cat1AlgebraSelect( 11 );</span>
-|--------------------------------------------------------|
-| 11 is invalid number for Galois Field (GFnum)             |
-| Possible numbers for GFnum in the Data :              |
-|--------------------------------------------------------|
- [ 2, 3, 4, 5, 7 ]
+|--------------------------------------------------------| 
+| 11 is invalid value for the Galois Field (GFnum)       | 
+| Available values for GFnum in the data :               | 
+|--------------------------------------------------------| 
+ [ 2, 3, 4, 5, 7 ] 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 fail
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cat1AlgebraSelect( 4, 12 );</span>
-|--------------------------------------------------------|
-| 12 is invalid number for size of group (gpsize)        |
-| Possible numbers for the gpsize for GF(4) in the Data: |
-|--------------------------------------------------------|
- [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+|--------------------------------------------------------| 
+| 12 is invalid value for size of group (gpsize)         | 
+| Available values for gpsize with GF(4) in the data:    | 
+|--------------------------------------------------------| 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
-fail
+[ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cat1AlgebraSelect( 2, 6, 3 );</span>
-|--------------------------------------------------------|
-| 3 is invalid number for group of order 6               |
-| Possible numbers for the gpnum in the Data :           |
-|--------------------------------------------------------|
- [ 1, 2 ]
+|--------------------------------------------------------| 
+| 3 is invalid value for groups of order 6               | 
+| Available values for gpnum for groups of size 6 :      | 
+|--------------------------------------------------------| 
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
-fail
+[ 1, 2 ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cat1AlgebraSelect( 2, 6, 2 );</span>
-There are 4 cat1-structures for the algebra GF(2)_c6.
+There are 4 cat1-structures for the group algebra GF(2)_c6.
  Range Alg      Tail                    Head
 |--------------------------------------------------------|
 | GF(2)_c6      identity map            identity map     |
@@ -213,14 +215,23 @@ There are 4 cat1-structures for the algebra GF(2)_c6.
 Usage: Cat1Algebra( GFnum, gpsize, gpnum, num );
 Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
 4
+
+</pre></div>
+
+<p>The algebra <code class="code">GF(n)_gp</code> has a list of <span class="SimpleMath">n^|gp|</span> elements. The <code class="code">[2, 10]</code> in the second structure above indicates that the tail map, and also the head map, of the cat<span class="SimpleMath">^1</span>-algebra maps the two generators of <code class="code">c6</code> to the second and tenth elements of this algebra respectively.</p>
+
+
+<div class="example"><pre>
+
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C0 := Cat1AlgebraSelect( 4, 6, 2, 2 );</span>
 [GF(2^2)_c6 -&gt; Algebra( GF(2^2), 
 [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+(
     Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ] )]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size2d( C0 ); </span>
 [ 4096, 1024 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( C0 );</span>
+[ 6, 5 ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C0 ); </span>
-
 Cat1-algebra [GF(2^2)_c6=&gt;..] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ]
@@ -251,10 +262,10 @@ Cat1-algebra [GF(2^2)_c6=&gt;..] :-
 
 <h5>3.1-4 SubCat1Algebra</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubCat1Algebra</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubPreCat1Algebra</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubCat1Algebra</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubPreCat1Algebra</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubCat1Algebra</code>( <var class="Arg">alg</var>, <var class="Arg">src</var>, <var class="Arg">rng</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubPreCat1Algebra</code>( <var class="Arg">alg</var>, <var class="Arg">src</var>, <var class="Arg">rng</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubCat1Algebra</code>( <var class="Arg">alg</var>, <var class="Arg">sub</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubPreCat1Algebra</code>( <var class="Arg">alg</var>, <var class="Arg">sub</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Let <span class="SimpleMath">mathcalC = (e;t,h:A→ R)</span> be a cat<span class="SimpleMath">^1</span>-algebra, and let <span class="SimpleMath">A^'</span>, <span class="SimpleMath">R^'</span> be subalgebras of <span class="SimpleMath">A</span> and <span class="SimpleMath">R</span> respectively. If the restriction morphisms</p>
 
 <p class="pcenter">
@@ -293,7 +304,6 @@ GF(2)_c3
 [Algebra( GF(2), [ &lt;zero&gt; of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) 
  ] ) -&gt; Algebra( GF(2), [ &lt;zero&gt; of ..., (Z(2)^0)*() ] )]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( CC3 );</span>
-
 Cat1-algebra [..=&gt;..] :-
 : source algebra has generators:
   [ &lt;zero&gt; of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
@@ -333,12 +343,13 @@ Cat1-algebra [..=&gt;..] :-
 
 <h5>3.2-1 Cat1AlgebraMorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityMapping</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraMorphismByHoms</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraMorphismByHoms</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPreCat1AlgebraMorphism</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCat1AlgebraMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraMorphismByHoms</code>( <var class="Arg">src</var>, <var class="Arg">rng</var>, <var class="Arg">srchom</var>, <var class="Arg">rnghom</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraMorphismByHoms</code>( <var class="Arg">src</var>, <var class="Arg">rng</var>, <var class="Arg">srchom</var>, <var class="Arg">rnghom</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPreCat1AlgebraMorphism</code>( <var class="Arg">mor</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCat1AlgebraMorphism</code>( <var class="Arg">mor</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>These operations are used for constructing cat<span class="SimpleMath">^1</span>-algebra morphisms. Details of the implementations can be found in <a href="chapBib.html#biBaodabas1">[Oda09]</a>.</p>
 
 <p><a id="X7A218A0C7DBA8B63" name="X7A218A0C7DBA8B63"></a></p>
@@ -359,7 +370,6 @@ Cat1-algebra [..=&gt;..] :-
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 := Cat1Algebra( 2, 1, 1, 1 );</span>
 [GF(2)_triv -&gt; GF(2)_triv]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C1 );</span>
-
 Cat1-algebra [GF(2)_triv=&gt;GF(2)_triv] :-
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
@@ -376,7 +386,6 @@ Cat1-algebra [GF(2)_triv=&gt;GF(2)_triv] :-
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C2 := Cat1Algebra( 2, 2, 1, 2 );</span>
 [GF(2)_c2 -&gt; GF(2)_triv]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C2 );</span>
-
 Cat1-algebra [GF(2)_c2=&gt;GF(2)_triv] :-
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
@@ -394,7 +403,6 @@ Cat1-algebra [GF(2)_c2=&gt;GF(2)_triv] :-
   [ &lt;zero&gt; of ... ]
 : kernel embedding maps generators of kernel to:
   [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
-
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 = C2;</span>
 false
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R1 := Source( C1 );;</span>
@@ -453,7 +461,6 @@ false
 
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imm := ImagesSource2DimensionalMapping( m );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( imm ); </span>
-
 Cat1-algebra [..=&gt;..] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
@@ -466,7 +473,6 @@ Cat1-algebra [..=&gt;..] :-
 : range embedding maps range generators to:
   [ (Z(2)^0)*() ]
 : the kernel is trivial.
-
 
 </pre></div>
 
