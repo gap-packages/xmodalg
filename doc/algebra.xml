@@ -88,8 +88,8 @@ for all <M>a,b</M> in the basis for <M>A</M>.
 <![CDATA[
 gap> IsAlgebraMultiplier( m1 ); 
 true
-gap> one := One( A1 );; 
-gap> L1 := List( BA1, v -> one );; 
+gap> id1 := One( A1 );; 
+gap> L1 := List( BA1, v -> id1 );; 
 gap> h1 := LeftModuleHomomorphismByImages( A1, A1, BA1, L1 ); 
 [ (Z(5)^0)*(), (Z(5)^0)*(1,2,3,4,5,6), (Z(5)^0)*(1,3,5)(2,4,6), 
   (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2) 
@@ -314,9 +314,9 @@ LeftModuleHomomorphismByMatrix( Basis( A2,
   [ [ 0, 0, 1, 4 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ] ] ), 
 [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ] ], CanonicalBasis( Q2 ) )
 gap> act2 := AlgebraActionBySurjection( nat2 );; 
-gap> C2 := Image( act2 );;
-gap> BC2 := BasisVectors( Basis( C2 ) );;
-gap> b1 := BC2[1];;  b2 := BC2[2];;
+gap> I2 := Image( act2 );;
+gap> BI2 := BasisVectors( Basis( I2 ) );;
+gap> b1 := BI2[1];;  b2 := BI2[2];;
 gap> [ Image(b1,m2)=m2^2, Image(b1,m2^2)=m2^3, Image(b1,m2^3)=Zero(A2) ];
 [ true, true, true ]
 gap> [ Image(b2,m2)=m2^3, b2=b1^2 ];

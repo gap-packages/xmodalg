@@ -2,64 +2,58 @@
 ##
 #W  convert.tst             XModAlg test files          Z. Arvasi - A. Odabas 
 ## 
+
 gap> START_TEST( "XModAlg package: convert.tst" );
-gap> saved_infolevel_xmodalg := InfoLevel( InfoXModAlg );; 
+gap> level := InfoLevel( InfoXModAlg );; 
 gap> SetInfoLevel( InfoXModAlg, 0 );
 
 gap> ## make convert.tst independent of cat1.tst and xmod.tst 
-gap> Ak4 := GroupRing( GF(5), DihedralGroup(4) );;
-gap> SetName( Ak4, "GF5[k4]" );
-gap> IAk4 := AugmentationIdeal( Ak4 );;
-gap> SetName( IAk4, "I(GF5[k4])" );
-gap> XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );;
 
-gap> G := SmallGroup( 4, 2 );;
-gap> F := GaloisField( 4 );;
-gap> R := GroupRing( F, G );;
-gap> SetName( R, "GF(2^2)[k4]" ); 
-gap> e5 := Elements(R)[5];; 
-gap> S := Subalgebra( R, [e5] );; 
-gap> SetName( S, "<e5>" );
-gap> act := AlgebraActionByMultipliers( R, S, R );;
-gap> bdy := AlgebraHomomorphismByImages( S, R, [e5], [e5] );;
-gap> IsAlgebraAction( act );; 
-gap> IsAlgebraHomomorphism( bdy );; 
-gap> XM := PreXModAlgebraByBoundaryAndAction( bdy, act );;
-gap> IsXModAlgebra( XM );;
+## from 2.2.4
+gap> m3 := [ [0,1,0], [0,0,1], [1,0,0] ];;
+gap> A3 := Algebra( Rationals, [m3] );;
+gap> SetName( A3, "A3" );
+gap> c3 := Group( (1,2,3) );;
+gap> Rc3 := GroupRing( Rationals, c3 );;
+gap> SetName( Rc3, "GR(c3)" );
+gap> g3 := GeneratorsOfAlgebra( Rc3 )[2];;
+gap> mg3 := RegularAlgebraMultiplier( Rc3, Rc3, g3 );;
+gap> Amg3 := AlgebraByGenerators( Rationals, [ mg3 ] );;
+gap> homg3 := AlgebraHomomorphismByImages( A3, Amg3, [ m3 ], [ mg3 ] );;
+gap> actg3 := AlgebraActionByHomomorphism( homg3, Rc3 );;
 
-gap> F := GF(5);;
-gap> one := One(F);;
+## Chapter 4, Section 4.1.2 
+gap> F5 := GF(5);;
+gap> id5 := One( F5 );;
 gap> two := Z(5);; 
-gap> z := Zero( F );; 
-gap> l := [ [one,z,z], [z,one,z], [z,z,one] ];; 
-gap> m := [ [z,one,two^3], [z,z,one], [z,z,z] ];;
-gap> n := [ [z,z,one], [z,z,z], [z,z,z] ];; 
-gap> A := Algebra( F, [l,m] );; 
-gap> SetName( A, "A(l,m)" ); 
-gap> B := Subalgebra( A, [m] );; 
-gap> SetName( B, "A(m)" ); 
-gap> IsIdeal( A, B );; 
-gap> act := AlgebraActionByMultipliers( A, B, A );; 
-gap> XAB := XModAlgebraByIdeal( A, B );; 
-gap> SetName( XAB, "XAB" ); 
-
-gap> C3 := Cat1AlgebraSelect( 2, 6, 2, 4 );; 
+gap> z5 := Zero( F5 );; 
+gap> n0 := [ [id5,z5,z5], [z5,id5,z5], [z5,z5,id5] ];; 
+gap> n1 := [ [z5,id5,two^3], [z5,z5,id5], [z5,z5,z5] ];;
+gap> n2 := [ [z5,z5,id5], [z5,z5,z5], [z5,z5,z5] ];; 
+gap> An := Algebra( F5, [ n0, n1 ] );; 
+gap> SetName( An, "An" ); 
+gap> Bn := Subalgebra( An, [ n1 ] );; 
+gap> SetName( Bn, "Bn" ); 
+gap> IsIdeal( An, Bn ); 
+true
+gap> actn := AlgebraActionByMultipliers( An, Bn, An );; 
+gap> Xn := XModAlgebraByIdeal( An, Bn ); 
+[ Bn -> An ]
+gap> SetName( Xn, "Xn" ); 
 
 gap> ############################ 
 gap> ## Chapter 5,  Section 5.1.1
-gap> CAB := Cat1AlgebraOfXModAlgebra( XAB );
-[A(l,m) |X A(m) -> A(l,m)]
-gap> Display( CAB );
-Cat1-algebra [A(l,m) |X A(m)=>A(l,m)] :- 
+gap> Cn := Cat1AlgebraOfXModAlgebra( Xn );
+[An |X Bn -> An]
+gap> Display( Cn );
+Cat1-algebra [An |X Bn => An] :- 
 :  range algebra has generators:
-  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
   [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: tail homomorphism maps source generators to:
-  
+: tail homomorphism maps source generators to:  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
@@ -71,8 +65,7 @@ Cat1-algebra [A(l,m) |X A(m)=>A(l,m)] :-
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
   [ [ 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: head homomorphism maps source generators to:
-  
+: head homomorphism maps source generators to:  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
@@ -84,14 +77,37 @@ Cat1-algebra [A(l,m) |X A(m)=>A(l,m)] :-
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
   [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: range embedding maps range generators to:
-  [ v.1, v.2 ]
-: kernel has generators:
-  [ v.4, v.5 ]
-gap> X3 := XModAlgebraOfCat1Algebra( C3 );
-[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
-gap> Display( X3 ); 
+: range embedding maps range generators to:    [ v.1, v.2 ]
+: kernel has generators:  [ v.4, v.5 ]
 
+gap> bdy3 := AlgebraHomomorphismByImages( Rc3, A3, [ g3 ], [ m3 ] );;
+gap> X3 := XModAlgebraByBoundaryAndAction( bdy3, actg3 );;
+gap> C3 := Cat1AlgebraOfXModAlgebra( X3 );
+[A3 |X GR(c3) -> A3]
+gap> Display( C3 );                 
+Cat1-algebra [A3 |X GR(c3) => A3] :- 
+:  range algebra has generators:[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
+: tail homomorphism maps source generators to:  
+[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+  [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+  [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+  [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
+: head homomorphism maps source generators to:  
+[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+  [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ] ]
+: range embedding maps range generators to:    [ v.1 ]
+: kernel has generators:  [ v.4, v.5, v.6 ]
+
+gap> C6 := Cat1AlgebraSelect( 2, 6, 2, 4 );;
+gap> X6 := XModAlgebraOfCat1Algebra( C6 );
+[ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
+gap> Display( X6 ); 
 Crossed module [..->..] :- 
 : Source algebra has generators:
   [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
@@ -101,7 +117,7 @@ Crossed module [..->..] :-
 : Boundary homomorphism maps source generators to:
   [ <zero> of ..., <zero> of ..., <zero> of ... ]
 
-gap> SetInfoLevel( InfoXModAlg, saved_infolevel_xmodalg );; 
+gap> SetInfoLevel( InfoXModAlg, level );; 
 gap> STOP_TEST( "convert.tst", 10000 );
 
 ############################################################################

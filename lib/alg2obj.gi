@@ -2,7 +2,7 @@
 ##
 #W  alg2obj.gi                 The XMODALG package           Zekeriya Arvasi
 #W                                                            & Alper Odabas
-#Y  Copyright (C) 2014-2022, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
 ##
     
 CAT1ALG_LIST_MAX_SIZE := 7;
@@ -217,8 +217,6 @@ InstallMethod( ViewObj, "method for a pre-crossed module of algebras", true,
     else       
         Pact := XModAlgebraAction( PM );
         if IsLeftModuleGeneralMapping( Pact ) then
-## temporary fix (20/03/18) 
-##          Print( "[", Source( PM ), " -> ", Range( PM ), "]" ); 
             Print( "[ " ); 
             ViewObj( Source( PM ) ); 
             Print( " -> " ); 
@@ -226,20 +224,12 @@ InstallMethod( ViewObj, "method for a pre-crossed module of algebras", true,
             Print( " ]" ); 
         else
             type := AlgebraActionType( Pact ); 
-            #  Type 1
             if (type = "multiplier") then
                 Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
             fi;  
-            #  Type 2
-            if (type = "Type2") then
-                Print( "[", Source( PM ), 
-                       " -> MultiplierAlgebra(", Source( PM ), ")]" );
-            fi;
-            #  Type 3
             if (type = "surjection") then
                 Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
             fi;
-            #  Type 4
             if (type = "module") then
                 Print( "[", Source( PM ), " -> ", Range( PM ), "]" );
             fi;
@@ -277,46 +267,36 @@ function( PM )
     Xrng := Range( PM );
     Pact := XModAlgebraAction( PM );
     type := AlgebraActionType( Pact );
-    if ( type ="Type2" ) then   
-        if IsXModAlgebra( PM ) then
-            Print( "\nCrossed module ", name, " :- \n" );
-        else
-            Print( "\nPre-crossed module ", name, " :- \n" );
-        fi;
-        Print( "Details will be written for Type2 \n" );
+    gensrc := GeneratorsOfAlgebra( Xsrc );
+    genrng := GeneratorsOfAlgebra( Xrng );
+    if IsXModAlgebra( PM ) then
+        Print( "Crossed module ", name, " :- \n" );
     else
-        gensrc := GeneratorsOfAlgebra( Xsrc );
-        genrng := GeneratorsOfAlgebra( Xrng );
-        if IsXModAlgebra( PM ) then
-            Print( "\nCrossed module ", name, " :- \n" );
-        else
-            Print( "\nPre-crossed module ", name, " :- \n" );
-        fi;
-        ispar := not HasParent( Xsrc );
-        if ( ispar and HasName( Xsrc ) ) then
-            Print( ": Source algebra ", Xsrc );
-        elif ( ispar and HasName( Parent( Xsrc ) ) ) then
-            Print( ": Source algebra has parent ( ", Parent( Xsrc), " ) and" );
-        else
-            Print( ": Source algebra" );
-        fi;
-        Print( " has generators:\n" );
-        Print( "  ", gensrc, "\n" );
-        ispar := not HasParent( Xrng );
-        if ( ispar and HasName( Xrng ) ) then
-            Print( ": Range algebra ", Xrng );
-        elif ( ispar and HasName( Parent( Xrng ) ) ) then
-            Print( ": Range algebra has parent ( ", Parent( Xrng ), " ) and" );
-        else
-            Print( ": Range algebra" );
-        fi;
-        Print( " has generators:\n" );
-        Print( "  ", genrng, "\n" );
-        Print( ": Boundary homomorphism maps source generators to:\n" );
-        bdy := Boundary( PM );
-        Print( "  ",  List( gensrc, s -> Image( bdy, s ) ), "\n" );         
-        Print( "\n" );  
+        Print( "Pre-crossed module ", name, " :- \n" );
     fi;
+    ispar := not HasParent( Xsrc );
+    if ( ispar and HasName( Xsrc ) ) then
+        Print( ": Source algebra ", Xsrc );
+    elif ( ispar and HasName( Parent( Xsrc ) ) ) then
+        Print( ": Source algebra has parent ( ", Parent( Xsrc), " ) and" );
+    else
+        Print( ": Source algebra" );
+    fi;
+    Print( " has generators:  " );
+    Print( gensrc, "\n" );
+    ispar := not HasParent( Xrng );
+    if ( ispar and HasName( Xrng ) ) then
+        Print( ": Range algebra ", Xrng );
+    elif ( ispar and HasName( Parent( Xrng ) ) ) then
+        Print( ": Range algebra has parent ( ", Parent( Xrng ), " ) and" );
+    else
+        Print( ": Range algebra" );
+    fi;
+    Print( " has generators:  " );
+    Print( genrng, "\n" );
+    Print( ": Boundary homomorphism maps source generators to:" );
+    bdy := Boundary( PM );
+    Print( List( gensrc, s -> Image( bdy, s ) ), "\n" );
 end ); 
 
 ############################################################################
@@ -573,12 +553,7 @@ function( PM, SM )
         Info( InfoXModAlg, 3, "IsIdeal failure in IsSubPreXModAlgebra" );
         return false;
     fi;
-    if ( AlgebraActionType(XModAlgebraAction(PM))="Type2" ) 
-         and (AlgebraActionType(XModAlgebraAction(SM))="Type2" ) then
-        return true;
-    fi;
     ok := true;
-    ######    
     if HasGeneratorsOfAlgebra( Ssrc ) then
         gensrc := GeneratorsOfAlgebra( Ssrc );
     else
@@ -589,7 +564,6 @@ function( PM, SM )
     else
         genrng := Srng;        
     fi; 
-    #####    
     for s in gensrc do
         if ( Image( Boundary( PM ), s ) <> Image( Boundary( SM ), s ) ) then
             ok := false;
@@ -674,7 +648,7 @@ end );
 
 ###########################################################################
 ##
-#M  SubPreXModAlgebra            creates SubPreXMod Of Algebra from Ssrc<=Psrc 
+#M  SubPreXModAlgebra         creates SubPreXMod Of Algebra from Ssrc<=Psrc 
 ##
 InstallMethod( SubPreXModAlgebra, "generic method for pre-crossed modules", 
     true, [ IsPreXModAlgebra, IsAlgebra, IsAlgebra ], 0,
@@ -696,17 +670,11 @@ function( PM, Ssrc, Srng )
     Pbdy := Boundary( PM );
     Pact := XModAlgebraAction( PM );
     type := AlgebraActionType( Pact );
-    #  Type 1
     if ( type = "multiplier" ) then
-        Info( InfoXModAlg, 1, "1. multiplier type" );
+        Info( InfoXModAlg, 1, "multiplier type" );
         SM := XModAlgebraByIdeal( Srng, Ssrc );
-    #  Type 2
-    elif ( type = "Type2" ) then
-        Info( InfoXModAlg, 1, "2. tip icin alt xmod olustur" );
-        SM := XModAlgebraByMultiplierAlgebra( Ssrc );
-    #  Type 3
     elif ( type = "surjection") then
-        Info( InfoXModAlg, 1, "3. surjection type" );
+        Info( InfoXModAlg, 1, "surjection type" );
         genSsrc := GeneratorsOfAlgebra( Ssrc );
         B := Range(Pbdy);
         list := [];    
@@ -717,9 +685,8 @@ function( PM, Ssrc, Srng )
         K := Image(f);
         surf := AlgebraHomomorphismByImages( Ssrc,K,genSsrc,list );
         SM := XModAlgebraBySurjection( surf );
-    #  Type 4
     elif ( type = "module" ) then
-        Info( InfoXModAlg, 1, "4. module type" );
+        Info( InfoXModAlg, 1, "module type" );
         SM := XModAlgebraByModule( Ssrc, Srng );
     else
         Print( "Uyumsuz xmod\n" );
@@ -966,39 +933,8 @@ function( C1A )
     
     if HasName( C1A ) then
         Print( Name( C1A ), "\n" );
-    else          
-        if IsXModAlgebraConst( TailMap(C1A) ) then
-            PM := XModAlgebraConst( TailMap(C1A) );        
-            Pact := XModAlgebraAction( PM );
-            type := AlgebraActionType( Pact );
-            #  Type 1
-            if ( type = "Type1" ) then
-                Print( "[", Range(PM)," IX ", Source( PM ), 
-                       " -> ", Range( C1A ), "]" );
-            fi;  
-            #  Type 2 
-            if ( type = "Type2" ) then
-                Print( "Mul. Alg.(", Source( PM ),") IX ", Source( PM ), 
-                       " -> Mul. Alg.(", Source( PM ), ")]" );;
-            fi;
-            #  Type 3
-            if ( type = "Surjection" ) then          
-                Print( "[", Range(PM)," IX ", Source( PM ), 
-                       " -> ", Range( C1A ), "]" );
-            fi;
-            #  Type 4
-            if ( type = "Type4" ) then          
-                Print( "[", Range(PM)," IX ", Source( PM ), 
-                       " -> ", Range( C1A ), "]" );
-            fi; 
-            #  Type 5
-            if ( type = "Multiplier" ) then
-                Print( "[", Range(PM)," IX ", Source( PM ), 
-                       " -> ", Range( C1A ), "]" );
-            fi; 
-        else
-            Print( "[", Source( C1A ), " -> ", Range( C1A ), "]" );
-        fi;
+    else
+        Print( "[", Source( C1A ), " -> ", Range( C1A ), "]" );
     fi;
 end );
 
@@ -1047,25 +983,25 @@ function( C1A )
         else
             Print( "Pre-cat1-algebra ", name, " :- \n" );
         fi;
-        Print( ":  range algebra has generators:\n" );
-        Print( "  ", genrng, "\n" );
+        Print( ":  range algebra has generators:" );
+        Print( genrng, "\n" );
         if eqth then 
             Print( ": tail homomorphism = head homomorphism\n" );
-            Print( "  they map the source generators to:\n" );
-            Print( "  ", imt, "\n" );
+            Print( "  they map the source generators to:  " );
+            Print( imt, "\n" );
         else
-            Print( ": tail homomorphism maps source generators to:\n" );
-            Print( "  ", imt, "\n" );
-            Print( ": head homomorphism maps source generators to:\n" );
-            Print( "  ", imh, "\n" );
+            Print( ": tail homomorphism maps source generators to:  " );
+            Print( imt, "\n" );
+            Print( ": head homomorphism maps source generators to:  " );
+            Print( imh, "\n" );
         fi;
-        Print( ": range embedding maps range generators to:\n" );
+        Print( ": range embedding maps range generators to:  " );
         Print( "  ", ime, "\n" );
         if ( Size( Cker ) = 1 ) then
             Print( ": the kernel is trivial.\n" );
         else
-            Print( ": kernel has generators:\n" );
-            Print( "  ", genker, "\n" );
+            Print( ": kernel has generators:  " );
+            Print( genker, "\n" );
         fi;    
     else
         b := Boundary( C1A );
@@ -1078,25 +1014,25 @@ function( C1A )
         else
             Print( "Pre-cat1-algebra ", name, " :- \n" );
         fi;
-        Print( ": source algebra has generators:\n" );
-        Print( "  ", gensrc, "\n" );
-        Print( ":  range algebra has generators:\n" );
-        Print( "  ", genrng, "\n" );
-        Print( ": tail homomorphism maps source generators to:\n" );
-        Print( "  ", imt, "\n" );
-        Print( ": head homomorphism maps source generators to:\n" );
-        Print( "  ", imh, "\n" );
-        Print( ": range embedding maps range generators to:\n" );
-        Print( "  ", ime, "\n" );
+        Print( ": source algebra has generators: \n" );
+        Print( gensrc, "\n" );
+        Print( ":  range algebra has generators: \n" );
+        Print( genrng, "\n" );
+        Print( ": tail homomorphism maps source generators to: \n" );
+        Print( imt, "\n" );
+        Print( ": head homomorphism maps source generators to: \n" );
+        Print( imh, "\n" );
+        Print( ": range embedding maps range generators to: \n" );
+        Print( ime, "\n" );
         if ( Size( Cker ) = 1 ) then
             Print( ": the kernel is trivial.\n" );
         else
-            Print( ": kernel has generators:\n" );
-            Print( "  ", genker, "\n" );
-            Print( ": boundary homomorphism maps generators of kernel to:\n" );
-            Print( "  ", imb, "\n" );
-            Print( ": kernel embedding maps generators of kernel to:\n" );
-            Print( "  ", imk, "\n" );
+            Print( ": kernel has generators: " );
+            Print( genker, "\n" );
+            Print( ": boundary homomorphism maps generators of kernel to:  \n" );
+            Print( imb, "\n" );
+            Print( ": kernel embedding maps generators of kernel to: \n" );
+            Print( imk, "\n" );
         fi;
     fi;
     # if ( IsCat1Algebra( C1A ) and HasXModAlgebraOfCat1Algebra( C1A ) ) then
@@ -1715,13 +1651,8 @@ end );
 InstallMethod( PreXModAlgebraOfPreCat1Algebra, true, [ IsPreCat1Algebra ], 0,
 function( C1A )
  
-    local  usage, A, B, s, t, e, bdy, S, R, vecR, evecR, eR, M, act, PM;
+    local  A, B, s, t, e, bdy, S, R, vecR, evecR, eR, M, act, PM;
 
-    usage := "Usage : Boundary of cat1-algebra not surjective";
-    if IsXModAlgebraConst( TailMap( C1A ) ) then ## what is this for ??? 
-        PM := XModAlgebraConst( TailMap( C1A ) );
-        return PM;   
-    fi; 
     A := Source( C1A ); 
     B := Range( C1A );
     s := HeadMap( C1A );
@@ -1755,7 +1686,7 @@ function( C1 )
     if not IsXModAlgebra( X1 ) then
         Info( InfoXModAlg, 1, "X1 is only a pre-xmod-algebra" ); 
         return fail;        
-    fi;    
+    fi;
     SetCat1AlgebraOfXModAlgebra( X1, C1 );
     return X1;
 end );

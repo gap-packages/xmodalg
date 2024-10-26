@@ -84,9 +84,6 @@ DeclareAttribute( "TailMap", IsPreCat1Algebra );
 DeclareAttribute( "RangeEmbedding", IsPreCat1Algebra );
 DeclareAttribute( "KernelEmbedding", IsPreCat1Algebra );
 
-DeclareFilter( "IsXModAlgebraConst", IsCat1Algebra );
-DeclareAttribute( "XModAlgebraConst", IsCat1Algebra );
-
 DeclareOperation( "SubPreCat1Algebra", 
     [ IsPreCat1Algebra, IsAlgebra, IsAlgebra ] );
 DeclareOperation( "SubCat1Algebra", [ IsCat1Algebra, IsAlgebra, IsAlgebra ] );

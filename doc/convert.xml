@@ -64,8 +64,8 @@ instead of the operation <Ref Oper="Cat1AlgebraSelect"/>.
 <Description> 
 These operations are used for constructing a cat<M>^{1}</M>-algebra 
 from a given crossed module of algebras. 
-As an example we use the crossed module <C>XAB</C> constructed in 
-<Ref Oper="XModAlgebraByIdeal"/>. 
+As an example we use the crossed module <C>XAB</C> constructed in section
+<Ref Sect="XModAlgebraByIdeal"/>. 
 </Description>
 </ManSection> 
 
@@ -74,16 +74,14 @@ As an example we use the crossed module <C>XAB</C> constructed in
 gap> CAB := Cat1AlgebraOfXModAlgebra( XAB );
 [A(l,m) |X A(m)=>A(l,m)]
 gap> Display( CAB );
-Cat1-algebra [A(l,m) |X A(m)=>A(l,m)] :- 
+Cat1-algebra [A(l,m) |X A(m) => A(l,m)] :- 
 :  range algebra has generators:
-  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
   [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: tail homomorphism maps source generators to:
-  
+: tail homomorphism maps source generators to:  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
@@ -96,7 +94,6 @@ Cat1-algebra [A(l,m) |X A(m)=>A(l,m)] :-
   [ [ 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
 : head homomorphism maps source generators to:
-  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
@@ -108,8 +105,7 @@ Cat1-algebra [A(l,m) |X A(m)=>A(l,m)] :-
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
   [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: range embedding maps range generators to:
-  [ v.1, v.2 ]
+: range embedding maps range generators to:  [ v.1, v.2 ]
 : kernel has generators:
   [ v.4, v.5 ]
 ]]>
@@ -125,6 +121,8 @@ Cat1-algebra [A(l,m) |X A(m)=>A(l,m)] :-
 <Description> 
 These operations are used for constructing a crossed module of algebras 
 from a given cat<M>^{1}</M>-algebra.
+The example uses the cat<M>^1</M>-algebra <C>C3</C> 
+constructed in section <Ref Sect="SubCat1Algebra"/>.
 </Description>
 </ManSection> 
 
@@ -133,7 +131,6 @@ from a given cat<M>^{1}</M>-algebra.
 gap> X3 := XModAlgebraOfCat1Algebra( C3 );
 [ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> Display( X3 ); 
-
 Crossed module [..->..] :- 
 : Source algebra has generators:
   [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 

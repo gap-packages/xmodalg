@@ -78,23 +78,23 @@ it is the case that <M>{\partial(S)}</M> is an ideal of <M>R</M>.
 
 <Example>
 <![CDATA[
-gap> F := GF(5);;
-gap> one := One(F);;
+gap> F5 := GF(5);;
+gap> id5 := One( F5 );;
 gap> two := Z(5);; 
-gap> z := Zero( F );; 
-gap> l := [ [one,z,z], [z,one,z], [z,z,one] ];; 
-gap> m := [ [z,one,two^3], [z,z,one], [z,z,z] ];;
-gap> n := [ [z,z,one], [z,z,z], [z,z,z] ];; 
-gap> A := Algebra( F, [l,m] );; 
-gap> SetName( A, "A(l,m)" ); 
-gap> B := Subalgebra( A, [m] );; 
-gap> SetName( B, "A(m)" ); 
-gap> IsIdeal( A, B ); 
+gap> z5 := Zero( F5 );; 
+gap> n0 := [ [id5,z5,z5], [z5,id5,z5], [z5,z5,id5] ];; 
+gap> n1 := [ [z5,id5,two^3], [z5,z5,id5], [z5,z5,z5] ];;
+gap> n2 := [ [z5,z5,id5], [z5,z5,z5], [z5,z5,z5] ];; 
+gap> An := Algebra( F5, [ n0, n1 ] );; 
+gap> SetName( An, "An" ); 
+gap> Bn := Subalgebra( An, [ n1 ] );; 
+gap> SetName( Bn, "Bn" ); 
+gap> IsIdeal( An, Bn ); 
 true
-gap> act := AlgebraActionByMultipliers( A, B, A );; 
-gap> XAB := XModAlgebraByIdeal( A, B ); 
-[ A(m) -> A(l,m) ]
-gap> SetName( XAB, "XAB" ); 
+gap> actn := AlgebraActionByMultipliers( An, Bn, An );; 
+gap> Xn := XModAlgebraByIdeal( An, Bn ); 
+[ Bn -> An ]
+gap> SetName( Xn, "Xn" ); 
 ]]>
 </Example>
 
@@ -125,7 +125,6 @@ gap> SetName( IAk4, "I(GF5[k4])" );
 gap> XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );
 [ I(GF5[k4]) -> GF5[k4] ]
 gap> Display( XIAk4 );
-
 Crossed module [I(GF5[k4])->GF5[k4]] :- 
 : Source algebra I(GF5[k4]) has generators:
   [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^
@@ -135,7 +134,6 @@ Crossed module [I(GF5[k4])->GF5[k4]] :-
 : Boundary homomorphism maps source generators to:
   [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^
     0)*f2 ]
-
 gap> Size2d( XIAk4 );
 [ 125, 625 ]
 ]]>
@@ -196,11 +194,6 @@ We also show usage of the attributes listed above.
 
 <Example>
 <![CDATA[
-gap> f := Boundary( XIAk4 );
-[ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...\
-+(Z(5)^
-    0)*f2 ] -> [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, 
-  (Z(5)^2)*<identity> of ...+(Z(5)^0)*f2 ]
 gap> RepresentationsOfObject( XIAk4 );
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
 gap> KnownPropertiesOfObject( XIAk4 );
@@ -227,9 +220,9 @@ of a crossed module in which the action is the identity map on <M>M</M>.
 
 <Example>
 <![CDATA[
-gap> XA := XModAlgebraByMultiplierAlgebra( A );
-[ A(l,m) -> <algebra of dimension 3 over GF(5)> ]
-gap> XModAlgebraAction( XA );
+gap> XAn := XModAlgebraByMultiplierAlgebra( An );
+[ An -> <algebra of dimension 3 over GF(5)> ]
+gap> XModAlgebraAction( XAn );
 IdentityMapping( <algebra of dimension 3 over GF(5)> )
 ]]>
 </Example>
@@ -297,23 +290,22 @@ of a given crossed module.
 gap> e4 := Elements( IAk4 )[4];
 (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
 gap> Je4 := Ideal( IAk4, [e4] );;
-gap> Size( Je4 );
-5
-gap> SetName( Je4, "<e4>" ); 
-gap> XJe4 := XModAlgebraByIdeal( Ak4, Je4 );
-[ <e4> -> GF5[k4] ]
-gap> Display( XJe4 );        
-
-Crossed module [<e4>->GF5[k4]] :- 
-: Source algebra <e4> has generators:
-  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
-: Range algebra GF5[k4] has generators:
-  [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
-: Boundary homomorphism maps source generators to:
-  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
-
-gap> IsSubXModAlgebra( XIAk4, XJe4 );
+gap> SetName( Je4, "<e4>" );
+gap> Ke4 := Subalgebra( Ak4, [e4] );;
+gap> [ Size( Je4 ), Size( Ke4 ) ];
+[ 5, 5 ]
+gap> Se4 := SubXModAlgebra( XIAk4, Je4, Ke4 );
+[ <e4> -> <algebra of dimension 1 over GF(5)> ]
+gap> IsSubXModAlgebra( XIAk4, Se4 ); 
 true
+gap> Display( Se4 );
+Crossed module [<e4> -> ..] :- 
+: Source algebra <e4> has generators:  
+[ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
+: Range algebra has generators:  
+[ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
+: Boundary homomorphism maps source generators to:
+[ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
 ]]>
 </Example>
 
@@ -412,9 +404,9 @@ gap> XIBk4 := XModAlgebra( Bk4, IBk4 );
 [ I(GF2[k4]) -> GF2[k4] ]
 gap> IAc4 = IBk4;
 false
-gap> homIAIB := AllHomsOfAlgebras( IAc4, IBk4 );; 
+gap> homIAIB := AllAlgebraHomomorphisms( IAc4, IBk4 );; 
 gap> theta := homIAIB[3];; 
-gap> homAB := AllHomsOfAlgebras( Ac4, Bk4 );;
+gap> homAB := AllAlgebraHomomorphisms( Ac4, Bk4 );;
 gap> phi := homAB[7];; 
 gap> mor := XModAlgebraMorphism( XIAc4, XIBk4, theta, phi );
 [[I(GF2[c4])->GF2[c4]] => [I(GF2[k4])->GF2[k4]]]
