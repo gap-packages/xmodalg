@@ -1,5 +1,11 @@
 # CHANGES to the 'XModAlg' package
 
+## 1.26 -> 1.27 (26/10/24) 
+ * (21/10/24) removed references to "Type2" and "XModAlgebraConst"
+              tests now use local variables and are mirrored in /examples
+              xmod.tst now agrees with sections 4.1.7-4.1.10 in the manual
+              changed names of variables in tests to avoid duplications
+
 ## 1.25 -> 1.26 (09/07/24) 
  * (08/07/24) renamed the actions and algebras in the tests/examples as 
               act1, act2, ,,, act6  and added direct sum operations
@@ -17,16 +23,16 @@
               and prior to the function being moved to the main GAP library 
 
 ## 1.18 -> 1.22 (29/04/22) 
- * (27/04/22) required version 2.87 of XMod which uses Size2d in place of Size, 
-              and so replaced Size by Size2d for 2d-algebras 
+ * (27/04/22) required version 2.87 of XMod which uses Size2d in place of
+              Size, and so replaced Size by Size2d for 2d-algebras 
  * (15/07/21) revised PreXModAlgebraOfPreCat1Algebra 
  * (14/07/21) revised IsPreXModAlgebra and IsXModAlgebra 
-              renamed AlgebraAction4 AlgebraActionByModule 
+              renamed AlgebraAction4 as AlgebraActionByModule 
  * (09/07/21) added section on Multipliers and MultiplierAlgebras 
- * (09/06/21) renamed AlgebraAction3 AlgebraActionBySurjection 
+ * (09/06/21) renamed AlgebraAction3 as AlgebraActionBySurjection 
               renamed XModAlgebraByCentralExtension XModAlgebraBySurjection 
               revised these operations and added examples
- * (25/05/21) renamed AlgebraAction1 AlgebraActionByMultipliers 
+ * (25/05/21) renamed AlgebraAction1 as AlgebraActionByMultipliers 
               added operation SemidirectProductofAlgebras 
               added chapter Commutative algebras and their actions to manual
  * (12/05/21) added algebra attribute AugmentationXMod 

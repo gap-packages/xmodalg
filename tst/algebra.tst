@@ -2,13 +2,11 @@
 ##
 #W  algebra.tst             XModAlg test files          Z. Arvasi - A. Odabas 
 ## 
+#@local level,A1,BA1,v,I1,v1,m1,id1,L1,h1,u1,S1,MS1,BMS1,MA1,BMA1,hom1,act1,act12,theta1,m2,A2,S2,nat2,Q2,act2,I2,BI2,b1,b2,P1,P2,A2c6,R2c3,homAR,homRA,bijAA,ideAA
+
 gap> START_TEST( "XModAlg package: algebra.tst" );
-gap> saved_infolevel_xmodalg := InfoLevel( InfoXModAlg );; 
+gap> level := InfoLevel( InfoXModAlg );; 
 gap> SetInfoLevel( InfoXModAlg, 0 );
-
-
-gap> SetInfoLevel( InfoXModAlg, saved_infolevel_xmodalg );; 
-gap> STOP_TEST( "algebra.tst", 10000 );
 
 ## Section 2.1.1
 gap> A1 := GroupRing( GF(5), Group( (1,2,3,4,5,6) ) );;
@@ -29,8 +27,8 @@ gap> m1 := RegularAlgebraMultiplier( A1, I1, v1 );
 ## Section 2.1.2
 gap> IsAlgebraMultiplier( m1 ); 
 true
-gap> one := One( A1 );; 
-gap> L1 := List( BA1, v -> one );; 
+gap> id1 := One( A1 );; 
+gap> L1 := List( BA1, v -> id1 );; 
 gap> h1 := LeftModuleHomomorphismByImages( A1, A1, BA1, L1 ); 
 [ (Z(5)^0)*(), (Z(5)^0)*(1,2,3,4,5,6), (Z(5)^0)*(1,3,5)(2,4,6), 
   (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2) 
@@ -110,9 +108,9 @@ LeftModuleHomomorphismByMatrix( Basis( A2,
   [ [ 0, 0, 1, 4 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ] ] ), 
 [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ] ], CanonicalBasis( Q2 ) )
 gap> act2 := AlgebraActionBySurjection( nat2 );; 
-gap> C2 := Image( act2 );;
-gap> BC2 := BasisVectors( Basis( C2 ) );;
-gap> b1 := BC2[1];;  b2 := BC2[2];;
+gap> I2 := Image( act2 );;
+gap> BI2 := BasisVectors( Basis( I2 ) );;
+gap> b1 := BI2[1];;  b2 := BI2[2];;
 gap> [ Image(b1,m2)=m2^2, Image(b1,m2^2)=m2^3, Image(b1,m2^3)=Zero(A2) ];
 [ true, true, true ]
 gap> [ Image(b2,m2)=m2^3, b2=b1^2 ];
@@ -187,6 +185,8 @@ gap> ideAA := AllIdempotentAlgebraHomomorphisms( A2c6, A2c6 );;
 gap> Length( ideAA );
 14
 
+gap> SetInfoLevel( InfoXModAlg, level );; 
+gap> STOP_TEST( "algebra.tst", 10000 );
 
 ############################################################################
 ##

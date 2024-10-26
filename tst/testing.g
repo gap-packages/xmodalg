@@ -11,8 +11,8 @@ TestXModAlg := function( pkgname )
     LoadPackage( pkgname );
     pkgdir := DirectoriesPackageLibrary( pkgname, "tst" );
     # Arrange chapters as required
-    testfiles := 
-        [ "cat1.tst", "xmod.tst", "convert.tst" ];
+    testfiles := [ "algebra.tst", "module.tst", "cat1.tst", 
+                   "xmod.tst", "convert.tst" ];
     testresult := true;
     for ff in testfiles do
         fn := Filename( pkgdir, ff );

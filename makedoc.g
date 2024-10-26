@@ -19,9 +19,8 @@ AutoDoc( rec(
                       "xmod.xml",  "convert.xml" ],
         bib := "bib.xml", 
         entities := rec( 
-            AutoDoc := "<Package>AutoDoc</Package>"
+            AutoDoc := "<Package>AutoDoc</Package>",
+            XMod := "<Package>XMod</Package>"
         )
     )
 ));
-
-QUIT;
