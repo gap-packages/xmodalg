@@ -85,13 +85,13 @@ gap> Size2d( XIAk4 );
 ## Section 4.1.4
 gap> RepresentationsOfObject( XIAk4 );
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
-gap> KnownPropertiesOfObject( XIAk4 );
-[ "CanEasilyCompareElements", "CanEasilySortElements", "IsDuplicateFree", 
-  "IsLeftActedOnByDivisionRing", "IsAdditivelyCommutative", "IsLDistributive",
-  "IsRDistributive", "IsPreXModDomain", "Is2dAlgebraObject", 
-  "IsPreXModAlgebra", "IsXModAlgebra" ]
-gap> KnownAttributesOfObject( XIAk4 );
-[ "Name", "LeftActingDomain", "Range", "Source", "Boundary", "Size2d", 
+gap> Set( KnownPropertiesOfObject( XIAk4 ) );
+[ "CanEasilyCompareElements", "CanEasilySortElements", "Is2dAlgebraObject", 
+  "IsAdditivelyCommutative", "IsDuplicateFree", "IsLDistributive", 
+  "IsLeftActedOnByDivisionRing", "IsPreXModAlgebra", "IsPreXModDomain", 
+  "IsRDistributive", "IsXModAlgebra" ]
+gap> Set( KnownAttributesOfObject( XIAk4 ) );
+[ "Boundary", "LeftActingDomain", "Name", "Range", "Size2d", "Source", 
   "XModAlgebraAction" ]
 
 ############################
