@@ -8,8 +8,8 @@ SetPackageInfo( rec(
 
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
-Version := "1.26",
-Date := "09/07/2024", # dd/mm/yyyy format
+Version := "1.27",
+Date := "26/10/2024", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -92,7 +92,7 @@ AvailabilityTest := ReturnTrue,
 
 BannerString := Concatenation( 
   "-----------------------------------------------------------------------------\n",
-  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.11 \n", 
+  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.13 \n", 
   "Methods for crossed modules of commutative algebras and cat1-algebras\n",
   "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n",
   "-----------------------------------------------------------------------------\n"
