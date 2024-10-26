@@ -339,19 +339,25 @@ DeclareOperation( "XModAlgebraByModule", [ IsAlgebra, IsLeftModule ] );
 ##
 ## <Example>
 ## <![CDATA[
-## gap> C4 := Cat1AlgebraOfXModAlgebra( X4 );
-## [A4 |X A(M4)=>A4]
-## gap> Display( C4 );           
-## Cat1-algebra [A4 |X A(M4) => A4] :- 
-## :  range algebra has generators:[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
-## : tail homomorphism = head homomorphism
-##   they map the source generators to:  
+## gap> C3 := Cat1AlgebraOfXModAlgebra( X3 );
+## [A3 |X GR(c3) -> A3]
+## gap> Display( C3 );                 
+## Cat1-algebra [A3 |X GR(c3) => A3] :- 
+## : range algebra has generators:[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
+## : tail homomorphism maps source generators to:  
 ## [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
 ##   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
 ##   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
 ##   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
 ##   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
 ##   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
+## : head homomorphism maps source generators to:  
+## [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+##   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+##   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+##   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+##   [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+##   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ] ]
 ## : range embedding maps range generators to:    [ v.1 ]
 ## : kernel has generators:  [ v.4, v.5, v.6 ]
 ## ]]>

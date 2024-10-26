@@ -71,10 +71,10 @@ As an example we use the crossed module <C>XAB</C> constructed in section
 
 <Example>
 <![CDATA[
-gap> CAB := Cat1AlgebraOfXModAlgebra( XAB );
-[A(l,m) |X A(m)=>A(l,m)]
-gap> Display( CAB );
-Cat1-algebra [A(l,m) |X A(m) => A(l,m)] :- 
+gap> Cn := Cat1AlgebraOfXModAlgebra( Xn );
+[An |X Bn -> An]
+gap> Display( Cn );
+Cat1-algebra [An |X Bn => An] :- 
 :  range algebra has generators:
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
@@ -93,7 +93,7 @@ Cat1-algebra [A(l,m) |X A(m) => A(l,m)] :-
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
   [ [ 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: head homomorphism maps source generators to:
+: head homomorphism maps source generators to:  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
@@ -105,9 +105,8 @@ Cat1-algebra [A(l,m) |X A(m) => A(l,m)] :-
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
   [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: range embedding maps range generators to:  [ v.1, v.2 ]
-: kernel has generators:
-  [ v.4, v.5 ]
+: range embedding maps range generators to:    [ v.1, v.2 ]
+: kernel has generators:  [ v.4, v.5 ]
 ]]>
 </Example>
 
@@ -128,9 +127,9 @@ constructed in section <Ref Sect="SubCat1Algebra"/>.
 
 <Example>
 <![CDATA[
-gap> X3 := XModAlgebraOfCat1Algebra( C3 );
+gap> X6 := XModAlgebraOfCat1Algebra( C6 );
 [ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
-gap> Display( X3 ); 
+gap> Display( X6 ); 
 Crossed module [..->..] :- 
 : Source algebra has generators:
   [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 

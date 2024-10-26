@@ -41,8 +41,8 @@ gap> Xn := XModAlgebraByIdeal( An, Bn );
 [ Bn -> An ]
 gap> SetName( Xn, "Xn" ); 
 
-gap> ############################ 
-gap> ## Chapter 5,  Section 5.1.1
+############################ 
+## Chapter 5,  Section 5.1.1
 gap> Cn := Cat1AlgebraOfXModAlgebra( Xn );
 [An |X Bn -> An]
 gap> Display( Cn );
