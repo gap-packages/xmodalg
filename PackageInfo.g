@@ -9,7 +9,7 @@ SetPackageInfo( rec(
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
 Version := "1.27",
-Date := "26/10/2024", # dd/mm/yyyy format
+Date := "06/12/2024", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -76,8 +76,7 @@ PackageDoc := rec(
   HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "Crossed Modules and Cat1-Algebras in GAP",
-  Autoload  := true
+  LongTitle := "Crossed Modules and Cat1-Algebras in GAP"
 ),
 
 Dependencies := rec(
@@ -97,8 +96,6 @@ BannerString := Concatenation(
   "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n",
   "-----------------------------------------------------------------------------\n"
 ),
-
-Autoload := false, 
 
 TestFile := "tst/testall.g",
 
