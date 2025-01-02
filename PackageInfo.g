@@ -77,7 +77,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Crossed Modules and Cat1-Algebras in GAP",
-  Autoload  := true
 ),
 
 Dependencies := rec(
@@ -98,7 +97,6 @@ BannerString := Concatenation(
   "-----------------------------------------------------------------------------\n"
 ),
 
-Autoload := false, 
 
 TestFile := "tst/testall.g",
 
