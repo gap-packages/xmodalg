@@ -2,7 +2,7 @@
 ##
 #W  xmod.tst                XModAlg test files          Z. Arvasi - A. Odabas      
 ##
-#@local level,m2,A2,S2,nat2,Q2,m3,A3,c3,Rc3,g3,mg3,Amg3,homg3,actg3,V3,M3,act3,F5,id5,two,z5,n0,n1,n2,An,Bn,actn,Xn,Ak4,IAk4,XIAk4,XAn,X2,bdy3,X3,Y3,XY3,e4,Je4,Ke4,Se4,c4,Ac4,IAc4,XIAc4,Bk4,IBk4,XIBk4,homIAIB,theta,homAB,phi,mor,Xmor,ic4,e1,e2,immor
+#@local level,m2,A2,S2,nat2,Q2,m3,A3,c3,Rc3,g3,mg3,Amg3,homg3,actg3,V3,M3,act3,F5,id5,two,z5,n0,n1,n2,An,Bn,actn,Xn,Ak4,IAk4,XIAk4,XAn,X2,bdy3,X3,Y3,e4,Je4,Ke4,Se4,c4,Ac4,IAc4,XIAc4,Bk4,IBk4,XIBk4,homIAIB,theta,homAB,phi,mor,Xmor,ic4,e1,e2,immor
 
 gap> START_TEST( "XModAlg package: xmod.tst" );
 gap> level := InfoLevel( InfoXModAlg );; 
@@ -145,11 +145,6 @@ Crossed module [A(M3) -> A3] :-
 [ [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
-
-############################
-## Section 4.1.9
-gap> XY3 := DirectSumOfXModAlgebras( X3, Y3 );
-[ GR(c3)(+)A(M3) -> A3(+)A3 ]
 
 ############################
 ## Section 4.1.10

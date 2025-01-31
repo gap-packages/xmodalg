@@ -2,7 +2,7 @@
 ##
 #W  alg2obj.gi                 The XMODALG package           Zekeriya Arvasi
 #W                                                            & Alper Odabas
-#Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2025, Zekeriya Arvasi & Alper Odabas,  
 ##
     
 CAT1ALG_LIST_MAX_SIZE := 7;
@@ -60,7 +60,7 @@ InstallMethod( IsPreXModAlgebra, "generic method for pre-crossed modules",
     true, [ Is2dAlgebra ], 0,
 function( P )
 
-    local R, S, bdy, act, genR, genS, r, m, s, ims, acts, z1, z2;
+    local R, S, bdy, act, basR, basS, i, j, r, m, s, ims, acts, z1, z2;
 
     if not IsPreXModAlgebraObj( P ) then
         return false;
@@ -83,19 +83,21 @@ function( P )
         Info( InfoXModAlg, 1, "Source( act ) <> R" );
         return false;
     fi; 
-    genR := GeneratorsOfAlgebra( R );
-    genS := GeneratorsOfAlgebra( S ); 
-    for r in genR do 
+    basR := CanonicalBasis( R );
+    basS := CanonicalBasis( S ); 
+    for i in [1..Length(basR)] do
+        r := basR[i]; 
         m := ImageElm( act, r );
-        for s in genS do 
+        for j in [1..Length(basS)] do
+            s := basS[j]; 
             ims := Image( bdy, s ); 
             acts := Image( m, s );
             z1 := ImageElm( bdy, acts ); 
             z2 := r * ims; 
             if not ( z1 = z2 ) then
-                Info( InfoXModAlg, 1, "XModAlg 1: ", z1, " <> ", z2 ); 
+                Info( InfoXModAlg, 1, "XModAlg1: ", z1, " <> ", z2 );
                 return false; 
-            fi; 
+            fi;
         od; 
     od; 
     return true;
@@ -350,7 +352,7 @@ InstallMethod( IsXModAlgebra, "generic method for pre-crossed modules",
     bdy := Boundary( P );
     act := XModAlgebraAction( P );
     S := Source( bdy ); 
-    genS := GeneratorsOfAlgebra( S ); 
+    genS := CanonicalBasis( S ); 
     for s1 in genS do
         r1 := ImageElm( bdy, s1 ); 
         m1 := ImageElm( act, r1 ); 
@@ -358,7 +360,7 @@ InstallMethod( IsXModAlgebra, "generic method for pre-crossed modules",
             z1 := ImageElm( m1, s2 ); 
             z2 := s1 * s2;
             if ( z1 <> z2 ) then                
-                Info( InfoXModAlg, 1, z1, " <> ", z2 ); 
+                Info( InfoXModAlg, 1, "XModAlg2: ", z1, " <> ", z2 ); 
                 return false;
             fi;
         od;
@@ -432,7 +434,7 @@ function( A )
     SetAlgebraActionType( act, "multiplier" ); 
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     if not IsXModAlgebra( PM ) then
-        Error( "this boundary and action only defines a pre-crossed module" );
+        Error( "this boundary & action only define a pre-crossed module" );
     fi;
     return PM;
 end );
@@ -451,7 +453,7 @@ function( hom )
     act := AlgebraActionBySurjection( hom );
     PM := PreXModAlgebraByBoundaryAndAction( hom, act );
     if not IsXModAlgebra( PM ) then
-        Error( "this boundary and action only defines a pre-crossed module" );
+        Error( "this boundary & action only define a pre-crossed module" );
     fi;
     return PM;
 end );
@@ -475,7 +477,7 @@ function( A, I )
     IsAlgebraHomomorphism( bdy );
     PM := PreXModAlgebraByBoundaryAndAction( bdy, act );
     # if not IsXModAlgebra( PM ) then
-    #   Error( "this boundary and action only defines a pre-crossed module" );
+    #   Error( "this boundary & action only define a pre-crossed module" );
     # fi;
     return PM;
 end );
@@ -584,7 +586,8 @@ function( PM, SM )
         maps_P := ListWithIdenticalEntries(dimPrng,0);
         for j in [1..dimPrng] do
             im_P := List(basPsrc, b -> vecPrng[j]*b);
-            maps_P[j] := LeftModuleHomomorphismByImages(Psrc,Psrc,basPsrc,im_P);
+            maps_P[j] := 
+                LeftModuleHomomorphismByImages(Psrc,Psrc,basPsrc,im_P);
         od;
         basSrng := Basis(Srng);
         vecSrng := BasisVectors(basSrng);
@@ -594,7 +597,8 @@ function( PM, SM )
         maps_S := ListWithIdenticalEntries(dimSrng,0);
         for j in [1..dimSrng] do
             im_S := List(basSsrc, b -> vecSrng[j]*b);
-            maps_S[j] := LeftModuleHomomorphismByImages(Ssrc,Ssrc,basSsrc,im_S);
+            maps_S[j] := 
+                LeftModuleHomomorphismByImages(Ssrc,Ssrc,basSsrc,im_S);
         od;
         for r in genrng do
             cp := Coefficients(basPrng,r);
@@ -718,8 +722,6 @@ function( XM, Ssrc, Srng )
     fi;
     return SM;
 end );
-
-
 
 #############################  cat1-algebras  ############################## 
 
@@ -1448,8 +1450,10 @@ function( et, eh )
     fi;
     R := Image( et );
     gG := GeneratorsOfAlgebra( G );
-    t := AlgebraHomomorphismByImages( G, R, gG, List( gG, g->Image( et, g ) ) );
-    h := AlgebraHomomorphismByImages( G, R, gG, List( gG, g->Image( eh, g ) ) );
+    t := AlgebraHomomorphismByImages( G, R, gG, 
+             List( gG, g->Image( et, g ) ) );
+    h := AlgebraHomomorphismByImages( G, R, gG, 
+             List( gG, g->Image( eh, g ) ) );
     e := InclusionMappingAlgebra( G, R ); 
     A := PreCat1AlgebraByTailHeadEmbedding( t, h, e ); 
     if ( A = fail ) then 
@@ -1522,9 +1526,10 @@ function( F, G )
     PreCat1_ler := [];
     for i in [1..Length(Iler)] do
         for j in [1..Length(Iler)] do
-            if PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]) <> fail then 
-                Add(PreCat1_ler,PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]));
-                Print(PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]));
+            if PreCat1AlgebraByEndomorphisms(Iler[i],Iler[j]) <> fail then
+                Add(PreCat1_ler,
+                    PreCat1AlgebraByEndomorphisms( Iler[i], Iler[j] ) );
+                Print(PreCat1AlgebraByEndomorphisms( Iler[i], Iler[j] ) );
             else 
                 continue; 
             fi;                
@@ -1640,7 +1645,6 @@ function( Cat1ler )
     od;
     return liste2;
 end );
-
 
 ##########################  conversion functions  ##########################  
 

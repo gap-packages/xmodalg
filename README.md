@@ -16,7 +16,7 @@ This package allows for computation with crossed modules of commutative algebras
 
 ## Copyright
 
-The 'XModAlg' package is Copyright © Zekeriya Arvasi and Alper Odabas et al, 2014--2022. 
+The 'XModAlg' package is Copyright © Zekeriya Arvasi and Alper Odabas et al, 2014--2025. 
 
 'XModAlg' is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

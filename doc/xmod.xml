@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  xmod.xml            XModAlg documentation               Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2024, Z. Arvasi & A. Odabas,                    --> 
+<!--  Copyright (C) 2014-2025, Z. Arvasi & A. Odabas,                    --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -261,8 +261,6 @@ Crossed module [A2->Q2] :-
 <#Include Label="XModAlgebraByBoundaryAndAction">
 
 <#Include Label="XModAlgebraByModule">
-
-<#Include Label="DirectSumOfXModAlgebras">
 
 
 <ManSection>

@@ -104,11 +104,6 @@ Print( "XModAlgebraAction( Y3 ) = act3? ",
 Display( Y3 );
 
 ############################
-## Section 4.1.9
-XY3 := DirectSumOfXModAlgebras( X3, Y3 );
-Print( "XY3 = DirectSumOfXModAlgebras( X3, Y3 ): ", XY3, "\n" );
-
-############################
 ## Section 4.1.10
 e4 := Elements( IAk4 )[4];
 Print( "\nelement e4 = ", e4, "\n" );
