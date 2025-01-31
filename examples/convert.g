@@ -45,6 +45,8 @@ Cn := Cat1AlgebraOfXModAlgebra( Xn );
 Print( "Cn = Cat1AlgebraOfXModAlgebra( Xn ): ", Cn, "\n" );
 Display( Cn );
 
+bdy3 := AlgebraHomomorphismByImages( Rc3, A3, [ g3 ], [ m3 ] );;
+X3 := XModAlgebraByBoundaryAndAction( bdy3, actg3 );;
 C3 := Cat1AlgebraOfXModAlgebra( X3 );
 Print( "\nC3 = Cat1AlgebraOfXModAlgebra( X3 ): ", C3, "\n" );
 Display( C3 );                 

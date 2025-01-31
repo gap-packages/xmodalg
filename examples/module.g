@@ -20,12 +20,10 @@ homg3 := AlgebraHomomorphismByImages( A3, Amg3, [ m3 ], [ mg3 ] );;
 actg3 := AlgebraActionByHomomorphism( homg3, Rc3 );
 Print ( "action actg3 of A3 on Rc3:\n", actg3, "\n" );
 
-## Section 4.1.6
-bdy3 := AlgebraHomomorphismByImages( Rc3, A3, [ g3 ], [ m3 ] );
-Print( "bdy3 = ", bdy3, "\n" );
+## Section 4.1.7
+homg3 := AlgebraHomomorphismByImages( A3, Amg3, [ m3 ], [ mg3 ] );
+bdy3 := AlgebraHomomorphismByImages( Rc3, A3, [g3 ], [m3 ] );
 X3 := XModAlgebraByBoundaryAndAction( bdy3, actg3 );
-Print( "crossed module X3:\n" );
-Display( X3 );
 
 ## Section 2.3
 m3 := [ [0,1,0], [0,0,1], [1,0,0] ];;
@@ -81,49 +79,14 @@ Print( "the image of a3 under act3 is:\n", Image( act3, a3 ), "\n" );
 Print( "the image of the action act3 is:\n", Image( act3 ), "\n" );
 Print( "\n" );
 
-## Section 4.1.7
-X4 := XModAlgebraByModule( A3, M3 );
-Print( "Name( X4 ) = ", Name( X4 ), "\n" );
-Display( X4 );
-
-## Section 5.1.1
-C4 := Cat1AlgebraOfXModAlgebra( X4 );
-Print( "Name( C4 ) = ", Name( C4 ), "\n" );
-Display( C4 );
-
 ## Section 2.4.1
-A3Rc3 := DirectSumOfAlgebras( A3, Rc3 );;
-SetName( A3Rc3, Concatenation( Name(A3), "(+)", Name(Rc3) ) );
-SetDirectSumOfAlgebrasInfo( A3Rc3, 
-  rec( algebras := [A3,Rc3], first := [1,Dimension(A3)+1],
-       embeddings := [ ], projections := [ ] ) );;
+A3Rc3 := DirectSumOfAlgebrasWithInfo( A3, Rc3 );
+Print( "A3Rc3 has name: ", Name( A3Rc3 ), "\n" );
 
 ## Section 2.4.2
-Print( "\n first embedding into A3Rc3:\n", Embedding( A3Rc3, 1 ), "\n" );
-Print( "second projection from A3Rc3:\n", Projection( A3Rc3, 2 ), "\n" );
-
-## Section 2.4.3
-hom33 := DirectSumOfAlgebraHomomorphisms( homg3, homg3 );
-Print( "\nthe direct sum of homg3 with itself is:\n", hom33, "\n" );
-
-## Section 2.4.4
-actMA3 := AlgebraActionByMultipliers( A3, A3, A3 );;
-act4 := AlgebraActionOnDirectSum( actMA3, actg3 );;
-Print( "\naction of A on the direct sum of A3 and Rc3\n", act4, "\n" );
-
-## Section 2.4.5
-act5 := DirectSumOfAlgebraActions( actg3, act3 );;
-A5 := Source( act5 );
-B5 := AlgebraActedOn( act5 );
-Print( "\nact5 is the direct sum action of ", A5, " on ", B5, "\n" );
-em3 := ImageElm( Embedding( A5, 1 ), m3 ); 
-Print( "matrix m3 embeds in A5 as: ", em3, "\n" );
-iem3 := ImageElm( act5, em3 );                     
-Print( "the action act5 maps em3 to:\n", iem3, "\n" );
-ea3 := ImageElm( Embedding( A5, 2 ), a3 );
-Print( "element a3 embeds in A5 as: ", ea3, "\n" );
-iea3 := ImageElm( act5, ea3 );
-Print( "the action act5 maps ea3 to:\n", iea3, "\n" );
+info := DirectSumOfAlgebrasInfo( A3Rc3 );;
+Print( "first embedding into A3Rc3:\n", info.embeddings[1], "\n" );
+Print( "second projection from A3Rc3:\n", info.projections[2], "\n" );
 
 ############################################################################
 ##

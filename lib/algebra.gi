@@ -2,7 +2,7 @@
 ##
 #W  algebra.gi                 The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2025, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ############################  algebra operations  ########################### 
@@ -372,7 +372,7 @@ function( G, H )
                     for l in [1..Size(H)] do
                         f := AlgebraHomomorphismByImages( G, H, genG, 
                                  [eH[i],eH[j],eH[k],eH[l]]);
-                        if ((f <> fail) and  (not f in mler) and (f*f=f)) then 
+                        if ((f <> fail) and (not f in mler) and (f*f=f)) then 
                             Add(mler,f);
                         else 
                             continue; 
@@ -446,29 +446,27 @@ end );
 InstallMethod(RestrictedMapping, "create new GHBI",
     CollFamSourceEqFamElms, [ IsAlgebraHomomorphism, IsAlgebra ], 0, 
 function( hom, U ) 
-  local rest,gens,imgs,imgp;
+    local rest,gens,imgs,imgp;
 
-  if ForAll(GeneratorsOfAlgebra(Source(hom)),i->i in U) then
-    return hom;   
-  fi;
+    if ForAll(GeneratorsOfAlgebra(Source(hom)),i->i in U) then
+        return hom;   
+    fi;
+    gens:=GeneratorsOfAlgebra(U);
+    imgs:=List( gens, i->ImageElm(hom,i) );
 
-  gens:=GeneratorsOfAlgebra(U);
-  imgs:=List( gens, i->ImageElm(hom,i) );
-
-  if HasImagesSource(hom) then
-    imgp:=ImagesSource(hom);
-  else
-    imgp:=Subalgebra(Range(hom),imgs);
-  fi;
-  rest:=AlgebraHomomorphismByImagesNC(U,imgp,gens,imgs);
-  if HasIsInjective(hom) and IsInjective(hom) then
-    SetIsInjective(rest,true);
-  fi;
-  if HasIsTotal(hom) and IsTotal(hom) then
-    SetIsTotal(rest,true);
-  fi;
-
-  return rest;
+    if HasImagesSource(hom) then
+        imgp:=ImagesSource(hom);
+    else
+        imgp:=Subalgebra(Range(hom),imgs);
+    fi;
+    rest:=AlgebraHomomorphismByImagesNC(U,imgp,gens,imgs);
+    if HasIsInjective(hom) and IsInjective(hom) then
+        SetIsInjective(rest,true);
+    fi;
+    if HasIsTotal(hom) and IsTotal(hom) then
+        SetIsTotal(rest,true);
+    fi;
+    return rest;
 end);
 
 ##############################  algebra actions  ############################ 
@@ -482,7 +480,7 @@ InstallMethod( IsAlgebraAction, "for an algebra homomorphism", true,
 function ( hom )
     local A, C, genC, g1, g;
     C := Range( hom );
-    ## check that C is an algebra of isomorphism of A
+    ## check that C is an algebra of isomorphisms of A
     genC := GeneratorsOfAlgebra( C );
     g1 := genC[1];
     if not IsLeftModuleHomomorphism( g1 ) then
@@ -718,10 +716,9 @@ InstallMethod( SemidirectProductOfAlgebras,
     return P; 
 end );
 
-
 #############################################################################
 ##
-#A Embedding
+#A  Embedding
 ##
 InstallMethod( Embedding, "semidirect product of algebras and integer",
     [ IsAlgebra and HasSemidirectProductOfAlgebrasInfo, IsPosInt ], 
@@ -788,3 +785,92 @@ function( P, i )
     info.projections[1] := hom;
     return hom;
 end );
+
+############################  direct sum operations  ####################### 
+
+#############################################################################
+##
+#M  DirectSumOfAlgebrasWithInfo
+##
+InstallMethod( DirectSumOfAlgebrasWithInfo, "for two algebra",
+    [ IsAlgebra, IsAlgebra ],
+    function( A, B )
+    local D, eA, eB, pA, pB, info;
+    D := DirectSumOfAlgebras( A, B );
+    if ( D <> fail ) then
+        if HasName( A ) and HasName( B ) then 
+            SetName( D, Concatenation( Name(A), "(+)", Name(B) ) );
+        fi;
+        info := rec( algebras := [ A, B ],
+                     first := [ 1, 1 + Dimension( A ) ],
+                     embeddings := [ ],
+                     projections := [ ] );
+        SetDirectSumOfAlgebrasInfo( D, info );
+        eA := Embedding( D, 1 );
+        eB := Embedding( D, 2 );
+        pA := Projection( D, 1 );
+        pB := Projection( D, 2 );
+    fi;
+    return D;
+end);
+
+#############################################################################
+##
+#M  Embedding
+##
+InstallMethod( Embedding, "algebra direct sum and integer",
+    [ IsAlgebra and HasDirectSumOfAlgebrasInfo, IsPosInt ],
+    function( D, i )
+    local info, A, imgs, hom;
+    # check if exists already
+    info := DirectSumOfAlgebrasInfo( D ); 
+    if IsBound( info.embeddings[i] ) then
+        return info.embeddings[i];
+    fi;
+    if not ( i in [1,2] ) then 
+        Error( "require i in [1,2]" );
+    fi;
+    # compute the embedding
+    A := info.algebras[i];
+    imgs := Basis( D ){[info.first[i]..info.first[i]+Dimension(A)-1]};
+    hom := AlgebraHomomorphismByImagesNC( A, D, Basis(A), imgs );
+    SetIsInjective( hom, true );
+    ## store information
+    info.embeddings[i] := hom;
+    return hom;
+end);
+
+#############################################################################
+##
+#M  Projection
+##
+InstallMethod( Projection, "algebra direct sum and integer",
+    [ IsAlgebra and HasDirectSumOfAlgebrasInfo, IsPosInt ],
+    function( D, i )
+    local info, A, bass, dimA, dimD, imgs, hom;
+    # check if exists already
+    info := DirectSumOfAlgebrasInfo( D ); 
+    if IsBound( info.projections[i] ) then
+        return info.projections[i];
+    fi;
+    if not ( i in [1,2] ) then 
+        Error( "require i in [1,2]" );
+    fi;
+    # compute the projection
+    A := info.algebras[i];
+    dimA := Dimension( A );
+    dimD := Dimension( D );
+    bass := Basis( D );
+    if ( i = 1 ) then
+        imgs := Concatenation( Basis( A ), 
+                               List( [1..dimD-dimA], x -> Zero(A) ) );
+    else
+        imgs := Concatenation( List( [1..dimD-dimA], x -> Zero(A) ),
+                               Basis( A ) );
+    fi;
+    hom := AlgebraHomomorphismByImagesNC( D, A, bass, imgs );
+    SetIsSurjective( hom, true );
+    ## store information
+    info.projections[i] := hom;
+    return hom;
+end);

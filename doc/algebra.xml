@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  algebra.xml           XModAlg documentation             Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2024, Z. Arvasi & A. Odabas,                    -->
+<!--  Copyright (C) 2014-2025, Z. Arvasi & A. Odabas,                    -->
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -352,12 +352,6 @@ gap> [ Image(b2,m2)=m2^3, b2=b1^2 ];
 <#Include Label="DirectSumOfAlgebrasInfo">
 
 <#Include Label="EmbeddingForDirectSumOfAlgebras">
-
-<#Include Label="DirectSumOfAlgebraHomomorphisms">
-
-<#Include Label="AlgebraActionOnDirectSum">
-
-<#Include Label="DirectSumOfAlgebraActions">
 
 </Section>
 

@@ -2,7 +2,7 @@
 ##
 #W  alg2map.gi                 The XMODALG package           Zekeriya Arvasi
 #W                                                            & Alper Odabas
-#Y  Copyright (C) 2014-2024, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2025, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ############################################################################
@@ -83,60 +83,58 @@ function( mor )
     # now check that the actions commute:
     Info( InfoXModAlg, 3,
           "Checking:  morsrc(x2^x1) = morsrc(x2)^(morrng(x1))" );
-	if ( IsLeftModuleGeneralMapping(Pact) = true ) then
-	basPrng := Basis(Prng);
-	vecPrng := BasisVectors(basPrng);
-	dimPrng := Dimension(Prng);
-	basPsrc := Basis(Psrc);
-	maps := ListWithIdenticalEntries(dimPrng,0);
-	for j in [1..dimPrng] do
-		im := List(basPsrc, b -> vecPrng[j]*b);
-		maps[j] := LeftModuleHomomorphismByImages(Psrc,Psrc,basPsrc,im);
-	od;
-	
-	basQrng := Basis(Qrng);
-	vecQrng := BasisVectors(basQrng);
-	dimQrng := Dimension(Qrng);
-	basQsrc := Basis(Qsrc);
-	maps2 := ListWithIdenticalEntries(dimQrng,0);
-	for j in [1..dimQrng] do
-		im2 := List(basQsrc, b -> vecQrng[j]*b);
-		maps2[j] := LeftModuleHomomorphismByImages(Qsrc,Qsrc,basQsrc,im2);
-	od;
-	
-	for x2 in gensrc do
-        for x1 in genrng do
-		cx1 := Coefficients(basPrng,x1);
-		actx1 := Sum(List([1..dimPrng], i -> cx1[i]*maps[i]));
-		gx1 := x1 ^ morrng;
-		gcx1 := Coefficients(basQrng,gx1);
-		actgx1 := Sum(List([1..dimQrng], i -> gcx1[i]*maps2[i]));
-            y2 := (x2^actx1)^morsrc; 
-            z2 := (x2^morsrc)^actgx1;
-            if not ( y2 = z2 ) then
-                Info( InfoXModAlg, 2, "Actions do not commute! \n",
-                      "When  x2 = ", x2, "  and  x1 = ", x1, "\n",
-                      "           morsrc(x2^x1) = ", y2, "\n",
-                      "and morsrc(x2)^(morrng(x1) = ", z2 );
-                return false;
-            fi;
+    if ( IsLeftModuleGeneralMapping(Pact) = true ) then
+        basPrng := Basis(Prng);
+        vecPrng := BasisVectors(basPrng);
+        dimPrng := Dimension(Prng);
+        basPsrc := Basis(Psrc);
+        maps := ListWithIdenticalEntries(dimPrng,0);
+        for j in [1..dimPrng] do
+            im := List(basPsrc, b -> vecPrng[j]*b);
+            maps[j] := LeftModuleHomomorphismByImages(Psrc,Psrc,basPsrc,im);
         od;
-    od;	  
-	else
-    for x2 in gensrc do
-        for x1 in genrng do
-            y2 := ( [ x1 , x2 ] ^ Pact) ^ morsrc; 
-            z2 := [ x1 ^ morrng , x2 ^ morsrc ] ^ Qact ;
-            if not ( y2 = z2 ) then
-                Info( InfoXModAlg, 2, "Actions do not commute! \n",
-                      "When  x2 = ", x2, "  and  x1 = ", x1, "\n",
-                      "           morsrc(x2^x1) = ", y2, "\n",
-                      "and morsrc(x2)^(morrng(x1) = ", z2 );
-                return false;
-            fi;
+        basQrng := Basis(Qrng);
+        vecQrng := BasisVectors(basQrng);
+        dimQrng := Dimension(Qrng);
+        basQsrc := Basis(Qsrc);
+        maps2 := ListWithIdenticalEntries(dimQrng,0);
+        for j in [1..dimQrng] do
+           im2 := List(basQsrc, b -> vecQrng[j]*b);
+           maps2[j] := LeftModuleHomomorphismByImages(Qsrc,Qsrc,basQsrc,im2);
         od;
-    od;
-	fi;
+        for x2 in gensrc do
+            for x1 in genrng do
+                cx1 := Coefficients(basPrng,x1);
+                actx1 := Sum(List([1..dimPrng], i -> cx1[i]*maps[i]));
+                gx1 := x1 ^ morrng;
+                gcx1 := Coefficients(basQrng,gx1);
+                actgx1 := Sum(List([1..dimQrng], i -> gcx1[i]*maps2[i]));
+                y2 := (x2^actx1)^morsrc; 
+                z2 := (x2^morsrc)^actgx1;
+                if not ( y2 = z2 ) then
+                    Info( InfoXModAlg, 2, "Actions do not commute! \n",
+                          "When  x2 = ", x2, "  and  x1 = ", x1, "\n",
+                          "           morsrc(x2^x1) = ", y2, "\n",
+                          "and morsrc(x2)^(morrng(x1) = ", z2 );
+                    return false;
+                fi;
+            od;
+        od;      
+    else
+        for x2 in gensrc do
+            for x1 in genrng do
+                y2 := ( [ x1 , x2 ] ^ Pact) ^ morsrc; 
+                z2 := [ x1 ^ morrng , x2 ^ morsrc ] ^ Qact ;
+                if not ( y2 = z2 ) then
+                    Info( InfoXModAlg, 2, "Actions do not commute! \n",
+                          "When  x2 = ", x2, "  and  x1 = ", x1, "\n",
+                          "           morsrc(x2^x1) = ", y2, "\n",
+                          "and morsrc(x2)^(morrng(x1) = ", z2 );
+                    return false;
+                fi;
+            od;
+        od;
+    fi;
     return true;
 end );
 
@@ -148,7 +146,7 @@ InstallMethod( Display, "display a morphism of pre-crossed modules", true,
     [ IsPreXModAlgebraMorphism ], 0,
     function( mor )
 
-    local morsrc, morrng, gensrc, genrng, imsrc, imrng, P, Q, name, ok;	
+    local morsrc, morrng, gensrc, genrng, imsrc, imrng, P, Q, name, ok;    
     name := Name( mor );
     P := Source( mor );
     Q := Range( mor );
@@ -195,7 +193,8 @@ InstallMethod( IsXModAlgebraMorphism,
     "generic method for pre-crossed module morphisms", true,
     [ IsPreXModAlgebraMorphism ], 0,
 function( mor )
-    return ( IsXModAlgebra( Source( mor ) ) and IsXModAlgebra(  Range( mor ) ) );
+    return ( IsXModAlgebra( Source( mor ) ) 
+           and IsXModAlgebra(  Range( mor ) ) );
 end );
 
 InstallMethod( IsXModAlgebraMorphism, "generic method for 2d-mappings", true,
@@ -223,9 +222,9 @@ function( obj )
     shom := IdentityMapping( Source( obj ) );
     rhom := IdentityMapping( Range( obj ) );
     if IsPreXModAlgebraObj( obj ) then
-###xmodu ekleyince tekrar duzenle########
+#### xmodu ekleyince tekrar duzenle########
         return PreXModAlgebraMorphismByHoms( obj, obj, shom, rhom );
-##         return fail;
+####    return fail;
     elif IsPreCat1AlgebraObj( obj ) then
         return PreCat1AlgebraMorphismByHoms( obj, obj, shom, rhom );
     else
@@ -235,7 +234,7 @@ end );
 
 ############################################################################
 ##
-#F  PreXModAlgebraMorphism( <src>,<rng>,<srchom>,<rnghom> ) pre-crossed mod morphism
+#F  PreXModAlgebraMorphism( <src>,<rng>,<srchom>,<rnghom> ) 
 ##
 ##  (need to extend to other sets of parameters)
 ##
@@ -245,19 +244,21 @@ InstallGlobalFunction( PreXModAlgebraMorphism, function( arg )
     nargs := Length( arg );
 
     # two pre-xmods and two homomorphisms
-    if ( ( nargs = 4 ) and IsPreXModAlgebra( arg[1] ) and IsPreXModAlgebra( arg[2])
+    if ( ( nargs = 4 ) and IsPreXModAlgebra( arg[1] ) 
+                       and IsPreXModAlgebra( arg[2])
                        and IsAlgebraHomomorphism( arg[3] )
                        and IsAlgebraHomomorphism( arg[4] ) ) then
-        return PreXModAlgebraMorphismByHoms( arg[1], arg[2], arg[3], arg[4] );
+        return PreXModAlgebraMorphismByHoms(arg[1],arg[2],arg[3],arg[4]);
     fi;
     # alternatives not allowed
-    Info( InfoXModAlg, 2, "usage: PreXModAlgebraMorphism( src, rng, srchom, rnghom );" );
+    Info( InfoXModAlg, 2, 
+          "usage: PreXModAlgebraMorphism( src, rng, srchom, rnghom );" );
     return fail;
 end );
 
 ##############################################################################
 ##
-#F  XModAlgebraMorphism( <src>, <rng>, <srchom>, <rnghom> )    crossed module morphism
+#F  XModAlgebraMorphism( <src>, <rng>, <srchom>, <rnghom> ) 
 ##
 ##  (need to extend to other sets of parameters)
 ##
@@ -267,13 +268,15 @@ InstallGlobalFunction( XModAlgebraMorphism, function( arg )
     nargs := Length( arg );
 
     # two xmods and two homomorphisms
-    if ( ( nargs = 4 ) and IsXModAlgebra( arg[1] ) and IsXModAlgebra( arg[2])
+    if ( ( nargs = 4 ) and IsXModAlgebra( arg[1] ) 
+                       and IsXModAlgebra( arg[2])
                        and IsAlgebraHomomorphism( arg[3] )
                        and IsAlgebraHomomorphism( arg[4] ) ) then
-        return XModAlgebraMorphismByHoms( arg[1], arg[2], arg[3], arg[4] );
+        return XModAlgebraMorphismByHoms(arg[1],arg[2],arg[3],arg[4]);
     fi;
     # alternatives not allowed
-    Info( InfoXModAlg, 2, "usage: XModAlgebraMorphism( src, rng, srchom, rnghom );" );
+    Info( InfoXModAlg, 2, 
+          "usage: XModAlgebraMorphism( src, rng, srchom, rnghom );" );
     return fail;
 end );
 
@@ -281,8 +284,9 @@ end );
 ##
 #M  XModMorphismByHoms( <Xs>, <Xr>, <hsrc>, <hrng> )  . . make xmod morphism
 ##
-InstallMethod( XModAlgebraMorphismByHoms, "for 2 xmods and 2 homomorphisms", true,
-    [ IsXModAlgebra, IsXModAlgebra, IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
+InstallMethod( XModAlgebraMorphismByHoms, "for 2 xmods and 2 homomorphisms",
+    true, [ IsXModAlgebra, IsXModAlgebra, 
+            IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
 function( src, rng, srchom, rnghom )
 
     local  mor, ok;
@@ -309,8 +313,9 @@ function( src, rng, srchom, rnghom )
 
     local  filter, fam, mor, ok, nsrc, nrng, name;
 
-    if not ( IsAlgebraHomomorphism(srchom) and IsAlgebraHomomorphism(rnghom) ) then
-        Info( InfoXModAlg, 2, "source and range mappings must be algebra homs" );
+    if not ( IsAlgebraHomomorphism(srchom) 
+             and IsAlgebraHomomorphism(rnghom) ) then
+        Info( InfoXModAlg,2, "source, range mappings must be algebra homs" );
         return fail;
     fi;
     mor := Make2dAlgebraMorphism( src, rng, srchom, rnghom );
@@ -331,13 +336,13 @@ function( src, rng, srchom, rnghom )
     name := Concatenation( "[", nsrc, " => ", nrng, "]" );
     SetName( mor, name );
     ok := IsXModAlgebraMorphism( mor );
-   # ok := IsSourceMorphism( mor );
+    #### ok := IsSourceMorphism( mor );
     return mor;
 end );
 
 ############################################################################
 ##
-#F  PreCat1AlgebraMorphism( <src>,<rng>,<srchom>,<rnghom> )    pre-cat1-algebra morphism
+#F  PreCat1AlgebraMorphism( <src>,<rng>,<srchom>,<rnghom> )
 ##
 ##  (need to extend to other sets of parameters)
 ##
@@ -347,19 +352,21 @@ InstallGlobalFunction( PreCat1AlgebraMorphism, function( arg )
     nargs := Length( arg );
 
     # two pre-cat1s and two homomorphisms
-    if ( ( nargs = 4 ) and IsPreCat1Algebra( arg[1] ) and IsPreCat1Algebra( arg[2])
+    if ( ( nargs = 4 ) and IsPreCat1Algebra( arg[1] ) 
+                       and IsPreCat1Algebra( arg[2])
                        and IsAlgebraHomomorphism( arg[3] )
                        and IsAlgebraHomomorphism( arg[4] ) ) then
-        return PreCat1AlgebraMorphismByHoms( arg[1], arg[2], arg[3], arg[4] );
+        return PreCat1AlgebraMorphismByHoms(arg[1],arg[2],arg[3],arg[4]);
     fi;
     # alternatives not allowed
-    Info( InfoXModAlg, 2, "usage: PreCat1AlgebraMorphism( src, rng, srchom, rnghom );" );
+    Info( InfoXModAlg, 2, 
+          "usage: PreCat1AlgebraMorphism( src, rng, srchom, rnghom );" );
     return fail;
 end );
 
 ############################################################################
 ##
-#F  Cat1AlgebraMorphism( <src>, <rng>, <srchom>, <rnghom> )        cat1-algebra morphism
+#F  Cat1AlgebraMorphism( <src>, <rng>, <srchom>, <rnghom> ) 
 ##
 ##  (need to extend to other sets of parameters)
 ##
@@ -369,13 +376,15 @@ InstallGlobalFunction( Cat1AlgebraMorphism, function( arg )
     nargs := Length( arg );
 
     # two cat1s and two homomorphisms
-    if ( ( nargs = 4 ) and IsCat1Algebra( arg[1] ) and IsCat1Algebra( arg[2])
+    if ( ( nargs = 4 ) and IsCat1Algebra( arg[1] ) 
+                       and IsCat1Algebra( arg[2])
                        and IsAlgebraHomomorphism( arg[3] )
                        and IsAlgebraHomomorphism( arg[4] ) ) then
-        return Cat1AlgebraMorphismByHoms( arg[1], arg[2], arg[3], arg[4] );
+        return Cat1AlgebraMorphismByHoms(arg[1],arg[2],arg[3],arg[4]);
     fi;
     # alternatives not allowed
-    Info( InfoXModAlg, 2, "usage: Cat1AlgebraMorphism( src, rng, srchom, rnghom );" );
+    Info( InfoXModAlg, 2, 
+          "usage: Cat1AlgebraMorphism( src, rng, srchom, rnghom );" );
     return fail;
 end );
 
@@ -443,7 +452,7 @@ end );
 
 ############################################################################
 ##
-#F  Display( <mor> ) . . . . . . print details of a (pre-)cat1-algebra morphism
+#F  Display( <mor> ) . . . . print details of a (pre-)cat1-algebra morphism
 ##
 InstallMethod( Display, "display a morphism of pre-cat1 algebras", true,
     [ IsPreCat1AlgebraMorphism ], 0,
@@ -480,7 +489,7 @@ function( mor )
     Print( "  ", List( gensrc, s -> Image( morsrc, s ) ), "\n" );
     Print( ": Range Homomorphism maps range generators to:\n" );
     Print( "  ", List( genrng, r -> Image( morrng, r ) ), "\n" );
-	Print( "\n" );
+    Print( "\n" );
 end ); 
 
 ############################################################################
@@ -525,7 +534,8 @@ function( mor )
     if not ispre then
         return false;
     else
-        return ( IsCat1Algebra( Source( mor ) ) and IsCat1Algebra(  Range( mor ) ) );
+        return ( IsCat1Algebra( Source( mor ) ) 
+                 and IsCat1Algebra(  Range( mor ) ) );
     fi;
 end );
 
@@ -535,14 +545,16 @@ end );
 ##
 InstallMethod( PreCat1AlgebraMorphismByHoms,
     "for pre-cat1-algebra, pre-cat1-algebra, homomorphism, homomorphism,",
-    true,
-    [ IsPreCat1Algebra, IsPreCat1Algebra, IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
+    true, [ IsPreCat1Algebra, IsPreCat1Algebra, 
+            IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
 function( src, rng, srchom, rnghom )
 
     local  filter, fam, mor, ok, nsrc, nrng, name;
 
-    if not ( IsAlgebraHomomorphism(srchom) and IsAlgebraHomomorphism(rnghom) ) then
-        Info( InfoXModAlg, 2, "source and range mappings must be algebra homs" );
+    if not ( IsAlgebraHomomorphism(srchom) 
+             and IsAlgebraHomomorphism(rnghom) ) then
+        Info( InfoXModAlg, 2, 
+              "source and range mappings must be algebra homs" );
         return fail;
     fi;
     mor := Make2dAlgebraMorphism( src, rng, srchom, rnghom );
@@ -568,7 +580,7 @@ end );
 
 ############################################################################
 ##
-#M  Cat1AlgebraMorphismByHoms( <Cs>, <Cr>, <hsrc>, <hrng> ) . . . make xmod morphism
+#M  Cat1AlgebraMorphismByHoms( <Cs>, <Cr>, <hsrc>, <hrng> ) 
 ##
 InstallMethod( Cat1AlgebraMorphismByHoms, "for 2 cat1s and 2 homomorphisms", true,
     [ IsCat1Algebra, IsCat1Algebra, IsAlgebraHomomorphism, IsAlgebraHomomorphism ], 0,
@@ -585,7 +597,7 @@ end );
 
 ############################################################################
 ##
-#M  ViewObj( <mor> ) . . . . . . . . . .  view a (pre-)crossed module morphism
+#M  ViewObj( <mor> ) . . . . . . . . . view a (pre-)crossed module morphism
 ##
 InstallMethod( ViewObj, "method for a morphism of pre-crossed modules", true,
     [ IsPreXModAlgebraMorphism ], 0,
@@ -601,8 +613,8 @@ end );
 ##
 #M  PrintObj( <mor> ) . . . . . . . . .  print a (pre-)crossed module morphism
 ##
-InstallMethod( PrintObj, "method for a morphism of pre-crossed modules", true,
-    [ IsPreXModAlgebraMorphism ], 0,
+InstallMethod( PrintObj, "method for a morphism of pre-crossed modules",
+    true, [ IsPreXModAlgebraMorphism ], 0,
 function( mor )
     if HasName( mor ) then
         Print( Name( mor ), "\n" );

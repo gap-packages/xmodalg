@@ -59,4 +59,3 @@ BindGlobal( "MakeImagesInfoLinearGeneralMappingByImages", function( map )
 
     fi;
 end );
-
