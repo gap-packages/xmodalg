@@ -1,9 +1,9 @@
 # CHANGES to the 'XModAlg' package
 
 ## 1.27 -> 1.28 (31/01/25) 
- * (31/01/25) added Nizar Shammu's thesis to the list of references
-              removed all operations involving direct sums of crossed modules
-              of algebras because the theoretical basis needs checking
+ * (31/01/25) removed all operations involving direct sums of crossed modules
+              of algebras because the theoretical basis needs checking;
+              added Nizar Shammu's thesis to the list of references
  
 ## 1.26 -> 1.27 (26/10/24) 
  * (21/10/24) removed references to "Type2" and "XModAlgebraConst"
