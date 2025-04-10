@@ -1,6 +1,6 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.27 -> 1.31 (10/04/25) 
+## 1.27 -> 1.32 (10/04/25) 
  * (31/01/25) added Nizar Shammu's thesis to the list of references;
               removed all operations involving direct sums of crossed modules
               of algebras because the theoretical basis needs checking;
