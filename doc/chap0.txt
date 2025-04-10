@@ -6,7 +6,7 @@
                       [1X Crossed Modules and Cat1-Algebras [101X
   
   
-                                      1.31
+                                      1.32
   
   
                                  10 April 2025

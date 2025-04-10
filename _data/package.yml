@@ -1,5 +1,5 @@
 name: XModAlg
-version: "1.31"
+version: "1.32"
 license: "GPL-2.0-or-later"
 date: 2025-04-10
 description: |
@@ -33,7 +33,7 @@ packageinfo: https://gap-packages.github.io/xmodalg/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/xmodalg/releases/download/v1.31/XModAlg-1.31.tar.gz
+      url: https://github.com/gap-packages/xmodalg/releases/download/v1.32/XModAlg-1.32.tar.gz
 
 abstract: |
     The <span class="pkgname">XModAlg</span> package provides a collection of functions for computing with crossed modules and cat1-algebras and morphisms of these structures.
@@ -47,7 +47,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>AOW25</span>]   <b class='BibAuthor'>Arvasi, Z., Odabas, A. and Wensley, C.</b>,
      <i class='BibTitle'>XModAlg, Crossed Modules and Cat1-Algebras,
-             Version 1.31</i>
+             Version 1.32</i>
      (<span class='BibYear'>2025</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/xmodalg/">https://gap-packages.github.io/xmodalg/</a></span>.
@@ -58,7 +58,7 @@ bibtex: |
     @misc{ XModAlg,
       author =           {Arvasi, Z. and Odabas, A. and Wensley, C.},
       title =            {{XModAlg},         {Crossed         Modules        and
-                          Cat1\texttt{\symbol{45}}Algebras}, {V}ersion 1.31},
+                          Cat1\texttt{\symbol{45}}Algebras}, {V}ersion 1.32},
       month =            {Apr},
       year =             {2025},
       note =             {GAP package},
