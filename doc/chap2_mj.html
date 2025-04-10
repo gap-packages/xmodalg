@@ -53,11 +53,8 @@
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X82E784EB7EBAEEA4">2.4 <span class="Heading">Actions on direct sums of algebras</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X830838D285082DFD">2.4-1 DirectSumOfAlgebrasInfo</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86FC4981819374E4">2.4-1 DirectSumOfAlgebrasWithInfo</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X800F0CFE7F431D92">2.4-2 Embedding</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X845FFF08821B36DB">2.4-3 DirectSumOfAlgebraHomomorphisms</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8766C9F0873F8354">2.4-4 AlgebraActionOnDirectSum</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82520DE680B627DC">2.4-5 DirectSumOfAlgebraActions</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X86CCCCB4786AC96B">2.5 <span class="Heading">Other operations on algebras</span></a>
 </span>
@@ -137,8 +134,8 @@
 
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAlgebraMultiplier( m1 ); </span>
 true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">one := One( A1 );; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L1 := List( BA1, v -&gt; one );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id1 := One( A1 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L1 := List( BA1, v -&gt; id1 );; </span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h1 := LeftModuleHomomorphismByImages( A1, A1, BA1, L1 ); </span>
 [ (Z(5)^0)*(), (Z(5)^0)*(1,2,3,4,5,6), (Z(5)^0)*(1,3,5)(2,4,6), 
   (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2) 
@@ -323,9 +320,9 @@ LeftModuleHomomorphismByMatrix( Basis( A2,
   [ [ 0, 0, 1, 4 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ] ] ), 
 [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ] ], CanonicalBasis( Q2 ) )
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act2 := AlgebraActionBySurjection( nat2 );; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C2 := Image( act2 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BC2 := BasisVectors( Basis( C2 ) );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b1 := BC2[1];;  b2 := BC2[2];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I2 := Image( act2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BI2 := BasisVectors( Basis( I2 ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b1 := BI2[1];;  b2 := BI2[2];;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Image(b1,m2)=m2^2, Image(b1,m2^2)=m2^3, Image(b1,m2^3)=Zero(A2) ];</span>
 [ true, true, true ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Image(b2,m2)=m2^3, b2=b1^2 ];</span>
@@ -340,7 +337,7 @@ LeftModuleHomomorphismByMatrix( Basis( A2,
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlgebraActionByHomomorphism</code>( <var class="Arg">hom</var>, <var class="Arg">alg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>If <span class="SimpleMath">\(\alpha : A \to C\)</span> is an algebra homomorphism where <span class="SimpleMath">\(C\)</span> is an algebra of left module isomorphisms of an algebra <span class="SimpleMath">\(B\)</span>, then <code class="code">AlgebraActionByHomomorphism( alpha, B )</code> attempts to return an action of <span class="SimpleMath">\(A\)</span> on <span class="SimpleMath">\(B\)</span>.</p>
 
-<p>In the example the matrix algebra <code class="code">A3</code> and the group algebra <code class="code">B3</code> are isomorphic algebras, so the resulting action is equivalent to the multiplier action of <code class="code">B3</code> on itself.</p>
+<p>In the example the matrix algebra <code class="code">A3</code> and the group algebra <code class="code">Rc3</code> are isomorphic algebras, so the resulting action is equivalent to the multiplier action of <code class="code">Rc3</code> on itself.</p>
 
 
 <div class="example"><pre>
@@ -348,14 +345,14 @@ LeftModuleHomomorphismByMatrix( Basis( A2,
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m3 := [ [0,1,0], [0,0,1], [1,0,0,] ];;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A3 := Algebra( Rationals, [m3] );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( A3, "A3" );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := Group( (1,2,3) );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B3 := GroupRing( Rationals, G );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( B3, "GR(G)" );</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g3 := GeneratorsOfAlgebra( B3 )[2];;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mg3 := RegularAlgebraMultiplier( B3, B3, g3 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MB3 := AlgebraByGenerators( Rationals, [ mg3 ] );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act3 := AlgebraActionByHomomorphism( hom3, B3 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c3 := Group( (1,2,3) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Rc3 := GroupRing( Rationals, c3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( Rc3, "GR(c3)" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g3 := GeneratorsOfAlgebra( Rc3 )[2];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mg3 := RegularAlgebraMultiplier( Rc3, Rc3, g3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Amg3 := AlgebraByGenerators( Rationals, [ mg3 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homg3 := AlgebraHomomorphismByImages( A3, Amg3, [ m3 ], [ mg3 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">actg3 := AlgebraActionByHomomorphism( homg3, Rc3 );</span>
 [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -&gt; 
 [ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -&gt; [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
     ] ]
@@ -368,25 +365,22 @@ LeftModuleHomomorphismByMatrix( Basis( A2,
 
 <p>Recall that a module can be made into an algebra by defining every product to be zero. When we apply this construction to a (left) algebra module, we obtain an algebra action on an algebra.</p>
 
-<p>Recall the construction of algebra modules from Chapter 62 of the <strong class="pkg">GAP</strong> reference manual. In the example, the vector space <span class="SimpleMath">\(V\)</span> becomes an algebra module <span class="SimpleMath">\(M\)</span> with a left action by <span class="SimpleMath">\(A\)</span>. Conversion between vectors in <span class="SimpleMath">\(V\)</span> and those in <span class="SimpleMath">\(M\)</span> is achieved using the operations <code class="code">ObjByExtRep</code> and <code class="code">ExtRepOfObj</code>. These vectors are indistinguishable when printed.</p>
+<p>Recall the construction of algebra modules from Chapter 62 of the <strong class="pkg">GAP</strong> reference manual. In the example, the vector space <span class="SimpleMath">\(V3\)</span> becomes an algebra module <span class="SimpleMath">\(M3\)</span> with a left action by <span class="SimpleMath">\(A3\)</span>. Conversion between vectors in <span class="SimpleMath">\(V3\)</span> and those in <span class="SimpleMath">\(M3\)</span> is achieved using the operations <code class="code">ObjByExtRep</code> and <code class="code">ExtRepOfObj</code>. These vectors are indistinguishable when printed.</p>
 
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m3 := [ [0,1,0], [0,0,1], [1,0,0] ];;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A4 := Algebra( Rationals, [m3] );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( A4, "A4" );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V4 := Rationals^3;;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M4 := LeftAlgebraModule( A4, \*, V4 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( M4, "M4" );</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">famM4 := ElementsFamily( FamilyObj( M4 ) );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v4 := [3,4,5];;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v4 := ObjByExtRep( famM4, v4 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V3 := Rationals^3;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M3 := LeftAlgebraModule( A3, \*, V3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( M3, "M3" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">famM3 := ElementsFamily( FamilyObj( M3 ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v3 := [3,4,5];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v3 := ObjByExtRep( famM3, v3 );</span>
 [ 3, 4, 5 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m3*v4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m3*v3;</span>
 [ 4, 5, 3 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">genM4 := GeneratorsOfLeftModule( M4 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">u4 := 6*genM4[1] + 7*genM4[2] + 8*genM4[3];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">genM3 := GeneratorsOfLeftModule( M3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">u4 := 6*genM3[1] + 7*genM3[2] + 8*genM3[3];</span>
 [ 6, 7, 8 ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">u4 := ExtRepOfObj( u4 );</span>
 [ 6, 7, 8 ]
@@ -405,15 +399,15 @@ LeftModuleHomomorphismByMatrix( Basis( A2,
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D4 := LeftActingDomain( M4 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T4 := EmptySCTable( Dimension(M4), Zero(D4), "symmetric" );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B4a := AlgebraByStructureConstants( D4, T4 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D3 := LeftActingDomain( M3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T3 := EmptySCTable( Dimension(M3), Zero(D3), "symmetric" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B3a := AlgebraByStructureConstants( D3, T3 );</span>
 &lt;algebra of dimension 3 over Rationals&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfAlgebra( B4a );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfAlgebra( B3a );</span>
 [ v.1, v.2, v.3 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B4 := ModuleAsAlgebra( M4 );               </span>
-A(M4)
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfAlgebra( B4 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B3 := ModuleAsAlgebra( M3 );               </span>
+A(M3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfAlgebra( B3 );</span>
 [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ]
 
 </pre></div>
@@ -428,9 +422,9 @@ A(M4)
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsModuleAsAlgebra( B4 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsModuleAsAlgebra( B3 );</span>
 true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsModuleAsAlgebra( A4 );   </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsModuleAsAlgebra( A3 );   </span>
 false
 
 </pre></div>
@@ -446,24 +440,23 @@ false
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownAttributesOfObject( B4 );    </span>
-[ "Name", "ZeroImmutable", "LeftActingDomain", "Dimension", 
-  "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing", 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownAttributesOfObject( B3 );</span>
+[ "Name", "ZeroImmutable", "LeftActingDomain", "Dimension",
+  "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing",
   "ModuleToAlgebraIsomorphism", "AlgebraToModuleIsomorphism" ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M2B4 := ModuleToAlgebraIsomorphism( B4 );</span>
-[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] -&gt; [ [[ 1, 0, 0 ]], [[ 0, \
-1, 0 ]], 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M2B3 := ModuleToAlgebraIsomorphism( B3 );</span>
+[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] -&gt; [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], 
   [[ 0, 0, 1 ]] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source( M2B4 ) = M4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source( M2B3 ) = M3;</span>
 false
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source( M2B4 ) = V4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source( M2B3 ) = V3;</span>
 true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B2M4 := AlgebraToModuleIsomorphism( B4 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B2M3 := AlgebraToModuleIsomorphism( B3 );</span>
 [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] -&gt;
 [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Range( B2M4 ) = M4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Range( B2M3 ) = M3;</span>
 false
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Range( B2M4 ) = V4;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Range( B2M3 ) = V3;</span>
 true
 
 </pre></div>
@@ -478,17 +471,17 @@ true
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act4 := AlgebraActionByModule( A4, M4 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act3 := AlgebraActionByModule( A3, M3 );</span>
 [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -&gt; 
 [ [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] -&gt; 
     [ [[ 0, 0, 1 ]], [[ 1, 0, 0 ]], [[ 0, 1, 0 ]] ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a4 := 2*m3 + 3*m3^2;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a3 := 2*m3 + 3*m3^2;</span>
 [ [ 0, 2, 3 ], [ 3, 0, 2 ], [ 2, 3, 0 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Image( act4, a4 );</span>
-Basis( A(M4), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -&gt; 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Image( act3, a3 );</span>
+Basis( A(M3), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -&gt; 
 [ (3)*[[ 0, 1, 0 ]]+(2)*[[ 0, 0, 1 ]], (2)*[[ 1, 0, 0 ]]+(3)*[[ 0, 0, 1 ]], 
   (3)*[[ 1, 0, 0 ]]+(2)*[[ 0, 1, 0 ]] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Image( act4 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Image( act3 );</span>
 &lt;algebra over Rationals, with 1 generator&gt;
 
 </pre></div>
@@ -497,21 +490,37 @@ Basis( A(M4), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -&gt;
 
 <h4>2.4 <span class="Heading">Actions on direct sums of algebras</span></h4>
 
-<p><a id="X830838D285082DFD" name="X830838D285082DFD"></a></p>
+<p><a id="X86FC4981819374E4" name="X86FC4981819374E4"></a></p>
 
-<h5>2.4-1 DirectSumOfAlgebrasInfo</h5>
+<h5>2.4-1 DirectSumOfAlgebrasWithInfo</h5>
 
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DirectSumOfAlgebrasWithInfo</code>( <var class="Arg">A1</var>, <var class="Arg">A2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DirectSumOfAlgebrasInfo</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
-<p>This attribute for direct sums of algebras is missing from the main library, and is added here to be used in methods for <code class="code">Embedding</code> and <code class="code">Projection</code>.</p>
+<p>This attribute for direct sums of algebras is missing from the main library, and is added here to be used in methods for <code class="code">Embedding</code> and <code class="code">Projection</code>. In order to construct a direct sum with this information attribute the operation <code class="code">DirectSumOfAlgebrasWithInfo</code> may be used. This just calls <code class="code">DirectSumOfAlgebras</code> and sets up the attribute.</p>
 
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A3B3 := DirectSumOfAlgebras( A3, B3 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( A3B3, Concatenation( Name(A3), "(+)", Name(B3) ) );</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetDirectSumOfAlgebrasInfo( A3B3,                             </span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">rec( algebras := [A3,B3], first := [1,Dimension(A3)+1],                      </span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">     embeddings := [ ], projections := [ ] ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A3Rc3 := DirectSumOfAlgebrasWithInfo( A3, Rc3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( A3Rc3, Concatenation( Name(A3), "(+)", Name(Rc3) ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DirectSumOfAlgebrasInfo( A3Rc3 );</span>
+rec( algebras := [ A3, GR(c3) ], 
+  embeddings := 
+    [ 
+      Basis( A3, [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+          [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+          [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] ) -&gt; [ v.1, v.2, v.3 ], 
+      CanonicalBasis( GR(c3) ) -&gt; [ v.4, v.5, v.6 ] ], first := [ 1, 4 ], 
+  projections := 
+    [ CanonicalBasis( A3(+)GR(c3) ) -&gt; 
+        [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+          [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+          [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+          [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+          [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+          [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ], 
+      CanonicalBasis( A3(+)GR(c3) ) -&gt; [ &lt;zero&gt; of ..., &lt;zero&gt; of ..., 
+          &lt;zero&gt; of ..., (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] ] )
 
 </pre></div>
 
@@ -526,88 +535,13 @@ Basis( A(M4), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -&gt;
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Embedding( A3B3, 1 );                                         </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Embedding( A3Rc3, 1 );</span>
 Basis( A3, [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] ) -&gt; [ v.1, v.2, v.3 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Projection( A3B3, 2 );</span>
-CanonicalBasis( A3(+)GR(G) ) -&gt; [ &lt;zero&gt; of ..., &lt;zero&gt; of ..., 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Projection( A3Rc3, 2 );</span>
+CanonicalBasis( A3(+)GR(c3) ) -&gt; [ &lt;zero&gt; of ..., &lt;zero&gt; of ..., 
   &lt;zero&gt; of ..., (1)*(), (1)*(1,2,3), (1)*(1,3,2) ]
-
-</pre></div>
-
-<p><a id="X845FFF08821B36DB" name="X845FFF08821B36DB"></a></p>
-
-<h5>2.4-3 DirectSumOfAlgebraHomomorphisms</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DirectSumOfAlgebraHomomorphisms</code>( <var class="Arg">hom1</var>, <var class="Arg">hom2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Let <span class="SimpleMath">\(\theta_1 : B_1 \to A_1\)</span> and <span class="SimpleMath">\(\theta_2 : B_2 \to A_2\)</span> be algebra homomorphisms. The embeddings into <span class="SimpleMath">\(A = A_1 \oplus A_2\)</span> and <span class="SimpleMath">\(B = B_1 \oplus B_2\)</span> may be used to construct <span class="SimpleMath">\(\theta = \theta_1 \oplus \theta_2 : B \to A\)</span> where <span class="SimpleMath">\(\theta(b_1,b_2) = (\theta_1b_1,\theta_2b_2)\)</span>. The example uses the homomorphism <code class="code">hom3</code> used in Section <a href="chap2_mj.html#X8530E1B27BC2FBB7"><span class="RefLink">2.2-4</span></a></p>
-
-
-<div class="example"><pre>
-
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom := DirectSumOfAlgebraHomomorphisms( hom3, hom3 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( hom, "\n" );</span>
-AlgebraHomomorphismByImages( A3(+)A3, Algebra( Rationals, 
-[ v.1, v.2, v.3, v.4, v.5, v.6 ] ), 
-[ [ [ 0, 1, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], 
-      [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ] ], 
-  [ [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], 
-      [ 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 1, 0, 0 ] ] ], 
-[ v.1, v.4 ] )
-
-</pre></div>
-
-<p><a id="X8766C9F0873F8354" name="X8766C9F0873F8354"></a></p>
-
-<h5>2.4-4 AlgebraActionOnDirectSum</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlgebraActionOnDirectSum</code>( <var class="Arg">act</var>, <var class="Arg">act</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>If <span class="SimpleMath">\(\alpha_1 : A \to C_1\)</span> is an action on algebra <span class="SimpleMath">\(B_1\)</span> and <span class="SimpleMath">\(\alpha_2 : A \to C_2\)</span> is an action on algebra <span class="SimpleMath">\(B_2\)</span> by the same algebra <span class="SimpleMath">\(A\)</span>, then <span class="SimpleMath">\(A\)</span> acts on the direct sum <span class="SimpleMath">\(B_1 \oplus B_2\)</span> by <span class="SimpleMath">\(a \cdot (b_1,b_2) = (a \cdot b_1, a \cdot b_2)\)</span>.</p>
-
-<p>In Section <a href="chap2_mj.html#X7C1C8B987B2167B9"><span class="RefLink">2.3-4</span></a> there is created an action <code class="code">actB3</code> of <code class="code">A3</code> on an isomorphic <code class="code">B3</code>. In the example here we construct <code class="code">actA3</code>, with <code class="code">A3</code> acting on itself, formed using <code class="code">AlgebraActionByMultipliers</code>. Then we construct the direcct sum of these actions.</p>
-
-
-<div class="example"><pre>
-
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">actMA3 := AlgebraActionByMultipliers( A3, A3, A3 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act5 := AlgebraActionOnDirectSum( actMA3, act3 );</span>
-[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
-  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
-  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] -&gt; 
-[ [ v.1, v.2, v.3, v.4, v.5, v.6 ] -&gt; [ v.2, v.3, v.1, v.5, v.6, v.4 ], 
-  [ v.1, v.2, v.3, v.4, v.5, v.6 ] -&gt; [ v.3, v.1, v.2, v.6, v.4, v.5 ], 
-  [ v.1, v.2, v.3, v.4, v.5, v.6 ] -&gt; [ v.1, v.2, v.3, v.4, v.5, v.6 ] ]
-
-</pre></div>
-
-<p><a id="X82520DE680B627DC" name="X82520DE680B627DC"></a></p>
-
-<h5>2.4-5 DirectSumOfAlgebraActions</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DirectSumOfAlgebraActions</code>( <var class="Arg">act</var>, <var class="Arg">act</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Let If <span class="SimpleMath">\(\alpha_1 : A_1 \to C_1\)</span> is an action on algebra <span class="SimpleMath">\(B_1\)</span>, and <span class="SimpleMath">\(\alpha_2 : A_2 \to C_2\)</span> is an action on algebra <span class="SimpleMath">\(B_2\)</span>, then <span class="SimpleMath">\(A_1 \oplus A_2\)</span> acts on the direct sum <span class="SimpleMath">\(B_1 \oplus B_2\)</span> by <span class="SimpleMath">\((a_1,a_2) \cdot (b_1,b_2) = (a_1 \cdot b_1, a_2 \cdot b_2)\)</span>. The example forms the direct sum of the actions constructed in sections <a href="chap2_mj.html#X7EAF09677CAE12D5"><span class="RefLink">2.2-3</span></a> and <a href="chap2_mj.html#X8530E1B27BC2FBB7"><span class="RefLink">2.2-4</span></a></p>
-
-
-<div class="example"><pre>
-
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act6 := DirectSumOfAlgebraActions( act3, act4 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A6 := Source( act6 );</span>
-A3(+)A4
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B6 := AlgebraActedOn( act6 );</span>
-GR(G)(+)A(M4)
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">em3 := ImageElm( Embedding( A6, 1 ), m3 ); </span>
-[ [ 0, 1, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], 
-  [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( act6, em3 );                     </span>
-Basis( GR(G)(+)A(M4), [ v.1, v.2, v.3, v.4, v.5, v.6 ] ) -&gt; 
-[ v.2, v.3, v.1, 0*v.1, 0*v.1, 0*v.1 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ea4 := ImageElm( Embedding( A6, 2 ), a4 );</span>
-[ [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], 
-  [ 0, 0, 0, 0, 2, 3 ], [ 0, 0, 0, 3, 0, 2 ], [ 0, 0, 0, 2, 3, 0 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( act6, ea4 );</span>
-Basis( GR(G)(+)A(M4), [ v.1, v.2, v.3, v.4, v.5, v.6 ] ) -&gt; 
-[ 0*v.1, 0*v.1, 0*v.1, (3)*v.5+(2)*v.6, (2)*v.4+(3)*v.6, (3)*v.4+(2)*v.5 ]
 
 </pre></div>
 

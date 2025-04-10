@@ -66,24 +66,22 @@ r_1r_2 + r_1(\partial s_2) + r_2(\partial s_1) + (\partial s_1)(\partial s_2)
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraOfXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraOfPreXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>These operations are used for constructing a cat<span class="SimpleMath">^1</span>-algebra from a given crossed module of algebras. As an example we use the crossed module <code class="code">XAB</code> constructed in <code class="func">XModAlgebraByIdeal</code> (<a href="chap4.html#X7B31475D7C030075"><span class="RefLink">4.1-2</span></a>).</p>
+<p>These operations are used for constructing a cat<span class="SimpleMath">^1</span>-algebra from a given crossed module of algebras. As an example we use the crossed module <code class="code">XAB</code> constructed in section <a href="chap4.html#X7B31475D7C030075"><span class="RefLink">4.1-2</span></a>.</p>
 
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CAB := Cat1AlgebraOfXModAlgebra( XAB );</span>
-[A(l,m) |X A(m)=&gt;A(l,m)]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( CAB );</span>
-Cat1-algebra [A(l,m) |X A(m)=&gt;A(l,m)] :- 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cn := Cat1AlgebraOfXModAlgebra( Xn );</span>
+[An |X Bn -&gt; An]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Cn );</span>
+Cat1-algebra [An |X Bn =&gt; An] :- 
 :  range algebra has generators:
-  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
   [ [ 0*Z(5), Z(5)^0, Z(5)^3 ], [ 0*Z(5), 0*Z(5), Z(5)^0 ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: tail homomorphism maps source generators to:
-  
+: tail homomorphism maps source generators to:  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
@@ -95,8 +93,7 @@ Cat1-algebra [A(l,m) |X A(m)=&gt;A(l,m)] :-
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
   [ [ 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: head homomorphism maps source generators to:
-  
+: head homomorphism maps source generators to:  
 [ 
   [ [ Z(5)^0, 0*Z(5), 0*Z(5) ], [ 0*Z(5), Z(5)^0, 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), Z(5)^0 ] ], 
@@ -108,36 +105,37 @@ Cat1-algebra [A(l,m) |X A(m)=&gt;A(l,m)] :-
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ], 
   [ [ 0*Z(5), 0*Z(5), Z(5)^0 ], [ 0*Z(5), 0*Z(5), 0*Z(5) ], 
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
-: range embedding maps range generators to:
-  [ v.1, v.2 ]
-: kernel has generators:
-  [ v.4, v.5 ]
+: range embedding maps range generators to:    [ v.1, v.2 ]
+: kernel has generators:  [ v.4, v.5 ]
 
 </pre></div>
 
-<p>As a second example, we convert the crossed module <span class="SimpleMath">X3</span> constructed in <a href="chap4.html#X78400B837A2C8FB9"><span class="RefLink">4.1-8</span></a></p>
+<p>As a second example, we convert the crossed module <span class="SimpleMath">X4</span> constructed in section <a href="chap4.html#X78400B837A2C8FB9"><span class="RefLink">4.1-8</span></a></p>
 
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C6 := Cat1AlgebraOfXModAlgebra( X6 );</span>
-[A4 |X A(M4)=&gt;A4]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C6 );           </span>
-Cat1-algebra [A4 |X A(M4)=&gt;A4] :- 
-:  range algebra has generators:
-  [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
-: tail homomorphism = head homomorphism
-  they map the source generators to:
-  [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C3 := Cat1AlgebraOfXModAlgebra( X3 );</span>
+[A3 |X GR(c3) -&gt; A3]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C3 );                 </span>
+Cat1-algebra [A3 |X GR(c3) =&gt; A3] :- 
+: range algebra has generators:[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
+: tail homomorphism maps source generators to:  
+[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
   [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
-: range embedding maps range generators to:
-  [ v.1 ]
-: kernel has generators:
-  [ v.4, v.5, v.6 ]
+: head homomorphism maps source generators to:  
+[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], 
+  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+  [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], 
+  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ] ]
+: range embedding maps range generators to:    [ v.1 ]
+: kernel has generators:  [ v.4, v.5, v.6 ]
 
 </pre></div>
 
@@ -147,15 +145,14 @@ Cat1-algebra [A4 |X A(M4)=&gt;A4] :-
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraOfCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreXModAlgebraOfPreCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>These operations are used for constructing a crossed module of algebras from a given cat<span class="SimpleMath">^1</span>-algebra.</p>
+<p>These operations are used for constructing a crossed module of algebras from a given cat<span class="SimpleMath">^1</span>-algebra. The example uses the cat<span class="SimpleMath">^1</span>-algebra <code class="code">C3</code> constructed in section <a href="chap3.html#X86E99B197E920C21"><span class="RefLink">3.1-4</span></a>.</p>
 
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X3 := XModAlgebraOfCat1Algebra( C3 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X6 := XModAlgebraOfCat1Algebra( C6 );</span>
 [ &lt;algebra of dimension 3 over GF(2)&gt; -&gt; &lt;algebra of dimension 3 over GF(2)&gt; ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( X3 ); </span>
-
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( X6 ); </span>
 Crossed module [..-&gt;..] :- 
 : Source algebra has generators:
   [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 

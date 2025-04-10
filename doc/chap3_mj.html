@@ -288,26 +288,26 @@ e^{\prime} = e|_{R^{\prime}} : R^{\prime}\rightarrow A^{\prime}
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C3 := Cat1AlgebraSelect( 2, 6, 2, 4 );; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A3 := Source( C3 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C6 := Cat1AlgebraSelect( 2, 6, 2, 4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A6 := Source( C6 );</span>
 GF(2)_c6
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B3 := Range( C3 ); </span>
-GF(2)_c3
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">eA3 := Elements( A3 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">eB3 := Elements( B3 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AA3 := Subalgebra( A3, [ eA3[1], eA3[2], eA3[3] ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B6 := Range( C6 );</span>
+&lt;algebra of dimension 3 over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">eA6 := Elements( A6 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">eB6 := Elements( B6 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SA6 := Subalgebra( A6, [ eA6[1], eA6[2], eA6[3] ] );</span>
 &lt;algebra over GF(2), with 3 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Size(A3), Size(AA3) ]; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Size(A6), Size(SA6) ]; </span>
 [ 64, 4 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BB3 := Subalgebra( B3, [ eB3[1], eB3[2] ] ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SB6 := Subalgebra( B6, [ eB6[1], eB6[2] ] ); </span>
 &lt;algebra over GF(2), with 2 generators&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Size(B3), Size(BB3) ]; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Size(B6), Size(SB6) ]; </span>
 [ 8, 2 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CC3 := SubCat1Algebra( C3, AA3, BB3 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SC6 := SubCat1Algebra( C6, SA6, SB6 );</span>
 [Algebra( GF(2), [ &lt;zero&gt; of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) 
  ] ) -&gt; Algebra( GF(2), [ &lt;zero&gt; of ..., (Z(2)^0)*() ] )]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( CC3 );</span>
-Cat1-algebra [..=&gt;..] :-
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( SC6 );</span>
+Cat1-algebra [..=&gt;..] :- 
 : source algebra has generators:
   [ &lt;zero&gt; of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
 :  range algebra has generators:
@@ -324,6 +324,8 @@ Cat1-algebra [..=&gt;..] :-
   [ &lt;zero&gt; of ..., &lt;zero&gt; of ... ]
 : kernel embedding maps generators of kernel to:
   [ &lt;zero&gt; of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubCat1Algebra( C6, SC6 );</span>
+true
 
 </pre></div>
 
@@ -370,10 +372,10 @@ Cat1-algebra [..=&gt;..] :-
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 := Cat1Algebra( 2, 1, 1, 1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 := Cat1AlgebraSelect( 2, 1, 1, 1 );</span>
 [GF(2)_triv -&gt; GF(2)_triv]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C1 );</span>
-Cat1-algebra [GF(2)_triv=&gt;GF(2)_triv] :-
+Cat1-algebra [GF(2)_triv=&gt;GF(2)_triv] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
 :  range algebra has generators:
@@ -385,11 +387,10 @@ Cat1-algebra [GF(2)_triv=&gt;GF(2)_triv] :-
 : range embedding maps range generators to:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
 : the kernel is trivial.
-
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C2 := Cat1Algebra( 2, 2, 1, 2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C2 := Cat1AlgebraSelect( 2, 2, 1, 2 );</span>
 [GF(2)_c2 -&gt; GF(2)_triv]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C2 );</span>
-Cat1-algebra [GF(2)_c2=&gt;GF(2)_triv] :-
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C2 );                        </span>
+Cat1-algebra [GF(2)_c2=&gt;GF(2)_triv] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
 :  range algebra has generators:
@@ -408,30 +409,32 @@ Cat1-algebra [GF(2)_c2=&gt;GF(2)_triv] :-
   [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 = C2;</span>
 false
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R1 := Source( C1 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R2 := Source( C2 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S1 := Range( C1 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S2 := Range( C2 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gR1 := GeneratorsOfAlgebra( R1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SC1 := Source( C1 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SC2 := Source( C2 );</span>
+GF(2)_c2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RC1 := Range( C1 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RC2 := Range( C2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gSC1 := GeneratorsOfAlgebra( SC1 );</span>
 [ (Z(2)^0)*(), (Z(2)^0)*() ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gR2 := GeneratorsOfAlgebra( R2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gSC2 := GeneratorsOfAlgebra( SC2 );</span>
 [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gS1 := GeneratorsOfAlgebra( S1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gRC1 := GeneratorsOfAlgebra( RC1 );</span>
 [ (Z(2)^0)*(), (Z(2)^0)*() ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gS2 := GeneratorsOfAlgebra( S2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gRC2 := GeneratorsOfAlgebra( RC2 );</span>
 [ (Z(2)^0)*(), (Z(2)^0)*() ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">im1 := [ gR2[1], gR2[1] ];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imS := [ gSC2[1], gSC2[1] ];</span>
 [ (Z(2)^0)*(), (Z(2)^0)*() ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f1 := AlgebraHomomorphismByImages( R1, R2, gR1, im1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homS := AlgebraHomomorphismByImages( SC1, SC2, gSC1, imS );</span>
 [ (Z(2)^0)*(), (Z(2)^0)*() ] -&gt; [ (Z(2)^0)*(), (Z(2)^0)*() ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">im2 := [ gS2[1], gS2[1] ];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imR := [ gRC2[1], gRC2[1] ];</span>
 [ (Z(2)^0)*(), (Z(2)^0)*() ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f2 := AlgebraHomomorphismByImages( S1, S2, gS1, im2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homR := AlgebraHomomorphismByImages( RC1, RC2, gRC1, imR );</span>
 [ (Z(2)^0)*(), (Z(2)^0)*() ] -&gt; [ (Z(2)^0)*(), (Z(2)^0)*() ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := Cat1AlgebraMorphism( C1, C2, f1, f2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m12 := Cat1AlgebraMorphism( C1, C2, homS, homR );</span>
 [[GF(2)_triv=&gt;GF(2)_triv] =&gt; [GF(2)_c2=&gt;GF(2)_triv]]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
-Morphism of cat1-algebras :-
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m12 );</span>
+
+Morphism of cat1-algebras :- 
 : Source = [GF(2)_triv=&gt;GF(2)_triv] with generating sets:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
@@ -442,13 +445,15 @@ Morphism of cat1-algebras :-
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
 : Range Homomorphism maps range generators to:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSurjective( m );</span>
-false
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsInjective( m );</span>
-true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsBijective( m );</span>
-false
 
+## gap&gt; Image2dAlgMapping( m12 );
+## [GF(3)_c2^3=&gt;GF(3)_c2^3]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSurjective( m12 );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsInjective( m12 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsBijective( m12 );</span>
+false
 
 </pre></div>
 
@@ -462,8 +467,8 @@ false
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imm := ImagesSource2DimensionalMapping( m );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( imm ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">im12 := ImagesSource2DimensionalMapping( m12 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( im12 ); </span>
 Cat1-algebra [..=&gt;..] :- 
 : source algebra has generators:
   [ (Z(2)^0)*(), (Z(2)^0)*() ]

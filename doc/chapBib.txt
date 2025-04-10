@@ -57,6 +57,10 @@
   [[20XPor87[120X]  [16XPorter,  T.[116X,  [17XSome  categorical  results  in  the theory of crossed
   modules in commutative algebras[117X, [18XJ. Algebra[118X, [19X109[119X (1987), 415--429.
   
+  [[20XSha92[120X]  [16XShammu, N. M.[116X, [17XAlgebraic and categorical structure of categories of
+  crossed  modules  of  algebras[117X,  Ph.D.  thesis,  University of Wales, Bangor
+  (U.K.) (1992).
+  
   [[20XWhi49[120X]  [16XWhitehead,  J.  H. C.[116X, [17XCombinatorial homotopy II[117X, [18XBull. Amer. Math.
   Soc.[118X, [19X55[119X (1949), 453--496.
   

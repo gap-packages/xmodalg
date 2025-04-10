@@ -49,23 +49,23 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XF := GF(5);;[127X[104X
-    [4X[25Xgap>[125X [27Xone := One(F);;[127X[104X
+    [4X[25Xgap>[125X [27XF5 := GF(5);;[127X[104X
+    [4X[25Xgap>[125X [27Xid5 := One( F5 );;[127X[104X
     [4X[25Xgap>[125X [27Xtwo := Z(5);; [127X[104X
-    [4X[25Xgap>[125X [27Xz := Zero( F );; [127X[104X
-    [4X[25Xgap>[125X [27Xl := [ [one,z,z], [z,one,z], [z,z,one] ];; [127X[104X
-    [4X[25Xgap>[125X [27Xm := [ [z,one,two^3], [z,z,one], [z,z,z] ];;[127X[104X
-    [4X[25Xgap>[125X [27Xn := [ [z,z,one], [z,z,z], [z,z,z] ];; [127X[104X
-    [4X[25Xgap>[125X [27XA := Algebra( F, [l,m] );; [127X[104X
-    [4X[25Xgap>[125X [27XSetName( A, "A(l,m)" ); [127X[104X
-    [4X[25Xgap>[125X [27XB := Subalgebra( A, [m] );; [127X[104X
-    [4X[25Xgap>[125X [27XSetName( B, "A(m)" ); [127X[104X
-    [4X[25Xgap>[125X [27XIsIdeal( A, B ); [127X[104X
+    [4X[25Xgap>[125X [27Xz5 := Zero( F5 );; [127X[104X
+    [4X[25Xgap>[125X [27Xn0 := [ [id5,z5,z5], [z5,id5,z5], [z5,z5,id5] ];; [127X[104X
+    [4X[25Xgap>[125X [27Xn1 := [ [z5,id5,two^3], [z5,z5,id5], [z5,z5,z5] ];;[127X[104X
+    [4X[25Xgap>[125X [27Xn2 := [ [z5,z5,id5], [z5,z5,z5], [z5,z5,z5] ];; [127X[104X
+    [4X[25Xgap>[125X [27XAn := Algebra( F5, [ n0, n1 ] );; [127X[104X
+    [4X[25Xgap>[125X [27XSetName( An, "An" ); [127X[104X
+    [4X[25Xgap>[125X [27XBn := Subalgebra( An, [ n1 ] );; [127X[104X
+    [4X[25Xgap>[125X [27XSetName( Bn, "Bn" ); [127X[104X
+    [4X[25Xgap>[125X [27XIsIdeal( An, Bn ); [127X[104X
     [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27Xact := AlgebraActionByMultipliers( A, B, A );; [127X[104X
-    [4X[25Xgap>[125X [27XXAB := XModAlgebraByIdeal( A, B ); [127X[104X
-    [4X[28X[ A(m) -> A(l,m) ][128X[104X
-    [4X[25Xgap>[125X [27XSetName( XAB, "XAB" ); [127X[104X
+    [4X[25Xgap>[125X [27Xactn := AlgebraActionByMultipliers( An, Bn, An );; [127X[104X
+    [4X[25Xgap>[125X [27XXn := XModAlgebraByIdeal( An, Bn ); [127X[104X
+    [4X[28X[ Bn -> An ][128X[104X
+    [4X[25Xgap>[125X [27XSetName( Xn, "Xn" ); [127X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   
@@ -92,7 +92,6 @@
     [4X[25Xgap>[125X [27XXIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );[127X[104X
     [4X[28X[ I(GF5[k4]) -> GF5[k4] ][128X[104X
     [4X[25Xgap>[125X [27XDisplay( XIAk4 );[127X[104X
-    [4X[28X[128X[104X
     [4X[28XCrossed module [I(GF5[k4])->GF5[k4]] :- [128X[104X
     [4X[28X: Source algebra I(GF5[k4]) has generators:[128X[104X
     [4X[28X  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^[128X[104X
@@ -102,7 +101,6 @@
     [4X[28X: Boundary homomorphism maps source generators to:[128X[104X
     [4X[28X  [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...+(Z(5)^[128X[104X
     [4X[28X    0)*f2 ][128X[104X
-    [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XSize2d( XIAk4 );[127X[104X
     [4X[28X[ 125, 625 ][128X[104X
     [4X[28X[128X[104X
@@ -146,11 +144,6 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27Xf := Boundary( XIAk4 );[127X[104X
-    [4X[28X[ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, (Z(5)^2)*<identity> of ...\[128X[104X
-    [4X[28X+(Z(5)^[128X[104X
-    [4X[28X    0)*f2 ] -> [ (Z(5)^2)*<identity> of ...+(Z(5)^0)*f1, [128X[104X
-    [4X[28X  (Z(5)^2)*<identity> of ...+(Z(5)^0)*f2 ][128X[104X
     [4X[25Xgap>[125X [27XRepresentationsOfObject( XIAk4 );[127X[104X
     [4X[28X[ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ][128X[104X
     [4X[25Xgap>[125X [27XKnownPropertiesOfObject( XIAk4 );[127X[104X
@@ -174,9 +167,9 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XXA := XModAlgebraByMultiplierAlgebra( A );[127X[104X
-    [4X[28X[ A(l,m) -> <algebra of dimension 3 over GF(5)> ][128X[104X
-    [4X[25Xgap>[125X [27XXModAlgebraAction( XA );[127X[104X
+    [4X[25Xgap>[125X [27XXAn := XModAlgebraByMultiplierAlgebra( An );[127X[104X
+    [4X[28X[ An -> <algebra of dimension 3 over GF(5)> ][128X[104X
+    [4X[25Xgap>[125X [27XXModAlgebraAction( XAn );[127X[104X
     [4X[28XIdentityMapping( <algebra of dimension 3 over GF(5)> )[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
@@ -214,21 +207,17 @@
   
   [33X[0;0YWhen   a  suitable  pair  of  algebra  homomorphisms  are  available,  these
   operations  may  be  used.  The  example  uses the algebra action created in
-  section [14X2.3-4[114X.[133X
+  section [14X2.2-4[114X.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27Xbdy3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );[127X[104X
-    [4X[28X[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> [128X[104X
-    [4X[28X[ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() [128X[104X
-    [4X[28X     ] ][128X[104X
-    [4X[25Xgap>[125X [27Xbdy3 := AlgebraHomomorphismByImages( B3, A3, [ g3 ], [ m3 ] );[127X[104X
+    [4X[25Xgap>[125X [27Xbdy3 := AlgebraHomomorphismByImages( Rc3, A3, [ g3 ], [ m3 ] );[127X[104X
     [4X[28X[ (1)*(1,2,3) ] -> [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ][128X[104X
-    [4X[25Xgap>[125X [27XX3 := XModAlgebraByBoundaryAndAction( bdy3, act3 );[127X[104X
-    [4X[28X[ GR(G) -> A3 ][128X[104X
+    [4X[25Xgap>[125X [27XX3 := XModAlgebraByBoundaryAndAction( bdy3, actg3 );[127X[104X
+    [4X[28X[ GR(c3) -> A3 ][128X[104X
     [4X[25Xgap>[125X [27XDisplay( X3 );[127X[104X
-    [4X[28XCrossed module [GR(G) -> A3] :- [128X[104X
-    [4X[28X: Source algebra GR(G) has generators:[128X[104X
+    [4X[28XCrossed module [GR(c3) -> A3] :- [128X[104X
+    [4X[28X: Source algebra GR(c3) has generators:[128X[104X
     [4X[28X  [ (1)*(), (1)*(1,2,3) ][128X[104X
     [4X[28X: Range algebra A3 has generators:[128X[104X
     [4X[28X  [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ][128X[104X
@@ -251,40 +240,24 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XX4 := XModAlgebraByModule( A4, M4 );[127X[104X
-    [4X[28X[ A(M4) -> A4 ][128X[104X
-    [4X[25Xgap>[125X [27XDisplay( X4 );[127X[104X
-    [4X[28XCrossed module [A(M4)->A4] :- [128X[104X
-    [4X[28X: Source algebra A(M4) has generators:[128X[104X
-    [4X[28X  [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ][128X[104X
-    [4X[28X: Range algebra A4 has generators:[128X[104X
-    [4X[28X  [4[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], [128X[104X
-    [4X[28X  [ [ 1, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], [128X[104X
-    [4X[28X  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XY3 := XModAlgebraByModule( A3, M3 );[127X[104X
+    [4X[28X[ A(M3) -> A3 ][128X[104X
+    [4X[25Xgap>[125X [27XImage( XModAlgebraAction( Y3 ), m3 ) = Image( act3, m3 ); [127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Y3 );[127X[104X
+    [4X[28XCrossed module [A(M3) -> A3] :- [128X[104X
+    [4X[28X: Source algebra A(M3) has generators:  [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [128X[104X
+    [4X[28X  [[ 0, 0, 1 ]] ][128X[104X
+    [4X[28X: Range algebra A3 has generators:  [128X[104X
+    [4X[28X[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ][128X[104X
     [4X[28X: Boundary homomorphism maps source generators to:[128X[104X
-    [4X[28X  [ [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], [128X[104X
+    [4X[28X[ [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], [128X[104X
     [4X[28X  [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], [128X[104X
     [4X[28X  [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ][128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   
-  [1X4.1-9 DirectSumOfXModAlgebras[101X
-  
-  [33X[1;0Y[29X[2XDirectSumOfXModAlgebras[102X( [3XX1[103X, [3XX2[103X ) [32X operation[133X
-  
-  [33X[0;0YIn   Sections  [14X2.4-3[114X  and  [14X2.4-5[114X  we  constructed  direct  sums  of  algebra
-  homomorphisms and algebra actions. So, given two crossed modules of algebras
-  [22XX_1,  X_2[122X,  we  can  form the direct sums of their boundaries and actions to
-  form a direct sum [22XX_1 ⊕ X_2[122X of crossed modules.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XDirectSumOfXModAlgebras( X3, X4 );[127X[104X
-    [4X[28X[ GR(G)(+)A(M4) -> A3(+)A4 ][128X[104X
-    [4X[28X[128X[104X
-  [4X[32X[104X
-  
-  [1X4.1-10 SubXModAlgebra[101X
+  [1X4.1-9 SubXModAlgebra[101X
   
   [33X[1;0Y[29X[2XSubXModAlgebra[102X( [3Xalg[103X, [3Xsrc[103X, [3Xrng[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XIsSubXModAlgebra[102X( [3Xalg[103X, [3Xsub[103X ) [32X operation[133X
@@ -300,23 +273,22 @@
     [4X[25Xgap>[125X [27Xe4 := Elements( IAk4 )[4];[127X[104X
     [4X[28X(Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2[128X[104X
     [4X[25Xgap>[125X [27XJe4 := Ideal( IAk4, [e4] );;[127X[104X
-    [4X[25Xgap>[125X [27XSize( Je4 );[127X[104X
-    [4X[28X5[128X[104X
-    [4X[25Xgap>[125X [27XSetName( Je4, "<e4>" ); [127X[104X
-    [4X[25Xgap>[125X [27XXJe4 := XModAlgebraByIdeal( Ak4, Je4 );[127X[104X
-    [4X[28X[ <e4> -> GF5[k4] ][128X[104X
-    [4X[25Xgap>[125X [27XDisplay( XJe4 );        [127X[104X
-    [4X[28X[128X[104X
-    [4X[28XCrossed module [<e4>->GF5[k4]] :- [128X[104X
-    [4X[28X: Source algebra <e4> has generators:[128X[104X
-    [4X[28X  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ][128X[104X
-    [4X[28X: Range algebra GF5[k4] has generators:[128X[104X
-    [4X[28X  [ (Z(5)^0)*<identity> of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ][128X[104X
-    [4X[28X: Boundary homomorphism maps source generators to:[128X[104X
-    [4X[28X  [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ][128X[104X
-    [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XIsSubXModAlgebra( XIAk4, XJe4 );[127X[104X
+    [4X[25Xgap>[125X [27XSetName( Je4, "<e4>" );[127X[104X
+    [4X[25Xgap>[125X [27XKe4 := Subalgebra( Ak4, [e4] );;[127X[104X
+    [4X[25Xgap>[125X [27X[ Size( Je4 ), Size( Ke4 ) ];[127X[104X
+    [4X[28X[ 5, 5 ][128X[104X
+    [4X[25Xgap>[125X [27XSe4 := SubXModAlgebra( XIAk4, Je4, Ke4 );[127X[104X
+    [4X[28X[ <e4> -> <algebra of dimension 1 over GF(5)> ][128X[104X
+    [4X[25Xgap>[125X [27XIsSubXModAlgebra( XIAk4, Se4 ); [127X[104X
     [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Se4 );[127X[104X
+    [4X[28XCrossed module [<e4> -> ..] :- [128X[104X
+    [4X[28X: Source algebra <e4> has generators:  [128X[104X
+    [4X[28X[ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ][128X[104X
+    [4X[28X: Range algebra has generators:  [128X[104X
+    [4X[28X[ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ][128X[104X
+    [4X[28X: Boundary homomorphism maps source generators to:[128X[104X
+    [4X[28X[ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ][128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   
@@ -389,9 +361,9 @@
     [4X[28X[ I(GF2[k4]) -> GF2[k4] ][128X[104X
     [4X[25Xgap>[125X [27XIAc4 = IBk4;[127X[104X
     [4X[28Xfalse[128X[104X
-    [4X[25Xgap>[125X [27XhomIAIB := AllHomsOfAlgebras( IAc4, IBk4 );; [127X[104X
+    [4X[25Xgap>[125X [27XhomIAIB := AllAlgebraHomomorphisms( IAc4, IBk4 );; [127X[104X
     [4X[25Xgap>[125X [27Xtheta := homIAIB[3];; [127X[104X
-    [4X[25Xgap>[125X [27XhomAB := AllHomsOfAlgebras( Ac4, Bk4 );;[127X[104X
+    [4X[25Xgap>[125X [27XhomAB := AllAlgebraHomomorphisms( Ac4, Bk4 );;[127X[104X
     [4X[25Xgap>[125X [27Xphi := homAB[7];; [127X[104X
     [4X[25Xgap>[125X [27Xmor := XModAlgebraMorphism( XIAc4, XIBk4, theta, phi );[127X[104X
     [4X[28X[[I(GF2[c4])->GF2[c4]] => [I(GF2[k4])->GF2[k4]]][128X[104X

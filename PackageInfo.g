@@ -8,8 +8,8 @@ SetPackageInfo( rec(
 
 PackageName := "XModAlg",
 Subtitle := "Crossed Modules and Cat1-Algebras",
-Version := "1.26",
-Date := "09/07/2024", # dd/mm/yyyy format
+Version := "1.31",
+Date := "10/04/2025", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -44,6 +44,16 @@ Persons := [
                        "Turkey"] ),
     Place         := "Eskisehir",
     Institution   := "Osmangazi University"
+  ),
+  rec(
+    LastName      := "Wensley",
+    FirstNames    := "Chris",
+    IsAuthor      := false,
+    IsMaintainer  := true,
+    Email         := "cdwensley.maths@btinternet.com",
+    WWWHome       := "https://github.com/cdwensley",
+    Place         := "Llanfairfechan",
+    Institution   := ""
   )
 ],
 
@@ -66,8 +76,8 @@ SupportEmail := "aodabas@ogu.edu.tr",
 ArchiveFormats  := ".tar.gz",
 
 AbstractHTML :=
- "The <span class=\"pkgname\">XModAlg</span> package provides a collection of \
-functions for computing with crossed modules and cat1-algebras \
+ "The <span class=\"pkgname\">XModAlg</span> package provides a collection \
+of functions for computing with crossed modules and cat1-algebras \
 and morphisms of these structures.",
 
 PackageDoc := rec(
@@ -76,8 +86,7 @@ PackageDoc := rec(
   HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "Crossed Modules and Cat1-Algebras in GAP",
-  Autoload  := true
+  LongTitle := "Crossed Modules and Cat1-Algebras in GAP"
 ),
 
 Dependencies := rec(
@@ -92,13 +101,11 @@ AvailabilityTest := ReturnTrue,
 
 BannerString := Concatenation( 
   "-----------------------------------------------------------------------------\n",
-  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.11 \n", 
+  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.14 \n", 
   "Methods for crossed modules of commutative algebras and cat1-algebras\n",
   "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n",
   "-----------------------------------------------------------------------------\n"
 ),
-
-Autoload := false, 
 
 TestFile := "tst/testall.g",
 
@@ -107,7 +114,7 @@ Keywords := ["crossed module of algebras", "cat1-algebra"],
 AutoDoc := rec(
     TitlePage := rec(
         Copyright := Concatenation(
-            "&copyright; 2014-2024, Zekeriya Arvasi and Alper Odabas. <P/>\n", 
+            "© 2014-2025, Zekeriya Arvasi and Alper Odabas. <P/>\n", 
             "The &XModAlg; package is free software; you can redistribute it ", 
             "and/or modify it under the terms of the GNU General ", 
             "Public License as published by the Free Software Foundation; ", 

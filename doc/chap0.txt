@@ -6,10 +6,10 @@
                       [1X Crossed Modules and Cat1-Algebras [101X
   
   
-                                      1.26
+                                      1.31
   
   
-                                  9 July 2024
+                                 10 April 2025
   
   
                                 Zekeriya Arvasi
@@ -51,7 +51,7 @@
   
   -------------------------------------------------------
   [1XCopyright[101X
-  [33X[0;0Y© 2014-2024, Zekeriya Arvasi and Alper Odabas.[133X
+  [33X[0;0Y© 2014-2025, Zekeriya Arvasi and Alper Odabas.[133X
   
   [33X[0;0YThe  [5XXModAlg[105X package is free software; you can redistribute it and/or modify
   it  under  the  terms  of the GNU General Public License as published by the
@@ -98,11 +98,8 @@
       2.3-3 ModuleToAlgebraIsomorphism
       2.3-4 AlgebraActionByModule
     2.4 [33X[0;0YActions on direct sums of algebras[133X
-      2.4-1 DirectSumOfAlgebrasInfo
+      2.4-1 DirectSumOfAlgebrasWithInfo
       2.4-2 Embedding
-      2.4-3 DirectSumOfAlgebraHomomorphisms
-      2.4-4 AlgebraActionOnDirectSum
-      2.4-5 DirectSumOfAlgebraActions
     2.5 [33X[0;0YOther operations on algebras[133X
       2.5-1 SemidirectProductOfAlgebras
       2.5-2 SemidirectProductOfAlgebrasInfo
@@ -128,8 +125,7 @@
       4.1-6 XModAlgebraBySurjection
       4.1-7 XModAlgebraByBoundaryAndAction
       4.1-8 XModAlgebraByModule
-      4.1-9 DirectSumOfXModAlgebras
-      4.1-10 SubXModAlgebra
+      4.1-9 SubXModAlgebra
     4.2 [33X[0;0Y(Pre-)Crossed Module Morphisms[133X
       4.2-1 XModAlgebraMorphism
       4.2-2 Kernel

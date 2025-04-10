@@ -66,8 +66,8 @@
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XIsAlgebraMultiplier( m1 ); [127X[104X
     [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27Xone := One( A1 );; [127X[104X
-    [4X[25Xgap>[125X [27XL1 := List( BA1, v -> one );; [127X[104X
+    [4X[25Xgap>[125X [27Xid1 := One( A1 );; [127X[104X
+    [4X[25Xgap>[125X [27XL1 := List( BA1, v -> id1 );; [127X[104X
     [4X[25Xgap>[125X [27Xh1 := LeftModuleHomomorphismByImages( A1, A1, BA1, L1 ); [127X[104X
     [4X[28X[ (Z(5)^0)*(), (Z(5)^0)*(1,2,3,4,5,6), (Z(5)^0)*(1,3,5)(2,4,6), [128X[104X
     [4X[28X  (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2) [128X[104X
@@ -252,9 +252,9 @@
     [4X[28X  [ [ 0, 0, 1, 4 ], [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ] ] ), [128X[104X
     [4X[28X[ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ] ], CanonicalBasis( Q2 ) )[128X[104X
     [4X[25Xgap>[125X [27Xact2 := AlgebraActionBySurjection( nat2 );; [127X[104X
-    [4X[25Xgap>[125X [27XC2 := Image( act2 );;[127X[104X
-    [4X[25Xgap>[125X [27XBC2 := BasisVectors( Basis( C2 ) );;[127X[104X
-    [4X[25Xgap>[125X [27Xb1 := BC2[1];;  b2 := BC2[2];;[127X[104X
+    [4X[25Xgap>[125X [27XI2 := Image( act2 );;[127X[104X
+    [4X[25Xgap>[125X [27XBI2 := BasisVectors( Basis( I2 ) );;[127X[104X
+    [4X[25Xgap>[125X [27Xb1 := BI2[1];;  b2 := BI2[2];;[127X[104X
     [4X[25Xgap>[125X [27X[ Image(b1,m2)=m2^2, Image(b1,m2^2)=m2^3, Image(b1,m2^3)=Zero(A2) ];[127X[104X
     [4X[28X[ true, true, true ][128X[104X
     [4X[25Xgap>[125X [27X[ Image(b2,m2)=m2^3, b2=b1^2 ];[127X[104X
@@ -270,23 +270,23 @@
   module  isomorphisms  of  an  algebra  [22XB[122X,  then [10XAlgebraActionByHomomorphism(
   alpha, B )[110X attempts to return an action of [22XA[122X on [22XB[122X.[133X
   
-  [33X[0;0YIn the example the matrix algebra [10XA3[110X and the group algebra [10XB3[110X are isomorphic
-  algebras,  so the resulting action is equivalent to the multiplier action of
-  [10XB3[110X on itself.[133X
+  [33X[0;0YIn  the  example  the  matrix  algebra  [10XA3[110X  and  the  group  algebra [10XRc3[110X are
+  isomorphic algebras, so the resulting action is equivalent to the multiplier
+  action of [10XRc3[110X on itself.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27Xm3 := [ [0,1,0], [0,0,1], [1,0,0,] ];;[127X[104X
     [4X[25Xgap>[125X [27XA3 := Algebra( Rationals, [m3] );;[127X[104X
     [4X[25Xgap>[125X [27XSetName( A3, "A3" );;[127X[104X
-    [4X[25Xgap>[125X [27XG := Group( (1,2,3) );;[127X[104X
-    [4X[25Xgap>[125X [27XB3 := GroupRing( Rationals, G );;[127X[104X
-    [4X[25Xgap>[125X [27XSetName( B3, "GR(G)" );[127X[104X
-    [4X[25Xgap>[125X [27Xg3 := GeneratorsOfAlgebra( B3 )[2];;[127X[104X
-    [4X[25Xgap>[125X [27Xmg3 := RegularAlgebraMultiplier( B3, B3, g3 );;[127X[104X
-    [4X[25Xgap>[125X [27XMB3 := AlgebraByGenerators( Rationals, [ mg3 ] );;[127X[104X
-    [4X[25Xgap>[125X [27Xhom3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );;[127X[104X
-    [4X[25Xgap>[125X [27Xact3 := AlgebraActionByHomomorphism( hom3, B3 );[127X[104X
+    [4X[25Xgap>[125X [27Xc3 := Group( (1,2,3) );;[127X[104X
+    [4X[25Xgap>[125X [27XRc3 := GroupRing( Rationals, c3 );;[127X[104X
+    [4X[25Xgap>[125X [27XSetName( Rc3, "GR(c3)" );[127X[104X
+    [4X[25Xgap>[125X [27Xg3 := GeneratorsOfAlgebra( Rc3 )[2];;[127X[104X
+    [4X[25Xgap>[125X [27Xmg3 := RegularAlgebraMultiplier( Rc3, Rc3, g3 );;[127X[104X
+    [4X[25Xgap>[125X [27XAmg3 := AlgebraByGenerators( Rationals, [ mg3 ] );;[127X[104X
+    [4X[25Xgap>[125X [27Xhomg3 := AlgebraHomomorphismByImages( A3, Amg3, [ m3 ], [ mg3 ] );;[127X[104X
+    [4X[25Xgap>[125X [27Xactg3 := AlgebraActionByHomomorphism( homg3, Rc3 );[127X[104X
     [4X[28X[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> [128X[104X
     [4X[28X[ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -> [ (1)*(1,2,3), (1)*(1,3,2), (1)*() [128X[104X
     [4X[28X    ] ][128X[104X
@@ -301,27 +301,24 @@
   obtain an algebra action on an algebra.[133X
   
   [33X[0;0YRecall  the  construction  of  algebra  modules  from  Chapter 62 of the [5XGAP[105X
-  reference  manual.  In  the  example,  the vector space [22XV[122X becomes an algebra
-  module  [22XM[122X with a left action by [22XA[122X. Conversion between vectors in [22XV[122X and those
-  in  [22XM[122X  is  achieved  using the operations [10XObjByExtRep[110X and [10XExtRepOfObj[110X. These
-  vectors are indistinguishable when printed.[133X
+  reference  manual.  In  the  example, the vector space [22XV3[122X becomes an algebra
+  module  [22XM3[122X  with  a  left action by [22XA3[122X. Conversion between vectors in [22XV3[122X and
+  those  in  [22XM3[122X  is achieved using the operations [10XObjByExtRep[110X and [10XExtRepOfObj[110X.
+  These vectors are indistinguishable when printed.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27Xm3 := [ [0,1,0], [0,0,1], [1,0,0] ];;[127X[104X
-    [4X[25Xgap>[125X [27XA4 := Algebra( Rationals, [m3] );;[127X[104X
-    [4X[25Xgap>[125X [27XSetName( A4, "A4" );;[127X[104X
-    [4X[25Xgap>[125X [27XV4 := Rationals^3;;[127X[104X
-    [4X[25Xgap>[125X [27XM4 := LeftAlgebraModule( A4, \*, V4 );;[127X[104X
-    [4X[25Xgap>[125X [27XSetName( M4, "M4" );[127X[104X
-    [4X[25Xgap>[125X [27XfamM4 := ElementsFamily( FamilyObj( M4 ) );;[127X[104X
-    [4X[25Xgap>[125X [27Xv4 := [3,4,5];;[127X[104X
-    [4X[25Xgap>[125X [27Xv4 := ObjByExtRep( famM4, v4 );[127X[104X
+    [4X[25Xgap>[125X [27XV3 := Rationals^3;;[127X[104X
+    [4X[25Xgap>[125X [27XM3 := LeftAlgebraModule( A3, \*, V3 );;[127X[104X
+    [4X[25Xgap>[125X [27XSetName( M3, "M3" );[127X[104X
+    [4X[25Xgap>[125X [27XfamM3 := ElementsFamily( FamilyObj( M3 ) );;[127X[104X
+    [4X[25Xgap>[125X [27Xv3 := [3,4,5];;[127X[104X
+    [4X[25Xgap>[125X [27Xv3 := ObjByExtRep( famM3, v3 );[127X[104X
     [4X[28X[ 3, 4, 5 ][128X[104X
-    [4X[25Xgap>[125X [27Xm3*v4;[127X[104X
+    [4X[25Xgap>[125X [27Xm3*v3;[127X[104X
     [4X[28X[ 4, 5, 3 ][128X[104X
-    [4X[25Xgap>[125X [27XgenM4 := GeneratorsOfLeftModule( M4 );;[127X[104X
-    [4X[25Xgap>[125X [27Xu4 := 6*genM4[1] + 7*genM4[2] + 8*genM4[3];[127X[104X
+    [4X[25Xgap>[125X [27XgenM3 := GeneratorsOfLeftModule( M3 );;[127X[104X
+    [4X[25Xgap>[125X [27Xu4 := 6*genM3[1] + 7*genM3[2] + 8*genM3[3];[127X[104X
     [4X[28X[ 6, 7, 8 ][128X[104X
     [4X[25Xgap>[125X [27Xu4 := ExtRepOfObj( u4 );[127X[104X
     [4X[28X[ 6, 7, 8 ][128X[104X
@@ -348,15 +345,15 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XD4 := LeftActingDomain( M4 );;[127X[104X
-    [4X[25Xgap>[125X [27XT4 := EmptySCTable( Dimension(M4), Zero(D4), "symmetric" );;[127X[104X
-    [4X[25Xgap>[125X [27XB4a := AlgebraByStructureConstants( D4, T4 );[127X[104X
+    [4X[25Xgap>[125X [27XD3 := LeftActingDomain( M3 );;[127X[104X
+    [4X[25Xgap>[125X [27XT3 := EmptySCTable( Dimension(M3), Zero(D3), "symmetric" );;[127X[104X
+    [4X[25Xgap>[125X [27XB3a := AlgebraByStructureConstants( D3, T3 );[127X[104X
     [4X[28X<algebra of dimension 3 over Rationals>[128X[104X
-    [4X[25Xgap>[125X [27XGeneratorsOfAlgebra( B4a );[127X[104X
+    [4X[25Xgap>[125X [27XGeneratorsOfAlgebra( B3a );[127X[104X
     [4X[28X[ v.1, v.2, v.3 ][128X[104X
-    [4X[25Xgap>[125X [27XB4 := ModuleAsAlgebra( M4 );               [127X[104X
-    [4X[28XA(M4)[128X[104X
-    [4X[25Xgap>[125X [27XGeneratorsOfAlgebra( B4 );[127X[104X
+    [4X[25Xgap>[125X [27XB3 := ModuleAsAlgebra( M3 );               [127X[104X
+    [4X[28XA(M3)[128X[104X
+    [4X[25Xgap>[125X [27XGeneratorsOfAlgebra( B3 );[127X[104X
     [4X[28X[ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ][128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
@@ -369,9 +366,9 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XIsModuleAsAlgebra( B4 );[127X[104X
+    [4X[25Xgap>[125X [27XIsModuleAsAlgebra( B3 );[127X[104X
     [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XIsModuleAsAlgebra( A4 );   [127X[104X
+    [4X[25Xgap>[125X [27XIsModuleAsAlgebra( A3 );   [127X[104X
     [4X[28Xfalse[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
@@ -388,24 +385,23 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XKnownAttributesOfObject( B4 );    [127X[104X
-    [4X[28X[ "Name", "ZeroImmutable", "LeftActingDomain", "Dimension", [128X[104X
-    [4X[28X  "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing", [128X[104X
+    [4X[25Xgap>[125X [27XKnownAttributesOfObject( B3 );[127X[104X
+    [4X[28X[ "Name", "ZeroImmutable", "LeftActingDomain", "Dimension",[128X[104X
+    [4X[28X  "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing",[128X[104X
     [4X[28X  "ModuleToAlgebraIsomorphism", "AlgebraToModuleIsomorphism" ][128X[104X
-    [4X[25Xgap>[125X [27XM2B4 := ModuleToAlgebraIsomorphism( B4 );[127X[104X
-    [4X[28X[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] -> [ [[ 1, 0, 0 ]], [[ 0, \[128X[104X
-    [4X[28X1, 0 ]], [128X[104X
+    [4X[25Xgap>[125X [27XM2B3 := ModuleToAlgebraIsomorphism( B3 );[127X[104X
+    [4X[28X[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] -> [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [128X[104X
     [4X[28X  [[ 0, 0, 1 ]] ][128X[104X
-    [4X[25Xgap>[125X [27XSource( M2B4 ) = M4;[127X[104X
+    [4X[25Xgap>[125X [27XSource( M2B3 ) = M3;[127X[104X
     [4X[28Xfalse[128X[104X
-    [4X[25Xgap>[125X [27XSource( M2B4 ) = V4;[127X[104X
+    [4X[25Xgap>[125X [27XSource( M2B3 ) = V3;[127X[104X
     [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XB2M4 := AlgebraToModuleIsomorphism( B4 );[127X[104X
+    [4X[25Xgap>[125X [27XB2M3 := AlgebraToModuleIsomorphism( B3 );[127X[104X
     [4X[28X[ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ->[128X[104X
     [4X[28X[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ][128X[104X
-    [4X[25Xgap>[125X [27XRange( B2M4 ) = M4;[127X[104X
+    [4X[25Xgap>[125X [27XRange( B2M3 ) = M3;[127X[104X
     [4X[28Xfalse[128X[104X
-    [4X[25Xgap>[125X [27XRange( B2M4 ) = V4;[127X[104X
+    [4X[25Xgap>[125X [27XRange( B2M3 ) = V3;[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
@@ -418,17 +414,17 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27Xact4 := AlgebraActionByModule( A4, M4 );[127X[104X
+    [4X[25Xgap>[125X [27Xact3 := AlgebraActionByModule( A3, M3 );[127X[104X
     [4X[28X[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -> [128X[104X
     [4X[28X[ [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] -> [128X[104X
     [4X[28X    [ [[ 0, 0, 1 ]], [[ 1, 0, 0 ]], [[ 0, 1, 0 ]] ] ][128X[104X
-    [4X[25Xgap>[125X [27Xa4 := 2*m3 + 3*m3^2;[127X[104X
+    [4X[25Xgap>[125X [27Xa3 := 2*m3 + 3*m3^2;[127X[104X
     [4X[28X[ [ 0, 2, 3 ], [ 3, 0, 2 ], [ 2, 3, 0 ] ][128X[104X
-    [4X[25Xgap>[125X [27XImage( act4, a4 );[127X[104X
-    [4X[28XBasis( A(M4), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -> [128X[104X
+    [4X[25Xgap>[125X [27XImage( act3, a3 );[127X[104X
+    [4X[28XBasis( A(M3), [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ] ) -> [128X[104X
     [4X[28X[ (3)*[[ 0, 1, 0 ]]+(2)*[[ 0, 0, 1 ]], (2)*[[ 1, 0, 0 ]]+(3)*[[ 0, 0, 1 ]], [128X[104X
     [4X[28X  (3)*[[ 1, 0, 0 ]]+(2)*[[ 0, 1, 0 ]] ][128X[104X
-    [4X[25Xgap>[125X [27XImage( act4 );[127X[104X
+    [4X[25Xgap>[125X [27XImage( act3 );[127X[104X
     [4X[28X<algebra over Rationals, with 1 generator>[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
@@ -436,20 +432,39 @@
   
   [1X2.4 [33X[0;0YActions on direct sums of algebras[133X[101X
   
-  [1X2.4-1 DirectSumOfAlgebrasInfo[101X
+  [1X2.4-1 DirectSumOfAlgebrasWithInfo[101X
   
+  [33X[1;0Y[29X[2XDirectSumOfAlgebrasWithInfo[102X( [3XA1[103X, [3XA2[103X ) [32X operation[133X
   [33X[1;0Y[29X[2XDirectSumOfAlgebrasInfo[102X( [3XA[103X ) [32X attribute[133X
   
   [33X[0;0YThis attribute for direct sums of algebras is missing from the main library,
-  and is added here to be used in methods for [10XEmbedding[110X and [10XProjection[110X.[133X
+  and  is  added  here  to be used in methods for [10XEmbedding[110X and [10XProjection[110X. In
+  order  to  construct  a  direct  sum  with  this  information  attribute the
+  operation   [10XDirectSumOfAlgebrasWithInfo[110X   may   be  used.  This  just  calls
+  [10XDirectSumOfAlgebras[110X and sets up the attribute.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XA3B3 := DirectSumOfAlgebras( A3, B3 );;[127X[104X
-    [4X[25Xgap>[125X [27XSetName( A3B3, Concatenation( Name(A3), "(+)", Name(B3) ) );[127X[104X
-    [4X[25Xgap>[125X [27XSetDirectSumOfAlgebrasInfo( A3B3,                             [127X[104X
-    [4X[25X>[125X [27Xrec( algebras := [A3,B3], first := [1,Dimension(A3)+1],                      [127X[104X
-    [4X[25X>[125X [27X     embeddings := [ ], projections := [ ] ) );[127X[104X
+    [4X[25Xgap>[125X [27XA3Rc3 := DirectSumOfAlgebrasWithInfo( A3, Rc3 );;[127X[104X
+    [4X[25Xgap>[125X [27XSetName( A3Rc3, Concatenation( Name(A3), "(+)", Name(Rc3) ) );[127X[104X
+    [4X[25Xgap>[125X [27XDirectSumOfAlgebrasInfo( A3Rc3 );[127X[104X
+    [4X[28Xrec( algebras := [ A3, GR(c3) ], [128X[104X
+    [4X[28X  embeddings := [128X[104X
+    [4X[28X    [ [128X[104X
+    [4X[28X      Basis( A3, [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], [128X[104X
+    [4X[28X          [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], [128X[104X
+    [4X[28X          [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] ) -> [ v.1, v.2, v.3 ], [128X[104X
+    [4X[28X      CanonicalBasis( GR(c3) ) -> [ v.4, v.5, v.6 ] ], first := [ 1, 4 ], [128X[104X
+    [4X[28X  projections := [128X[104X
+    [4X[28X    [ CanonicalBasis( A3(+)GR(c3) ) -> [128X[104X
+    [4X[28X        [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], [128X[104X
+    [4X[28X          [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], [128X[104X
+    [4X[28X          [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], [128X[104X
+    [4X[28X          [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], [128X[104X
+    [4X[28X          [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], [128X[104X
+    [4X[28X          [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ], [128X[104X
+    [4X[28X      CanonicalBasis( A3(+)GR(c3) ) -> [ <zero> of ..., <zero> of ..., [128X[104X
+    [4X[28X          <zero> of ..., (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] ] )[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   
@@ -463,93 +478,13 @@
   
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XEmbedding( A3B3, 1 );                                         [127X[104X
+    [4X[25Xgap>[125X [27XEmbedding( A3Rc3, 1 );[127X[104X
     [4X[28XBasis( A3, [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], [128X[104X
     [4X[28X  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], [128X[104X
     [4X[28X  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] ) -> [ v.1, v.2, v.3 ][128X[104X
-    [4X[25Xgap>[125X [27XProjection( A3B3, 2 );[127X[104X
-    [4X[28XCanonicalBasis( A3(+)GR(G) ) -> [ <zero> of ..., <zero> of ..., [128X[104X
+    [4X[25Xgap>[125X [27XProjection( A3Rc3, 2 );[127X[104X
+    [4X[28XCanonicalBasis( A3(+)GR(c3) ) -> [ <zero> of ..., <zero> of ..., [128X[104X
     [4X[28X  <zero> of ..., (1)*(), (1)*(1,2,3), (1)*(1,3,2) ][128X[104X
-    [4X[28X[128X[104X
-  [4X[32X[104X
-  
-  [1X2.4-3 DirectSumOfAlgebraHomomorphisms[101X
-  
-  [33X[1;0Y[29X[2XDirectSumOfAlgebraHomomorphisms[102X( [3Xhom1[103X, [3Xhom2[103X ) [32X operation[133X
-  
-  [33X[0;0YLet  [22Xθ_1  :  B_1  ->  A_1[122X and [22Xθ_2 : B_2 -> A_2[122X be algebra homomorphisms. The
-  embeddings into [22XA = A_1 ⊕ A_2[122X and [22XB = B_1 ⊕ B_2[122X may be used to construct [22Xθ =
-  θ_1  ⊕ θ_2 : B -> A[122X where [22Xθ(b_1,b_2) = (θ_1b_1,θ_2b_2)[122X. The example uses the
-  homomorphism [10Xhom3[110X used in Section [14X2.2-4[114X[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27Xhom := DirectSumOfAlgebraHomomorphisms( hom3, hom3 );;[127X[104X
-    [4X[25Xgap>[125X [27XPrint( hom, "\n" );[127X[104X
-    [4X[28XAlgebraHomomorphismByImages( A3(+)A3, Algebra( Rationals, [128X[104X
-    [4X[28X[ v.1, v.2, v.3, v.4, v.5, v.6 ] ), [128X[104X
-    [4X[28X[ [ [ 0, 1, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [128X[104X
-    [4X[28X      [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ] ], [128X[104X
-    [4X[28X  [ [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [128X[104X
-    [4X[28X      [ 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 1, 0, 0 ] ] ], [128X[104X
-    [4X[28X[ v.1, v.4 ] )[128X[104X
-    [4X[28X[128X[104X
-  [4X[32X[104X
-  
-  [1X2.4-4 AlgebraActionOnDirectSum[101X
-  
-  [33X[1;0Y[29X[2XAlgebraActionOnDirectSum[102X( [3Xact[103X, [3Xact[103X ) [32X operation[133X
-  
-  [33X[0;0YIf  [22Xα_1  :  A  ->  C_1[122X  is an action on algebra [22XB_1[122X and [22Xα_2 : A -> C_2[122X is an
-  action  on  algebra [22XB_2[122X by the same algebra [22XA[122X, then [22XA[122X acts on the direct sum
-  [22XB_1 ⊕ B_2[122X by [22Xa ⋅ (b_1,b_2) = (a ⋅ b_1, a ⋅ b_2)[122X.[133X
-  
-  [33X[0;0YIn Section [14X2.3-4[114X there is created an action [10XactB3[110X of [10XA3[110X on an isomorphic [10XB3[110X.
-  In  the  example  here  we construct [10XactA3[110X, with [10XA3[110X acting on itself, formed
-  using [10XAlgebraActionByMultipliers[110X. Then we construct the direcct sum of these
-  actions.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27XactMA3 := AlgebraActionByMultipliers( A3, A3, A3 );;[127X[104X
-    [4X[25Xgap>[125X [27Xact5 := AlgebraActionOnDirectSum( actMA3, act3 );[127X[104X
-    [4X[28X[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ], [128X[104X
-    [4X[28X  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ], [128X[104X
-    [4X[28X  [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] ] -> [128X[104X
-    [4X[28X[ [ v.1, v.2, v.3, v.4, v.5, v.6 ] -> [ v.2, v.3, v.1, v.5, v.6, v.4 ], [128X[104X
-    [4X[28X  [ v.1, v.2, v.3, v.4, v.5, v.6 ] -> [ v.3, v.1, v.2, v.6, v.4, v.5 ], [128X[104X
-    [4X[28X  [ v.1, v.2, v.3, v.4, v.5, v.6 ] -> [ v.1, v.2, v.3, v.4, v.5, v.6 ] ][128X[104X
-    [4X[28X[128X[104X
-  [4X[32X[104X
-  
-  [1X2.4-5 DirectSumOfAlgebraActions[101X
-  
-  [33X[1;0Y[29X[2XDirectSumOfAlgebraActions[102X( [3Xact[103X, [3Xact[103X ) [32X operation[133X
-  
-  [33X[0;0YLet If [22Xα_1 : A_1 -> C_1[122X is an action on algebra [22XB_1[122X, and [22Xα_2 : A_2 -> C_2[122X is
-  an action on algebra [22XB_2[122X, then [22XA_1 ⊕ A_2[122X acts on the direct sum [22XB_1 ⊕ B_2[122X by
-  [22X(a_1,a_2) ⋅ (b_1,b_2) = (a_1 ⋅ b_1, a_2 ⋅ b_2)[122X. The example forms the direct
-  sum of the actions constructed in sections [14X2.2-3[114X and [14X2.2-4[114X[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[28X[128X[104X
-    [4X[25Xgap>[125X [27Xact6 := DirectSumOfAlgebraActions( act3, act4 );;[127X[104X
-    [4X[25Xgap>[125X [27XA6 := Source( act6 );[127X[104X
-    [4X[28XA3(+)A4[128X[104X
-    [4X[25Xgap>[125X [27XB6 := AlgebraActedOn( act6 );[127X[104X
-    [4X[28XGR(G)(+)A(M4)[128X[104X
-    [4X[25Xgap>[125X [27Xem3 := ImageElm( Embedding( A6, 1 ), m3 ); [127X[104X
-    [4X[28X[ [ 0, 1, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [128X[104X
-    [4X[28X  [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ] ][128X[104X
-    [4X[25Xgap>[125X [27XImageElm( act6, em3 );                     [127X[104X
-    [4X[28XBasis( GR(G)(+)A(M4), [ v.1, v.2, v.3, v.4, v.5, v.6 ] ) -> [128X[104X
-    [4X[28X[ v.2, v.3, v.1, 0*v.1, 0*v.1, 0*v.1 ][128X[104X
-    [4X[25Xgap>[125X [27Xea4 := ImageElm( Embedding( A6, 2 ), a4 );[127X[104X
-    [4X[28X[ [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0 ], [128X[104X
-    [4X[28X  [ 0, 0, 0, 0, 2, 3 ], [ 0, 0, 0, 3, 0, 2 ], [ 0, 0, 0, 2, 3, 0 ] ][128X[104X
-    [4X[25Xgap>[125X [27XImageElm( act6, ea4 );[127X[104X
-    [4X[28XBasis( GR(G)(+)A(M4), [ v.1, v.2, v.3, v.4, v.5, v.6 ] ) -> [128X[104X
-    [4X[28X[ 0*v.1, 0*v.1, 0*v.1, (3)*v.5+(2)*v.6, (2)*v.4+(3)*v.6, (3)*v.4+(2)*v.5 ][128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   

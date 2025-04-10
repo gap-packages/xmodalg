@@ -6,7 +6,7 @@
   as  [22X2[122X[13X-dimensional  groups[113X, [Bro82], [Bro87]. The commutative algebra version
   of  this  construction  has been adapted by T. Porter, [AP96], [Por87]. This
   algebraic  version  is  called  [13Xcombinatorial algebra theory[113X, which contains
-  potentially important new ideas (see [AP96], [AP98], [AE03]).[133X
+  potentially important new ideas (see [Sha92], [AP96], [AP98], [AE03]).[133X
   
   [33X[0;0YA  share  package  [5XXMod[105X,  [AOUW17],  [AW00], was prepared by M. Alp and C.D.
   Wensley  for the [5XGAP[105X computational group theory language, initially for [5XGAP[105X3

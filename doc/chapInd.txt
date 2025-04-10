@@ -8,7 +8,6 @@
   [2XAlgebraActionByModule[102X 2.3-4 
   [2XAlgebraActionByMultipliers[102X 2.2-2 
   [2XAlgebraActionBySurjection[102X 2.2-3 
-  [2XAlgebraActionOnDirectSum[102X 2.4-4 
   [2XAlgebraToModuleIsomorphism[102X 2.3-3 
   [2XAllAlgebraHomomorphisms[102X 2.6-1 
   [2XAllBijectiveAlgebraHomomorphisms[102X 2.6-1 
@@ -25,10 +24,8 @@
   [2XCat1AlgebraSelect[102X 3.1-3 
   crossed module 4.1 
   [2XDimension[102X, for 2d-algebras 3.1-2 
-  [2XDirectSumOfAlgebraActions[102X 2.4-5 
-  [2XDirectSumOfAlgebraHomomorphisms[102X 2.4-3 
   [2XDirectSumOfAlgebrasInfo[102X 2.4-1 
-  [2XDirectSumOfXModAlgebras[102X 4.1-9 
+  [2XDirectSumOfAlgebrasWithInfo[102X 2.4-1 
   [2XEmbedding[102X, for direct sum of algebras 2.4-2 
   [2XHeadMap[102X, for cat1-algebras 3.1-2 
   [2XIdentityMapping[102X, for cat1-algebras 3.2-1 
@@ -50,7 +47,7 @@
       for morphisms of crossed modules of algebras 4.2-1 
   [2XIsSubCat1Algebra[102X 3.1-4 
   [2XIsSubPreCat1Algebra[102X 3.1-4 
-  [2XIsSubXModAlgebra[102X 4.1-10 
+  [2XIsSubXModAlgebra[102X 4.1-9 
   [2XIsSurjective[102X 4.2-4 
   [2XIsTotal[102X, for morphisms of cat1-algebras 3.2-2 
       for morphisms of crossed modules of algebras 4.2-1 
@@ -95,7 +92,7 @@
   [2XSourceHom[102X 4.2-4 
   [2XSubCat1Algebra[102X 3.1-4 
   [2XSubPreCat1Algebra[102X 3.1-4 
-  [2XSubXModAlgebra[102X 4.1-10 
+  [2XSubXModAlgebra[102X 4.1-9 
   [2XTailMap[102X, for cat1-algebras 3.1-2 
   [2XXModAlgebra[102X 4.1-1 
   [2XXModAlgebraAction[102X 4.1-4 

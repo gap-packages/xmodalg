@@ -33,8 +33,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X824D4DD88323EF70">4.1-6 XModAlgebraBySurjection</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7AB09A158148290F">4.1-7 XModAlgebraByBoundaryAndAction</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78400B837A2C8FB9">4.1-8 XModAlgebraByModule</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87DFAA7E8438B938">4.1-9 DirectSumOfXModAlgebras</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CA213397B334CBC">4.1-10 SubXModAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CA213397B334CBC">4.1-9 SubXModAlgebra</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X866610BC7C41E1EC">4.2 <span class="Heading">(Pre-)Crossed Module Morphisms</span></a>
 </span>
@@ -91,23 +90,23 @@
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := GF(5);;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">one := One(F);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F5 := GF(5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id5 := One( F5 );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">two := Z(5);; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := Zero( F );; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := [ [one,z,z], [z,one,z], [z,z,one] ];; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := [ [z,one,two^3], [z,z,one], [z,z,z] ];;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := [ [z,z,one], [z,z,z], [z,z,z] ];; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := Algebra( F, [l,m] );; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( A, "A(l,m)" ); </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := Subalgebra( A, [m] );; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( B, "A(m)" ); </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdeal( A, B ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z5 := Zero( F5 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n0 := [ [id5,z5,z5], [z5,id5,z5], [z5,z5,id5] ];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n1 := [ [z5,id5,two^3], [z5,z5,id5], [z5,z5,z5] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n2 := [ [z5,z5,id5], [z5,z5,z5], [z5,z5,z5] ];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">An := Algebra( F5, [ n0, n1 ] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( An, "An" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Bn := Subalgebra( An, [ n1 ] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( Bn, "Bn" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdeal( An, Bn ); </span>
 true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act := AlgebraActionByMultipliers( A, B, A );; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XAB := XModAlgebraByIdeal( A, B ); </span>
-[ A(m) -&gt; A(l,m) ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( XAB, "XAB" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">actn := AlgebraActionByMultipliers( An, Bn, An );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Xn := XModAlgebraByIdeal( An, Bn ); </span>
+[ Bn -&gt; An ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( Xn, "Xn" ); </span>
 
 </pre></div>
 
@@ -134,7 +133,6 @@ true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );</span>
 [ I(GF5[k4]) -&gt; GF5[k4] ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( XIAk4 );</span>
-
 Crossed module [I(GF5[k4])-&gt;GF5[k4]] :- 
 : Source algebra I(GF5[k4]) has generators:
   [ (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^0)*f1, (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^
@@ -144,7 +142,6 @@ Crossed module [I(GF5[k4])-&gt;GF5[k4]] :-
 : Boundary homomorphism maps source generators to:
   [ (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^0)*f1, (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^
     0)*f2 ]
-
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size2d( XIAk4 );</span>
 [ 125, 625 ]
 
@@ -194,11 +191,6 @@ Crossed module [I(GF5[k4])-&gt;GF5[k4]] :-
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := Boundary( XIAk4 );</span>
-[ (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^0)*f1, (Z(5)^2)*&lt;identity&gt; of ...\
-+(Z(5)^
-    0)*f2 ] -&gt; [ (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^0)*f1, 
-  (Z(5)^2)*&lt;identity&gt; of ...+(Z(5)^0)*f2 ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RepresentationsOfObject( XIAk4 );</span>
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownPropertiesOfObject( XIAk4 );</span>
@@ -222,9 +214,9 @@ Crossed module [I(GF5[k4])-&gt;GF5[k4]] :-
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XA := XModAlgebraByMultiplierAlgebra( A );</span>
-[ A(l,m) -&gt; &lt;algebra of dimension 3 over GF(5)&gt; ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XModAlgebraAction( XA );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XAn := XModAlgebraByMultiplierAlgebra( An );</span>
+[ An -&gt; &lt;algebra of dimension 3 over GF(5)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XModAlgebraAction( XAn );</span>
 IdentityMapping( &lt;algebra of dimension 3 over GF(5)&gt; )
 
 </pre></div>
@@ -259,22 +251,18 @@ Crossed module [A2-&gt;Q2] :-
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraByBoundaryAndAction</code>( <var class="Arg">bdy</var>, <var class="Arg">act</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreXModAlgebraByBoundaryAndAction</code>( <var class="Arg">bdy</var>, <var class="Arg">act</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>When a suitable pair of algebra homomorphisms are available, these operations may be used. The example uses the algebra action created in section <a href="chap2.html#X7C1C8B987B2167B9"><span class="RefLink">2.3-4</span></a>.</p>
+<p>When a suitable pair of algebra homomorphisms are available, these operations may be used. The example uses the algebra action created in section <a href="chap2.html#X8530E1B27BC2FBB7"><span class="RefLink">2.2-4</span></a>.</p>
 
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bdy3 := AlgebraHomomorphismByImages( A3, MB3, [ m3 ], [ mg3 ] );</span>
-[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ] -&gt; 
-[ [ (1)*(), (1)*(1,2,3), (1)*(1,3,2) ] -&gt; [ (1)*(1,2,3), (1)*(1,3,2), (1)*() 
-     ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bdy3 := AlgebraHomomorphismByImages( B3, A3, [ g3 ], [ m3 ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bdy3 := AlgebraHomomorphismByImages( Rc3, A3, [ g3 ], [ m3 ] );</span>
 [ (1)*(1,2,3) ] -&gt; [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X3 := XModAlgebraByBoundaryAndAction( bdy3, act3 );</span>
-[ GR(G) -&gt; A3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X3 := XModAlgebraByBoundaryAndAction( bdy3, actg3 );</span>
+[ GR(c3) -&gt; A3 ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( X3 );</span>
-Crossed module [GR(G) -&gt; A3] :- 
-: Source algebra GR(G) has generators:
+Crossed module [GR(c3) -&gt; A3] :- 
+: Source algebra GR(c3) has generators:
   [ (1)*(), (1)*(1,2,3) ]
 : Range algebra A3 has generators:
   [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
@@ -296,41 +284,26 @@ Crossed module [GR(G) -&gt; A3] :-
 
 <div class="example"><pre>
 
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X4 := XModAlgebraByModule( A4, M4 );</span>
-[ A(M4) -&gt; A4 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( X4 );</span>
-Crossed module [A(M4)-&gt;A4] :- 
-: Source algebra A(M4) has generators:
-  [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], [[ 0, 0, 1 ]] ]
-: Range algebra A4 has generators:
-  [4[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
-  [ [ 1, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
-  [ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Y3 := XModAlgebraByModule( A3, M3 );</span>
+[ A(M3) -&gt; A3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Image( XModAlgebraAction( Y3 ), m3 ) = Image( act3, m3 ); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Y3 );</span>
+Crossed module [A(M3) -&gt; A3] :- 
+: Source algebra A(M3) has generators:  [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], 
+  [[ 0, 0, 1 ]] ]
+: Range algebra A3 has generators:  
+[ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
 : Boundary homomorphism maps source generators to:
-  [ [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
+[ [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ], 
   [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
 
 </pre></div>
 
-<p><a id="X87DFAA7E8438B938" name="X87DFAA7E8438B938"></a></p>
-
-<h5>4.1-9 DirectSumOfXModAlgebras</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DirectSumOfXModAlgebras</code>( <var class="Arg">X1</var>, <var class="Arg">X2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>In Sections <a href="chap2.html#X845FFF08821B36DB"><span class="RefLink">2.4-3</span></a> and <a href="chap2.html#X82520DE680B627DC"><span class="RefLink">2.4-5</span></a> we constructed direct sums of algebra homomorphisms and algebra actions. So, given two crossed modules of algebras <span class="SimpleMath">X_1, X_2</span>, we can form the direct sums of their boundaries and actions to form a direct sum <span class="SimpleMath">X_1 ⊕ X_2</span> of crossed modules.</p>
-
-
-<div class="example"><pre>
-
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DirectSumOfXModAlgebras( X3, X4 );</span>
-[ GR(G)(+)A(M4) -&gt; A3(+)A4 ]
-
-</pre></div>
-
 <p><a id="X7CA213397B334CBC" name="X7CA213397B334CBC"></a></p>
 
-<h5>4.1-10 SubXModAlgebra</h5>
+<h5>4.1-9 SubXModAlgebra</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubXModAlgebra</code>( <var class="Arg">alg</var>, <var class="Arg">src</var>, <var class="Arg">rng</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubXModAlgebra</code>( <var class="Arg">alg</var>, <var class="Arg">sub</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
@@ -342,23 +315,22 @@ Crossed module [A(M4)-&gt;A4] :-
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e4 := Elements( IAk4 )[4];</span>
 (Z(5)^0)*&lt;identity&gt; of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Je4 := Ideal( IAk4, [e4] );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( Je4 );</span>
-5
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( Je4, "&lt;e4&gt;" ); </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XJe4 := XModAlgebraByIdeal( Ak4, Je4 );</span>
-[ &lt;e4&gt; -&gt; GF5[k4] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( XJe4 );        </span>
-
-Crossed module [&lt;e4&gt;-&gt;GF5[k4]] :- 
-: Source algebra &lt;e4&gt; has generators:
-  [ (Z(5)^0)*&lt;identity&gt; of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
-: Range algebra GF5[k4] has generators:
-  [ (Z(5)^0)*&lt;identity&gt; of ..., (Z(5)^0)*f1, (Z(5)^0)*f2 ]
-: Boundary homomorphism maps source generators to:
-  [ (Z(5)^0)*&lt;identity&gt; of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
-
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubXModAlgebra( XIAk4, XJe4 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( Je4, "&lt;e4&gt;" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Ke4 := Subalgebra( Ak4, [e4] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Size( Je4 ), Size( Ke4 ) ];</span>
+[ 5, 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Se4 := SubXModAlgebra( XIAk4, Je4, Ke4 );</span>
+[ &lt;e4&gt; -&gt; &lt;algebra of dimension 1 over GF(5)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubXModAlgebra( XIAk4, Se4 ); </span>
 true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Se4 );</span>
+Crossed module [&lt;e4&gt; -&gt; ..] :- 
+: Source algebra &lt;e4&gt; has generators:  
+[ (Z(5)^0)*&lt;identity&gt; of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
+: Range algebra has generators:  
+[ (Z(5)^0)*&lt;identity&gt; of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
+: Boundary homomorphism maps source generators to:
+[ (Z(5)^0)*&lt;identity&gt; of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
 
 </pre></div>
 
@@ -432,9 +404,9 @@ true
 [ I(GF2[k4]) -&gt; GF2[k4] ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IAc4 = IBk4;</span>
 false
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homIAIB := AllHomsOfAlgebras( IAc4, IBk4 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homIAIB := AllAlgebraHomomorphisms( IAc4, IBk4 );; </span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">theta := homIAIB[3];; </span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homAB := AllHomsOfAlgebras( Ac4, Bk4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homAB := AllAlgebraHomomorphisms( Ac4, Bk4 );;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := homAB[7];; </span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mor := XModAlgebraMorphism( XIAc4, XIBk4, theta, phi );</span>
 [[I(GF2[c4])-&gt;GF2[c4]] =&gt; [I(GF2[k4])-&gt;GF2[k4]]]
