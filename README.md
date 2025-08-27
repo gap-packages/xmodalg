@@ -9,14 +9,12 @@ This package allows for computation with crossed modules of commutative algebras
 
 ## Distribution
 
- * The 'XModAlg' package is distributed with the deposited GAP packages, see: 
-     <https://www.gap-system.org/Packages/xmodalg.html>
- * It will, in due course, be available from the GitHub repository at:
+The 'XModAlg' package may be obtained from the GitHub repository at:
      <https://gap-packages.github.io/xmodalg/> 
 
 ## Copyright
 
-The 'XModAlg' package is Copyright © Zekeriya Arvasi and Alper Odabas et al, 2014--2025. 
+The 'XModAlg' package is Copyright Zekeriya Arvasi and Alper Odabas et al, 2014--2025. 
 
 'XModAlg' is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -34,6 +32,7 @@ For details, see <https://www.gnu.org/licenses/gpl.html>.
    true
    ```
  * The file `manual.pdf` is in the `doc` subdirectory.
+ * To run the test file read `testall.g` from the `tst` subdirectory. 
 
 ## Contact
 

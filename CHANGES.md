@@ -1,5 +1,9 @@
 # CHANGES to the 'XModAlg' package
 
+## 1.32 -> 1.33 (27/08/25) 
+ * (27/08/25) added installation instructions to the manual introduction
+              replaced \mathcal by \mathbb which suits MathJax better
+
 ## 1.27 -> 1.32 (11/04/25) 
  * (31/01/25) added Nizar Shammu's thesis to the list of references;
               removed all operations involving direct sums of crossed modules

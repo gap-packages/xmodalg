@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  intro.xml           XModAlg documentation               Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2021, Z. Arvasi & A. Odabas,              	 --> 
+<!--  Copyright (C) 2014-2025, Z. Arvasi & A. Odabas,              	 --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -53,5 +53,46 @@ and described in detail in the paper <Cite Key="arvasi_odabas" />.
 <P/>
 There are aspects of commutative algebras for which no &GAP; functions yet exist, for example semidirect products. 
 We have included here functions for all homomorphisms of algebras. 
+<P/>
+The package is loaded with the command
+<Example>
+<![CDATA[
+gap> LoadPackage( "xmodalg" ); 
+]]>
+</Example>
+<P/>
+
+The package may be obtained as a compressed <Code>.tar</Code> file 
+<File>XModAlg-version.tar.gz</File> from the GitHub release site: 
+<URL>https://github.com/gap-packages/xmodalg/releases/tag/version</URL>.
+<Index>GitHub repository</Index> 
+The package also has a GitHub repository at: 
+<URL>https://github.com/gap-packages/xmodalg</URL>. 
+<P/> 
+
+Once the package is loaded, the manual <Code>doc/manual.pdf</Code> 
+can be found in the documentation folder. 
+The <Code>html</Code> versions, with or without MathJax, 
+may be rebuilt as follows: 
+<P/>
+<Example>
+<![CDATA[
+gap> ReadPackage( "xmodalg", "makedoc.g" ); 
+]]>
+</Example>
+<P/>
+
+It is possible to check that the package has been installed correctly
+by running the test files (this terminates the &GAP; session): 
+<P/>
+<Example>
+<![CDATA[
+gap> TestPackage( "xmodalg" );
+Architecture: . . . . . 
+testing: . . . . . 
+. . . 
+#I  No errors detected while testing
+]]>
+</Example>
 
 </Chapter>
