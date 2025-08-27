@@ -24,7 +24,7 @@ algebras and their implementation in this package.
 <Index>2d-algebra</Index>
 
 A <E>crossed module</E> is a <B>k</B>-algebra morphism 
-<M>\mathcal{X}:=(\partial:S\rightarrow R)</M> 
+<M>\mathbb{X}:=(\partial:S\rightarrow R)</M> 
 with a left action of <M>R</M> on <M>S</M> satisfying 
 <Display>
 {\bf XModAlg\ 1} ~:~  \partial(r \cdot s) 
@@ -34,7 +34,7 @@ with a left action of <M>R</M> on <M>S</M> satisfying
 </Display> 
 for all <M>s,s^{\prime }\in S, \ r\in R</M>. 
 The morphism <M>\partial</M> is called the <E>boundary map</E> 
-of <M>\mathcal{X}</M>
+of <M>\mathbb{X}</M>
 <P/>
 Note that, although in this definition we have used a left action, 
 in the category of commutative algebras left and right actions coincide.
@@ -67,10 +67,10 @@ structures.
          Arg="A I" />
 <Description> 
 Let <M>A</M> be an algebra and <M>I</M> an ideal of <M>A</M>. 
-Then <M>\mathcal{X} = (inc:I\rightarrow A)</M> is a 
+Then <M>\mathbb{X} = (inc:I\rightarrow A)</M> is a 
 crossed module whose action is left multiplication of <M>A</M> on <M>I</M>. 
 Conversely, given a crossed module 
-<M>\mathcal{X} = (\partial : S \rightarrow R)</M>,
+<M>\mathbb{X} = (\partial : S \rightarrow R)</M>,
 it is the case that <M>{\partial(S)}</M> is an ideal of <M>R</M>. 
 <P/>
 </Description>
@@ -150,14 +150,14 @@ gap> Size2d( XIAk4 );
          Arg="X0" />
 <Description>
 These four attributes are used in the construction of a crossed module 
-<M>\mathcal{X}</M> where: 
+<M>\mathbb{X}</M> where: 
 <List>
 <Item>
 <C>Source(X)</C> and <C>Range(X)</C> are the <E>source</E> and the <E>range</E>
 of the boundary map respectively; 
 </Item>
 <Item>
-<C>Boundary(X)</C> is the boundary map of the crossed module <M>\mathcal{X}</M>; 
+<C>Boundary(X)</C> is the boundary map of the crossed module <M>\mathbb{X}</M>; 
 </Item>
 <Item>
 <C>XModAlgebraAction(X)</C> is the action used in the crossed module. 
@@ -169,19 +169,19 @@ endomorphisms of <C>Source(X)</C>.
 The following standard &GAP; operations have special &XModAlg; implementations: 
 <List>
 <Item>
-<C>Display(X)</C> is used to list the components of <M>\mathcal{X}</M>; 
+<C>Display(X)</C> is used to list the components of <M>\mathbb{X}</M>; 
 </Item> 
 <Item>
-<C>Size2d(X)</C> for a crossed module <M>\mathcal{X}</M> 
+<C>Size2d(X)</C> for a crossed module <M>\mathbb{X}</M> 
 returns a <M>2</M>-element list, the sizes of the source and range, 
 </Item>
 <Item>
-<C>Dimension(X)</C> for a crossed module <M>\mathcal{X}</M> 
+<C>Dimension(X)</C> for a crossed module <M>\mathbb{X}</M> 
 returns a <M>2</M>-element list, the dimensions of the source and range,
 </Item>
 <Item>
 <C>Name(X)</C> is used for giving a name to the crossed module 
-<M>\mathcal{X}</M> by associating the names of source and range algebras. 
+<M>\mathbb{X}</M> by associating the names of source and range algebras. 
 </Item> 
 </List> 
 
@@ -236,7 +236,7 @@ whose kernel lies in the annihilator of <M>S</M>.
 Define the action of <M>R</M> on <M>S</M> by <M>r\cdot s = \widetilde{r}s</M>
 where <M>\widetilde{r} \in \partial^{-1}(r)</M>, 
 as described in section <Ref Oper="AlgebraActionBySurjection"/>.
-Then <M>\mathcal{X}=(\partial : S\rightarrow R)</M> 
+Then <M>\mathbb{X}=(\partial : S\rightarrow R)</M> 
 is a crossed module with the defined action.
 <P/> 
 Continuing with the example in that section, 
@@ -269,10 +269,10 @@ Crossed module [A2->Q2] :-
    <Oper Name="IsSubXModAlgebra"
          Arg="alg sub" />
 <Description>
-A crossed module <M>\mathcal{X}^{\prime } 
+A crossed module <M>\mathbb{X}^{\prime } 
 = (\partial ^{\prime }:S^{\prime}\rightarrow R^{\prime })</M> 
 is a  subcrossed module of the crossed module 
-<M>\mathcal{X} = (\partial :S\rightarrow R)</M> if 
+<M>\mathbb{X} = (\partial :S\rightarrow R)</M> if 
 <M>S^{\prime }\leq S</M>, <M>R^{\prime}\leq R</M>,  
 <M>\partial^{\prime } = \partial|_{S^{\prime }}</M>,  
 and the action of <M>S^{\prime }</M> on <M>R^{\prime }</M> 
@@ -312,8 +312,8 @@ Crossed module [<e4> -> ..] :-
 
 <Section><Heading>(Pre-)Crossed Module Morphisms</Heading>
 
-Let <M>\mathcal{X} = (\partial:S\rightarrow R)</M> and 
-<M>\mathcal{X}^{\prime} = 
+Let <M>\mathbb{X} = (\partial:S\rightarrow R)</M> and 
+<M>\mathbb{X}^{\prime} = 
 (\partial^{\prime }:S^{\prime }\rightarrow R^{\prime })</M> 
 be (pre)crossed modules and let <M>\theta :S\rightarrow S^{\prime }</M>, 
 <M>\varphi : R\rightarrow R^{\prime }</M> be algebra homomorphisms. 
@@ -325,7 +325,7 @@ Then if
 </Display>
 for all <M>r\in R</M>, <M>s\in S,</M> 
 the pair <M>(\theta ,\varphi )</M> is called a morphism between 
-<M>\mathcal{X}</M> and <M>\mathcal{X}^{\prime } </M>
+<M>\mathbb{X}</M> and <M>\mathbb{X}^{\prime } </M>
 <P/>
 The conditions can be thought as the commutativity of the following diagrams: 
 
@@ -433,8 +433,8 @@ true
    <Meth Name="Kernel" Label="for morphisms of crossed modules of algebras" 
          Arg="mor" />
 <Description>
-Let <M>(\theta,\varphi) : \mathcal{X} = (\partial : S \rightarrow R) 
-       \rightarrow \mathcal{X}^{\prime} = (\partial^{\prime} 
+Let <M>(\theta,\varphi) : \mathbb{X} = (\partial : S \rightarrow R) 
+       \rightarrow \mathbb{X}^{\prime} = (\partial^{\prime} 
        : S^{\prime} \rightarrow R^{\prime})</M>
 be a crossed module homomorphism. 
 Then the crossed module 
@@ -442,7 +442,7 @@ Then the crossed module
 \ker(\theta,\varphi) = (\partial| : \ker\theta \rightarrow \ker\varphi )
 </Display>
 is called the <E>kernel</E> of <M>(\theta,\varphi)</M>. 
-Also, <M>\ker(\theta ,\varphi )</M> is an ideal of <M>\mathcal{X}</M>. 
+Also, <M>\ker(\theta ,\varphi )</M> is an ideal of <M>\mathbb{X}</M>. 
 An example is given below. 
 </Description>
 </ManSection>
@@ -464,8 +464,8 @@ true
    <Oper Name="Image"
          Arg="mor" />
 <Description>
-Let <M>(\theta,\varphi) : \mathcal{X} = (\partial : S \rightarrow R) 
-        \rightarrow \mathcal{X}^{\prime} = (\partial^{\prime} : S^{\prime} 
+Let <M>(\theta,\varphi) : \mathbb{X} = (\partial : S \rightarrow R) 
+        \rightarrow \mathbb{X}^{\prime} = (\partial^{\prime} : S^{\prime} 
         \rightarrow R^{\prime})</M> 
 be a crossed module homomorphism. 
 Then the crossed module 

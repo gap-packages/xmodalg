@@ -58,7 +58,7 @@ If the conditions,
 \mathbf{Cat1Alg2:} \quad (\ker t)(\ker h) = \{0_{A}\} 
 </Display> 
 are satisfied, then the algebraic system 
-<M>\mathcal{C} := (e;t,h : A \rightarrow R)</M>
+<M>\mathbb{C} := (e;t,h : A \rightarrow R)</M>
 is called a <E>cat<M>^{1}</M>-algebra</E>. 
 A system which satisfies the condition
 <M>\mathbf{Cat1Alg1}</M> is called a <E>precat<M>^{1}</M>-algebra</E>. 
@@ -292,7 +292,7 @@ Cat1-algebra [GF(2^2)_c6=>..] :-
    <Oper Name="IsSubPreCat1Algebra"
          Arg="alg sub" />
 <Description> 
-Let <M>\mathcal{C} = (e;t,h:A\rightarrow R)</M> 
+Let <M>\mathbb{C} = (e;t,h:A\rightarrow R)</M> 
 be a cat<M>^{1}</M>-algebra, and let <M>A^{\prime}</M>, 
 <M>R^{\prime}</M> be subalgebras of <M>A</M> and <M>R</M> respectively. 
 If the restriction morphisms
@@ -305,14 +305,14 @@ e^{\prime} = e|_{R^{\prime}} : R^{\prime}\rightarrow A^{\prime}
 </Display> 
 satisfy the <M>\mathbf{Cat1Alg1}</M> and <M>\mathbf{Cat1Alg2}</M> 
 conditions, then the system 
-<M>\mathcal{C}^{\prime } = (e^{\prime};t^{\prime},h^{\prime}
+<M>\mathbb{C}^{\prime } = (e^{\prime};t^{\prime},h^{\prime}
   : A^{\prime} \rightarrow R^{\prime})</M> 
 is called a <E>subcat<M>^{1}</M>-algebra</E> of 
-<M>\mathcal{C} = (e;t,h:A\rightarrow R)</M>. 
+<M>\mathbb{C} = (e;t,h:A\rightarrow R)</M>. 
 <P/> 
 If the morphisms satisfy only the <M>\mathbf{Cat1Alg1}</M> condition 
-then <M>\mathcal{C}^{\prime }</M> is called a 
-<E>sub-precat<M>^{1}</M>-algebra</E> of <M>\mathcal{C}</M>. 
+then <M>\mathbb{C}^{\prime }</M> is called a 
+<E>sub-precat<M>^{1}</M>-algebra</E> of <M>\mathbb{C}</M>. 
 <P/> 
 The operations in this subsection are used for constructing 
 subcat<M>^{1}</M>-algebras of a given cat<M>^{1}</M>-algebra.
@@ -370,8 +370,8 @@ true
 
 <Heading>Cat<M>^{1}-</M>algebra morphisms</Heading> 
 
-Let <M>\mathcal{C} = (e;t,h:A\rightarrow R)</M>, 
-<M>\mathcal{C}^{\prime } = (e^{\prime}; t^{\prime }, h^{\prime } 
+Let <M>\mathbb{C} = (e;t,h:A\rightarrow R)</M>, 
+<M>\mathbb{C}^{\prime } = (e^{\prime}; t^{\prime }, h^{\prime } 
                            : A^{\prime} \rightarrow R^{\prime})</M> 
 be cat<M>^{1}</M>-algebras, 
 and let <M>\phi : A\rightarrow A^{\prime}</M> 
