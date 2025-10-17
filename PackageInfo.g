@@ -101,7 +101,7 @@ AvailabilityTest := ReturnTrue,
 
 BannerString := Concatenation( 
   "-----------------------------------------------------------------------------\n",
-  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ") for GAP 4.14 \n", 
+  "Loading XModAlg ", String( ~.Version ), " (", String( ~.Date ), ")\n",
   "Methods for crossed modules of commutative algebras and cat1-algebras\n",
   "by Zekeriya Arvasi (zarvasi@ogu.edu.tr) and Alper Odabas (aodabas@ogu.edu.tr).\n",
   "-----------------------------------------------------------------------------\n"
