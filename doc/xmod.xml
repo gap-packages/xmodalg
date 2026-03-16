@@ -76,8 +76,7 @@ it is the case that <M>{\partial(S)}</M> is an ideal of <M>R</M>.
 </Description>
 </ManSection>
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> F5 := GF(5);;
 gap> id5 := One( F5 );;
 gap> two := Z(5);; 
@@ -95,8 +94,7 @@ gap> actn := AlgebraActionByMultipliers( An, Bn, An );;
 gap> Xn := XModAlgebraByIdeal( An, Bn ); 
 [ Bn -> An ]
 gap> SetName( Xn, "Xn" ); 
-]]>
-</Example>
+]]></Example>
 
 <ManSection>
    <Attr Name="AugmentationXMod"
@@ -110,8 +108,7 @@ is the <C>XModAlgebraByIdeal</C> formed using the
 </Description>
 </ManSection>
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> Ak4 := GroupRing( GF(5), DihedralGroup(4) );
 <algebra-with-one over GF(5), with 2 generators>
 gap> Size( Ak4 );
@@ -136,8 +133,7 @@ Crossed module [I(GF5[k4])->GF5[k4]] :-
     0)*f2 ]
 gap> Size2d( XIAk4 );
 [ 125, 625 ]
-]]>
-</Example>
+]]></Example>
 
 <ManSection>
    <Attr Name="Source" Label="for crossed modules of commutative algebras"
@@ -192,8 +188,7 @@ We also show usage of the attributes listed above.
 </Description>
 </ManSection>
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> RepresentationsOfObject( XIAk4 );
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
 gap> KnownPropertiesOfObject( XIAk4 );
@@ -204,8 +199,7 @@ gap> KnownPropertiesOfObject( XIAk4 );
 gap> KnownAttributesOfObject( XIAk4 );
 [ "Name", "LeftActingDomain", "Range", "Source", "Boundary", "Size2d", 
   "XModAlgebraAction" ]
-]]>
-</Example>
+]]></Example>
 
 <ManSection>
    <Oper Name="XModAlgebraByMultiplierAlgebra"
@@ -218,14 +212,12 @@ of a crossed module in which the action is the identity map on <M>M</M>.
 </Description>
 </ManSection>
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> XAn := XModAlgebraByMultiplierAlgebra( An );
 [ An -> <algebra of dimension 3 over GF(5)> ]
 gap> XModAlgebraAction( XAn );
 IdentityMapping( <algebra of dimension 3 over GF(5)> )
-]]>
-</Example>
+]]></Example>
 
 <ManSection>
    <Oper Name="XModAlgebraBySurjection"
@@ -244,8 +236,7 @@ Continuing with the example in that section,
 </Description>
 </ManSection>
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> X2 := XModAlgebraBySurjection( nat2 );; 
 gap> Display( X2 ); 
 Crossed module [A2->Q2] :- 
@@ -255,8 +246,7 @@ Crossed module [A2->Q2] :-
   [ v.1, v.2 ]
 : Boundary homomorphism maps source generators to:
   [ v.1 ]
-]]>
-</Example>
+]]></Example>
 
 <#Include Label="XModAlgebraByBoundaryAndAction">
 
@@ -283,8 +273,7 @@ of a given crossed module.
 </Description>
 </ManSection>
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> e4 := Elements( IAk4 )[4];
 (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2
 gap> Je4 := Ideal( IAk4, [e4] );;
@@ -304,8 +293,7 @@ Crossed module [<e4> -> ..] :-
 [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
 : Boundary homomorphism maps source generators to:
 [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
-]]>
-</Example>
+]]></Example>
 
 </Section>
 
@@ -381,8 +369,7 @@ which may have the attributes listed.
 </Description>
 </ManSection>
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> c4 := CyclicGroup( 4 );;
 gap> Ac4 := GroupRing( GF(2), c4 );
 <algebra-with-one over GF(2), with 2 generators>
@@ -425,8 +412,7 @@ gap> IsTotal( mor );
 true
 gap> IsSingleValued( mor );
 true
-]]>
-</Example>
+]]></Example>
 
 
 <ManSection>
@@ -447,8 +433,7 @@ An example is given below.
 </Description>
 </ManSection>
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> Xmor := Kernel( mor );
 [ <algebra of dimension 2 over GF(2)> -> <algebra of dimension 2 over GF(2)> ]
 gap> IsXModAlgebra( Xmor );
@@ -457,8 +442,7 @@ gap> Size2d( Xmor );
 [ 4, 4 ]
 gap> IsSubXModAlgebra( XIAc4, Xmor );
 true
-]]>
-</Example>
+]]></Example>
 
 <ManSection>
    <Oper Name="Image"
@@ -509,8 +493,7 @@ store the two algebra homomorphisms <M>\theta</M> and <M>\varphi</M>.
 </Description>
 </ManSection>
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> ic4 := One( Ac4 );;                                      
 gap> e1 := ic4*c4.1 + ic4*c4.2;
 (Z(2)^0)*f1+(Z(2)^0)*f2
@@ -535,8 +518,7 @@ Crossed module [..->..] :-
 : Boundary homomorphism maps source generators to:
   [ (Z(2)^0)*<identity> of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2 ]
 
-]]>
-</Example>
+]]></Example>
 
 </Section>
 

@@ -69,8 +69,7 @@ As an example we use the crossed module <C>XAB</C> constructed in section
 </Description>
 </ManSection> 
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> Cn := Cat1AlgebraOfXModAlgebra( Xn );
 [An |X Bn -> An]
 gap> Display( Cn );
@@ -107,8 +106,7 @@ Cat1-algebra [An |X Bn => An] :-
       [ 0*Z(5), 0*Z(5), 0*Z(5) ] ] ]
 : range embedding maps range generators to:    [ v.1, v.2 ]
 : kernel has generators:  [ v.4, v.5 ]
-]]>
-</Example>
+]]></Example>
 
 <#Include Label="Cat1AlgebraOfXModAlgebra">
 
@@ -125,8 +123,7 @@ constructed in section <Ref Sect="SubCat1Algebra"/>.
 </Description>
 </ManSection> 
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> X6 := XModAlgebraOfCat1Algebra( C6 );
 [ <algebra of dimension 3 over GF(2)> -> <algebra of dimension 3 over GF(2)> ]
 gap> Display( X6 ); 
@@ -138,8 +135,7 @@ Crossed module [..->..] :-
   [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3) ]
 : Boundary homomorphism maps source generators to:
   [ <zero> of ..., <zero> of ..., <zero> of ... ]
-]]>
-</Example>
+]]></Example>
 
 </Section>
 
