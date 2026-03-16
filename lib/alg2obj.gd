@@ -80,7 +80,7 @@ DeclareOperation( "PreXModAlgebraByBoundaryAndAction",
    [ IsAlgebraHomomorphism, IsAlgebraAction ] );
 DeclareOperation( "PreXModAlgebraByBoundaryAndActionNC",
    [ IsAlgebraHomomorphism, IsAlgebraAction ] );
- DeclareOperation( "XModAlgebraByBoundaryAndAction",
+DeclareOperation( "XModAlgebraByBoundaryAndAction",
    [ IsAlgebraHomomorphism, IsAlgebraAction ] );
 DeclareOperation( "XModAlgebraByBoundaryAndActionNC",
    [ IsAlgebraHomomorphism, IsAlgebraAction ] );
