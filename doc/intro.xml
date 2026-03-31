@@ -55,11 +55,9 @@ There are aspects of commutative algebras for which no &GAP; functions yet exist
 We have included here functions for all homomorphisms of algebras. 
 <P/>
 The package is loaded with the command
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> LoadPackage( "xmodalg" ); 
-]]>
-</Example>
+]]></Example>
 <P/>
 
 The package may be obtained as a compressed <Code>.tar</Code> file 
@@ -75,24 +73,20 @@ can be found in the documentation folder.
 The <Code>html</Code> versions, with or without MathJax, 
 may be rebuilt as follows: 
 <P/>
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> ReadPackage( "xmodalg", "makedoc.g" ); 
-]]>
-</Example>
+]]></Example>
 <P/>
 
 It is possible to check that the package has been installed correctly
 by running the test files (this terminates the &GAP; session): 
 <P/>
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> TestPackage( "xmodalg" );
 Architecture: . . . . . 
 testing: . . . . . 
 . . . 
 #I  No errors detected while testing
-]]>
-</Example>
+]]></Example>
 
 </Chapter>
