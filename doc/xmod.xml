@@ -166,6 +166,11 @@ endomorphisms of <C>Source(X)</C>.
 </Item>
 </List> 
 
+The action in <C>XIAk4</C> is straightforward multiplication,
+so <C>f1</C> and <C>f2</C> map the generating set <C>[1-f1,f1-f2,f2-f1*f2]</C> 
+to <C>[f1-1,1-f1*f2,f1*f2-f2]</C> and <C>[f2-f1*f2,f1*f2-1,1-f1]</C>
+respectively.
+<P/>
 The following standard &GAP; operations have special &XModAlg; implementations: 
 <List>
 <Item>
