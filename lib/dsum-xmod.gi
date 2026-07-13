@@ -2,7 +2,7 @@
 ##
 #W  dsum-xmod.gi               The XMODALG package           Zekeriya Arvasi
 #W                                                            & Alper Odabas
-#Y  Copyright (C) 2014-2025, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2026, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 #############################################################################
@@ -244,7 +244,7 @@ InstallMethod( AlgebraHomomorphismFromDirectSum,
 Print( "genB = ", genB, "\n" );
     imhom := Concatenation( im1, im2 );
 Print( "imhom = ", imhom, "\n" );
-Error("here");
+## Error("here");
     hom := AlgebraHomomorphismByImages( B, A, genB, imhom );
     return hom;
 end);

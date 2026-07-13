@@ -1,8 +1,8 @@
- #############################################################################
+#############################################################################
 ##
 #W  dsum-xmod.gd               The XMODALG package            Zekeriya Arvasi
 #W                                                             & Alper Odabas
-#Y  Copyright (C) 2014-2025, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2026, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 ############################################################################

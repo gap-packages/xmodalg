@@ -2,7 +2,7 @@
 ##
 #W  cat1.tst                XModAlg test files          Z. Arvasi - A. Odabas 
 ## 
-#@local level,Ak4,IAk4,XIAk4,m,A1,A3,nat13,X13,G,F,R,e5,S,act,bdy,XM,A2c6,R2c3,homAR,homRA,t4,e4,C4,C,C0,C6,A6,B6,eA6,eB6,SA6,SB6,SC6,C1,C2,SC1,SC2,RC1,RC2,gSC1,gSC2,gRC1,gRC2,imS,homS,imR,homR,m12,im12
+#@local level,Ak4,IAk4,XIAk4,m2,A2,S2,nat2,X2,G,F,R,e5,S,act,bdy,XM,A2c6,R2c3,homAR,homRA,t4,e4,C4,C,C0,C6,A6,B6,eA6,eB6,SA6,SB6,SC6,C1,C2,SC1,SC2,RC1,RC2,gSC1,gSC2,gRC1,gRC2,imS,homS,imR,homR,m12,im12
 
 gap> START_TEST( "XModAlg package: cat1.tst" );
 gap> level := InfoLevel( InfoXModAlg );; 
@@ -15,11 +15,11 @@ gap> IAk4 := AugmentationIdeal( Ak4 );;
 gap> SetName( IAk4, "I(GF5[k4])" );
 gap> XIAk4 := XModAlgebraByIdeal( Ak4, IAk4 );;
 
-gap> m := [ [0,1,2,3], [0,0,1,2], [0,0,0,1], [0,0,0,0] ];; 
-gap> A1 := Algebra( Rationals, [m] );;
-gap> A3 := Subalgebra( A1, [m^3] );; 
-gap> nat13 := NaturalHomomorphismByIdeal( A1, A3 );; 
-gap> X13 := XModAlgebraBySurjection( nat13 );; 
+gap> m2 := [ [0,1,2,3], [0,0,1,2], [0,0,0,1], [0,0,0,0] ];; 
+gap> A2 := Algebra( Rationals, [m2] );;
+gap> S2 := Subalgebra( A2, [m2^3] );; 
+gap> nat2 := NaturalHomomorphismByIdeal( A2, S2 );; 
+gap> X2 := XModAlgebraBySurjection( nat2 );; 
 
 gap> G := SmallGroup( 4, 2 );;
 gap> F := GaloisField( 4 );;
