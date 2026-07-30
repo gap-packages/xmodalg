@@ -582,7 +582,9 @@ function ( hom )
     for k in vecK do 
         for a in vecA do 
             if not ( k*a = zA ) then 
-                Print( "kernel of hom is not in the annihilator of A\n" ); 
+                Print( "!!!\n" );
+                Print( "kernel of hom is not in the annihilator of A\n" );
+                Print( "!!!\n" );
                 return fail;  
             fi; 
         od; 
