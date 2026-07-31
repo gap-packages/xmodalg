@@ -36,7 +36,6 @@ DeclareOperation( "AlgebraActionByDirectSum",
 ############################################################################
 ##
 #O DirectSumOfAlgebraHomomorphisms( <hom> <hom> )
-#O AlgebraHomomorphismFromDirectSum( <hom> <hom> )
 ##
 ## <#GAPDoc Label="DirectSumOfAlgebraHomomorphisms"> 
 ## <ManSection>
@@ -46,14 +45,10 @@ DeclareOperation( "AlgebraActionByDirectSum",
 ## <Description>
 ## Let <M>\theta_1 : B_1 \to A_1</M> and <M>\theta_2 : B_2 \to A_2</M>
 ## be algebra homomorphisms. 
-## The first operation uses embeddings into <M>A = A_1 \oplus A_2</M> 
+## This operation uses embeddings into <M>A = A_1 \oplus A_2</M> 
 ## and <M>B = B_1 \oplus B_2</M> to construct
 ## <M>\theta = \theta_1 \oplus \theta_2 : B \to A</M>
 ## where <M>\theta(b_1,b_2) = (\theta_1b_1,\theta_2b_2)</M>.
-## <P/>
-## When <M>A_1=A_2</M> the second operation constructs
-## <M>\theta = \theta_1 \oplus \theta_2 : B \to A_1</M>
-## where <M>\theta(b_1,b_2) = \theta_1b_1 + \theta_2b_2</M>.
 ## <P/>
 ## The example uses the homomorphism <C>homg3</C> used in 
 ## Section <Ref Sect="AlgebraActionByHomomorphism" />
@@ -76,8 +71,6 @@ DeclareOperation( "AlgebraActionByDirectSum",
 ## <#/GAPDoc>
 ##
 DeclareOperation( "DirectSumOfAlgebraHomomorphisms", 
-    [ IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
-DeclareOperation( "AlgebraHomomorphismFromDirectSum", 
     [ IsAlgebraHomomorphism, IsAlgebraHomomorphism ] );
 
 ## section 2.4.4

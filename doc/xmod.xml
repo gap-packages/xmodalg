@@ -2,7 +2,7 @@
 <!--                                                                     -->
 <!--  xmod.xml            XModAlg documentation               Z. Arvasi  -->
 <!--                                                        & A. Odabas  -->
-<!--  Copyright (C) 2014-2025, Z. Arvasi & A. Odabas,                    --> 
+<!--  Copyright (C) 2014-2026, Z. Arvasi & A. Odabas,                    --> 
 <!--  Osmangazi University, Eskisehir, Turkey                            --> 
 <!--                                                                     -->
 <!-- ------------------------------------------------------------------- -->
@@ -299,6 +299,8 @@ Crossed module [<e4> -> ..] :-
 : Boundary homomorphism maps source generators to:
 [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
 ]]></Example>
+
+<#Include Label="DirectSumOfXModAlgebras">
 
 </Section>
 
