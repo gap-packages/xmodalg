@@ -29,7 +29,8 @@ gap> mg3 := RegularAlgebraMultiplier( Rc3, Rc3, g3 );;
 gap> Amg3 := AlgebraByGenerators( Rationals, [ mg3 ] );;
 gap> homg3 := AlgebraHomomorphismByImages( A3, Amg3, [ m3 ], [ mg3 ] );;
 gap> actg3 := AlgebraActionByHomomorphism( homg3, Rc3 );;
-
+gap> bdy3 := AlgebraHomomorphismByImages( Rc3, A3, [ g3 ], [ m3 ] );;
+gap> X3 := XModAlgebraByBoundaryAndAction( bdy3, actg3 );;
 gap> V3 := Rationals^3;;
 gap> M3 := LeftAlgebraModule( A3, \*, V3 );;
 gap> SetName( M3, "M3" );
@@ -115,10 +116,6 @@ Crossed module [A2->Q2] :-
 
 ############################
 ## Section 4.1.7
-gap> bdy3 := AlgebraHomomorphismByImages( Rc3, A3, [ g3 ], [ m3 ] );
-[ (1)*(1,2,3) ] -> [ [ [ 0, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ] ] ]
-gap> X3 := XModAlgebraByBoundaryAndAction( bdy3, actg3 );
-[ GR(c3) -> A3 ]
 gap> Display( X3 );
 Crossed module [GR(c3) -> A3] :- 
 : Source algebra GR(c3) has generators:

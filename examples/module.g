@@ -19,16 +19,11 @@ Amg3 := AlgebraByGenerators( Rationals, [ mg3 ] );;
 homg3 := AlgebraHomomorphismByImages( A3, Amg3, [ m3 ], [ mg3 ] );;
 actg3 := AlgebraActionByHomomorphism( homg3, Rc3 );
 Print ( "action actg3 of A3 on Rc3:\n", actg3, "\n" );
-
-## Section 4.1.7
 homg3 := AlgebraHomomorphismByImages( A3, Amg3, [ m3 ], [ mg3 ] );
 bdy3 := AlgebraHomomorphismByImages( Rc3, A3, [g3 ], [m3 ] );
 X3 := XModAlgebraByBoundaryAndAction( bdy3, actg3 );
 
 ## Section 2.3
-m3 := [ [0,1,0], [0,0,1], [1,0,0] ];;
-A3 := Algebra( Rationals, [m3] );;
-SetName( A3, "A3" );;
 V3 := Rationals^3;;
 M3 := LeftAlgebraModule( A3, \*, V3 );;
 SetName( M3, "M3" );

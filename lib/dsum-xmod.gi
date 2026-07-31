@@ -2,7 +2,7 @@
 ##
 #W  dsum-xmod.gi               The XMODALG package           Zekeriya Arvasi
 #W                                                            & Alper Odabas
-#Y  Copyright (C) 2014-2025, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2026, Zekeriya Arvasi & Alper Odabas,  
 ##
 
 #############################################################################
@@ -214,43 +214,6 @@ end);
 
 #############################################################################
 ##
-#M  AlgebraHomomorphismFromDirectSum
-##
-InstallMethod( AlgebraHomomorphismFromDirectSum, 
-    "for two algebra homomorphisms",
-    [ IsAlgebraHomomorphism, IsAlgebraHomomorphism ],
-    function( hom1, hom2 )
-    local B1, A, gen1, im1, B2, gen2, im2,
-          dom, B, eB1, eB2, genB, imhom, hom;
-    B1 := Source( hom1 );
-    A := Range( hom1 );
-    gen1 := GeneratorsOfAlgebra( B1 );
-    im1 := List( gen1, g -> ImageElm( hom1, g ) );
-    B2 := Source( hom2 );
-    if not ( A = Range( hom2 ) ) then
-        Error( "hom1 and hom2 should have the same range" );
-    fi;
-    gen2 := GeneratorsOfAlgebra( B2 );
-    im2 := List( gen2, g -> ImageElm( hom2, g ) );
-    dom := LeftActingDomain( B1 );
-    if not ( dom = LeftActingDomain( B2 ) ) then
-        Error( "homomorphisms are over different domains" );
-    fi;
-    B := DirectSumOfAlgebrasWithInfo( B1, B2 );
-    eB1 := Embedding( B, 1 );
-    eB2 := Embedding( B, 2 );
-    genB := Concatenation( List( gen1, b -> ImageElm( eB1, b ) ),
-                           List( gen2, b -> ImageElm( eB2, b ) ) );
-Print( "genB = ", genB, "\n" );
-    imhom := Concatenation( im1, im2 );
-Print( "imhom = ", imhom, "\n" );
-Error("here");
-    hom := AlgebraHomomorphismByImages( B, A, genB, imhom );
-    return hom;
-end);
-
-#############################################################################
-##
 #M  AlgebraActionOnDirectSum
 ##
 InstallMethod( AlgebraActionOnDirectSum, "for two algebra actions", true,
@@ -303,8 +266,8 @@ InstallMethod( DirectSumOfAlgebraActions, "for two algebra actions", true,
     [ IsAlgebraAction, IsAlgebraAction ], 0,
 function( act1, act2 )
     local domA, A1, basA1, nA1, A2, basA2, nA2, A, basA, firstA,
-          B1, basB1, nB1, B2, basB2, nB2, B, basB, firstB, zB, zB1, zB2,
-          C1, basC1, nC1, C2, basC2, nC2, C, basC, c, imc, hom,
+          B1, basB1, nB1, B2, basB2, nB2, B, basB, firstB,
+          C1, basC1, nC1, C2, basC2, nC2, C, basC, c, imc1, imc2, imc, hom,
           eA1, imA1, eA2, imA2, eB1, imB1, eB2, imB2, i, act;
     A1 := Source( act1 );
     domA := LeftActingDomain( A1 );
@@ -360,18 +323,12 @@ function( act1, act2 )
     imB2 := List( [1..nB2], j -> ImageElm( eB2, basB2[j] ) );
     basB := Concatenation( imB1, imB2 );
     basC := ListWithIdenticalEntries( nC1+nC2, 0 );
-    zB := Zero( B );
-    zB1 := List( [1..nB1], i -> zB );
-    zB2 := List( [1..nB2], i -> zB );
-##    zB1 := imB1;
-##    zB2 := imB2;
-## Print( "zB1 = ", zB1, "\n" );
-## Print( "zB2 = ", zB2, "\n" );
     for i in [1..nC1] do
         ## c := ImageElm( act1, basA1[i] );
         c := basC1[i];
-        imc := List( basB1, b -> ImageElm( eB1, ImageElm( c, b ) ) );
-        imc := Concatenation( imc, zB2 );
+        imc1 := List( basB1, b -> ImageElm( eB1, ImageElm( c, b ) ) );
+        imc2 := List( basB2, b -> ImageElm( eB2, b ) );
+        imc := Concatenation( imc1, imc2 );
 ## Print( "\nimc1 = ", imc,  "\n\n" );
         hom := LeftModuleHomomorphismByImages( B, B, basB, imc );
 ## Error("here");
@@ -383,8 +340,9 @@ function( act1, act2 )
     for i in [1..nC2] do
         ## c := ImageElm( act2, basA2[i] );
         c := basC2[i];
-        imc := List( basB2, b -> ImageElm( eB2, ImageElm( c, b ) ) );
-        imc := Concatenation( zB1, imc );
+        imc1 := List( basB1, b -> ImageElm( eB1, b ) );
+        imc2 := List( basB2, b -> ImageElm( eB2, ImageElm( c, b ) ) );
+        imc := Concatenation( imc1, imc2 );
 ## Print( "\nimc2 = ", imc, "\n\n" );
         hom := LeftModuleHomomorphismByImages( B, B, basB, imc );
         basC[nC1+i] := hom;
@@ -433,7 +391,7 @@ function( X1, X2 )
     act2 := XModAlgebraAction( X2 );
     ## now construct the combined boundary
     bdy12 := DirectSumOfAlgebraHomomorphisms( bdy1, bdy2 );
-    act12 := AlgebraActionOnDirectSum( act1, act2 );
+    act12 := DirectSumOfAlgebraActions( act1, act2 );
     X12 := PreXModAlgebraByBoundaryAndAction( bdy12, act12 );
     ok := IsPreXModAlgebra( X12 );
     Print( "X12 is a pre-crossed module of algebras? ", ok, "\n" );

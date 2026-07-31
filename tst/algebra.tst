@@ -2,7 +2,7 @@
 ##
 #W  algebra.tst             XModAlg test files          Z. Arvasi - A. Odabas 
 ## 
-#@local level,A1,BA1,v,I1,v1,m1,id1,L1,h1,u1,S1,MS1,BMS1,MA1,BMA1,hom1,act1,act12,theta1,m2,A2,S2,nat2,Q2,act2,I2,BI2,b1,b2,P1,P2,A2c6,R2c3,homAR,homRA,bijAA,ideAA
+#@local level,A1,BA1,v,I1,v1,m1,id1,L1,h1,u1,S1,MS1,BMS1,MA1,BMA1,mhom1,act1,act12,theta1,m2,A2,S2,nat2,Q2,act2,I2,BI2,b1,b2,P1,P2,A2c6,R2c3,homAR,homRA,bijAA,ideAA
 
 gap> START_TEST( "XModAlg package: algebra.tst" );
 gap> level := InfoLevel( InfoXModAlg );; 
@@ -57,8 +57,8 @@ gap> BMA1[3];
 <linear mapping by matrix, A1 -> A1>
 
 ## Section 2.1.5
-gap> hom1 := MultiplierHomomorphism( MA1 );;
-gap> ImageElm( hom1, BA1[2] ); 
+gap> mhom1 := MultiplierHomomorphism( MA1 );;
+gap> ImageElm( mhom1, BA1[2] ); 
 Basis( A1, [ (Z(5)^0)*(), (Z(5)^0)*(1,2,3,4,5,6), (Z(5)^0)*(1,3,5)(2\
 ,4,6), 
   (Z(5)^0)*(1,4)(2,5)(3,6), (Z(5)^0)*(1,5,3)(2,6,4), (Z(5)^0)*(1,6,5,4,3,2) 
@@ -84,7 +84,9 @@ gap> theta1 := NaturalHomomorphismByIdeal( A1, I1 );
 gap> List( BA1, v -> ImageElm( theta1, v ) ); 
 [ v.1, v.2, v.3, v.4, (Z(5)^2)*v.1+(Z(5)^2)*v.3, (Z(5)^2)*v.2+(Z(5)^2)*v.4 ]
 gap> AlgebraActionBySurjection( theta1 );
+!!!
 kernel of hom is not in the annihilator of A
+!!!
 fail
 gap> ## an example which does not fail: 
 gap> m2 := [ [0,1,2,3], [0,0,1,2], [0,0,0,1], [0,0,0,0] ];; 

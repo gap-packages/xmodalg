@@ -49,9 +49,9 @@ Print( "BMA1 = BasisVectors( Basis( MA1 ) )\n" );
 Print( "BMA1[3] = ", BMA1[3], "\n" );
 
 ## Section 2.1.5
-hom1 := MultiplierHomomorphism( MA1 );;
-Print( "\nhom1 = MultiplierHomomorphism( MA1 ): ", hom1, "\n" );
-Print( "ImageElm( hom1, BA1[2] ) = ", ImageElm( hom1, BA1[2] ), "\n" ); 
+mhom1 := MultiplierHomomorphism( MA1 );;
+Print( "\nmhom1 = MultiplierHomomorphism( MA1 ): ", mhom1, "\n" );
+Print( "ImageElm( mhom1, BA1[2] ) = ", ImageElm( mhom1, BA1[2] ), "\n" ); 
 
 ## Section 2.2.2
 A1 := GroupRing( GF(5), Group( (1,2,3,4,5,6) ) );;
