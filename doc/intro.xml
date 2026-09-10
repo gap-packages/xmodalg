@@ -56,7 +56,7 @@ We have included here functions for all homomorphisms of algebras.
 <P/>
 The package is loaded with the command
 <Example><![CDATA[
-gap> LoadPackage( "xmodalg" ); 
+gap> LoadPackage( "xmodalg" );; 
 ]]></Example>
 <P/>
 
@@ -71,22 +71,11 @@ The package also has a GitHub repository at:
 Once the package is loaded, the manual <Code>doc/manual.pdf</Code> 
 can be found in the documentation folder. 
 The <Code>html</Code> versions, with or without MathJax, 
-may be rebuilt as follows: 
+may be rebuilt by running the command
+<C> ReadPackage("xmodalg","makedoc.g"); </C>. 
 <P/>
-<Example><![CDATA[
-gap> ReadPackage( "xmodalg", "makedoc.g" ); 
-]]></Example>
-<P/>
-
-It is possible to check that the package has been installed correctly
-by running the test files (this terminates the &GAP; session): 
-<P/>
-<Example><![CDATA[
-gap> TestPackage( "xmodalg" );
-Architecture: . . . . . 
-testing: . . . . . 
-. . . 
-#I  No errors detected while testing
-]]></Example>
+Once the package is loaded, it is possible to check the installation
+has proceeded correctly by running the test suite of the package with 
+the command  <C> ReadPackage("xmodalg","tst/testall.g"); </C>. 
 
 </Chapter>

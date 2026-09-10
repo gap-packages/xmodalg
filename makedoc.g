@@ -7,6 +7,9 @@ LoadPackage( "GAPDoc" );
 LoadPackage( "AutoDoc" ); 
 
 AutoDoc( rec( 
+    extract_examples := rec(
+        subdir := "tst",
+    ),
     gapdoc := rec( 
         LaTeXOptions := rec( EarlyExtraPreamble := """
             \usepackage[all]{xy} 
