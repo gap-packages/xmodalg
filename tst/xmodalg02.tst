@@ -180,10 +180,10 @@ false
 
 # doc/../lib/module.gd:183-204
 
-gap> KnownAttributesOfObject( B3 );
-[ "Name", "ZeroImmutable", "LeftActingDomain", "Dimension",
-  "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing",
-  "ModuleToAlgebraIsomorphism", "AlgebraToModuleIsomorphism" ]
+gap> Set( KnownAttributesOfObject( B3 ) );
+[ "AlgebraToModuleIsomorphism", "Dimension", 
+  "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing", 
+  "LeftActingDomain", "ModuleToAlgebraIsomorphism", "Name", "ZeroImmutable" ]
 gap> M2B3 := ModuleToAlgebraIsomorphism( B3 );
 [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] -> [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], 
   [[ 0, 0, 1 ]] ]

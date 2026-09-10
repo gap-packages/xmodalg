@@ -2,7 +2,7 @@
 ##
 #W  module.gd                 The XMODALG package              Chris Wensley
 #W                                                             
-#Y  Copyright (C) 2014-2025, Zekeriya Arvasi & Alper Odabas,  
+#Y  Copyright (C) 2014-2026, Zekeriya Arvasi & Alper Odabas,  
 ##
 ############################  algebra actions  ############################# 
 
@@ -182,10 +182,10 @@ DeclareProperty( "IsModuleAsAlgebra", IsAlgebra );
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> KnownAttributesOfObject( B3 );
-## [ "Name", "ZeroImmutable", "LeftActingDomain", "Dimension",
-##   "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing",
-##   "ModuleToAlgebraIsomorphism", "AlgebraToModuleIsomorphism" ]
+## gap> Set( KnownAttributesOfObject( B3 ) );
+## [ "AlgebraToModuleIsomorphism", "Dimension", 
+##   "GeneratorsOfLeftOperatorAdditiveGroup", "GeneratorsOfLeftOperatorRing", 
+##   "LeftActingDomain", "ModuleToAlgebraIsomorphism", "Name", "ZeroImmutable" ]
 ## gap> M2B3 := ModuleToAlgebraIsomorphism( B3 );
 ## [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ] -> [ [[ 1, 0, 0 ]], [[ 0, 1, 0 ]], 
 ##   [[ 0, 0, 1 ]] ]
