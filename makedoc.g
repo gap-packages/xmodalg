@@ -7,15 +7,15 @@ LoadPackage( "GAPDoc" );
 LoadPackage( "AutoDoc" ); 
 
 AutoDoc( rec( 
-    extract_examples := rec(
-        subdir := "tst",
-    ),
     gapdoc := rec( 
         LaTeXOptions := rec( EarlyExtraPreamble := """
             \usepackage[all]{xy} 
             \newcommand{\hello} {\mathrm{hello}}
         """ )
     ),  
+    extract_examples := rec(
+        subdir := "tst",
+    ),
     scaffold := rec(
         ## MainPage := false, 
         includes := [ "intro.xml", "algebra.xml", "cat1.xml", 
