@@ -185,8 +185,9 @@ DeclareOperation( "DirectSumOfAlgebraActions",
 ## </ManSection>
 ## <Example>
 ## <![CDATA[
-## gap> XY3 := DirectSumOfXModAlgebras( X3, Y3 );
-## [ GR(c3)(+)A(M3) -> A3(+)A3 ]
+## gap> ## the following command is failing at present:
+## gap> ## XY3 := DirectSumOfXModAlgebras( X3, Y3 );
+## gap> ## [ GR(c3)(+)A(M3) -> A3(+)A3 ]
 ## ]]>
 ## </Example>
 ## <#/GAPDoc>

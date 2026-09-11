@@ -251,7 +251,7 @@ CanonicalBasis( A3(+)GR(c3) ) -> [ <zero> of ..., <zero> of ...,
   <zero> of ..., (1)*(), (1)*(1,2,3), (1)*(1,3,2) ]
 
 
-# doc/algebra.xml:383-408
+# doc/algebra.xml:389-414
 gap> P1 := SemidirectProductOfAlgebras( A1, act1, I1 ); 
 <algebra of dimension 8 over GF(5)>
 gap> Embedding( P1, 1 );
@@ -277,7 +277,7 @@ gap> Embedding( P2, 2 );
   [ [ 0, 0, 0, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ] ] -> 
 [ v.3, v.4, v.5 ]
 
-# doc/algebra.xml:441-483
+# doc/algebra.xml:447-489
 gap> A2c6 := GroupRing( GF(2), Group( (1,2,3,4,5,6) ) );;
 gap> R2c3 := GroupRing( GF(2), Group( (7,8,9) ) );;
 gap> homAR := AllAlgebraHomomorphisms( A2c6, R2c3 );;
