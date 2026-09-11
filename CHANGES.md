@@ -1,6 +1,7 @@
 # CHANGES to the 'XModAlg' package
 
-## 1.32 -> 1.33 (16/03/26)
+## 1.32 -> 1.32dev (16/03/26)
+ * (10/09/26) extracted examples from the manual using AutoDoc
  * (18/12/25) added new material on direct sums
  * (27/08/25) added installation instructions to the manual introduction
               replaced \mathcal by \mathbb which suits MathJax better
