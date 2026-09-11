@@ -194,7 +194,7 @@ We also show usage of the attributes listed above.
 </ManSection>
 
 <Example><![CDATA[
-gap> RepresentationsOfObject( XIAk4 );
+gap> Set( RepresentationsOfObject( XIAk4 ) );
 [ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
 gap> Set( KnownPropertiesOfObject( XIAk4 ) );
 [ "CanEasilyCompareElements", "CanEasilySortElements", "Is2dAlgebraObject", 

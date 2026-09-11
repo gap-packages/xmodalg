@@ -84,7 +84,9 @@ gap> theta1 := NaturalHomomorphismByIdeal( A1, I1 );
 gap> List( BA1, v -> ImageElm( theta1, v ) ); 
 [ v.1, v.2, v.3, v.4, (Z(5)^2)*v.1+(Z(5)^2)*v.3, (Z(5)^2)*v.2+(Z(5)^2)*v.4 ]
 gap> AlgebraActionBySurjection( theta1 );
+!!!
 kernel of hom is not in the annihilator of A
+!!!
 fail
 gap> ## an example which does not fail: 
 gap> m2 := [ [0,1,2,3], [0,0,1,2], [0,0,0,1], [0,0,0,0] ];; 

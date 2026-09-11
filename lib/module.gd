@@ -173,8 +173,8 @@ DeclareProperty( "IsModuleAsAlgebra", IsAlgebra );
 ## <Oper Name="AlgebraToModuleIsomorphism" Arg="alg" />
 ##
 ## <Description>
-## These two algebra mappings are attributes of a module converted into 
-## an algebra. They are required for the process of converting 
+## These two algebra mappings are attributes of a module converted into an
+## algebra. They are required for the process of converting
 ## the action of <M>A</M> on <M>M</M> into an action on <M>B</M>.
 ## Note that these left module homomorphisms have as source 
 ## or range the underlying module <M>V</M>, not <M>M</M>. 
