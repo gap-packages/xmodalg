@@ -56,8 +56,8 @@ gap> Size2d( XIAk4 );
 [ 125, 625 ]
 
 # doc/xmod.xml:196-207
-gap> RepresentationsOfObject( XIAk4 );
-[ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPreXModAlgebraObj" ]
+gap> Set( RepresentationsOfObject( XIAk4 ) );
+[ "IsAttributeStoringRep", "IsComponentObjectRep", "IsPreXModAlgebraObj" ]
 gap> Set( KnownPropertiesOfObject( XIAk4 ) );
 [ "CanEasilyCompareElements", "CanEasilySortElements", "Is2dAlgebraObject", 
   "IsAdditivelyCommutative", "IsDuplicateFree", "IsLDistributive", 
@@ -140,7 +140,14 @@ Crossed module [<e4> -> ..] :-
 : Boundary homomorphism maps source generators to:
 [ (Z(5)^0)*<identity> of ...+(Z(5)^0)*f1+(Z(5)^2)*f2+(Z(5)^2)*f1*f2 ]
 
-# doc/xmod.xml:377-420
+# doc/../lib/dsum-xmod.gd:186-192
+
+gap> ## the following command is failing at present:
+gap> ## XY3 := DirectSumOfXModAlgebras( X3, Y3 );
+gap> ## [ GR(c3)(+)A(M3) -> A3(+)A3 ]
+
+
+# doc/xmod.xml:379-422
 gap> c4 := CyclicGroup( 4 );;
 gap> Ac4 := GroupRing( GF(2), c4 );
 <algebra-with-one over GF(2), with 2 generators>
@@ -184,7 +191,7 @@ true
 gap> IsSingleValued( mor );
 true
 
-# doc/xmod.xml:441-450
+# doc/xmod.xml:443-452
 gap> Xmor := Kernel( mor );
 [ <algebra of dimension 2 over GF(2)> -> <algebra of dimension 2 over GF(2)> ]
 gap> IsXModAlgebra( Xmor );
@@ -194,7 +201,7 @@ gap> Size2d( Xmor );
 gap> IsSubXModAlgebra( XIAc4, Xmor );
 true
 
-# doc/xmod.xml:501-526
+# doc/xmod.xml:503-528
 gap> ic4 := One( Ac4 );;                                      
 gap> e1 := ic4*c4.1 + ic4*c4.2;
 (Z(2)^0)*f1+(Z(2)^0)*f2
